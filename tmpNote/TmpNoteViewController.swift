@@ -38,6 +38,12 @@ class TmpNoteViewController: NSViewController {
     func saveText() {
         UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
     }
+    
+    ///Close popover if Esc key is pressed
+    override func cancelOperation(_ sender: Any?) {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.closePopover()
+    }
 }
 
 extension TmpNoteViewController {
