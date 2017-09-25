@@ -8,14 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464AA1F78372A008A0252 /* EventMonitor.swift */; };
+		274464B51F79567A008A0252 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464B41F79567A008A0252 /* PreferencesWindow.swift */; };
+		274464B71F79939F008A0252 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 274464B61F79939F008A0252 /* Podfile */; };
 		275847351F782C7F0072F709 /* TmpNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275847341F782C7F0072F709 /* TmpNoteViewController.swift */; };
 		277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776565F1F75BBEC001B0294 /* AppDelegate.swift */; };
 		277656641F75BBEC001B0294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277656631F75BBEC001B0294 /* Assets.xcassets */; };
 		277656671F75BBEC001B0294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277656651F75BBEC001B0294 /* Main.storyboard */; };
+		EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		274464AA1F78372A008A0252 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		274464B41F79567A008A0252 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		274464B61F79939F008A0252 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		275847341F782C7F0072F709 /* TmpNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpNoteViewController.swift; sourceTree = "<group>"; };
 		2776565C1F75BBEC001B0294 /* tmpNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tmpNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2776565F1F75BBEC001B0294 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -23,6 +28,9 @@
 		277656661F75BBEC001B0294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		277656681F75BBEC001B0294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		277656691F75BBEC001B0294 /* tmpNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tmpNote.entitlements; sourceTree = "<group>"; };
+		3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.debug.xcconfig"; sourceTree = "<group>"; };
+		58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tmpNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +50,8 @@
 			children = (
 				2776565E1F75BBEC001B0294 /* tmpNote */,
 				2776565D1F75BBEC001B0294 /* Products */,
+				E95C7FB7367FBAB697D54ED9 /* Pods */,
+				C32BFCA9F155C8CFA91587B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,14 +67,33 @@
 			isa = PBXGroup;
 			children = (
 				2776565F1F75BBEC001B0294 /* AppDelegate.swift */,
+				274464B41F79567A008A0252 /* PreferencesWindow.swift */,
 				275847341F782C7F0072F709 /* TmpNoteViewController.swift */,
 				274464AA1F78372A008A0252 /* EventMonitor.swift */,
+				274464B61F79939F008A0252 /* Podfile */,
 				277656631F75BBEC001B0294 /* Assets.xcassets */,
 				277656651F75BBEC001B0294 /* Main.storyboard */,
 				277656681F75BBEC001B0294 /* Info.plist */,
 				277656691F75BBEC001B0294 /* tmpNote.entitlements */,
 			);
 			path = tmpNote;
+			sourceTree = "<group>";
+		};
+		C32BFCA9F155C8CFA91587B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E95C7FB7367FBAB697D54ED9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */,
+				C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -73,9 +103,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2776566C1F75BBEC001B0294 /* Build configuration list for PBXNativeTarget "tmpNote" */;
 			buildPhases = (
+				9C243515056E804DE74BD260 /* [CP] Check Pods Manifest.lock */,
 				277656581F75BBEC001B0294 /* Sources */,
 				277656591F75BBEC001B0294 /* Frameworks */,
 				2776565A1F75BBEC001B0294 /* Resources */,
+				C7B0C2D3FC7953005B126D06 /* [CP] Embed Pods Frameworks */,
+				14242F44F9C4046B6F4E1492 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,6 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274464B71F79939F008A0252 /* Podfile in Resources */,
 				277656641F75BBEC001B0294 /* Assets.xcassets in Resources */,
 				277656671F75BBEC001B0294 /* Main.storyboard in Resources */,
 			);
@@ -132,11 +166,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		14242F44F9C4046B6F4E1492 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C243515056E804DE74BD260 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-tmpNote-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7B0C2D3FC7953005B126D06 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MASShortcut/MASShortcut.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASShortcut.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		277656581F75BBEC001B0294 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274464B51F79567A008A0252 /* PreferencesWindow.swift in Sources */,
 				274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */,
 				277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */,
 				275847351F782C7F0072F709 /* TmpNoteViewController.swift in Sources */,
@@ -265,6 +354,7 @@
 		};
 		2776566D1F75BBEC001B0294 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tmpNote/tmpNote.entitlements;
@@ -281,6 +371,7 @@
 		};
 		2776566E1F75BBEC001B0294 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tmpNote/tmpNote.entitlements;

@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
     var eventMonitor: EventMonitor?
+    let preferences = PreferencesWindowController.freshController()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -70,7 +71,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     @objc func openPreferences() {
-        
+        NSApplication.shared.activate(ignoringOtherApps: true)
+        preferences.window?.makeKeyAndOrderFront(self)
     }
     
     @objc func quitAction() {
@@ -81,6 +83,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func showPopover() {
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            NSApplication.shared.activate(ignoringOtherApps: true)
+            (popover.contentViewController as! TmpNoteViewController).textView.window?.makeKeyAndOrderFront(self)
             eventMonitor?.start()
         }
     }

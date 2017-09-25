@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -739,7 +740,91 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10" y="688"/>
+            <point key="canvasLocation" x="35" y="259"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="mTL-9A-lK3">
+            <objects>
+                <windowController storyboardIdentifier="PreferencesWindowController" showSeguePresentationStyle="single" id="4OR-bp-yKV" customClass="PreferencesWindowController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="tmpNote Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="36b-Uf-3Au">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" transient="YES"/>
+                        <rect key="contentRect" x="488" y="401" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+                        <toolbar key="toolbar" implicitIdentifier="5D91E1F9-40C9-43DE-B340-36F2E568DF14" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="1cT-xj-hNn">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="B91A2435-DE33-4E89-8547-C37BA64407E7" label="General" paletteLabel="General" tag="-1" image="NSPreferencesGeneral" id="tQs-aW-iqY"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="GxD-1t-oru"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="3Uo-Kd-d8P"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="tQs-aW-iqY"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="4OR-bp-yKV" id="2Or-zp-QMR"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="Gxo-NN-4O8" kind="relationship" relationship="window.shadowedContentViewController" id="PV4-4Z-mEP"/>
+                    </connections>
+                </windowController>
+                <customObject id="uTI-jk-rlH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-487" y="259"/>
+        </scene>
+        <!--General View Controller-->
+        <scene sceneID="4aS-rL-jSh">
+            <objects>
+                <viewController id="Gxo-NN-4O8" customClass="GeneralViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Bkm-LD-4MX">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="129"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-5X-PVb">
+                                <rect key="frame" x="122" y="49" width="236" height="30"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zh2-rq-LlD">
+                                        <rect key="frame" x="-2" y="6.5" width="112" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Global show/hide:" id="Iyo-r6-3sm">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uGo-6N-k3Q" customClass="MASShortcutView">
+                                        <rect key="frame" x="116" y="0.0" width="120" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="7wu-Jx-JS4"/>
+                                            <constraint firstAttribute="width" constant="120" id="kvi-Xt-VN4"/>
+                                        </constraints>
+                                    </customView>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="x7b-5X-PVb" firstAttribute="top" secondItem="Bkm-LD-4MX" secondAttribute="top" constant="50" id="kp0-DD-U0s"/>
+                            <constraint firstItem="x7b-5X-PVb" firstAttribute="centerX" secondItem="Bkm-LD-4MX" secondAttribute="centerX" id="slZ-Qz-umK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="shortcutView" destination="uGo-6N-k3Q" id="aru-Pm-nbo"/>
+                    </connections>
+                </viewController>
+                <customObject id="8dV-xV-HWL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-487" y="658.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+    </resources>
 </document>
