@@ -39,17 +39,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Insert code here to tear down your application
     }
 
-    func createStatusBarMenu() {
-
-
+    private func createStatusBarMenu() {
         let menu = NSMenu()
         menu.delegate = self
+        addMenuItems(to: menu)
+        statusItem.menu = menu
+    }
+    
+    private func addMenuItems(to menu: NSMenu) {
         menu.addItem(NSMenuItem(title: "Preferences", action: #selector(openPreferences), keyEquivalent: "P"))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit tmpNote", action: #selector(quitAction), keyEquivalent: ""))
-        
-        statusItem.menu = menu
-
     }
     
     func menuWillOpen(_ menu: NSMenu) {
@@ -60,14 +60,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return
         }
         else {
-            menu.addItem(NSMenuItem(title: "Preferences", action: #selector(openPreferences), keyEquivalent: "P"))
-            menu.addItem(NSMenuItem.separator())
-            menu.addItem(NSMenuItem(title: "Quit tmpNote", action: #selector(quitAction), keyEquivalent: ""))
+            addMenuItems(to: menu)
         }
     }
-
+    
+    //MARK: Menu actions
     @objc func togglePopover(_ sender: Any?) {
-        debugPrint("test")
         popover.isShown == true ? closePopover() : showPopover()
     }
     
@@ -79,6 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         NSApp.terminate(self)
     }
     
+    //MARK: Popover Show/Hide
     func showPopover() {
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
@@ -88,6 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func closePopover() {
         popover.performClose(self)
+        (popover.contentViewController as! TmpNoteViewController).saveText()
         eventMonitor?.stop()
     }
 }

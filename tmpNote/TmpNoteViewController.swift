@@ -10,13 +10,35 @@ import Cocoa
 
 class TmpNoteViewController: NSViewController {
 
+    static private let kPreviousSessionTextKey = "PreviousSessionText"
+    
+    @IBOutlet var textView: NSTextView! {
+        didSet {
+            textView.font = NSFont.systemFont(ofSize: 20)
+            textView.textColor = .white
+            
+            loadPreviousText()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
+    func loadPreviousText() {
+        if let prevText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
+            textView.string = prevText
+        }
+        else {
+            textView.string = ""
+        }
+    }
+    
+    func saveText() {
+        UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+    }
 }
-
 
 extension TmpNoteViewController {
     

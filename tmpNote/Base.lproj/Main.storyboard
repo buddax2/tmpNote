@@ -686,21 +686,21 @@
             <objects>
                 <viewController storyboardIdentifier="TmpNoteViewController" id="XfG-lQ-9wD" customClass="TmpNoteViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="336"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMr-3L-Pyx">
-                                <rect key="frame" x="7" y="7" width="466" height="243"/>
+                                <rect key="frame" x="7" y="7" width="336" height="309"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ez8-Jb-5dV">
-                                    <rect key="frame" x="0.0" y="0.0" width="466" height="243"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="336" height="309"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView drawsBackground="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Bmf-bl-IZh">
-                                            <rect key="frame" x="0.0" y="0.0" width="466" height="243"/>
+                                        <textView focusRingType="none" drawsBackground="NO" verticallyResizable="YES" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="Bmf-bl-IZh">
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="309"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="466" height="243"/>
+                                            <size key="minSize" width="336" height="309"/>
                                             <size key="maxSize" width="471" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="some text">
@@ -721,7 +721,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="o9L-ZG-2hP">
-                                    <rect key="frame" x="450" y="0.0" width="16" height="243"/>
+                                    <rect key="frame" x="320" y="0.0" width="16" height="309"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -733,10 +733,13 @@
                             <constraint firstItem="DMr-3L-Pyx" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="w8Q-zU-6dT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="Bmf-bl-IZh" id="9vW-8p-XBB"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="10" y="688"/>
         </scene>
     </scenes>
 </document>
