@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2736E6E61F79A857002015D3 /* LauncherApplication.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 274464BC1F79A10A008A0252 /* LauncherApplication.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464AA1F78372A008A0252 /* EventMonitor.swift */; };
 		274464B51F79567A008A0252 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464B41F79567A008A0252 /* PreferencesWindow.swift */; };
 		274464B71F79939F008A0252 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 274464B61F79939F008A0252 /* Podfile */; };
+		274464BF1F79A10A008A0252 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464BE1F79A10A008A0252 /* AppDelegate.swift */; };
+		274464C31F79A10A008A0252 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 274464C21F79A10A008A0252 /* Assets.xcassets */; };
+		274464C61F79A10A008A0252 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274464C41F79A10A008A0252 /* Main.storyboard */; };
+		274464CD1F79A12A008A0252 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274464CC1F79A12A008A0252 /* ServiceManagement.framework */; };
 		275847351F782C7F0072F709 /* TmpNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275847341F782C7F0072F709 /* TmpNoteViewController.swift */; };
 		277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776565F1F75BBEC001B0294 /* AppDelegate.swift */; };
 		277656641F75BBEC001B0294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277656631F75BBEC001B0294 /* Assets.xcassets */; };
@@ -17,10 +22,30 @@
 		EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2736E6E51F79A84C002015D3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				2736E6E61F79A857002015D3 /* LauncherApplication.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		274464AA1F78372A008A0252 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		274464B41F79567A008A0252 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		274464B61F79939F008A0252 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		274464BC1F79A10A008A0252 /* LauncherApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LauncherApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		274464BE1F79A10A008A0252 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		274464C21F79A10A008A0252 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		274464C51F79A10A008A0252 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		274464C71F79A10A008A0252 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		274464C81F79A10A008A0252 /* LauncherApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LauncherApplication.entitlements; sourceTree = "<group>"; };
+		274464CC1F79A12A008A0252 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		275847341F782C7F0072F709 /* TmpNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpNoteViewController.swift; sourceTree = "<group>"; };
 		2776565C1F75BBEC001B0294 /* tmpNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tmpNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2776565F1F75BBEC001B0294 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,10 +59,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		274464B91F79A10A008A0252 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		277656591F75BBEC001B0294 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274464CD1F79A12A008A0252 /* ServiceManagement.framework in Frameworks */,
 				EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,10 +78,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		274464BD1F79A10A008A0252 /* LauncherApplication */ = {
+			isa = PBXGroup;
+			children = (
+				274464BE1F79A10A008A0252 /* AppDelegate.swift */,
+				274464C21F79A10A008A0252 /* Assets.xcassets */,
+				274464C41F79A10A008A0252 /* Main.storyboard */,
+				274464C71F79A10A008A0252 /* Info.plist */,
+				274464C81F79A10A008A0252 /* LauncherApplication.entitlements */,
+			);
+			path = LauncherApplication;
+			sourceTree = "<group>";
+		};
 		277656531F75BBEC001B0294 = {
 			isa = PBXGroup;
 			children = (
 				2776565E1F75BBEC001B0294 /* tmpNote */,
+				274464BD1F79A10A008A0252 /* LauncherApplication */,
 				2776565D1F75BBEC001B0294 /* Products */,
 				E95C7FB7367FBAB697D54ED9 /* Pods */,
 				C32BFCA9F155C8CFA91587B5 /* Frameworks */,
@@ -59,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				2776565C1F75BBEC001B0294 /* tmpNote.app */,
+				274464BC1F79A10A008A0252 /* LauncherApplication.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +129,7 @@
 		C32BFCA9F155C8CFA91587B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				274464CC1F79A12A008A0252 /* ServiceManagement.framework */,
 				58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */,
 			);
 			name = Frameworks;
@@ -99,6 +147,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		274464BB1F79A10A008A0252 /* LauncherApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 274464CB1F79A10A008A0252 /* Build configuration list for PBXNativeTarget "LauncherApplication" */;
+			buildPhases = (
+				274464B81F79A10A008A0252 /* Sources */,
+				274464B91F79A10A008A0252 /* Frameworks */,
+				274464BA1F79A10A008A0252 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LauncherApplication;
+			productName = LauncherApplication;
+			productReference = 274464BC1F79A10A008A0252 /* LauncherApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
 		2776565B1F75BBEC001B0294 /* tmpNote */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2776566C1F75BBEC001B0294 /* Build configuration list for PBXNativeTarget "tmpNote" */;
@@ -109,6 +174,7 @@
 				2776565A1F75BBEC001B0294 /* Resources */,
 				C7B0C2D3FC7953005B126D06 /* [CP] Embed Pods Frameworks */,
 				14242F44F9C4046B6F4E1492 /* [CP] Copy Pods Resources */,
+				2736E6E51F79A84C002015D3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -129,6 +195,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = BUDDAx2;
 				TargetAttributes = {
+					274464BB1F79A10A008A0252 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 					2776565B1F75BBEC001B0294 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -149,11 +219,21 @@
 			projectRoot = "";
 			targets = (
 				2776565B1F75BBEC001B0294 /* tmpNote */,
+				274464BB1F79A10A008A0252 /* LauncherApplication */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		274464BA1F79A10A008A0252 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				274464C31F79A10A008A0252 /* Assets.xcassets in Resources */,
+				274464C61F79A10A008A0252 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2776565A1F75BBEC001B0294 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +301,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		274464B81F79A10A008A0252 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				274464BF1F79A10A008A0252 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		277656581F75BBEC001B0294 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,6 +323,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		274464C41F79A10A008A0252 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				274464C51F79A10A008A0252 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		277656651F75BBEC001B0294 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -246,6 +342,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		274464C91F79A10A008A0252 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LauncherApplication/LauncherApplication.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q2N8L37H44;
+				INFOPLIST_FILE = LauncherApplication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote.LauncherApplication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		274464CA1F79A10A008A0252 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LauncherApplication/LauncherApplication.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q2N8L37H44;
+				INFOPLIST_FILE = LauncherApplication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote.LauncherApplication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		2776566A1F75BBEC001B0294 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -356,8 +488,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tmpNote/tmpNote.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Q2N8L37H44;
@@ -365,6 +499,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -373,8 +508,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tmpNote/tmpNote.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Q2N8L37H44;
@@ -382,6 +519,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -389,6 +527,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		274464CB1F79A10A008A0252 /* Build configuration list for PBXNativeTarget "LauncherApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				274464C91F79A10A008A0252 /* Debug */,
+				274464CA1F79A10A008A0252 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		277656571F75BBEC001B0294 /* Build configuration list for PBXProject "tmpNote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

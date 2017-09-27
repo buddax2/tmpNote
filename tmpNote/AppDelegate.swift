@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import ServiceManagement
+
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -19,6 +21,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        let launcherIdentifier = "io.github.buddax2.tmpNote.LauncherApplication"
+        SMLoginItemSetEnabled(launcherIdentifier as CFString, true)
+        
+        var startAtLogin = false
+        for app in NSWorkspace.shared.runningApplications {
+            if app.bundleIdentifier == launcherIdentifier {
+                startAtLogin = true
+            }
+        }
+        
+        if startAtLogin == true {
+            DistributedNotificationCenter.default().post(name: Notification.Name(rawValue: "killme"), object: Bundle.main.bundleIdentifier)
+        }
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             if let strongSelf = self, strongSelf.popover.isShown {
