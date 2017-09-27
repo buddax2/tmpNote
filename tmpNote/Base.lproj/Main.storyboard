@@ -702,14 +702,14 @@
                                                 <textView focusRingType="none" drawsBackground="NO" verticallyResizable="YES" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="Bmf-bl-IZh">
                                                     <rect key="frame" x="0.0" y="0.0" width="340" height="301"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <size key="minSize" width="340" height="301"/>
                                                     <size key="maxSize" width="471" height="10000000"/>
                                                     <attributedString key="textStorage">
                                                         <fragment content="some text">
                                                             <attributes>
-                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="NSColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <font key="NSFont" metaFont="system" size="20"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
