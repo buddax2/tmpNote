@@ -757,7 +757,7 @@
         <scene sceneID="mTL-9A-lK3">
             <objects>
                 <windowController storyboardIdentifier="PreferencesWindowController" showSeguePresentationStyle="single" id="4OR-bp-yKV" customClass="PreferencesWindowController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="tmpNote Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="36b-Uf-3Au">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="36b-Uf-3Au">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" transient="YES"/>
                         <rect key="contentRect" x="488" y="401" width="480" height="270"/>
@@ -792,24 +792,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="129"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-5X-PVb">
-                                <rect key="frame" x="122" y="49" width="236" height="30"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-2e-99M">
+                                <rect key="frame" x="122" y="35" width="236" height="59"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zh2-rq-LlD">
-                                        <rect key="frame" x="-2" y="7" width="112" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Global show/hide:" id="Iyo-r6-3sm">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
+                                        <rect key="frame" x="2" y="43" width="232" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wFd-BU-K3o">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uGo-6N-k3Q" customClass="MASShortcutView">
-                                        <rect key="frame" x="116" y="0.0" width="120" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="7wu-Jx-JS4"/>
-                                            <constraint firstAttribute="width" constant="120" id="kvi-Xt-VN4"/>
-                                        </constraints>
-                                    </customView>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="toggleLaunchState:" target="Gxo-NN-4O8" id="YXA-yf-6fC"/>
+                                        </connections>
+                                    </button>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-5X-PVb">
+                                        <rect key="frame" x="0.0" y="0.0" width="236" height="30"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zh2-rq-LlD">
+                                                <rect key="frame" x="-2" y="7" width="112" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Global show/hide:" id="Iyo-r6-3sm">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="uGo-6N-k3Q" customClass="MASShortcutView">
+                                                <rect key="frame" x="116" y="0.0" width="120" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="7wu-Jx-JS4"/>
+                                                    <constraint firstAttribute="width" constant="120" id="kvi-Xt-VN4"/>
+                                                </constraints>
+                                            </customView>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
@@ -822,11 +845,12 @@
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="x7b-5X-PVb" firstAttribute="top" secondItem="Bkm-LD-4MX" secondAttribute="top" constant="50" id="kp0-DD-U0s"/>
-                            <constraint firstItem="x7b-5X-PVb" firstAttribute="centerX" secondItem="Bkm-LD-4MX" secondAttribute="centerX" id="slZ-Qz-umK"/>
+                            <constraint firstItem="ujt-2e-99M" firstAttribute="centerY" secondItem="Bkm-LD-4MX" secondAttribute="centerY" id="BmC-V8-FiQ"/>
+                            <constraint firstItem="ujt-2e-99M" firstAttribute="centerX" secondItem="Bkm-LD-4MX" secondAttribute="centerX" id="iS8-BF-CYI"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="launchAtStartupCheckbox" destination="SP1-l5-MaS" id="acC-Dl-znU"/>
                         <outlet property="shortcutView" destination="uGo-6N-k3Q" id="aru-Pm-nbo"/>
                     </connections>
                 </viewController>

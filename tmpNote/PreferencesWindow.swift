@@ -32,6 +32,11 @@ extension PreferencesWindowController {
 
 class GeneralViewController: NSViewController {
 
+    @IBOutlet weak var launchAtStartupCheckbox: NSButton! {
+        didSet {
+            launchAtStartupCheckbox.state = NSControl.StateValue(UserDefaults.standard.bool(forKey: "LaunchOnStartup") == false ? 0 : 1)
+        }
+    }
     @IBOutlet var shortcutView: MASShortcutView! {
         didSet {
             shortcutView.associatedUserDefaultsKey = GeneralViewController.kPreferenceGlobalShortcut
@@ -48,4 +53,14 @@ class GeneralViewController: NSViewController {
             appDelegate.togglePopover(self)
         })
     }
+    
+    @IBAction func toggleLaunchState(_ sender: NSButton) {
+        let shouldLaunch = sender.state.rawValue == 1
+        
+        UserDefaults.standard.set(shouldLaunch, forKey: "LaunchOnStartup")
+        
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.setupLaunchOnStartup()
+    }
+    
 }
