@@ -14,9 +14,6 @@ class TmpNoteViewController: NSViewController {
     
     @IBOutlet var textView: NSTextView! {
         didSet {
-            textView.font = NSFont.systemFont(ofSize: 20)
-            textView.textColor = .white
-            
             loadPreviousText()
         }
     }
