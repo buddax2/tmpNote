@@ -5,3 +5,5 @@ it's a "fork" of [Tyke.io](http://tyke.io) ([@torrez](https://twitter.com/torrez
  - global hotkey
  - launch at system startup
  
+Please try it!
+[tmpNote.dmg](https://github.com/buddax2/tmpNote/blob/master/Resources/tmpNote.dmg)
