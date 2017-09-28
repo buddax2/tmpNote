@@ -24,8 +24,7 @@ class TmpNoteViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(setupTextView), name: Notification.Name(rawValue: "PlainTextDidChange"), object: nil)
+
     }
     
     func willAppear() {
@@ -34,12 +33,6 @@ class TmpNoteViewController: NSViewController {
     }
     
     @objc fileprivate func setupTextView() {
-
-        // Will back to this later
-        // Need to fix some style issues while using RTF
-        
-//        let isPlainTextOn = UserDefaults.standard.bool(forKey: "PlainText")
-//        textView.isRichText = !isPlainTextOn
 
         //set default font
         //TODO: make this size configurable in preferences

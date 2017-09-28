@@ -32,7 +32,6 @@ extension PreferencesWindowController {
 
 class GeneralViewController: NSViewController {
 
-    @IBOutlet weak var plainTextCheckbox: NSButton!
     @IBOutlet weak var launchAtStartupCheckbox: NSButton!
     @IBOutlet var shortcutView: MASShortcutView! {
         didSet {
@@ -49,10 +48,6 @@ class GeneralViewController: NSViewController {
             let appDelegate = NSApplication.shared.delegate as! AppDelegate
             appDelegate.togglePopover(self)
         })
-    }
-    
-    @IBAction func togglePlainTextState(_ sender: NSButton) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "PlainTextDidChange"), object: nil)
     }
     
     @IBAction func toggleLaunchState(_ sender: NSButton) {
