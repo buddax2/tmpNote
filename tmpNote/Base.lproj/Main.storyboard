@@ -687,23 +687,37 @@
             <objects>
                 <viewController storyboardIdentifier="TmpNoteViewController" id="XfG-lQ-9wD" customClass="TmpNoteViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="336"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="6l7-95-4Pz">
+                                <rect key="frame" x="325" y="209" width="21" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="EZg-mu-QjP"/>
+                                    <constraint firstAttribute="width" constant="21" id="Vgg-uW-BTW"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="gWY-qb-J3x">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showMenu:" target="XfG-lQ-9wD" id="aFf-qf-RrD"/>
+                                </connections>
+                            </button>
                             <visualEffectView blendingMode="behindWindow" material="mediumLight" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="306"/>
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="204"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-ax-0FW">
-                                        <rect key="frame" x="7" y="0.0" width="336" height="306"/>
+                                        <rect key="frame" x="7" y="0.0" width="336" height="204"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Yc-ce-VzK">
-                                            <rect key="frame" x="0.0" y="0.0" width="336" height="306"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="204"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="336" height="306"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="336" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="336" height="306"/>
+                                                    <size key="minSize" width="336" height="204"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                     <attributedString key="textStorage">
                                                         <fragment content="some text">
@@ -723,7 +737,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V1X-0u-SVp">
-                                            <rect key="frame" x="320" y="0.0" width="16" height="306"/>
+                                            <rect key="frame" x="320" y="0.0" width="16" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -737,6 +751,8 @@
                             </visualEffectView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6l7-95-4Pz" secondAttribute="trailing" constant="4" id="4uR-vm-5xj"/>
+                            <constraint firstItem="6l7-95-4Pz" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="4" id="Akf-2f-O3p"/>
                             <constraint firstAttribute="trailing" secondItem="Swo-en-XTe" secondAttribute="trailing" id="dPx-ou-OH8"/>
                             <constraint firstItem="Swo-en-XTe" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="o6m-5f-NoB"/>
                             <constraint firstAttribute="bottom" secondItem="Swo-en-XTe" secondAttribute="bottom" id="sbO-DG-A64"/>
@@ -744,12 +760,30 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="appMenu" destination="clg-M0-VxI" id="oUi-gL-cdL"/>
+                        <outlet property="menuIcon" destination="6l7-95-4Pz" id="I8F-Pa-V96"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="clg-M0-VxI">
+                    <items>
+                        <menuItem title="Preferences..." id="x4i-ey-TAZ">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openPreferences:" target="XfG-lQ-9wD" id="nwp-QC-vug"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="52B-5O-Vpk"/>
+                        <menuItem title="Quit tmpNote" keyEquivalent="q" id="YCc-f5-uaw">
+                            <connections>
+                                <action selector="terminateApp:" target="XfG-lQ-9wD" id="wph-4O-ZLR"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
-            <point key="canvasLocation" x="35" y="259"/>
+            <point key="canvasLocation" x="35" y="208"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="mTL-9A-lK3">
@@ -875,5 +909,6 @@
     </scenes>
     <resources>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="settings" width="17" height="17"/>
     </resources>
 </document>

@@ -12,6 +12,8 @@ class TmpNoteViewController: NSViewController {
 
     static private let kPreviousSessionTextKey = "PreviousSessionText"
     
+    @IBOutlet var appMenu: NSMenu!
+    @IBOutlet weak var menuIcon: NSButton!
     @IBOutlet var textView: NSTextView! {
         didSet {
             setupTextView()
@@ -63,6 +65,24 @@ class TmpNoteViewController: NSViewController {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.closePopover()
     }
+    
+    @IBAction func showMenu(_ sender: NSButton) {
+        let p = NSPoint(x: 0, y: sender.frame.height)
+        appMenu.popUp(positioning: nil, at: p, in: sender)
+    }
+    
+    @IBAction func openPreferences(_ sender: Any) {
+        NSApplication.shared.activate(ignoringOtherApps: true)
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.openPreferences()
+    }
+    
+    @IBAction func terminateApp(_ sender: Any) {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.quitAction()
+    }
+    
+    
 }
 
 extension TmpNoteViewController {

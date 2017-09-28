@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
         }
         
-        createStatusBarMenu()
+        createStatusBarIcon()
         popover.contentViewController = TmpNoteViewController.freshController()
         popover.animates = false
     }
@@ -40,17 +40,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Insert code here to tear down your application
     }
 
-    private func createStatusBarMenu() {
+    private func createStatusBarIcon() {
         
         if let button = statusItem.button {
             button.image = #imageLiteral(resourceName: " Compose")
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
-
-        let menu = NSMenu()
-        menu.delegate = self
-        addMenuItems(to: menu)
-        statusItem.menu = menu
     }
     
     fileprivate func killLauncher() {
@@ -63,24 +58,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         if startAtLogin == true {
             DistributedNotificationCenter.default().post(name: Notification.Name(rawValue: "killme"), object: Bundle.main.bundleIdentifier)
-        }
-    }
-    
-    private func addMenuItems(to menu: NSMenu) {
-        menu.addItem(NSMenuItem(title: "Preferences", action: #selector(openPreferences), keyEquivalent: "P"))
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit tmpNote", action: #selector(quitAction), keyEquivalent: ""))
-    }
-    
-    func menuWillOpen(_ menu: NSMenu) {
-        menu.removeAllItems() // TODO: re-work this piece of shit
-
-        if (NSEvent.pressedMouseButtons == 1) {
-            togglePopover(menu)
-            return
-        }
-        else {
-            addMenuItems(to: menu)
         }
     }
     
