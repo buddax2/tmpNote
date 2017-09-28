@@ -38,6 +38,11 @@ class TmpNoteViewController: NSViewController {
         
 //        let isPlainTextOn = UserDefaults.standard.bool(forKey: "PlainText")
 //        textView.isRichText = !isPlainTextOn
+
+        //set default font
+        //TODO: make this size configurable in preferences
+        let font = NSFont.systemFont(ofSize: 20)
+        textView.font = font
     }
     
     func loadPreviousText() {
