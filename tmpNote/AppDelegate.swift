@@ -101,9 +101,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     //MARK: Popover Show/Hide
     func showPopover() {
         if let button = statusItem.button {
+            (popover.contentViewController as! TmpNoteViewController).willAppear()
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             NSApplication.shared.activate(ignoringOtherApps: true)
-            (popover.contentViewController as! TmpNoteViewController).textView.window?.makeKeyAndOrderFront(self)
             eventMonitor?.start()
         }
     }

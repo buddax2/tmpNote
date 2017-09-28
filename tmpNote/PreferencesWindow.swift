@@ -32,11 +32,8 @@ extension PreferencesWindowController {
 
 class GeneralViewController: NSViewController {
 
-    @IBOutlet weak var launchAtStartupCheckbox: NSButton! {
-        didSet {
-            launchAtStartupCheckbox.state = NSControl.StateValue(UserDefaults.standard.bool(forKey: "LaunchOnStartup") == false ? 0 : 1)
-        }
-    }
+    @IBOutlet weak var plainTextCheckbox: NSButton!
+    @IBOutlet weak var launchAtStartupCheckbox: NSButton!
     @IBOutlet var shortcutView: MASShortcutView! {
         didSet {
             shortcutView.associatedUserDefaultsKey = GeneralViewController.kPreferenceGlobalShortcut
@@ -54,11 +51,11 @@ class GeneralViewController: NSViewController {
         })
     }
     
+    @IBAction func togglePlainTextState(_ sender: NSButton) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "PlainTextDidChange"), object: nil)
+    }
+    
     @IBAction func toggleLaunchState(_ sender: NSButton) {
-        let shouldLaunch = sender.state.rawValue == 1
-        
-        UserDefaults.standard.set(shouldLaunch, forKey: "LaunchOnStartup")
-        
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.setupLaunchOnStartup()
     }

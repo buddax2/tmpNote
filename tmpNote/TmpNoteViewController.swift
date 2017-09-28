@@ -14,6 +14,7 @@ class TmpNoteViewController: NSViewController {
     
     @IBOutlet var textView: NSTextView! {
         didSet {
+            setupTextView()
             loadPreviousText()
         }
     }
@@ -21,6 +22,22 @@ class TmpNoteViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupTextView), name: Notification.Name(rawValue: "PlainTextDidChange"), object: nil)
+    }
+    
+    func willAppear() {
+        // make textview focused
+        textView?.window?.makeKeyAndOrderFront(self)
+    }
+    
+    @objc fileprivate func setupTextView() {
+
+        // Will back to this later
+        // Need to fix some style issues while using RTF
+        
+//        let isPlainTextOn = UserDefaults.standard.bool(forKey: "PlainText")
+//        textView.isRichText = !isPlainTextOn
     }
     
     func loadPreviousText() {
