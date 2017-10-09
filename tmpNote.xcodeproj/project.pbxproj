@@ -353,7 +353,7 @@
 				DEVELOPMENT_TEAM = Q2N8L37H44;
 				INFOPLIST_FILE = LauncherApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote.LauncherApplication;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddax2.tmpNote.LauncherApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -371,7 +371,7 @@
 				DEVELOPMENT_TEAM = Q2N8L37H44;
 				INFOPLIST_FILE = LauncherApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote.LauncherApplication;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddax2.tmpNote.LauncherApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -497,7 +497,7 @@
 				DEVELOPMENT_TEAM = Q2N8L37H44;
 				INFOPLIST_FILE = tmpNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddax2.tmpNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -517,7 +517,7 @@
 				DEVELOPMENT_TEAM = Q2N8L37H44;
 				INFOPLIST_FILE = tmpNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.buddax2.tmpNote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddax2.tmpNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

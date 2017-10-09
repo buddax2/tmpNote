@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         NSLog("launched tmpNote launcher")
         
-        let mainAppIdentifier = "io.github.buddax2.tmpNote"
+        let mainAppIdentifier = Bundle.main.bundleIdentifier!.replacingOccurrences(of: ".LauncherApplication", with: "")
         let runningApps = NSWorkspace.shared.runningApplications
         var alreadyRunning = false
         
@@ -36,10 +36,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             components.removeLast()
             components.removeLast()
             components.removeLast()
+            components.append("MacOS")
+            components.append("tmpNote")
             let newPath = NSString.path(withComponents: components)
-            if let binaryPath = Bundle(path: newPath)?.executablePath {
-                NSWorkspace.shared.launchApplication(binaryPath)
-            }
+            NSWorkspace.shared.launchApplication(newPath)
         }
         else {
             terminate()

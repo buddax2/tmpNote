@@ -13,7 +13,9 @@ import ServiceManagement
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
-    fileprivate let launcherIdentifier = "io.github.buddax2.tmpNote.LauncherApplication"
+    fileprivate var launcherIdentifier: String {
+       return  Bundle.main.bundleIdentifier!+".LauncherApplication"
+    }
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
     var eventMonitor: EventMonitor?
@@ -91,15 +93,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         eventMonitor?.stop()
     }
     
-    
     func setupLaunchOnStartup() {
         
-        var shouldLaunch = true
+        var shouldLaunch = false
         if let _ = UserDefaults.standard.object(forKey: "LaunchOnStartup") {
             shouldLaunch = UserDefaults.standard.bool(forKey: "LaunchOnStartup")
         }
         else {
-            UserDefaults.standard.set(true, forKey: "LaunchOnStartup")
+            UserDefaults.standard.set(false, forKey: "LaunchOnStartup")
         }
         
         SMLoginItemSetEnabled(launcherIdentifier as CFString, shouldLaunch)

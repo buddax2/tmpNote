@@ -829,7 +829,7 @@
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
                                         <rect key="frame" x="-2" y="43" width="232" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wFd-BU-K3o">
+                                        <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="wFd-BU-K3o">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
