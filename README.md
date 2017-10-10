@@ -5,5 +5,4 @@ it's a "fork" of [Tyke.io](http://tyke.io) ([@torrez](https://twitter.com/torrez
  - global hotkey
  - launch at system startup
  
-Please try it!
-[tmpNote.dmg](https://github.com/buddax2/tmpNote/blob/master/Resources/tmpNote.dmg)
+Please try it: [Mac App Store](https://itunes.apple.com/us/app/tmpnote/id1293664761?l=ru&ls=1&mt=12)
