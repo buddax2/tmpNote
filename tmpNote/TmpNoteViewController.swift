@@ -34,10 +34,9 @@ class TmpNoteViewController: NSViewController {
     
     @objc fileprivate func setupTextView() {
 
-        //set default font
-        //TODO: make this size configurable in preferences
-        let font = NSFont.systemFont(ofSize: 20)
-        textView.font = font
+        let fontSize = UserDefaults.standard.value(forKey: kFontSizeKey) as? CGFloat ?? 20
+        let font = NSFont.systemFont(ofSize: fontSize)
+        textView.textStorage?.font = font
     }
     
     func loadPreviousText() {
@@ -67,6 +66,7 @@ class TmpNoteViewController: NSViewController {
     @IBAction func openPreferences(_ sender: Any) {
         NSApplication.shared.activate(ignoringOtherApps: true)
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        (appDelegate.preferences.contentViewController as? GeneralViewController)?.delegate = self
         appDelegate.openPreferences()
     }
     
@@ -90,5 +90,12 @@ extension TmpNoteViewController {
         }
         
         return vc
+    }
+}
+
+extension TmpNoteViewController: PreferencesDelegate {
+    
+    func updateFontSize() {
+        setupTextView()
     }
 }
