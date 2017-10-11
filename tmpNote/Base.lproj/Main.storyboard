@@ -825,10 +825,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-2e-99M">
-                                <rect key="frame" x="122" y="35" width="236" height="59"/>
+                                <rect key="frame" x="122" y="17" width="236" height="95"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
-                                        <rect key="frame" x="-2" y="43" width="232" height="18"/>
+                                        <rect key="frame" x="-2" y="79" width="232" height="18"/>
                                         <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wFd-BU-K3o">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -838,6 +838,35 @@
                                             <binding destination="zNx-2O-HHw" name="value" keyPath="values.LaunchOnStartup" id="5ds-KR-epv"/>
                                         </connections>
                                     </button>
+                                    <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7UH-62-uPd">
+                                        <rect key="frame" x="0.0" y="45" width="236" height="21"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7B8-ye-DFP">
+                                                <rect key="frame" x="-2" y="2" width="118" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font Size:" id="21A-iA-Bq3">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R72-va-1rf">
+                                                <rect key="frame" x="121" y="-3" width="118" height="26"/>
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D4a-r2-3Rh">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" userInterfaceLayoutDirection="leftToRight" id="bNP-GN-hdF"/>
+                                                </popUpButtonCell>
+                                            </popUpButton>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-5X-PVb">
                                         <rect key="frame" x="0.0" y="0.0" width="236" height="30"/>
                                         <subviews>
@@ -867,11 +896,17 @@
                                         </customSpacing>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="7UH-62-uPd" firstAttribute="leading" secondItem="ujt-2e-99M" secondAttribute="leading" id="MGT-fZ-8LU"/>
+                                    <constraint firstAttribute="trailing" secondItem="7UH-62-uPd" secondAttribute="trailing" id="jVi-tB-Th6"/>
+                                </constraints>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -883,6 +918,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fontSizeMenu" destination="bNP-GN-hdF" id="8gR-sH-aMd"/>
+                        <outlet property="fontSizePopUpButton" destination="R72-va-1rf" id="KRc-t8-l9v"/>
                         <outlet property="launchAtStartupCheckbox" destination="SP1-l5-MaS" id="acC-Dl-znU"/>
                         <outlet property="shortcutView" destination="uGo-6N-k3Q" id="aru-Pm-nbo"/>
                     </connections>
