@@ -103,10 +103,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             UserDefaults.standard.set(false, forKey: "LaunchOnStartup")
         }
         
-        if UserDefaults.standard.object(forKey: kFontSizeKey) == nil {
-            UserDefaults.standard.set(20, forKey: kFontSizeKey)
-        }
-        
         SMLoginItemSetEnabled(launcherIdentifier as CFString, shouldLaunch)
     }
 }

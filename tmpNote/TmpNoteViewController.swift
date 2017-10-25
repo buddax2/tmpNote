@@ -10,8 +10,19 @@ import Cocoa
 
 class TmpNoteViewController: NSViewController {
 
+    static let kFontSizeKey = "FontSize"
+    static let kFontSizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72]
+    static var defaultFontSize: Int {
+        return kFontSizes[4]
+    }
+
     static private let kPreviousSessionTextKey = "PreviousSessionText"
     
+    @IBOutlet weak var menuView: NSView! {
+        didSet {
+            menuView.isHidden = true // make it hidden here to be able to see it in the storyboard
+        }
+    }
     @IBOutlet var appMenu: NSMenu!
     @IBOutlet weak var menuIcon: NSButton!
     @IBOutlet var textView: NSTextView! {
@@ -34,8 +45,12 @@ class TmpNoteViewController: NSViewController {
     
     @objc fileprivate func setupTextView() {
 
-        let fontSize = UserDefaults.standard.value(forKey: kFontSizeKey) as? CGFloat ?? 20
-        let font = NSFont.systemFont(ofSize: fontSize)
+        let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        setFontSize(size: CGFloat(fontSize))
+    }
+    
+    fileprivate func setFontSize(size: CGFloat) {
+        let font = NSFont.systemFont(ofSize: size)
         textView.textStorage?.font = font
     }
     
@@ -58,9 +73,35 @@ class TmpNoteViewController: NSViewController {
         appDelegate.closePopover()
     }
     
-    @IBAction func showMenu(_ sender: NSButton) {
+    @IBAction func showAppMenu(_ sender: NSButton) {
         let p = NSPoint(x: 0, y: sender.frame.height)
         appMenu.popUp(positioning: nil, at: p, in: sender)
+    }
+
+    @IBAction func showMenuView(_ sender: NSButton) {
+        menuView.isHidden = !menuView.isHidden
+        return
+    }
+
+    @IBAction func changeFontSize(_ sender: NSSegmentedControl) {
+        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        var nextFontSize: Int?
+        
+        switch sender.selectedSegment {
+        case 0: //make the font smaller
+            nextFontSize = currentFontIndex-1 > 0 ? TmpNoteViewController.kFontSizes[currentFontIndex-1] : TmpNoteViewController.kFontSizes.first
+        case 1:
+            nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
+        default:
+            nextFontSize = TmpNoteViewController.defaultFontSize
+        }
+        
+        if let newFontSize = nextFontSize {
+            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            self.setFontSize(size: CGFloat(newFontSize))
+        }
     }
     
     @IBAction func openPreferences(_ sender: Any) {
@@ -95,7 +136,7 @@ extension TmpNoteViewController {
 
 extension TmpNoteViewController: PreferencesDelegate {
     
-    func updateFontSize() {
+    func settingsDidChange() {
         setupTextView()
     }
 }
