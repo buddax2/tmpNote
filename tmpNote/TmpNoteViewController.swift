@@ -104,7 +104,7 @@ class TmpNoteViewController: NSViewController {
         }
     }
     
-    @IBAction func exportToNotes(_ sender: NSButton) {
+    @IBAction func shareAction(_ sender: NSButton) {
         let sharedItems = [textView.string];
         
         let servicePicker = NSSharingServicePicker(items: sharedItems)

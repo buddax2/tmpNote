@@ -691,13 +691,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xuj-yR-LsQ">
-                                <rect key="frame" x="147" y="205" width="195" height="25"/>
+                                <rect key="frame" x="186" y="205" width="156" height="25"/>
                                 <subviews>
                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                        <rect key="frame" x="0.0" y="0.0" width="134" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="25"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                <rect key="frame" x="0.0" y="0.0" width="134" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="95" height="25"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw">
                                                         <rect key="frame" x="0.0" y="1" width="30" height="25"/>
@@ -709,11 +709,11 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
-                                                            <action selector="exportToNotes:" target="XfG-lQ-9wD" id="sj0-dG-LK1"/>
+                                                            <action selector="shareAction:" target="XfG-lQ-9wD" id="ZbB-fd-ovm"/>
                                                         </connections>
                                                     </button>
                                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Ca-NE-o2y">
-                                                        <rect key="frame" x="38" y="2" width="96" height="23"/>
+                                                        <rect key="frame" x="38" y="2" width="57" height="23"/>
                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="momentary" id="Mwp-gt-qwc">
                                                             <font key="font" metaFont="system"/>
                                                             <segments>
@@ -744,7 +744,7 @@
                                         </constraints>
                                     </customView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70V-vv-ywN">
-                                        <rect key="frame" x="146" y="0.0" width="49" height="25"/>
+                                        <rect key="frame" x="107" y="0.0" width="49" height="25"/>
                                         <subviews>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="6l7-95-4Pz">
                                                 <rect key="frame" x="0.0" y="3" width="21" height="20"/>
