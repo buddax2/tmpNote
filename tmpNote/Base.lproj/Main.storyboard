@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -680,7 +680,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="67" y="-99"/>
         </scene>
         <!--Tmp Note View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -691,16 +691,29 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xuj-yR-LsQ">
-                                <rect key="frame" x="189" y="205" width="153" height="25"/>
+                                <rect key="frame" x="186" y="205" width="156" height="25"/>
                                 <subviews>
                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                        <rect key="frame" x="0.0" y="0.0" width="92" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="25"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                <rect key="frame" x="0.0" y="0.0" width="92" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="95" height="25"/>
                                                 <subviews>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw">
+                                                        <rect key="frame" x="0.0" y="1" width="30" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="kDC-Hu-pIg"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="shareAction:" target="XfG-lQ-9wD" id="ZbB-fd-ovm"/>
+                                                        </connections>
+                                                    </button>
                                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Ca-NE-o2y">
-                                                        <rect key="frame" x="0.0" y="2" width="92" height="23"/>
+                                                        <rect key="frame" x="38" y="2" width="57" height="23"/>
                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="momentary" id="Mwp-gt-qwc">
                                                             <font key="font" metaFont="system"/>
                                                             <segments>
@@ -715,8 +728,10 @@
                                                 </subviews>
                                                 <visibilityPriorities>
                                                     <integer value="1000"/>
+                                                    <integer value="1000"/>
                                                 </visibilityPriorities>
                                                 <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                 </customSpacing>
                                             </stackView>
@@ -729,7 +744,7 @@
                                         </constraints>
                                     </customView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70V-vv-ywN">
-                                        <rect key="frame" x="104" y="0.0" width="49" height="25"/>
+                                        <rect key="frame" x="107" y="0.0" width="49" height="25"/>
                                         <subviews>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="6l7-95-4Pz">
                                                 <rect key="frame" x="0.0" y="3" width="21" height="20"/>
@@ -851,10 +866,10 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="clg-M0-VxI">
                     <items>
-                        <menuItem title="Preferences..." id="x4i-ey-TAZ">
+                        <menuItem title="Preferences..." id="SD4-yG-jIO">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="openPreferences:" target="XfG-lQ-9wD" id="OpN-9M-5xV"/>
+                                <action selector="openPreferences:" target="XfG-lQ-9wD" id="BxA-QH-77o"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="52B-5O-Vpk"/>
@@ -978,6 +993,7 @@
     </scenes>
     <resources>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
         <image name="big_A" width="10" height="11"/>
         <image name="menu" width="20" height="5"/>
         <image name="settings" width="17" height="17"/>
