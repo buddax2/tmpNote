@@ -104,6 +104,13 @@ class TmpNoteViewController: NSViewController {
         }
     }
     
+    @IBAction func exportToNotes(_ sender: NSButton) {
+        let sharedItems = [textView.string];
+        
+        let servicePicker = NSSharingServicePicker(items: sharedItems)
+        servicePicker.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
+    }
+    
     @IBAction func openPreferences(_ sender: Any) {
         NSApplication.shared.activate(ignoringOtherApps: true)
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
