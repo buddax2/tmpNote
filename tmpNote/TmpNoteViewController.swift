@@ -10,6 +10,7 @@ import Cocoa
 
 class TmpNoteViewController: NSViewController {
 
+    static private let suiteName = "Q2N8L37H44..tmpNote"
     static let kFontSizeKey = "FontSize"
     static let kFontSizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72]
     static var defaultFontSize: Int {
@@ -38,6 +39,12 @@ class TmpNoteViewController: NSViewController {
 
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        loadPreviousText()
+    }
+    
     func willAppear() {
         // make textview focused
         textView?.window?.makeKeyAndOrderFront(self)
@@ -45,7 +52,7 @@ class TmpNoteViewController: NSViewController {
     
     @objc fileprivate func setupTextView() {
 
-        let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        let fontSize = UserDefaults(suiteName: TmpNoteViewController.suiteName)?.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
         setFontSize(size: CGFloat(fontSize))
     }
     
@@ -55,7 +62,7 @@ class TmpNoteViewController: NSViewController {
     }
     
     func loadPreviousText() {
-        if let prevText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
+        if let prevText = UserDefaults(suiteName: TmpNoteViewController.suiteName)?.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
             textView.string = prevText
         }
         else {
@@ -64,7 +71,8 @@ class TmpNoteViewController: NSViewController {
     }
     
     func saveText() {
-        UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        UserDefaults(suiteName: TmpNoteViewController.suiteName)?.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        UserDefaults(suiteName: TmpNoteViewController.suiteName)?.synchronize()
     }
     
     ///Close popover if Esc key is pressed
@@ -84,7 +92,8 @@ class TmpNoteViewController: NSViewController {
     }
 
     @IBAction func changeFontSize(_ sender: NSSegmentedControl) {
-        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        let defaults = UserDefaults(suiteName: TmpNoteViewController.suiteName)
+        let fontSize = defaults?.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
 
         guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
         var nextFontSize: Int?
@@ -99,7 +108,8 @@ class TmpNoteViewController: NSViewController {
         }
         
         if let newFontSize = nextFontSize {
-            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            defaults?.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            defaults?.synchronize()
             self.setFontSize(size: CGFloat(newFontSize))
         }
     }

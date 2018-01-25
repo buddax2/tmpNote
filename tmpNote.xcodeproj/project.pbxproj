@@ -16,11 +16,28 @@
 		274464C61F79A10A008A0252 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274464C41F79A10A008A0252 /* Main.storyboard */; };
 		274464CD1F79A12A008A0252 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274464CC1F79A12A008A0252 /* ServiceManagement.framework */; };
 		275847351F782C7F0072F709 /* TmpNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275847341F782C7F0072F709 /* TmpNoteViewController.swift */; };
+		27613F101FC22CFD00CE1D67 /* GrowingTextview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27613F0F1FC22CFD00CE1D67 /* GrowingTextview.swift */; };
 		277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776565F1F75BBEC001B0294 /* AppDelegate.swift */; };
 		277656641F75BBEC001B0294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277656631F75BBEC001B0294 /* Assets.xcassets */; };
 		277656671F75BBEC001B0294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277656651F75BBEC001B0294 /* Main.storyboard */; };
+		27BDFD071FBB576100EB197C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BDFD061FBB576100EB197C /* NotificationCenter.framework */; };
+		27BDFD0A1FBB576100EB197C /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BDFD091FBB576100EB197C /* TodayViewController.swift */; };
+		27BDFD0D1FBB576100EB197C /* TodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BDFD0B1FBB576100EB197C /* TodayViewController.xib */; };
+		27BDFD111FBB576100EB197C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27BDFD0F1FBB576100EB197C /* InfoPlist.strings */; };
+		27BDFD151FBB576100EB197C /* tmpNote.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 27BDFD051FBB576100EB197C /* tmpNote.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		27BDFD1A1FBB587F00EB197C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277656631F75BBEC001B0294 /* Assets.xcassets */; };
 		EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27BDFD131FBB576100EB197C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 277656541F75BBEC001B0294 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27BDFD041FBB576100EB197C;
+			remoteInfo = "tmpNote todayWidget";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2736E6E51F79A84C002015D3 /* CopyFiles */ = {
@@ -31,6 +48,17 @@
 			files = (
 				2736E6E61F79A857002015D3 /* LauncherApplication.app in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27BDFD191FBB576100EB197C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				27BDFD151FBB576100EB197C /* tmpNote.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -47,12 +75,20 @@
 		274464C81F79A10A008A0252 /* LauncherApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LauncherApplication.entitlements; sourceTree = "<group>"; };
 		274464CC1F79A12A008A0252 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		275847341F782C7F0072F709 /* TmpNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpNoteViewController.swift; sourceTree = "<group>"; };
+		27613F0F1FC22CFD00CE1D67 /* GrowingTextview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextview.swift; sourceTree = "<group>"; };
 		2776565C1F75BBEC001B0294 /* tmpNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tmpNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2776565F1F75BBEC001B0294 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		277656631F75BBEC001B0294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		277656661F75BBEC001B0294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		277656681F75BBEC001B0294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		277656691F75BBEC001B0294 /* tmpNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tmpNote.entitlements; sourceTree = "<group>"; };
+		27BDFD051FBB576100EB197C /* tmpNote.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = tmpNote.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		27BDFD061FBB576100EB197C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		27BDFD091FBB576100EB197C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		27BDFD0C1FBB576100EB197C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TodayViewController.xib; sourceTree = "<group>"; };
+		27BDFD0E1FBB576100EB197C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27BDFD101FBB576100EB197C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27BDFD121FBB576100EB197C /* tmpNote_todayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tmpNote_todayWidget.entitlements; sourceTree = "<group>"; };
 		3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.debug.xcconfig"; sourceTree = "<group>"; };
 		58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tmpNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +108,14 @@
 			files = (
 				274464CD1F79A12A008A0252 /* ServiceManagement.framework in Frameworks */,
 				EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27BDFD021FBB576100EB197C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27BDFD071FBB576100EB197C /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +139,7 @@
 			children = (
 				2776565E1F75BBEC001B0294 /* tmpNote */,
 				274464BD1F79A10A008A0252 /* LauncherApplication */,
+				27BDFD081FBB576100EB197C /* tmpNote todayWidget */,
 				2776565D1F75BBEC001B0294 /* Products */,
 				E95C7FB7367FBAB697D54ED9 /* Pods */,
 				C32BFCA9F155C8CFA91587B5 /* Frameworks */,
@@ -106,6 +151,7 @@
 			children = (
 				2776565C1F75BBEC001B0294 /* tmpNote.app */,
 				274464BC1F79A10A008A0252 /* LauncherApplication.app */,
+				27BDFD051FBB576100EB197C /* tmpNote.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,11 +172,25 @@
 			path = tmpNote;
 			sourceTree = "<group>";
 		};
+		27BDFD081FBB576100EB197C /* tmpNote todayWidget */ = {
+			isa = PBXGroup;
+			children = (
+				27BDFD091FBB576100EB197C /* TodayViewController.swift */,
+				27613F0F1FC22CFD00CE1D67 /* GrowingTextview.swift */,
+				27BDFD0B1FBB576100EB197C /* TodayViewController.xib */,
+				27BDFD0E1FBB576100EB197C /* Info.plist */,
+				27BDFD0F1FBB576100EB197C /* InfoPlist.strings */,
+				27BDFD121FBB576100EB197C /* tmpNote_todayWidget.entitlements */,
+			);
+			path = "tmpNote todayWidget";
+			sourceTree = "<group>";
+		};
 		C32BFCA9F155C8CFA91587B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				274464CC1F79A12A008A0252 /* ServiceManagement.framework */,
 				58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */,
+				27BDFD061FBB576100EB197C /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -175,15 +235,34 @@
 				C7B0C2D3FC7953005B126D06 /* [CP] Embed Pods Frameworks */,
 				14242F44F9C4046B6F4E1492 /* [CP] Copy Pods Resources */,
 				2736E6E51F79A84C002015D3 /* CopyFiles */,
+				27BDFD191FBB576100EB197C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				27BDFD141FBB576100EB197C /* PBXTargetDependency */,
 			);
 			name = tmpNote;
 			productName = tmpNote;
 			productReference = 2776565C1F75BBEC001B0294 /* tmpNote.app */;
 			productType = "com.apple.product-type.application";
+		};
+		27BDFD041FBB576100EB197C /* tmpNote todayWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27BDFD181FBB576100EB197C /* Build configuration list for PBXNativeTarget "tmpNote todayWidget" */;
+			buildPhases = (
+				27BDFD011FBB576100EB197C /* Sources */,
+				27BDFD021FBB576100EB197C /* Frameworks */,
+				27BDFD031FBB576100EB197C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tmpNote todayWidget";
+			productName = "tmpNote todayWidget";
+			productReference = 27BDFD051FBB576100EB197C /* tmpNote.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -191,7 +270,7 @@
 		277656541F75BBEC001B0294 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = BUDDAx2;
 				TargetAttributes = {
@@ -202,6 +281,20 @@
 					2776565B1F75BBEC001B0294 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
+					};
+					27BDFD041FBB576100EB197C = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -220,6 +313,7 @@
 			targets = (
 				2776565B1F75BBEC001B0294 /* tmpNote */,
 				274464BB1F79A10A008A0252 /* LauncherApplication */,
+				27BDFD041FBB576100EB197C /* tmpNote todayWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -241,6 +335,16 @@
 				274464B71F79939F008A0252 /* Podfile in Resources */,
 				277656641F75BBEC001B0294 /* Assets.xcassets in Resources */,
 				277656671F75BBEC001B0294 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27BDFD031FBB576100EB197C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27BDFD0D1FBB576100EB197C /* TodayViewController.xib in Resources */,
+				27BDFD1A1FBB587F00EB197C /* Assets.xcassets in Resources */,
+				27BDFD111FBB576100EB197C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +424,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		27BDFD011FBB576100EB197C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27BDFD0A1FBB576100EB197C /* TodayViewController.swift in Sources */,
+				27613F101FC22CFD00CE1D67 /* GrowingTextview.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27BDFD141FBB576100EB197C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27BDFD041FBB576100EB197C /* tmpNote todayWidget */;
+			targetProxy = 27BDFD131FBB576100EB197C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		274464C41F79A10A008A0252 /* Main.storyboard */ = {
@@ -337,6 +458,22 @@
 				277656661F75BBEC001B0294 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		27BDFD0B1FBB576100EB197C /* TodayViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27BDFD0C1FBB576100EB197C /* Base */,
+			);
+			name = TodayViewController.xib;
+			sourceTree = "<group>";
+		};
+		27BDFD0F1FBB576100EB197C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27BDFD101FBB576100EB197C /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -524,6 +661,42 @@
 			};
 			name = Release;
 		};
+		27BDFD161FBB576100EB197C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "tmpNote todayWidget/tmpNote_todayWidget.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q2N8L37H44;
+				INFOPLIST_FILE = "tmpNote todayWidget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.buddax2.tmpNote.tmpNote-todayWidget";
+				PRODUCT_NAME = tmpNote;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		27BDFD171FBB576100EB197C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "tmpNote todayWidget/tmpNote_todayWidget.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q2N8L37H44;
+				INFOPLIST_FILE = "tmpNote todayWidget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.buddax2.tmpNote.tmpNote-todayWidget";
+				PRODUCT_NAME = tmpNote;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -550,6 +723,15 @@
 			buildConfigurations = (
 				2776566D1F75BBEC001B0294 /* Debug */,
 				2776566E1F75BBEC001B0294 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27BDFD181FBB576100EB197C /* Build configuration list for PBXNativeTarget "tmpNote todayWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27BDFD161FBB576100EB197C /* Debug */,
+				27BDFD171FBB576100EB197C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
