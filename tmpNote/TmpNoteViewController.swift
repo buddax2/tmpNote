@@ -83,6 +83,31 @@ class TmpNoteViewController: NSViewController {
         return
     }
 
+    @IBAction func decreaseFontSize(_ sender: Any) {
+        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        let nextFontSize = currentFontIndex-1 > 0 ? TmpNoteViewController.kFontSizes[currentFontIndex-1] : TmpNoteViewController.kFontSizes.first
+
+        
+        if let newFontSize = nextFontSize {
+            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            self.setFontSize(size: CGFloat(newFontSize))
+        }
+    }
+    
+    @IBAction func increaseFontSize(_ sender: Any) {
+        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        let nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
+        
+        if let newFontSize = nextFontSize {
+            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            self.setFontSize(size: CGFloat(newFontSize))
+        }
+    }
+    
     @IBAction func changeFontSize(_ sender: NSSegmentedControl) {
         let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
 

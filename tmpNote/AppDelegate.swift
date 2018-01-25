@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func createStatusBarIcon() {
         
         if let button = statusItem.button {
-            button.image = #imageLiteral(resourceName: " Compose")
+            button.image = #imageLiteral(resourceName: "Compose")
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
     }
