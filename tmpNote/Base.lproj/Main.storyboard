@@ -694,15 +694,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xuj-yR-LsQ">
-                                        <rect key="frame" x="206" y="206" width="141" height="25"/>
+                                        <rect key="frame" x="126" y="206" width="221" height="25"/>
                                         <subviews>
                                             <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
                                                 <subviews>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
                                                         <subviews>
-                                                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi">
+                                                            <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="eBp-3F-idk"/>
@@ -711,9 +711,12 @@
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
+                                                                <connections>
+                                                                    <action selector="clearAction:" target="XfG-lQ-9wD" id="r0L-9h-JEr"/>
+                                                                </connections>
                                                             </button>
-                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="25"/>
+                                                            <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
+                                                                <rect key="frame" x="40" y="0.0" width="30" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="kDC-Hu-pIg"/>
                                                                 </constraints>
@@ -726,9 +729,9 @@
                                                                 </connections>
                                                             </button>
                                                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-0Q-XhH">
-                                                                <rect key="frame" x="40" y="0.0" width="40" height="25"/>
+                                                                <rect key="frame" x="80" y="0.0" width="40" height="25"/>
                                                                 <subviews>
-                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gY5-3D-xuh">
+                                                                    <button toolTip="Smaller Font" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gY5-3D-xuh">
                                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="20" id="92D-hm-jpc"/>
@@ -741,7 +744,7 @@
                                                                             <action selector="decreaseFontSize:" target="XfG-lQ-9wD" id="gOP-Rc-ke1"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Na-4L-zkh">
+                                                                    <button toolTip="Bigger Font" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Na-4L-zkh">
                                                                         <rect key="frame" x="20" y="0.0" width="20" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="20" id="fu6-n5-H4p"/>
@@ -764,13 +767,28 @@
                                                                     <real value="3.4028234663852886e+38"/>
                                                                 </customSpacing>
                                                             </stackView>
+                                                            <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
+                                                                <rect key="frame" x="130" y="0.0" width="30" height="25"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="30" id="4FR-ju-a4K"/>
+                                                                </constraints>
+                                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSLockUnlockedTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="oDG-nR-cXq">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="lockAction:" target="XfG-lQ-9wD" id="7na-65-UKk"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <visibilityPriorities>
                                                             <integer value="1000"/>
                                                             <integer value="1000"/>
                                                             <integer value="1000"/>
+                                                            <integer value="1000"/>
                                                         </visibilityPriorities>
                                                         <customSpacing>
+                                                            <real value="3.4028234663852886e+38"/>
                                                             <real value="3.4028234663852886e+38"/>
                                                             <real value="3.4028234663852886e+38"/>
                                                             <real value="3.4028234663852886e+38"/>
@@ -785,9 +803,9 @@
                                                 </constraints>
                                             </customView>
                                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70V-vv-ywN">
-                                                <rect key="frame" x="92" y="0.0" width="49" height="25"/>
+                                                <rect key="frame" x="172" y="0.0" width="49" height="25"/>
                                                 <subviews>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="6l7-95-4Pz">
+                                                    <button toolTip="Show/Hide Panel" translatesAutoresizingMaskIntoConstraints="NO" id="6l7-95-4Pz">
                                                         <rect key="frame" x="0.0" y="3" width="21" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="EZg-mu-QjP"/>
@@ -801,7 +819,7 @@
                                                             <action selector="showMenuView:" target="XfG-lQ-9wD" id="1O7-0n-1ni"/>
                                                         </connections>
                                                     </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
+                                                    <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
                                                         <rect key="frame" x="29" y="0.0" width="20" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="Wpk-Wd-Xot"/>
@@ -896,6 +914,7 @@
                     </view>
                     <connections>
                         <outlet property="appMenu" destination="clg-M0-VxI" id="oUi-gL-cdL"/>
+                        <outlet property="lockButton" destination="mVr-9C-HmB" id="lXr-gA-42a"/>
                         <outlet property="menuIcon" destination="6l7-95-4Pz" id="I8F-Pa-V96"/>
                         <outlet property="menuView" destination="Ja4-zF-4V6" id="9kw-YE-7Ih"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
@@ -1030,6 +1049,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSLockUnlockedTemplate" width="10" height="14"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
