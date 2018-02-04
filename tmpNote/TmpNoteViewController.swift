@@ -31,6 +31,13 @@ class TmpNoteViewController: NSViewController {
             loadPreviousText()
         }
     }
+    @IBOutlet weak var lockButton: NSButton! {
+        didSet {
+            let isLocked = UserDefaults.standard.bool(forKey: "locked")
+            lockButton.image = isLocked ? NSImage(named: NSImage.Name(rawValue: "NSLockLockedTemplate")) : NSImage(named: NSImage.Name(rawValue: "NSLockUnlockedTemplate"))
+            lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +58,7 @@ class TmpNoteViewController: NSViewController {
     
     fileprivate func setFontSize(size: CGFloat) {
         let font = NSFont.systemFont(ofSize: size)
-        textView.textStorage?.font = font
+        textView.font = font
     }
     
     func loadPreviousText() {
@@ -61,6 +68,13 @@ class TmpNoteViewController: NSViewController {
         else {
             textView.string = ""
         }
+    }
+    
+    @IBAction func lockAction(_ sender: Any) {
+        let isLocked = UserDefaults.standard.bool(forKey: "locked")
+        UserDefaults.standard.set(!isLocked, forKey: "locked")
+        lockButton.image = isLocked ? NSImage(named: NSImage.Name(rawValue: "NSLockUnlockedTemplate")) : NSImage(named: NSImage.Name(rawValue: "NSLockLockedTemplate"))
+        lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
     }
     
     func saveText() {
@@ -83,20 +97,30 @@ class TmpNoteViewController: NSViewController {
         return
     }
 
-    @IBAction func changeFontSize(_ sender: NSSegmentedControl) {
+    @IBAction func decreaseFontSize(_ sender: Any) {
         let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
-
-        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
-        var nextFontSize: Int?
         
-        switch sender.selectedSegment {
-        case 0: //make the font smaller
-            nextFontSize = currentFontIndex-1 > 0 ? TmpNoteViewController.kFontSizes[currentFontIndex-1] : TmpNoteViewController.kFontSizes.first
-        case 1:
-            nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
-        default:
-            nextFontSize = TmpNoteViewController.defaultFontSize
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        let nextFontSize = currentFontIndex-1 > 0 ? TmpNoteViewController.kFontSizes[currentFontIndex-1] : TmpNoteViewController.kFontSizes.first
+
+        
+        if let newFontSize = nextFontSize {
+            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            self.setFontSize(size: CGFloat(newFontSize))
         }
+    }
+    
+    @IBAction func clearAction(_ sender: Any) {
+        textView.string = ""
+        saveText()
+    }
+    
+    
+    @IBAction func increaseFontSize(_ sender: Any) {
+        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        let nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
         
         if let newFontSize = nextFontSize {
             UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)

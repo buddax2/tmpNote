@@ -28,7 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         killLauncher()
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
-            if let strongSelf = self, strongSelf.popover.isShown {
+            let isLocked = UserDefaults.standard.bool(forKey: "locked")
+            if let strongSelf = self, strongSelf.popover.isShown, isLocked == false {
                 strongSelf.closePopover()
             }
         }
@@ -45,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func createStatusBarIcon() {
         
         if let button = statusItem.button {
-            button.image = #imageLiteral(resourceName: " Compose")
+            button.image = #imageLiteral(resourceName: "Compose")
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
     }
