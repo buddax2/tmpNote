@@ -58,7 +58,7 @@ class TmpNoteViewController: NSViewController {
     
     fileprivate func setFontSize(size: CGFloat) {
         let font = NSFont.systemFont(ofSize: size)
-        textView.textStorage?.font = font
+        textView.font = font
     }
     
     func loadPreviousText() {
