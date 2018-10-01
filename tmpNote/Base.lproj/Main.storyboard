@@ -860,17 +860,17 @@
                                         </customSpacing>
                                     </stackView>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-ax-0FW">
-                                        <rect key="frame" x="7" y="0.0" width="336" height="204"/>
+                                        <rect key="frame" x="5" y="0.0" width="345" height="204"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Yc-ce-VzK">
-                                            <rect key="frame" x="0.0" y="0.0" width="336" height="204"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="204"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="336" height="204"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="minSize" width="336" height="204"/>
+                                                    <size key="minSize" width="345" height="204"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
@@ -881,7 +881,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V1X-0u-SVp">
-                                            <rect key="frame" x="320" y="0.0" width="16" height="204"/>
+                                            <rect key="frame" x="329" y="0.0" width="16" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -889,9 +889,9 @@
                                 <constraints>
                                     <constraint firstItem="Xuj-yR-LsQ" firstAttribute="top" secondItem="Swo-en-XTe" secondAttribute="top" constant="3" id="1nT-e4-hug"/>
                                     <constraint firstAttribute="bottom" secondItem="ljf-ax-0FW" secondAttribute="bottom" id="GbV-an-kVp"/>
-                                    <constraint firstItem="ljf-ax-0FW" firstAttribute="leading" secondItem="Swo-en-XTe" secondAttribute="leading" constant="7" id="TI9-ST-E9k"/>
+                                    <constraint firstItem="ljf-ax-0FW" firstAttribute="leading" secondItem="Swo-en-XTe" secondAttribute="leading" constant="5" id="TI9-ST-E9k"/>
                                     <constraint firstAttribute="trailing" secondItem="Xuj-yR-LsQ" secondAttribute="trailing" constant="3" id="WEe-vn-VOd"/>
-                                    <constraint firstAttribute="trailing" secondItem="ljf-ax-0FW" secondAttribute="trailing" constant="7" id="jaG-Px-tIY"/>
+                                    <constraint firstAttribute="trailing" secondItem="ljf-ax-0FW" secondAttribute="trailing" id="jaG-Px-tIY"/>
                                     <constraint firstItem="ljf-ax-0FW" firstAttribute="top" secondItem="Swo-en-XTe" secondAttribute="top" constant="30" id="pKa-ed-hJ6"/>
                                 </constraints>
                             </visualEffectView>
