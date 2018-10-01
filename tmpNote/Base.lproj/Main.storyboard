@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -690,7 +689,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView blendingMode="behindWindow" material="mediumLight" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
+                            <visualEffectView blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xuj-yR-LsQ">
@@ -699,7 +698,7 @@
                                             <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
                                                 <subviews>
-                                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
+                                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
                                                         <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
                                                         <subviews>
                                                             <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
@@ -716,7 +715,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                <rect key="frame" x="40" y="0.0" width="30" height="25"/>
+                                                                <rect key="frame" x="40" y="5" width="30" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="kDC-Hu-pIg"/>
                                                                 </constraints>
@@ -728,24 +727,24 @@
                                                                     <action selector="shareAction:" target="XfG-lQ-9wD" id="ZbB-fd-ovm"/>
                                                                 </connections>
                                                             </button>
-                                                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-0Q-XhH">
-                                                                <rect key="frame" x="80" y="0.0" width="40" height="25"/>
+                                                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-0Q-XhH">
+                                                                <rect key="frame" x="80" y="3" width="40" height="19"/>
                                                                 <subviews>
                                                                     <button toolTip="Smaller Font" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gY5-3D-xuh">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="3" width="20" height="14"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="20" id="92D-hm-jpc"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="bevel" title="A" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="qEe-RW-xVo">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                         </buttonCell>
                                                                         <connections>
                                                                             <action selector="decreaseFontSize:" target="XfG-lQ-9wD" id="gOP-Rc-ke1"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Bigger Font" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Na-4L-zkh">
-                                                                        <rect key="frame" x="20" y="0.0" width="20" height="25"/>
+                                                                        <rect key="frame" x="20" y="0.0" width="20" height="19"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="20" id="fu6-n5-H4p"/>
                                                                         </constraints>
@@ -768,7 +767,7 @@
                                                                 </customSpacing>
                                                             </stackView>
                                                             <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                <rect key="frame" x="130" y="0.0" width="30" height="25"/>
+                                                                <rect key="frame" x="130" y="6" width="30" height="14"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="4FR-ju-a4K"/>
                                                                 </constraints>
@@ -820,7 +819,7 @@
                                                         </connections>
                                                     </button>
                                                     <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                        <rect key="frame" x="29" y="0.0" width="20" height="25"/>
+                                                        <rect key="frame" x="29" y="4" width="20" height="17"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="Wpk-Wd-Xot"/>
                                                         </constraints>
@@ -869,27 +868,19 @@
                                                 <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR">
                                                     <rect key="frame" x="0.0" y="0.0" width="336" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <size key="minSize" width="336" height="204"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
-                                                    <attributedString key="textStorage">
-                                                        <fragment content="some text">
-                                                            <attributes>
-                                                                <font key="NSFont" size="20" name=".SFNSDisplay"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uWi-lY-bG5">
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uWi-lY-bG5">
                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V1X-0u-SVp">
+                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V1X-0u-SVp">
                                             <rect key="frame" x="320" y="0.0" width="16" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -944,7 +935,7 @@
         <scene sceneID="mTL-9A-lK3">
             <objects>
                 <windowController storyboardIdentifier="PreferencesWindowController" showSeguePresentationStyle="single" id="4OR-bp-yKV" customClass="PreferencesWindowController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="36b-Uf-3Au">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="36b-Uf-3Au">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" transient="YES"/>
                         <rect key="contentRect" x="488" y="401" width="480" height="270"/>
@@ -1050,7 +1041,7 @@
     </scenes>
     <resources>
         <image name="NSLockUnlockedTemplate" width="10" height="14"/>
-        <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="NSPreferencesGeneral" width="128" height="128"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
         <image name="menu" width="20" height="5"/>
