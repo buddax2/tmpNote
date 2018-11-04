@@ -50,6 +50,12 @@ class TmpNoteViewController: NSViewController {
         textView?.window?.makeKeyAndOrderFront(self)
     }
     
+    func copyText() {
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+        pasteboard.setString(textView.string, forType: NSPasteboard.PasteboardType.string)
+    }
+    
     @objc fileprivate func setupTextView() {
 
         let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
@@ -132,6 +138,7 @@ class TmpNoteViewController: NSViewController {
         let sharedItems = [textView.string];
         
         let servicePicker = NSSharingServicePicker(items: sharedItems)
+        servicePicker.delegate = self
         servicePicker.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
     }
     
@@ -148,6 +155,24 @@ class TmpNoteViewController: NSViewController {
     }
     
     
+}
+
+// MARK: NSSharingServicePickerDelegate
+extension TmpNoteViewController: NSSharingServicePickerDelegate {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+        
+        guard let image = NSImage(named: NSImage.Name(rawValue: "copy")) else {
+            return proposedServices
+        }
+        
+        var share = proposedServices
+        let plainText = NSSharingService(title: "Copy", image: image, alternateImage: image, handler: {
+            self.copyText()
+        })
+        share.insert(plainText, at: 0)
+        
+        return share
+    }
 }
 
 extension TmpNoteViewController {
