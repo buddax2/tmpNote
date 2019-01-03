@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271CEFF021DD555A004CD3A8 /* DrawingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 271CEFEF21DD555A004CD3A8 /* DrawingScene.sks */; };
+		271CEFF221DD5823004CD3A8 /* DrawingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271CEFF121DD5823004CD3A8 /* DrawingScene.swift */; };
+		271CEFFA21DEB801004CD3A8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271CEFF921DEB801004CD3A8 /* HeaderView.swift */; };
 		2736E6E61F79A857002015D3 /* LauncherApplication.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 274464BC1F79A10A008A0252 /* LauncherApplication.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464AA1F78372A008A0252 /* EventMonitor.swift */; };
 		274464B51F79567A008A0252 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274464B41F79567A008A0252 /* PreferencesWindow.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		271CEFEF21DD555A004CD3A8 /* DrawingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DrawingScene.sks; sourceTree = "<group>"; };
+		271CEFF121DD5823004CD3A8 /* DrawingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingScene.swift; sourceTree = "<group>"; };
+		271CEFF921DEB801004CD3A8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		274464AA1F78372A008A0252 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		274464B41F79567A008A0252 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		274464B61F79939F008A0252 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -116,6 +122,9 @@
 				2776565F1F75BBEC001B0294 /* AppDelegate.swift */,
 				274464B41F79567A008A0252 /* PreferencesWindow.swift */,
 				275847341F782C7F0072F709 /* TmpNoteViewController.swift */,
+				271CEFF921DEB801004CD3A8 /* HeaderView.swift */,
+				271CEFEF21DD555A004CD3A8 /* DrawingScene.sks */,
+				271CEFF121DD5823004CD3A8 /* DrawingScene.swift */,
 				274464AA1F78372A008A0252 /* EventMonitor.swift */,
 				274464B61F79939F008A0252 /* Podfile */,
 				277656631F75BBEC001B0294 /* Assets.xcassets */,
@@ -173,7 +182,6 @@
 				277656591F75BBEC001B0294 /* Frameworks */,
 				2776565A1F75BBEC001B0294 /* Resources */,
 				C7B0C2D3FC7953005B126D06 /* [CP] Embed Pods Frameworks */,
-				14242F44F9C4046B6F4E1492 /* [CP] Copy Pods Resources */,
 				2736E6E51F79A84C002015D3 /* CopyFiles */,
 			);
 			buildRules = (
@@ -201,6 +209,7 @@
 					};
 					2776565B1F75BBEC001B0294 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -239,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				274464B71F79939F008A0252 /* Podfile in Resources */,
+				271CEFF021DD555A004CD3A8 /* DrawingScene.sks in Resources */,
 				277656641F75BBEC001B0294 /* Assets.xcassets in Resources */,
 				277656671F75BBEC001B0294 /* Main.storyboard in Resources */,
 			);
@@ -247,21 +257,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		14242F44F9C4046B6F4E1492 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9C243515056E804DE74BD260 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,6 +308,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				271CEFF221DD5823004CD3A8 /* DrawingScene.swift in Sources */,
+				271CEFFA21DEB801004CD3A8 /* HeaderView.swift in Sources */,
 				274464B51F79567A008A0252 /* PreferencesWindow.swift in Sources */,
 				274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */,
 				277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */,
@@ -490,6 +487,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = tmpNote/tmpNote.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -500,6 +498,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.buddax2.tmpNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -510,6 +509,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = tmpNote/tmpNote.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;

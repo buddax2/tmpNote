@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SpriteKit
 
 class TmpNoteViewController: NSViewController {
 
@@ -18,13 +19,29 @@ class TmpNoteViewController: NSViewController {
 
     static private let kPreviousSessionTextKey = "PreviousSessionText"
     
-    @IBOutlet weak var menuView: NSView! {
+    var drawingScene: DrawingScene?
+    var skview: SKView?
+    
+    @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
+    @IBOutlet weak var headerView: HeaderView! {
         didSet {
-            menuView.isHidden = true // make it hidden here to be able to see it in the storyboard
+            headerView.onMouseExitedClosure = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.hidableHeaderView.isHidden = true
+                }
+            }
+            headerView.onMouseEnteredClosure = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.hidableHeaderView.isHidden = false
+                }
+            }
+
         }
     }
+    @IBOutlet weak var drawButton: NSButton!
+    @IBOutlet weak var textareaScrollView: NSScrollView!
+    @IBOutlet weak var drawingView: NSView!
     @IBOutlet var appMenu: NSMenu!
-    @IBOutlet weak var menuIcon: NSButton!
     @IBOutlet var textView: NSTextView! {
         didSet {
             setupTextView()
@@ -43,6 +60,10 @@ class TmpNoteViewController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
 
+        skview = SKView(frame: drawingView.bounds)
+        drawingView.addSubview(skview!)
+        drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
+        skview?.presentScene(drawingScene)
     }
     
     func willAppear() {
@@ -50,7 +71,26 @@ class TmpNoteViewController: NSViewController {
         textView?.window?.makeKeyAndOrderFront(self)
     }
     
+    @IBAction func toggleDrawingMode(_ sender: Any) {
+        textareaScrollView.isHidden.toggle()
+        drawingView.isHidden.toggle()
+        
+        drawButton.state = drawingView.isHidden == false ? .on : .off
+    }
+    
     func copyText() {
+        if drawingView.isHidden == false {
+            
+            if let texture = skview?.texture(from: drawingScene!) {
+                let img2 = texture.cgImage()
+                let image = NSImage(cgImage: img2, size: drawingScene!.size)
+                NSPasteboard.general.clearContents()
+                NSPasteboard.general.writeObjects([image])
+            }
+            
+            return
+        }
+        
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
         pasteboard.setString(textView.string, forType: NSPasteboard.PasteboardType.string)
@@ -98,11 +138,6 @@ class TmpNoteViewController: NSViewController {
         appMenu.popUp(positioning: nil, at: p, in: sender)
     }
 
-    @IBAction func showMenuView(_ sender: NSButton) {
-        menuView.isHidden = !menuView.isHidden
-        return
-    }
-
     @IBAction func decreaseFontSize(_ sender: Any) {
         let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
         
@@ -117,8 +152,14 @@ class TmpNoteViewController: NSViewController {
     }
     
     @IBAction func clearAction(_ sender: Any) {
-        textView.string = ""
-        saveText()
+        
+        if drawingView.isHidden {
+            textView.string = ""
+            saveText()
+        }
+        else {
+            drawingScene?.clear()
+        }
     }
     
     
