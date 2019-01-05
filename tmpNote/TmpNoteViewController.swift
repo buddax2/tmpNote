@@ -64,6 +64,11 @@ class TmpNoteViewController: NSViewController {
         drawingView.addSubview(skview!)
         drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
         skview?.presentScene(drawingScene)
+        
+        skview?.backgroundColor = .clear
+        skview?.allowsTransparency = true
+        drawingView.backgroundColor = .clear
+        drawingScene?.backgroundColor = .clear
     }
     
     func willAppear() {

@@ -29,7 +29,7 @@ class DrawingScene: SKScene {
         }
         pathToDraw?.addLine(to: CGPoint(x: positionInScene.x, y: positionInScene.y))
         lineNode.path = pathToDraw
-        lineNode.strokeColor = .black
+        lineNode.strokeColor = .textColor
         addChild(lineNode)
         firstPoint = positionInScene
     }
@@ -38,7 +38,7 @@ class DrawingScene: SKScene {
         if let path = pathToDraw {
             lineNode.removeFromParent()
             let newLine = SKShapeNode(path: path)
-            newLine.strokeColor = .black
+            newLine.strokeColor = .textColor
             addChild(newLine)
             lines.append(newLine)
         }
