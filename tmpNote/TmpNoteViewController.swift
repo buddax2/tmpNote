@@ -9,7 +9,8 @@
 import Cocoa
 import SpriteKit
 
-class TmpNoteViewController: NSViewController {
+
+class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
     static let kFontSizeKey = "FontSize"
     static let kFontSizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72]
@@ -17,8 +18,8 @@ class TmpNoteViewController: NSViewController {
         return kFontSizes[4]
     }
 
-    static private let kPreviousSessionTextKey = "PreviousSessionText"
-    
+    static let kPreviousSessionTextKey = "PreviousSessionText"
+
     var drawingScene: DrawingScene? {
         didSet {
             drawingScene?.load()
@@ -48,6 +49,7 @@ class TmpNoteViewController: NSViewController {
     @IBOutlet var appMenu: NSMenu!
     @IBOutlet var textView: NSTextView! {
         didSet {
+            textView.delegate = self
             setupTextView()
             loadPreviousText()
         }
@@ -233,7 +235,10 @@ class TmpNoteViewController: NSViewController {
         appDelegate.quitAction()
     }
     
-    
+    func textDidChange(_ notification: Notification) {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.toggleMenuIcon(fill: textView.string.isEmpty == false)
+    }
 }
 
 // MARK: NSSharingServicePickerDelegate
@@ -273,5 +278,8 @@ extension TmpNoteViewController: PreferencesDelegate {
     
     func settingsDidChange() {
         setupTextView()
+        
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.toggleMenuIcon(fill: textView.string.isEmpty == false)
     }
 }

@@ -729,13 +729,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
                                                 <subviews>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xuj-yR-LsQ">
-                                                        <rect key="frame" x="113" y="3" width="227" height="25"/>
+                                                        <rect key="frame" x="73" y="3" width="267" height="25"/>
                                                         <subviews>
                                                             <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="195" height="25"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="25"/>
                                                                 <subviews>
                                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="195" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="25"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -828,6 +828,19 @@
                                                                                     <action selector="lockAction:" target="XfG-lQ-9wD" id="7na-65-UKk"/>
                                                                                 </connections>
                                                                             </button>
+                                                                            <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xxv-V0-PWC">
+                                                                                <rect key="frame" x="205" y="0.0" width="30" height="25"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="30" id="3Qt-4d-6VS"/>
+                                                                                </constraints>
+                                                                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="alert2" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="LNc-MF-1hd">
+                                                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="toggleAlertMode:" target="XfG-lQ-9wD" id="KjX-5J-5JJ"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
                                                                         <visibilityPriorities>
                                                                             <integer value="1000"/>
@@ -835,8 +848,10 @@
                                                                             <integer value="1000"/>
                                                                             <integer value="1000"/>
                                                                             <integer value="1000"/>
+                                                                            <integer value="1000"/>
                                                                         </visibilityPriorities>
                                                                         <customSpacing>
+                                                                            <real value="3.4028234663852886e+38"/>
                                                                             <real value="3.4028234663852886e+38"/>
                                                                             <real value="3.4028234663852886e+38"/>
                                                                             <real value="3.4028234663852886e+38"/>
@@ -853,7 +868,7 @@
                                                                 </constraints>
                                                             </customView>
                                                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70V-vv-ywN">
-                                                                <rect key="frame" x="207" y="0.0" width="20" height="25"/>
+                                                                <rect key="frame" x="247" y="0.0" width="20" height="25"/>
                                                                 <subviews>
                                                                     <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
                                                                         <rect key="frame" x="0.0" y="4" width="20" height="17"/>
@@ -934,6 +949,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertButton" destination="xxv-V0-PWC" id="ekM-nO-yFh"/>
                         <outlet property="appMenu" destination="clg-M0-VxI" id="oUi-gL-cdL"/>
                         <outlet property="drawButton" destination="Tmv-FH-vBs" id="zNE-9n-yTr"/>
                         <outlet property="drawingView" destination="LAu-TD-YOn" id="Pds-vg-Xkl"/>
@@ -1004,10 +1020,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-2e-99M">
-                                <rect key="frame" x="122" y="35" width="236" height="59"/>
+                                <rect key="frame" x="62" y="21" width="357" height="88"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
-                                        <rect key="frame" x="-2" y="43" width="232" height="18"/>
+                                        <rect key="frame" x="-2" y="72" width="232" height="18"/>
                                         <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wFd-BU-K3o">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1017,11 +1033,22 @@
                                             <binding destination="zNx-2O-HHw" name="value" keyPath="values.LaunchOnStartup" id="5ds-KR-epv"/>
                                         </connections>
                                     </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="vRQ-ac-kCA">
+                                        <rect key="frame" x="-2" y="43" width="361" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Automaticaly change menu bar icon from empty to filled" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gjD-k7-4Ne">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="toggleDynamicIcon:" target="Gxo-NN-4O8" id="gB8-ti-jmw"/>
+                                            <binding destination="zNx-2O-HHw" name="value" keyPath="values.DynamicIcon" id="C87-r1-2fS"/>
+                                        </connections>
+                                    </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-5X-PVb">
                                         <rect key="frame" x="0.0" y="0.0" width="236" height="30"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zh2-rq-LlD">
-                                                <rect key="frame" x="-2" y="7" width="112" height="17"/>
+                                                <rect key="frame" x="-2" y="6" width="112" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Global show/hide:" id="Iyo-r6-3sm">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1049,8 +1076,10 @@
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -1077,6 +1106,7 @@
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
+        <image name="alert2" width="44" height="44"/>
         <image name="draw" width="374" height="252"/>
         <image name="settings" width="17" height="17"/>
     </resources>

@@ -46,8 +46,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func createStatusBarIcon() {
         
         if let button = statusItem.button {
-            button.image = #imageLiteral(resourceName: "Compose")
+            button.image = NSImage(named: NSImage.Name(rawValue: "Compose"))
             button.action = #selector(AppDelegate.togglePopover(_:))
+        }
+        
+        if let prevText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
+            toggleMenuIcon(fill: prevText.isEmpty == false)
+        }
+    }
+    
+    public func toggleMenuIcon(fill: Bool) {
+        var iconShouldBeFilled = fill
+        let isDynamicIconON = UserDefaults.standard.bool(forKey: "DynamicIcon")
+        if isDynamicIconON == false {
+            iconShouldBeFilled = false
+        }
+        
+        let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg3")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
+        
+        statusItem.button?.image = image
+
+        if #available(OSX 10.14, *) {
+            if iconShouldBeFilled == true {
+                statusItem.button?.contentTintColor = .textColor
+            } else {
+                statusItem.button?.contentTintColor = .textColor
+            }
         }
     }
     
@@ -106,5 +130,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         SMLoginItemSetEnabled(launcherIdentifier as CFString, shouldLaunch)
+    }
+}
+
+extension NSImage {
+    convenience init(color: NSColor, size: NSSize) {
+        self.init(size: size)
+        lockFocus()
+        color.drawSwatch(in: NSRect(origin: .zero, size: size))
+        unlockFocus()
     }
 }

@@ -56,6 +56,10 @@ class GeneralViewController: NSViewController {
         })
     }
     
+    @IBAction func toggleDynamicIcon(_ sender: Any) {
+        delegate?.settingsDidChange()
+    }
+    
     @IBAction func toggleLaunchState(_ sender: NSButton) {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.setupLaunchOnStartup()
