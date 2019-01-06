@@ -10,6 +10,8 @@ import SpriteKit
 
 class DrawingScene: SKScene {
     
+    static let saveKey = "PreviousSessionSketch"
+    
     var firstPoint: CGPoint?
     var lines = [SKShapeNode]()
     var lineNode = SKShapeNode()
@@ -48,6 +50,45 @@ class DrawingScene: SKScene {
         lines.forEach { line in
             line.removeFromParent()
         }
+        lines.removeAll()
         pathToDraw = nil
+    }
+    
+    func save() {
+        let paths:[CGPath] = lines.compactMap { $0.path }
+        
+        var encodedLines = [Data]()
+        for path in paths {
+            let bp = NSBezierPath()
+            
+            let points:[CGPoint] = path.getPathElementsPoints()
+            if points.count > 0 {
+                
+                bp.move(to: points.first!)
+                for i in 1..<points.count {
+                    bp.line(to: points[i])
+                }
+                
+                let arch = NSKeyedArchiver.archivedData(withRootObject: bp)
+                encodedLines.append(arch)
+            }
+        }
+        
+        UserDefaults.standard.set(encodedLines, forKey: DrawingScene.saveKey)
+    }
+    
+    func load() {
+        if let encodedLines = UserDefaults.standard.value(forKey: DrawingScene.saveKey) as? [Data] {
+            pathToDraw = CGMutablePath()
+            for data in encodedLines {
+                if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
+                    let path = bp.cgPath
+                    let newLine = SKShapeNode(path: path)
+                    newLine.strokeColor = .textColor
+                    addChild(newLine)
+                    lines.append(newLine)
+                }
+            }
+        }
     }
 }

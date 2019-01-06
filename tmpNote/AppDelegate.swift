@@ -92,6 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         popover.performClose(self)
         (popover.contentViewController as! TmpNoteViewController).saveText()
         eventMonitor?.stop()
+        UserDefaults.standard.synchronize()
     }
     
     func setupLaunchOnStartup() {

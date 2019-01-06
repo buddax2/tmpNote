@@ -22,6 +22,7 @@
 		277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776565F1F75BBEC001B0294 /* AppDelegate.swift */; };
 		277656641F75BBEC001B0294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277656631F75BBEC001B0294 /* Assets.xcassets */; };
 		277656671F75BBEC001B0294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277656651F75BBEC001B0294 /* Main.storyboard */; };
+		2787D48A21E20934005E817F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787D48921E20934005E817F /* Extensions.swift */; };
 		EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		277656661F75BBEC001B0294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		277656681F75BBEC001B0294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		277656691F75BBEC001B0294 /* tmpNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tmpNote.entitlements; sourceTree = "<group>"; };
+		2787D48921E20934005E817F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.debug.xcconfig"; sourceTree = "<group>"; };
 		58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tmpNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				271CEFF921DEB801004CD3A8 /* HeaderView.swift */,
 				271CEFEF21DD555A004CD3A8 /* DrawingScene.sks */,
 				271CEFF121DD5823004CD3A8 /* DrawingScene.swift */,
+				2787D48921E20934005E817F /* Extensions.swift */,
 				274464AA1F78372A008A0252 /* EventMonitor.swift */,
 				274464B61F79939F008A0252 /* Podfile */,
 				277656631F75BBEC001B0294 /* Assets.xcassets */,
@@ -314,6 +317,7 @@
 				274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */,
 				277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */,
 				275847351F782C7F0072F709 /* TmpNoteViewController.swift in Sources */,
+				2787D48A21E20934005E817F /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

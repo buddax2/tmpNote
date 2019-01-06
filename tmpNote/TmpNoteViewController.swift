@@ -19,7 +19,11 @@ class TmpNoteViewController: NSViewController {
 
     static private let kPreviousSessionTextKey = "PreviousSessionText"
     
-    var drawingScene: DrawingScene?
+    var drawingScene: DrawingScene? {
+        didSet {
+            drawingScene?.load()
+        }
+    }
     var skview: SKView?
     
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
@@ -130,6 +134,7 @@ class TmpNoteViewController: NSViewController {
     
     func saveText() {
         UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        drawingScene?.save()
     }
     
     ///Close popover if Esc key is pressed
