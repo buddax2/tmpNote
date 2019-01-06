@@ -87,12 +87,10 @@ class TmpNoteViewController: NSViewController {
         drawButton.state = drawingView.isHidden == false ? .on : .off
     }
     
-    func copyText() {
+    func copyContent() {
         if drawingView.isHidden == false {
             
-            if let texture = skview?.texture(from: drawingScene!) {
-                let img2 = texture.cgImage()
-                let image = NSImage(cgImage: img2, size: drawingScene!.size)
+            if let image = imageFromScene() {
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.writeObjects([image])
             }
@@ -103,6 +101,27 @@ class TmpNoteViewController: NSViewController {
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
         pasteboard.setString(textView.string, forType: NSPasteboard.PasteboardType.string)
+    }
+    
+    func imageFromScene() -> NSImage? {
+        var isDarkTheme = false
+        if #available(OSX 10.14, *) {
+            isDarkTheme = NSAppearance.current.name == NSAppearance.Name.darkAqua || NSAppearance.current.name == NSAppearance.Name.vibrantDark
+        } else {
+            isDarkTheme = NSAppearance.current.name == NSAppearance.Name.vibrantDark
+        }
+        drawingScene?.backgroundColor = isDarkTheme ? .darkGray : .white
+        let texture = skview?.texture(from: drawingScene!)
+        drawingScene?.backgroundColor = .clear
+
+        if let texture = texture {
+            let img2 = texture.cgImage()
+            let image = NSImage(cgImage: img2, size: drawingScene!.size)
+
+            return image
+        }
+
+        return nil
     }
     
     @objc fileprivate func setupTextView() {
@@ -186,7 +205,16 @@ class TmpNoteViewController: NSViewController {
     }
     
     @IBAction func shareAction(_ sender: NSButton) {
-        let sharedItems = [textView.string];
+        var sharedItems = [Any]()
+        
+        if drawingView.isHidden == false {
+            if let image = imageFromScene() {
+                sharedItems = [image]
+            }
+        }
+        else {
+            sharedItems = [textView.string];
+        }
         
         let servicePicker = NSSharingServicePicker(items: sharedItems)
         servicePicker.delegate = self
@@ -218,7 +246,7 @@ extension TmpNoteViewController: NSSharingServicePickerDelegate {
         
         var share = proposedServices
         let plainText = NSSharingService(title: "Copy", image: image, alternateImage: image, handler: {
-            self.copyText()
+            self.copyContent()
         })
         share.insert(plainText, at: 0)
         
