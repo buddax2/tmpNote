@@ -68,7 +68,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         if #available(OSX 10.14, *) {
             if iconShouldBeFilled == true {
-                statusItem.button?.contentTintColor = .textColor
+                let colorIndex = UserDefaults.standard.integer(forKey: "iconFillColor")
+                let iconColor = IconColor(rawValue: colorIndex)
+                statusItem.button?.contentTintColor = iconColor?.color()
             } else {
                 statusItem.button?.contentTintColor = .textColor
             }

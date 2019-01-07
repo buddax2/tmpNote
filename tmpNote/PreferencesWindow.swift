@@ -34,9 +34,24 @@ extension PreferencesWindowController {
     }
 }
 
+enum IconColor: Int {
+    case `default`
+    case red
+    
+    func color() -> NSColor {
+        switch self {
+        case .default:
+            return .textColor
+        case .red:
+            return .red
+        }
+    }
+}
 
 class GeneralViewController: NSViewController {
-
+    
+    @IBOutlet weak var colorPicker: NSPopUpButton!
+    @IBOutlet weak var colorView: NSStackView!
     @IBOutlet weak var launchAtStartupCheckbox: NSButton!
     @IBOutlet var shortcutView: MASShortcutView! {
         didSet {
@@ -57,11 +72,39 @@ class GeneralViewController: NSViewController {
     }
     
     @IBAction func toggleDynamicIcon(_ sender: Any) {
+        let isDynamicIconON = UserDefaults.standard.bool(forKey: "DynamicIcon")
+        colorView.isHidden = isDynamicIconON == false
         delegate?.settingsDidChange()
     }
     
     @IBAction func toggleLaunchState(_ sender: NSButton) {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.setupLaunchOnStartup()
+    }
+    
+    @IBAction func tintColorDidChange(_ sender: NSPopUpButton) {
+        delegate?.settingsDidChange()
+    }
+    
+    @IBAction func shopIconPopover(_ sender: NSButton) {
+        let popover = NSPopover()
+        popover.behavior = .transient
+        let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        let identifier = NSStoryboard.SceneIdentifier("PopoverAnimationVC")
+        guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? PopoverAnimationVC else { return }
+        popover.contentViewController = vc
+        popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.maxX)
+    }
+}
+
+class PopoverAnimationVC: NSViewController {
+
+    @IBOutlet weak var imageView: NSImageView! {
+        didSet {
+            imageView.canDrawSubviewsIntoLayer = true
+            imageView.imageScaling = .scaleNone
+            imageView.animates = true
+            imageView.image = NSImage(named: NSImage.Name(rawValue: "example"))
+        }
     }
 }
