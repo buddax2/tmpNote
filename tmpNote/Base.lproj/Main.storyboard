@@ -729,10 +729,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="151" y="0.0" width="191" height="30"/>
+                                                        <rect key="frame" x="175" y="0.0" width="171" height="30"/>
                                                         <subviews>
-                                                            <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="191" height="30"/>
+                                                            <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
+                                                                <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
                                                                 <subviews>
                                                                     <button toolTip="Draw" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
                                                                         <rect key="frame" x="0.0" y="-1" width="25" height="31"/>
@@ -740,7 +740,7 @@
                                                                             <constraint firstAttribute="width" constant="25" id="uQ9-jz-Jh4"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="draw" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S1T-hQ-kdK">
-                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
                                                                         <connections>
@@ -748,7 +748,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4r2-Vj-3vr">
-                                                                        <rect key="frame" x="33" y="3" width="55" height="24"/>
+                                                                        <rect key="frame" x="28" y="3" width="55" height="24"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="PB5-e5-2Y6">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -761,7 +761,7 @@
                                                                         </connections>
                                                                     </segmentedControl>
                                                                     <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="96" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="86" y="-1" width="25" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
@@ -775,7 +775,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="131" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="116" y="-1" width="25" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
@@ -789,7 +789,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="166" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="146" y="-1" width="25" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
@@ -837,7 +837,7 @@
                                                         </constraints>
                                                     </customView>
                                                     <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
-                                                        <rect key="frame" x="7" y="3" width="25" height="23"/>
+                                                        <rect key="frame" x="4" y="3" width="25" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="eBp-3F-idk"/>
                                                         </constraints>
@@ -852,13 +852,13 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="bhm-gD-XRi" firstAttribute="leading" secondItem="wsD-cc-9eo" secondAttribute="leading" constant="7" id="6mx-Pd-LUb"/>
+                                                    <constraint firstItem="bhm-gD-XRi" firstAttribute="leading" secondItem="wsD-cc-9eo" secondAttribute="leading" constant="4" id="6mx-Pd-LUb"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ja4-zF-4V6" secondAttribute="bottom" id="SgK-BV-5Vv"/>
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="top" secondItem="wsD-cc-9eo" secondAttribute="top" id="UHZ-dR-dvF"/>
                                                     <constraint firstAttribute="height" constant="30" id="VwY-KC-GPY"/>
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bhm-gD-XRi" secondAttribute="trailing" constant="5" id="os3-Ti-utA"/>
                                                     <constraint firstItem="bhm-gD-XRi" firstAttribute="centerY" secondItem="R0a-dX-I4o" secondAttribute="centerY" id="qF9-DJ-2sH"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Ja4-zF-4V6" secondAttribute="trailing" constant="8" id="uUp-6M-tiO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ja4-zF-4V6" secondAttribute="trailing" constant="4" id="uUp-6M-tiO"/>
                                                 </constraints>
                                             </visualEffectView>
                                         </subviews>
