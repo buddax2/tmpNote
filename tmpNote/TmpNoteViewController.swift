@@ -44,6 +44,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     @IBOutlet weak var drawButton: NSButton!
+    @IBOutlet weak var shareButton: NSButton!
     @IBOutlet weak var textareaScrollView: NSScrollView!
     @IBOutlet weak var drawingView: NSView!
     @IBOutlet var appMenu: NSMenu!
@@ -75,6 +76,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         skview?.allowsTransparency = true
         drawingView.backgroundColor = .clear
         drawingScene?.backgroundColor = .clear
+        
+        shareButton.sendAction(on: .leftMouseDown)
     }
     
     func willAppear() {

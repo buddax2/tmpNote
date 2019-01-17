@@ -40,10 +40,10 @@ enum IconColor: Int {
     
     func color() -> NSColor {
         switch self {
-        case .default:
-            return .textColor
-        case .red:
-            return .red
+            case .default:
+                return .textColor
+            case .red:
+                return .red
         }
     }
 }

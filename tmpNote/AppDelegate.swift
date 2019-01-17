@@ -61,19 +61,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if isDynamicIconON == false {
             iconShouldBeFilled = false
         }
-        
-        let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg3")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
-        
-        statusItem.button?.image = image
+
+        let colorIndex = UserDefaults.standard.integer(forKey: "iconFillColor")
+        let iconColor: NSColor = IconColor(rawValue: colorIndex)?.color() ?? .textColor
+        let resultColor = iconShouldBeFilled ? iconColor : .textColor
 
         if #available(OSX 10.14, *) {
-            if iconShouldBeFilled == true {
-                let colorIndex = UserDefaults.standard.integer(forKey: "iconFillColor")
-                let iconColor = IconColor(rawValue: colorIndex)
-                statusItem.button?.contentTintColor = iconColor?.color()
-            } else {
-                statusItem.button?.contentTintColor = .textColor
-            }
+            let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg_template")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
+            statusItem.button?.image = image
+            statusItem.button?.contentTintColor = resultColor
+        }
+        else {
+            let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg3")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
+            
+            statusItem.button?.image = image
+            
+            let img = image?.tintedImage(tintColor: resultColor)
+            statusItem.button?.image = img
         }
     }
     
@@ -141,5 +145,18 @@ extension NSImage {
         lockFocus()
         color.drawSwatch(in: NSRect(origin: .zero, size: size))
         unlockFocus()
+    }
+    
+    func tintedImage(tintColor: NSColor?) -> NSImage {
+        guard let tinted = self.copy() as? NSImage else { return self }
+        guard let tint = tintColor else { return self }
+        
+        tinted.lockFocus()
+        tint.set()
+        let imageRect = NSRect(origin: NSZeroPoint, size: tinted.size)
+        __NSRectFillUsingOperation(imageRect, .sourceAtop)
+        tinted.unlockFocus()
+        
+        return tinted
     }
 }

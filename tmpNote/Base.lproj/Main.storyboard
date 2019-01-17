@@ -729,12 +729,12 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="117" y="0.0" width="225" height="30"/>
+                                                        <rect key="frame" x="162" y="0.0" width="180" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="225" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="180" height="30"/>
                                                                 <subviews>
-                                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
+                                                                    <button toolTip="Draw" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
                                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="uQ9-jz-Jh4"/>
@@ -747,34 +747,8 @@
                                                                             <action selector="toggleDrawingMode:" target="XfG-lQ-9wD" id="h8m-oD-LTK"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
-                                                                        <rect key="frame" x="35" y="0.0" width="30" height="30"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="30" id="eBp-3F-idk"/>
-                                                                        </constraints>
-                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSTouchBarDeleteTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aHp-Qe-fZp">
-                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                            <font key="font" metaFont="system"/>
-                                                                        </buttonCell>
-                                                                        <connections>
-                                                                            <action selector="clearAction:" target="XfG-lQ-9wD" id="r0L-9h-JEr"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="75" y="7" width="30" height="16"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="30" id="kDC-Hu-pIg"/>
-                                                                        </constraints>
-                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
-                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                            <font key="font" metaFont="system"/>
-                                                                        </buttonCell>
-                                                                        <connections>
-                                                                            <action selector="shareAction:" target="XfG-lQ-9wD" id="ZbB-fd-ovm"/>
-                                                                        </connections>
-                                                                    </button>
                                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-0Q-XhH">
-                                                                        <rect key="frame" x="115" y="6" width="40" height="19"/>
+                                                                        <rect key="frame" x="35" y="6" width="40" height="19"/>
                                                                         <subviews>
                                                                             <button toolTip="Smaller Font" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gY5-3D-xuh">
                                                                                 <rect key="frame" x="0.0" y="2" width="20" height="14"/>
@@ -785,6 +759,7 @@
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                 </buttonCell>
+                                                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <connections>
                                                                                     <action selector="decreaseFontSize:" target="XfG-lQ-9wD" id="gOP-Rc-ke1"/>
                                                                                 </connections>
@@ -798,6 +773,7 @@
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="system" size="16"/>
                                                                                 </buttonCell>
+                                                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <connections>
                                                                                     <action selector="increaseFontSize:" target="XfG-lQ-9wD" id="zQl-nS-cow"/>
                                                                                 </connections>
@@ -813,34 +789,59 @@
                                                                         </customSpacing>
                                                                     </stackView>
                                                                     <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="165" y="8" width="30" height="14"/>
+                                                                        <rect key="frame" x="85" y="0.0" width="25" height="30"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="30" id="4FR-ju-a4K"/>
+                                                                            <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSLockUnlockedTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="oDG-nR-cXq">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
+                                                                        <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <connections>
                                                                             <action selector="lockAction:" target="XfG-lQ-9wD" id="7na-65-UKk"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="205" y="7" width="20" height="17"/>
+                                                                    <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
+                                                                        <rect key="frame" x="120" y="0.0" width="25" height="30"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="20" id="Wpk-Wd-Xot"/>
+                                                                            <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <connections>
+                                                                            <action selector="shareAction:" target="XfG-lQ-9wD" id="ZbB-fd-ovm"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
+                                                                        <rect key="frame" x="155" y="0.0" width="25" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="settings" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="1lt-4a-E1F">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                         </buttonCell>
+                                                                        <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <connections>
                                                                             <action selector="showAppMenu:" target="XfG-lQ-9wD" id="Xio-Lv-R2C"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="JuG-yx-yCu" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="0ef-ne-Lh5"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="JuG-yx-yCu" secondAttribute="bottom" id="CX0-1t-fIk"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="mVr-9C-HmB" secondAttribute="bottom" id="JIP-ga-mFB"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Tmv-FH-vBs" secondAttribute="bottom" id="Mwu-ry-aoO"/>
+                                                                    <constraint firstItem="Tmv-FH-vBs" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="SLc-vE-w7m"/>
+                                                                    <constraint firstItem="mVr-9C-HmB" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="YId-Au-51O"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="HNl-Bn-WOw" secondAttribute="bottom" id="aeQ-JD-WfM"/>
+                                                                    <constraint firstItem="HNl-Bn-WOw" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="zq9-lr-d4z"/>
+                                                                </constraints>
                                                                 <visibilityPriorities>
-                                                                    <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
@@ -848,7 +849,6 @@
                                                                     <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
-                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
@@ -864,12 +864,28 @@
                                                             <constraint firstItem="R0a-dX-I4o" firstAttribute="top" secondItem="Ja4-zF-4V6" secondAttribute="top" id="laZ-uW-YvJ"/>
                                                         </constraints>
                                                     </customView>
+                                                    <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
+                                                        <rect key="frame" x="7" y="0.0" width="25" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="25" id="eBp-3F-idk"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSTouchBarDeleteTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aHp-Qe-fZp">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <connections>
+                                                            <action selector="clearAction:" target="XfG-lQ-9wD" id="r0L-9h-JEr"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="Ja4-zF-4V6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wsD-cc-9eo" secondAttribute="leading" priority="1" constant="85" id="2Dj-iQ-EmN"/>
+                                                    <constraint firstItem="bhm-gD-XRi" firstAttribute="leading" secondItem="wsD-cc-9eo" secondAttribute="leading" constant="7" id="6mx-Pd-LUb"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ja4-zF-4V6" secondAttribute="bottom" id="SgK-BV-5Vv"/>
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="top" secondItem="wsD-cc-9eo" secondAttribute="top" id="UHZ-dR-dvF"/>
                                                     <constraint firstAttribute="height" constant="30" id="VwY-KC-GPY"/>
+                                                    <constraint firstItem="Ja4-zF-4V6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bhm-gD-XRi" secondAttribute="trailing" constant="5" id="os3-Ti-utA"/>
+                                                    <constraint firstItem="bhm-gD-XRi" firstAttribute="centerY" secondItem="R0a-dX-I4o" secondAttribute="centerY" id="qF9-DJ-2sH"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ja4-zF-4V6" secondAttribute="trailing" constant="8" id="uUp-6M-tiO"/>
                                                 </constraints>
                                             </visualEffectView>
@@ -912,6 +928,7 @@
                         <outlet property="headerView" destination="uDa-7L-bqj" id="HFX-V0-Wqw"/>
                         <outlet property="hidableHeaderView" destination="wsD-cc-9eo" id="28Z-Wq-Jcx"/>
                         <outlet property="lockButton" destination="mVr-9C-HmB" id="lXr-gA-42a"/>
+                        <outlet property="shareButton" destination="HNl-Bn-WOw" id="Zdz-rN-pA0"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
                         <outlet property="textareaScrollView" destination="ljf-ax-0FW" id="J9Q-Bp-9ZF"/>
                     </connections>
@@ -1004,7 +1021,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-2e-99M">
-                                <rect key="frame" x="93" y="21" width="294" height="131"/>
+                                <rect key="frame" x="100" y="21" width="280" height="131"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
                                         <rect key="frame" x="-2" y="115" width="232" height="18"/>
@@ -1055,7 +1072,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sno-8E-NQV">
-                                        <rect key="frame" x="30" y="45" width="264" height="21"/>
+                                        <rect key="frame" x="30" y="45" width="154" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XYm-By-taG">
                                                 <rect key="frame" x="-2" y="4" width="66" height="17"/>
@@ -1082,25 +1099,12 @@
                                                     <binding destination="zNx-2O-HHw" name="selectedIndex" keyPath="values.iconFillColor" id="GiZ-zc-6AF"/>
                                                 </connections>
                                             </popUpButton>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vcD-Z5-MNK">
-                                                <rect key="frame" x="167" y="0.0" width="99" height="11"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="(macOS X 10.14 only)" id="naw-sd-MiD">
-                                                    <font key="font" metaFont="system" size="9"/>
-                                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="vcD-Z5-MNK" secondAttribute="bottom" id="PPC-Ka-zZZ"/>
-                                        </constraints>
                                         <visibilityPriorities>
-                                            <integer value="1000"/>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
