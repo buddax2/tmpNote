@@ -172,12 +172,33 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         appMenu.popUp(positioning: nil, at: p, in: sender)
     }
 
-    @IBAction func decreaseFontSize(_ sender: Any) {
+    @IBAction func changeFontSize(_ sender: NSSegmentedControl) {
+        if sender.indexOfSelectedItem == 0 {
+            decreaseFontSize()
+        }
+        else {
+            increaseFontSize()
+        }
+    }
+    
+    func decreaseFontSize() {
         let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
         
         guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
         let nextFontSize = currentFontIndex-1 > 0 ? TmpNoteViewController.kFontSizes[currentFontIndex-1] : TmpNoteViewController.kFontSizes.first
 
+        
+        if let newFontSize = nextFontSize {
+            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
+            self.setFontSize(size: CGFloat(newFontSize))
+        }
+    }
+    
+    func increaseFontSize() {
+        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        let nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
         
         if let newFontSize = nextFontSize {
             UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
@@ -193,19 +214,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
         else {
             drawingScene?.clear()
-        }
-    }
-    
-    
-    @IBAction func increaseFontSize(_ sender: Any) {
-        let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
-        
-        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
-        let nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
-        
-        if let newFontSize = nextFontSize {
-            UserDefaults.standard.set(newFontSize, forKey: TmpNoteViewController.kFontSizeKey)
-            self.setFontSize(size: CGFloat(newFontSize))
         }
     }
     
