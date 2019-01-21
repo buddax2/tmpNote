@@ -735,7 +735,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
                                                                 <subviews>
                                                                     <button toolTip="Draw" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
-                                                                        <rect key="frame" x="0.0" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="-0.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="uQ9-jz-Jh4"/>
                                                                         </constraints>
@@ -752,8 +752,8 @@
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="PB5-e5-2Y6">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
-                                                                                <segment label="a" toolTip="Smaller Font" width="24"/>
-                                                                                <segment label="A" toolTip="Bigger Font" width="24" tag="1"/>
+                                                                                <segment toolTip="Smaller Font" image="small_A" width="24"/>
+                                                                                <segment toolTip="Bigger Font" image="big_A" width="24" tag="1"/>
                                                                             </segments>
                                                                         </segmentedCell>
                                                                         <connections>
@@ -761,7 +761,7 @@
                                                                         </connections>
                                                                     </segmentedControl>
                                                                     <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="86" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="85.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
@@ -775,7 +775,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="116" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="115.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
@@ -789,7 +789,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="146" y="-1" width="25" height="31"/>
+                                                                        <rect key="frame" x="145.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
@@ -837,7 +837,7 @@
                                                         </constraints>
                                                     </customView>
                                                     <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
-                                                        <rect key="frame" x="4" y="3" width="25" height="23"/>
+                                                        <rect key="frame" x="3.5" y="3" width="26" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="eBp-3F-idk"/>
                                                         </constraints>
@@ -1151,7 +1151,9 @@
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
+        <image name="big_A" width="10" height="11"/>
         <image name="draw" width="374" height="252"/>
         <image name="settings" width="17" height="17"/>
+        <image name="small_A" width="7" height="8"/>
     </resources>
 </document>
