@@ -12,6 +12,11 @@ import SpriteKit
 
 class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
+    enum Mode: Int {
+        case text
+        case sketch
+    }
+    
     static let kFontSizeKey = "FontSize"
     static let kFontSizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72]
     static var defaultFontSize: Int {
@@ -19,7 +24,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
 
     static let kPreviousSessionTextKey = "PreviousSessionText"
-
+    static let kPreviousSessionModeKey = "PreviousMode"
+    
     var drawingScene: DrawingScene? {
         didSet {
             drawingScene?.load()
@@ -63,10 +69,37 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    var currentMode: Mode = .text {
+        didSet {
+            let icon = currentMode == .sketch ? NSImage(named: NSImage.Name(rawValue: "draw_filled")) : NSImage(named: NSImage.Name(rawValue: "draw"))
+            drawButton.state = currentMode == .sketch ? .on : .off
+            drawButton.image = icon
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
 
+        shareButton.sendAction(on: .leftMouseDown)
+        
+        let prevModeInt = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionModeKey)
+        if let mode = Mode(rawValue: prevModeInt) {
+            switch mode {
+                case .text:
+                    removeDrawScene()
+                case .sketch:
+                    createDrawScene()
+            }
+        }
+    }
+    
+    func willAppear() {
+        // make textview focused
+        textView?.window?.makeKeyAndOrderFront(self)
+    }
+    
+    func createDrawScene() {
         skview = SKView(frame: drawingView.bounds)
         drawingView.addSubview(skview!)
         drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
@@ -77,19 +110,31 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         drawingView.backgroundColor = .clear
         drawingScene?.backgroundColor = .clear
         
-        shareButton.sendAction(on: .leftMouseDown)
+        textareaScrollView.isHidden = true
+        drawingView.isHidden = false
+        
+        currentMode = .sketch
     }
     
-    func willAppear() {
-        // make textview focused
-        textView?.window?.makeKeyAndOrderFront(self)
+    func removeDrawScene() {
+        drawingScene?.removeFromParent()
+        skview?.removeFromSuperview()
+        
+        textareaScrollView.isHidden = false
+        drawingView.isHidden = true
+        
+        currentMode = .text
     }
     
     @IBAction func toggleDrawingMode(_ sender: Any) {
-        textareaScrollView.isHidden.toggle()
-        drawingView.isHidden.toggle()
+        save()
         
-        drawButton.state = drawingView.isHidden == false ? .on : .off
+        switch currentMode {
+            case .text:
+                createDrawScene()
+            case .sketch:
+                removeDrawScene()
+        }
     }
     
     func copyContent() {
@@ -156,8 +201,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
     }
     
-    func saveText() {
+    func save() {
         UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
+        
         drawingScene?.save()
     }
     
@@ -210,7 +257,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         
         if drawingView.isHidden {
             textView.string = ""
-            saveText()
+            save()
         }
         else {
             drawingScene?.clear()

@@ -684,7 +684,7 @@
         <!--Tmp Note View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="TmpNoteViewController" id="XfG-lQ-9wD" customClass="TmpNoteViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TmpNoteViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="TmpNoteViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1134,7 +1134,6 @@
                     </view>
                     <connections>
                         <outlet property="colorPicker" destination="IFG-C1-jEf" id="EWR-bn-Lbb"/>
-                        <outlet property="colorPopover" destination="IFG-C1-jEf" id="jLj-aA-mv0"/>
                         <outlet property="colorView" destination="sno-8E-NQV" id="Ig3-TE-uYl"/>
                         <outlet property="launchAtStartupCheckbox" destination="SP1-l5-MaS" id="acC-Dl-znU"/>
                         <outlet property="shortcutView" destination="uGo-6N-k3Q" id="aru-Pm-nbo"/>

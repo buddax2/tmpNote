@@ -9,7 +9,6 @@
 import Cocoa
 import ServiceManagement
 
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
@@ -35,8 +34,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         createStatusBarIcon()
-        popover.contentViewController = TmpNoteViewController.freshController()
         popover.animates = false
+        
+        // Force light appearance for OSX < 10.14
+        let majorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.majorVersion
+        let minorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.minorVersion
+        
+        if majorVersion == 10 && minorVersion < 14 {
+            popover.appearance = NSAppearance(named: .vibrantLight)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -73,6 +79,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         else {
             let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg3")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
+            
+            image?.isTemplate = false
+            if IconColor(rawValue: colorIndex) == .default {
+                image?.isTemplate = true
+            }
             
             statusItem.button?.image = image
             
@@ -111,6 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     //MARK: Popover Show/Hide
     func showPopover() {
         if let button = statusItem.button {
+            popover.contentViewController = TmpNoteViewController.freshController()
             (popover.contentViewController as! TmpNoteViewController).willAppear()
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             NSApplication.shared.activate(ignoringOtherApps: true)
@@ -120,9 +132,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func closePopover() {
         popover.performClose(self)
-        (popover.contentViewController as! TmpNoteViewController).saveText()
+        (popover.contentViewController as! TmpNoteViewController).save()
         eventMonitor?.stop()
         UserDefaults.standard.synchronize()
+        popover.contentViewController = nil
     }
     
     func setupLaunchOnStartup() {
