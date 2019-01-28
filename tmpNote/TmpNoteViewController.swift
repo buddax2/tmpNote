@@ -188,6 +188,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func loadPreviousText() {
         if let prevText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
             textView.string = prevText
+            textView.checkTextInDocument(nil)
         }
         else {
             textView.string = ""
