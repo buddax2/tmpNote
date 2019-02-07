@@ -26,11 +26,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     static let kPreviousSessionTextKey = "PreviousSessionText"
     static let kPreviousSessionModeKey = "PreviousMode"
     
-    var drawingScene: DrawingScene? {
-        didSet {
-            drawingScene?.load()
-        }
-    }
+    var drawingScene: DrawingScene?
     var skview: SKView?
     
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
@@ -69,6 +65,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    var lines = [SKShapeNode]()
     var currentMode: Mode = .text {
         didSet {
             let icon = currentMode == .sketch ? NSImage(named: NSImage.Name(rawValue: "draw_filled")) : NSImage(named: NSImage.Name(rawValue: "draw"))
@@ -103,7 +100,11 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         skview = SKView(frame: drawingView.bounds)
         drawingView.addSubview(skview!)
         drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
+        drawingScene?.mainController = self
+        drawingScene?.contentDidChangeCallback = contentDidChange
         skview?.presentScene(drawingScene)
+        
+        drawingScene?.load()
         
         skview?.backgroundColor = .clear
         skview?.allowsTransparency = true
@@ -186,15 +187,45 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func loadPreviousText() {
-        if let prevText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
-            textView.string = prevText
-            textView.checkTextInDocument(nil)
-        }
-        else {
-            textView.string = ""
-        }
+        textView.string = TmpNoteViewController.loadText()
+        textView.checkTextInDocument(nil)
+
+        loadSketch()
     }
     
+    func loadSketch() {
+        lines = TmpNoteViewController.loadSketch()
+        
+        contentDidChange()
+    }
+    
+    static func loadText() -> String {
+        var text = ""
+        
+        if let savedText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
+            text = savedText
+        }
+        
+        return text
+    }
+    
+    static func loadSketch() -> [SKShapeNode] {
+        var lines = [SKShapeNode]()
+        
+        if let encodedLines = UserDefaults.standard.value(forKey: DrawingScene.saveKey) as? [Data] {
+            for data in encodedLines {
+                if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
+                    let path = bp.cgPath
+                    let newLine = SKShapeNode(path: path)
+                    newLine.strokeColor = .textColor
+                    lines.append(newLine)
+                }
+            }
+        }
+        
+        return lines
+    }
+
     @IBAction func lockAction(_ sender: Any) {
         let isLocked = UserDefaults.standard.bool(forKey: "locked")
         UserDefaults.standard.set(!isLocked, forKey: "locked")
@@ -206,8 +237,32 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
         
-        drawingScene?.save()
+        saveSketch()
     }
+    
+    func saveSketch() {
+        let paths:[CGPath] = lines.compactMap { $0.path }
+        
+        var encodedLines = [Data]()
+        for path in paths {
+            let bp = NSBezierPath()
+            
+            let points:[CGPoint] = path.getPathElementsPoints()
+            if points.count > 0 {
+                
+                bp.move(to: points.first!)
+                for i in 1..<points.count {
+                    bp.line(to: points[i])
+                }
+                
+                let arch = NSKeyedArchiver.archivedData(withRootObject: bp)
+                encodedLines.append(arch)
+            }
+        }
+        
+        UserDefaults.standard.set(encodedLines, forKey: DrawingScene.saveKey)
+    }
+
     
     ///Close popover if Esc key is pressed
     override func cancelOperation(_ sender: Any?) {
@@ -263,6 +318,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         else {
             drawingScene?.clear()
         }
+        
+        contentDidChange()
     }
     
     @IBAction func shareAction(_ sender: NSButton) {
@@ -295,8 +352,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func textDidChange(_ notification: Notification) {
+        contentDidChange()
+    }
+    
+    func contentDidChange() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        appDelegate.toggleMenuIcon(fill: textView.string.isEmpty == false)
+        let isTextContent = textView.string.isEmpty == false
+        let isSketchContent = lines.count > 0
+        appDelegate.toggleMenuIcon(fill: (isTextContent || isSketchContent))
     }
 }
 

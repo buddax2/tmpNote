@@ -56,9 +56,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
         
-        if let prevText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
-            toggleMenuIcon(fill: prevText.isEmpty == false)
-        }
+        let savedText = TmpNoteViewController.loadText()
+        let savedSketch = TmpNoteViewController.loadSketch()
+        toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
     }
     
     public func toggleMenuIcon(fill: Bool) {
