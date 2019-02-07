@@ -52,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func createStatusBarIcon() {
         
         if let button = statusItem.button {
-            button.image = NSImage(named: NSImage.Name(rawValue: "Compose"))
+            button.image = NSImage(named: "Compose")
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
         
@@ -73,12 +73,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let resultColor = iconShouldBeFilled ? iconColor : .textColor
 
         if #available(OSX 10.14, *) {
-            let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg_template")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
+            let image = iconShouldBeFilled ? NSImage(named: "Compose_bg_template") : NSImage(named: "Compose")
             statusItem.button?.image = image
             statusItem.button?.contentTintColor = resultColor
         }
         else {
-            let image = iconShouldBeFilled ? NSImage(named: NSImage.Name(rawValue: "Compose_bg3")) : NSImage(named: NSImage.Name(rawValue: "Compose"))
+            let image = iconShouldBeFilled ? NSImage(named: "Compose_bg3") : NSImage(named: "Compose")
             
             image?.isTemplate = false
             if IconColor(rawValue: colorIndex) == .default {

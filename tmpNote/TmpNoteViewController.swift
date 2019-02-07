@@ -60,7 +60,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var lockButton: NSButton! {
         didSet {
             let isLocked = UserDefaults.standard.bool(forKey: "locked")
-            lockButton.image = isLocked ? NSImage(named: NSImage.Name(rawValue: "NSLockLockedTemplate")) : NSImage(named: NSImage.Name(rawValue: "NSLockUnlockedTemplate"))
+            lockButton.image = isLocked ? NSImage(named: "NSLockLockedTemplate") : NSImage(named: "NSLockUnlockedTemplate")
             lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
         }
     }
@@ -68,7 +68,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var lines = [SKShapeNode]()
     var currentMode: Mode = .text {
         didSet {
-            let icon = currentMode == .sketch ? NSImage(named: NSImage.Name(rawValue: "draw_filled")) : NSImage(named: NSImage.Name(rawValue: "draw"))
+            let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw")
             drawButton.state = currentMode == .sketch ? .on : .off
             drawButton.image = icon
         }
@@ -229,7 +229,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBAction func lockAction(_ sender: Any) {
         let isLocked = UserDefaults.standard.bool(forKey: "locked")
         UserDefaults.standard.set(!isLocked, forKey: "locked")
-        lockButton.image = isLocked ? NSImage(named: NSImage.Name(rawValue: "NSLockUnlockedTemplate")) : NSImage(named: NSImage.Name(rawValue: "NSLockLockedTemplate"))
+        lockButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
     }
     
@@ -367,7 +367,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 extension TmpNoteViewController: NSSharingServicePickerDelegate {
     func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
         
-        guard let image = NSImage(named: NSImage.Name(rawValue: "copy")) else {
+        guard let image = NSImage(named: "copy") else {
             return proposedServices
         }
         
@@ -385,8 +385,8 @@ extension TmpNoteViewController {
     
     static func freshController() -> TmpNoteViewController {
         
-        let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let identifier = NSStoryboard.SceneIdentifier("TmpNoteViewController")
+        let storyBoard = NSStoryboard(name: "Main", bundle: nil)
+        let identifier = "TmpNoteViewController"
         guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? TmpNoteViewController else {
             
             fatalError("Can't instantiate TmpNoteViewController. Check Main.storyboard")

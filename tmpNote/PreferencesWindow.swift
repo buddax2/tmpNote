@@ -23,8 +23,8 @@ extension PreferencesWindowController {
     
     static func freshController() -> PreferencesWindowController {
         
-        let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let identifier = NSStoryboard.SceneIdentifier("PreferencesWindowController")
+        let storyBoard = NSStoryboard(name: "Main", bundle: nil)
+        let identifier = "PreferencesWindowController"
         guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? PreferencesWindowController else {
             
             fatalError("Can't instantiate PreferencesWindowController. Check Main.storyboard")
@@ -89,8 +89,8 @@ class GeneralViewController: NSViewController {
     @IBAction func shopIconPopover(_ sender: NSButton) {
         let popover = NSPopover()
         popover.behavior = .transient
-        let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let identifier = NSStoryboard.SceneIdentifier("PopoverAnimationVC")
+        let storyBoard = NSStoryboard(name: "Main", bundle: nil)
+        let identifier = "PopoverAnimationVC"
         guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? PopoverAnimationVC else { return }
         popover.contentViewController = vc
         popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.maxX)
@@ -104,7 +104,7 @@ class PopoverAnimationVC: NSViewController {
             imageView.canDrawSubviewsIntoLayer = true
             imageView.imageScaling = .scaleNone
             imageView.animates = true
-            imageView.image = NSImage(named: NSImage.Name(rawValue: "example"))
+            imageView.image = NSImage(named: "example")
         }
     }
 }
