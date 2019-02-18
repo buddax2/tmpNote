@@ -79,21 +79,31 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         // Do view setup here.
 
         shareButton.sendAction(on: .leftMouseDown)
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
         
         let prevModeInt = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionModeKey)
         if let mode = Mode(rawValue: prevModeInt) {
             switch mode {
-                case .text:
-                    removeDrawScene()
-                case .sketch:
-                    createDrawScene()
+            case .text:
+                textView?.window?.makeKeyAndOrderFront(self)
+                removeDrawScene()
+            case .sketch:
+                createDrawScene()
             }
         }
     }
     
-    func willAppear() {
-        // make textview focused
-        textView?.window?.makeKeyAndOrderFront(self)
+    override func viewWillDisappear() {
+        drawingScene?.removeFromParent()
+        skview?.removeFromSuperview()
+        
+        textareaScrollView.isHidden = false
+        drawingView.isHidden = true
+
+        super.viewWillDisappear()
     }
     
     func createDrawScene() {

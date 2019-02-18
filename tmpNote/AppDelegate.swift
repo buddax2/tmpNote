@@ -35,7 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         createStatusBarIcon()
         popover.animates = false
-        
+        popover.contentViewController = TmpNoteViewController.freshController()
+
         // Force light appearance for OSX < 10.14
         let majorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.majorVersion
         let minorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.minorVersion
@@ -122,8 +123,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     //MARK: Popover Show/Hide
     func showPopover() {
         if let button = statusItem.button {
-            popover.contentViewController = TmpNoteViewController.freshController()
-            (popover.contentViewController as! TmpNoteViewController).willAppear()
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             NSApplication.shared.activate(ignoringOtherApps: true)
             eventMonitor?.start()
@@ -135,7 +134,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         (popover.contentViewController as! TmpNoteViewController).save()
         eventMonitor?.stop()
         UserDefaults.standard.synchronize()
-        popover.contentViewController = nil
     }
     
     func setupLaunchOnStartup() {
