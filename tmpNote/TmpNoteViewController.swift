@@ -197,6 +197,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func loadPreviousText() {
+        loadSubstitutions()
+        
         textView.string = TmpNoteViewController.loadText()
         textView.checkTextInDocument(nil)
 
@@ -219,6 +221,15 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         return text
     }
     
+    func loadSubstitutions() {
+        textView.isAutomaticDashSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartDashes") != nil ? UserDefaults.standard.bool(forKey: "SmartDashes") : true
+        textView.isAutomaticSpellingCorrectionEnabled = UserDefaults.standard.object(forKey: "SmartSpelling") != nil ? UserDefaults.standard.bool(forKey: "SmartSpelling") : true
+        textView.isAutomaticTextReplacementEnabled = UserDefaults.standard.object(forKey: "SmartTextReplacing") != nil ? UserDefaults.standard.bool(forKey: "SmartTextReplacing") : true
+        textView.isAutomaticDataDetectionEnabled = UserDefaults.standard.object(forKey: "SmartDataDetection") != nil ? UserDefaults.standard.bool(forKey: "SmartDataDetection") : true
+        textView.isAutomaticQuoteSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartQuotes") != nil ? UserDefaults.standard.bool(forKey: "SmartQuotes") : true
+        textView.isAutomaticLinkDetectionEnabled = UserDefaults.standard.object(forKey: "SmartLinks") != nil ? UserDefaults.standard.bool(forKey: "SmartLinks") : true
+    }
+
     static func loadSketch() -> [SKShapeNode] {
         var lines = [SKShapeNode]()
         
@@ -247,7 +258,25 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
         
+        saveSubstitutions()
+        
         saveSketch()
+    }
+    
+    func saveSubstitutions() {
+        let dashes = textView.isAutomaticDashSubstitutionEnabled
+        let spelling = textView.isAutomaticSpellingCorrectionEnabled
+        let textReplacing = textView.isAutomaticTextReplacementEnabled
+        let dataDetection = textView.isAutomaticDataDetectionEnabled
+        let quotes = textView.isAutomaticQuoteSubstitutionEnabled
+        let links = textView.isAutomaticLinkDetectionEnabled
+        
+        UserDefaults.standard.set(dashes, forKey: "SmartDashes")
+        UserDefaults.standard.set(spelling, forKey: "SmartSpelling")
+        UserDefaults.standard.set(textReplacing, forKey: "SmartTextReplacing")
+        UserDefaults.standard.set(dataDetection, forKey: "SmartDataDetection")
+        UserDefaults.standard.set(quotes, forKey: "SmartQuotes")
+        UserDefaults.standard.set(links, forKey: "SmartLinks")
     }
     
     func saveSketch() {
