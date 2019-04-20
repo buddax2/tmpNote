@@ -29,6 +29,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var drawingScene: DrawingScene?
     var skview: SKView?
     
+    var tmpLockMode = false
+    
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
     @IBOutlet weak var headerView: HeaderView! {
         didSet {
@@ -348,17 +350,54 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    func deleteDialog(question: String, text: String) -> NSAlert {
+        
+        // Prevent popup from hiding while the dialog is visible
+        tmpLockMode = UserDefaults.standard.bool(forKey: "locked")
+        UserDefaults.standard.set(true, forKey: "locked")
+
+        
+        let alert = NSAlert()
+        alert.messageText = question
+        alert.informativeText = text
+        alert.addButton(withTitle: "Delete")
+        alert.addButton(withTitle: "Cancel")
+        alert.alertStyle = .warning
+        return alert
+    }
+    
     @IBAction func clearAction(_ sender: Any) {
         
-        if drawingView.isHidden {
-            textView.string = ""
-            save()
-        }
-        else {
-            drawingScene?.clear()
+        var message: (String, String)
+        switch currentMode {
+            case .text:
+                message = ("Delete the note?", "Are you sure you would like to delete the note?")
+            case .sketch:
+                message = ("Delete the drawing?", "Are you sure you would like to delete the drawing?")
         }
         
-        contentDidChange()
+        deleteDialog(question: message.0, text: message.1).beginSheetModal(for: self.view.window!, completionHandler: { [weak self] (modalResponse) -> Void in
+            
+            if let lock = self?.tmpLockMode {
+                UserDefaults.standard.set(lock, forKey: "locked")
+            }
+            
+            if modalResponse == .alertFirstButtonReturn {
+                
+                if let mode = self?.currentMode {
+                    switch mode {
+                        case .text:
+                            self?.textView.string = ""
+                            self?.save()
+
+                        case .sketch:
+                            self?.drawingScene?.clear()
+                    }
+                    
+                    self?.contentDidChange()
+                }
+            }
+        })
     }
     
     @IBAction func shareAction(_ sender: NSButton) {
