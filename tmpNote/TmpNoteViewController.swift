@@ -377,6 +377,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
         
         deleteDialog(question: message.0, text: message.1).beginSheetModal(for: self.view.window!, completionHandler: { [weak self] (modalResponse) -> Void in
+            guard let strongSelf = self else { return }
             
             if let lock = self?.tmpLockMode {
                 UserDefaults.standard.set(lock, forKey: "locked")
@@ -387,8 +388,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
                 if let mode = self?.currentMode {
                     switch mode {
                         case .text:
-                            self?.textView.string = ""
-                            self?.save()
+                            if let textLength = strongSelf.textView.textStorage?.length {
+                                strongSelf.textView.insertText("", replacementRange: NSRange(location: 0, length: textLength))
+                                self?.save()
+                            }
 
                         case .sketch:
                             self?.drawingScene?.clear()
