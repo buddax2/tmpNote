@@ -328,7 +328,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func decreaseFontSize() {
         let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
         
-        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.firstIndex(of: fontSize) else { return }
         let nextFontSize = currentFontIndex-1 > 0 ? TmpNoteViewController.kFontSizes[currentFontIndex-1] : TmpNoteViewController.kFontSizes.first
 
         
@@ -341,7 +341,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func increaseFontSize() {
         let fontSize = UserDefaults.standard.object(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
         
-        guard let currentFontIndex = TmpNoteViewController.kFontSizes.index(of: fontSize) else { return }
+        guard let currentFontIndex = TmpNoteViewController.kFontSizes.firstIndex(of: fontSize) else { return }
         let nextFontSize = currentFontIndex+1 < TmpNoteViewController.kFontSizes.count ? TmpNoteViewController.kFontSizes[currentFontIndex+1] : TmpNoteViewController.kFontSizes.last
         
         if let newFontSize = nextFontSize {
