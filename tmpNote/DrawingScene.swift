@@ -60,7 +60,9 @@ class DrawingScene: SKScene {
     
     func load() {
         pathToDraw = CGMutablePath()
+
         for line in mainController.lines {
+            line.removeFromParent()
             addChild(line)
         }
     }
