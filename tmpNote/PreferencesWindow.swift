@@ -17,6 +17,7 @@ protocol PreferencesDelegate: class {
 
 class PreferencesWindowController: NSWindowController {
     
+    
 }
 
 extension PreferencesWindowController {
@@ -71,6 +72,19 @@ class GeneralViewController: NSViewController {
         })
     }
     
+    static func freshController() -> GeneralViewController {
+        
+        let storyBoard = NSStoryboard(name: "Main", bundle: nil)
+        let identifier = "GeneralViewController"
+        guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? GeneralViewController else {
+            
+            fatalError("Can't instantiate GeneralViewController. Check Main.storyboard")
+        }
+        
+        return vc
+    }
+
+    
     @IBAction func toggleDynamicIcon(_ sender: Any) {
         let isDynamicIconON = UserDefaults.standard.bool(forKey: "DynamicIcon")
         colorView.isHidden = isDynamicIconON == false
@@ -95,6 +109,21 @@ class GeneralViewController: NSViewController {
         popover.contentViewController = vc
         popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.maxX)
     }
+}
+
+class ListsPreferencesViewController: NSViewController {
+    static func freshController() -> ListsPreferencesViewController {
+        
+        let storyBoard = NSStoryboard(name: "Main", bundle: nil)
+        let identifier = "ListsPreferencesViewController"
+        guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? ListsPreferencesViewController else {
+            
+            fatalError("Can't instantiate ListsPreferencesViewController. Check Main.storyboard")
+        }
+        
+        return vc
+    }
+
 }
 
 class PopoverAnimationVC: NSViewController {

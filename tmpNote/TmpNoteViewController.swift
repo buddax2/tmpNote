@@ -24,13 +24,34 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
 
     static let kPreviousSessionTextKey = "PreviousSessionText"
+    static let kPreviousSessionSelectedListKey = "PreviousSessionSelectedList"
+    static let kListsKey = "Lists"
     static let kPreviousSessionModeKey = "PreviousMode"
     
     var drawingScene: DrawingScene?
     var skview: SKView?
     
     var tmpLockMode = false
+
+    var currentListID: Int? {
+        didSet {
+            guard let listID = currentListID else { return }
+            listButton?.selectItem(withTag: listID)
+
+            guard oldValue != listID else {
+                return
+            }
+            
+            if let oldValue = oldValue {
+                TmpNoteViewController.saveText(note: textView.string, listID: oldValue)
+            }
+            
+            let text = TmpNoteViewController.loadText(listID: listID)
+            textView.string = text
+        }
+    }
     
+    @IBOutlet weak var listButton: NSPopUpButton!
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
     @IBOutlet weak var headerView: HeaderView! {
         didSet {
@@ -79,7 +100,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-
+        
         shareButton.sendAction(on: .leftMouseDown)
     }
     
@@ -150,6 +171,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    @IBAction func switchToView(_ sender: NSPopUpButton) {
+
+//        save()
+        currentListID = sender.selectedItem?.tag ?? 0
+//        textView.string = lists.filter{ $0.ID == currentListID }.first?.note ?? ""
+//        textView.string = TmpNoteViewController.loadText(listID: currentListID)
+    }
+    
     func copyContent() {
         if drawingView.isHidden == false {
             
@@ -201,7 +230,11 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func loadPreviousText() {
         loadSubstitutions()
         
-        textView.string = TmpNoteViewController.loadText()
+        let lastListID = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
+        currentListID = lastListID
+        
+        listButton.selectItem(withTag: lastListID)
+        
         textView.checkTextInDocument(nil)
 
         loadSketch()
@@ -214,13 +247,34 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     static func loadText() -> String {
+        
+        let currentListID: Int = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
+
+        return TmpNoteViewController.loadText(listID: currentListID)
+    }
+    
+    private static func loadText(listID: Int) -> String {
         var text = ""
         
-        if let savedText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
+        var currentListID = TmpNoteViewController.kPreviousSessionTextKey
+        if listID > 0 {
+            currentListID += String(listID)
+        }
+
+        if let savedText = UserDefaults.standard.string(forKey: currentListID)  {
             text = savedText
         }
         
         return text
+    }
+    
+    static func saveText(note: String, listID: Int = 0) {
+        var listIDStr = TmpNoteViewController.kPreviousSessionTextKey
+        if listID > 0 {
+            listIDStr += String(listID)
+        }
+        
+        UserDefaults.standard.set(note, forKey: listIDStr)
     }
     
     func loadSubstitutions() {
@@ -257,12 +311,18 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func save() {
-        UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        guard let currentListID = currentListID else { return }
+        UserDefaults.standard.set(currentListID, forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
+        TmpNoteViewController.saveText(note: textView.string, listID: currentListID)
         
         saveSubstitutions()
         
         saveSketch()
+    }
+    
+    func saveLists() {
+        
     }
     
     func saveSubstitutions() {

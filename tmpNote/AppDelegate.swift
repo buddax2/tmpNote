@@ -148,6 +148,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         SMLoginItemSetEnabled(launcherIdentifier as CFString, shouldLaunch)
     }
+    
+    
+    @IBAction func switchToView(_ sender: NSMenuItem) {
+        print(sender.tag)
+    }
 }
 
 extension NSImage {
@@ -170,4 +175,8 @@ extension NSImage {
         
         return tinted
     }
+}
+
+extension AppDelegate {
+    
 }
