@@ -304,7 +304,7 @@
                                                         <rect key="frame" x="102" y="5" width="65" height="21"/>
                                                         <popUpButtonCell key="cell" type="bevel" title="view 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" selectedItem="aGp-yG-swl" id="17u-CE-Mzw">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
+                                                            <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="XQ5-gP-8Nn">
                                                                 <items>
                                                                     <menuItem title="view 1" state="on" keyEquivalent="1" id="aGp-yG-swl"/>
@@ -424,10 +424,10 @@
             </objects>
             <point key="canvasLocation" x="203" y="613.5"/>
         </scene>
-        <!--Preferences View Controller-->
+        <!--Tab View Controller-->
         <scene sceneID="TGn-rv-7C6">
             <objects>
-                <tabViewController tabStyle="toolbar" id="4WV-sf-n1E" customClass="PreferencesViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController tabStyle="toolbar" id="4WV-sf-n1E" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="General" image="NSPreferencesGeneral" id="Wxv-Sn-79E"/>
                         <tabViewItem label="Lists" image="NSMultipleDocuments" id="U4V-7E-Z3b"/>
@@ -488,7 +488,7 @@
                                             <rect key="frame" x="1" y="1" width="198" height="198"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="2ER-YL-MMy">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="2ER-YL-MMy">
                                                     <rect key="frame" x="0.0" y="0.0" width="198" height="198"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -508,27 +508,34 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <tableCellView id="uI2-Pt-Sbm">
+                                                                <tableCellView id="mz8-QW-86S">
                                                                     <rect key="frame" x="1" y="1" width="195" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jc0-gS-9c8">
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPg-P2-iMP">
                                                                             <rect key="frame" x="0.0" y="0.0" width="195" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="nYu-ap-J15">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="lMX-n3-Yiq">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="mz8-QW-86S" name="value" keyPath="objectValue.title" id="oWx-1X-Ibj"/>
+                                                                            </connections>
                                                                         </textField>
                                                                     </subviews>
                                                                     <connections>
-                                                                        <outlet property="textField" destination="Jc0-gS-9c8" id="3qN-Gh-meD"/>
+                                                                        <outlet property="textField" destination="oPg-P2-iMP" id="hNY-lG-U2Q"/>
                                                                     </connections>
                                                                 </tableCellView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <binding destination="hrg-GH-xWc" name="content" keyPath="arrangedObjects" id="KFm-DF-I0a"/>
+                                                        <binding destination="hrg-GH-xWc" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="KFm-DF-I0a" id="roQ-Cd-Mav"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                         </clipView>
@@ -554,6 +561,9 @@
                                                 <segment image="NSRemoveTemplate" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="listAction:" target="fp4-sN-ufy" id="Ba0-iX-507"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <constraints>
@@ -573,10 +583,18 @@
                             <constraint firstAttribute="trailing" secondItem="Llj-VQ-7R7" secondAttribute="trailing" id="sX6-Ib-zbZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="arrayController" destination="hrg-GH-xWc" id="uej-vB-7vy"/>
+                        <outlet property="tableView" destination="2ER-YL-MMy" id="lkm-O1-NY6"/>
+                    </connections>
                 </viewController>
                 <customObject id="NvE-ah-uo0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController id="3ag-4U-uih"/>
-                <userDefaultsController id="Fg8-ng-vjr"/>
+                <arrayController objectClassName="tmpNote.List" id="hrg-GH-xWc">
+                    <connections>
+                        <binding destination="fp4-sN-ufy" name="contentArray" keyPath="self.dataArray" id="gxq-mT-m9o"/>
+                    </connections>
+                </arrayController>
+                <userDefaultsController id="uCJ-bG-oc3"/>
             </objects>
             <point key="canvasLocation" x="-994" y="755"/>
         </scene>

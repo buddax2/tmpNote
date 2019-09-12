@@ -124,6 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func showPopover() {
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            (popover.contentViewController as! TmpNoteViewController).loadPreviousText()
             NSApplication.shared.activate(ignoringOtherApps: true)
             eventMonitor?.start()
         }

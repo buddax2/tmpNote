@@ -111,7 +111,13 @@ class GeneralViewController: NSViewController {
     }
 }
 
-class ListsPreferencesViewController: NSViewController {
+class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
+    
+    @objc dynamic var dataArray = [List(id: 0, title: "title", note: "note")]
+
+    @IBOutlet var arrayController: NSArrayController!
+    @IBOutlet weak var tableView: NSTableView!
+    
     static func freshController() -> ListsPreferencesViewController {
         
         let storyBoard = NSStoryboard(name: "Main", bundle: nil)
@@ -123,7 +129,52 @@ class ListsPreferencesViewController: NSViewController {
         
         return vc
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let listsData = UserDefaults.standard.data(forKey: TmpNoteViewController.kListsKey) {
+            let listsArray = try? JSONDecoder().decode([List].self, from: listsData)
+            if let l = listsArray {
+                dataArray = l
+            }
+        }
+    }
 
+    override func viewDidDisappear() {
+        let listsData = try! JSONEncoder().encode(dataArray)
+        UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+
+        let appDelegate = NSApplication.shared.delegate as? AppDelegate
+        (appDelegate?.popover.contentViewController as! TmpNoteViewController).loadPreviousText()
+        
+        super.viewDidDisappear()
+    }
+    
+    @IBAction func listAction(_ sender: NSSegmentedControl) {
+        switch sender.selectedSegment {
+        case 0:
+            addList()
+        default:
+            removeList()
+        }
+    }
+    
+    func addList() {
+        
+        let newList = List(id: dataArray.count, title: "title", note: "note")
+        arrayController.addObject(newList)
+        
+        let listsData = try! JSONEncoder().encode(dataArray)
+        UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+    }
+    
+    func removeList() {
+        arrayController.remove(atArrangedObjectIndex: tableView.selectedRow)
+
+        let listsData = try! JSONEncoder().encode(dataArray)
+        UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+    }
 }
 
 class PopoverAnimationVC: NSViewController {

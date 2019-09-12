@@ -24,6 +24,7 @@
 		277656671F75BBEC001B0294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277656651F75BBEC001B0294 /* Main.storyboard */; };
 		2787D48A21E20934005E817F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787D48921E20934005E817F /* Extensions.swift */; };
 		27B72AB221E384BD0082E490 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = 27B72AB121E384BD0082E490 /* example.gif */; };
+		937880AD2327A2C600DB7C39 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937880AC2327A2C600DB7C39 /* List.swift */; };
 		EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		27B72AB121E384BD0082E490 /* example.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = example.gif; sourceTree = "<group>"; };
 		3D89BE136325237EBA1B4B06 /* Pods-tmpNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.debug.xcconfig"; sourceTree = "<group>"; };
 		58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tmpNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		937880AC2327A2C600DB7C39 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		C5BD56484756DECFF14D330B /* Pods-tmpNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmpNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-tmpNote/Pods-tmpNote.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 			children = (
 				2776565F1F75BBEC001B0294 /* AppDelegate.swift */,
 				274464B41F79567A008A0252 /* PreferencesWindow.swift */,
+				937880AC2327A2C600DB7C39 /* List.swift */,
 				275847341F782C7F0072F709 /* TmpNoteViewController.swift */,
 				271CEFF921DEB801004CD3A8 /* HeaderView.swift */,
 				271CEFEF21DD555A004CD3A8 /* DrawingScene.sks */,
@@ -333,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				271CEFF221DD5823004CD3A8 /* DrawingScene.swift in Sources */,
+				937880AD2327A2C600DB7C39 /* List.swift in Sources */,
 				271CEFFA21DEB801004CD3A8 /* HeaderView.swift in Sources */,
 				274464B51F79567A008A0252 /* PreferencesWindow.swift in Sources */,
 				274464AB1F78372A008A0252 /* EventMonitor.swift in Sources */,

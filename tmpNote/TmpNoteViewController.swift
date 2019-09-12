@@ -36,7 +36,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var currentListID: Int? {
         didSet {
             guard let listID = currentListID else { return }
-            listButton?.selectItem(withTag: listID)
+            listButton.selectItem(at: listID)
 
             guard oldValue != listID else {
                 return
@@ -48,6 +48,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             
             let text = TmpNoteViewController.loadText(listID: listID)
             textView.string = text
+            
+            textView.checkTextInDocument(nil)
         }
     }
     
@@ -88,6 +90,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    var lists = [List]()
     var lines = [SKShapeNode]()
     var currentMode: Mode = .text {
         didSet {
@@ -174,7 +177,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBAction func switchToView(_ sender: NSPopUpButton) {
 
 //        save()
-        currentListID = sender.selectedItem?.tag ?? 0
+        currentListID = sender.indexOfSelectedItem
+//        sender.selectedItem!.title
 //        textView.string = lists.filter{ $0.ID == currentListID }.first?.note ?? ""
 //        textView.string = TmpNoteViewController.loadText(listID: currentListID)
     }
@@ -230,10 +234,22 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func loadPreviousText() {
         loadSubstitutions()
         
+        if let listsData = UserDefaults.standard.data(forKey: TmpNoteViewController.kListsKey) {
+            let listsArray = try? JSONDecoder().decode([List].self, from: listsData)
+            if let l = listsArray {
+                lists = l
+            }
+
+            listButton.removeAllItems()
+            lists.forEach { item in
+                listButton.addItem(withTitle: item.title)
+            }
+        }
+        
         let lastListID = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
         currentListID = lastListID
         
-        listButton.selectItem(withTag: lastListID)
+        listButton.selectItem(at: lastListID)
         
         textView.checkTextInDocument(nil)
 
@@ -315,6 +331,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(currentListID, forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
         TmpNoteViewController.saveText(note: textView.string, listID: currentListID)
+        
+        if let listsData = try? JSONEncoder().encode(lists) {
+            UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+        }
         
         saveSubstitutions()
         
@@ -493,6 +513,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func textDidChange(_ notification: Notification) {
+        lists[currentListID ?? 0].note = textView.string
+        save()
         contentDidChange()
     }
     
