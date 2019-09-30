@@ -113,7 +113,9 @@ class GeneralViewController: NSViewController {
 
 class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
     
-    @objc dynamic var dataArray = [List(id: 0, title: "title", note: "note")]
+    @objc lazy var moc: NSManagedObjectContext = {
+        return (NSApplication.shared.delegate as? AppDelegate)!.persistentContainer.viewContext
+    }()
 
     @IBOutlet var arrayController: NSArrayController!
     @IBOutlet weak var tableView: NSTableView!
@@ -132,21 +134,9 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let listsData = UserDefaults.standard.data(forKey: TmpNoteViewController.kListsKey) {
-            let listsArray = try? JSONDecoder().decode([List].self, from: listsData)
-            if let l = listsArray {
-                dataArray = l
-            }
-        }
     }
 
     override func viewDidDisappear() {
-        let listsData = try! JSONEncoder().encode(dataArray)
-        UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
-
-        let appDelegate = NSApplication.shared.delegate as? AppDelegate
-        (appDelegate?.popover.contentViewController as! TmpNoteViewController).loadPreviousText()
         
         super.viewDidDisappear()
     }
@@ -161,19 +151,27 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
     }
     
     func addList() {
+
+        let entity = NSEntityDescription.entity(forEntityName: "Draft", in: moc)!
+        let list = Draft(entity: entity, insertInto: moc)
         
-        let newList = List(id: dataArray.count, title: "title", note: "note")
-        arrayController.addObject(newList)
+        list.title = UUID().uuidString
         
-        let listsData = try! JSONEncoder().encode(dataArray)
-        UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+        do {
+            try moc.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     func removeList() {
         arrayController.remove(atArrangedObjectIndex: tableView.selectedRow)
 
-        let listsData = try! JSONEncoder().encode(dataArray)
-        UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+        do {
+            try moc.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 }
 

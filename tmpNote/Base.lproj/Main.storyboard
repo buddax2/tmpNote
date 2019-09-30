@@ -156,6 +156,14 @@
                                                     <size key="minSize" width="345" height="204"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <connections>
+                                                        <binding destination="XJB-2w-res" name="value" keyPath="selection.body" id="cOr-WE-tRH">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                         </clipView>
@@ -302,6 +310,9 @@
                                                     </button>
                                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="b02-jH-scc">
                                                         <rect key="frame" x="102" y="5" width="65" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" priority="999" constant="150" id="jCl-U9-YZl"/>
+                                                        </constraints>
                                                         <popUpButtonCell key="cell" type="bevel" title="view 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" selectedItem="aGp-yG-swl" id="17u-CE-Mzw">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
@@ -315,6 +326,7 @@
                                                         </popUpButtonCell>
                                                         <connections>
                                                             <action selector="switchToView:" target="XfG-lQ-9wD" id="0Qu-61-KLc"/>
+                                                            <binding destination="XJB-2w-res" name="content" keyPath="arrangedObjects.title" id="ln1-LK-G5Y"/>
                                                         </connections>
                                                     </popUpButton>
                                                 </subviews>
@@ -365,6 +377,7 @@
                     </view>
                     <connections>
                         <outlet property="appMenu" destination="clg-M0-VxI" id="oUi-gL-cdL"/>
+                        <outlet property="arrayController" destination="XJB-2w-res" id="nLW-05-lNr"/>
                         <outlet property="drawButton" destination="Tmv-FH-vBs" id="zNE-9n-yTr"/>
                         <outlet property="drawingView" destination="LAu-TD-YOn" id="Pds-vg-Xkl"/>
                         <outlet property="headerView" destination="uDa-7L-bqj" id="HFX-V0-Wqw"/>
@@ -377,6 +390,11 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Draft" usesLazyFetching="YES" automaticallyPreparesContent="YES" id="XJB-2w-res">
+                    <connections>
+                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.moc" id="lc7-4X-Gex"/>
+                    </connections>
+                </arrayController>
                 <menu id="clg-M0-VxI">
                     <items>
                         <menuItem title="Preferences..." id="SD4-yG-jIO">
@@ -432,6 +450,7 @@
                         <tabViewItem label="General" image="NSPreferencesGeneral" id="Wxv-Sn-79E"/>
                         <tabViewItem label="Lists" image="NSMultipleDocuments" id="U4V-7E-Z3b"/>
                     </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="mS9-pw-y5Y">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -521,7 +540,7 @@
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
-                                                                                <binding destination="mz8-QW-86S" name="value" keyPath="objectValue.title" id="oWx-1X-Ibj"/>
+                                                                                <binding destination="mz8-QW-86S" name="value" keyPath="objectValue.title" id="hSg-fB-fTR"/>
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>
@@ -533,8 +552,8 @@
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
-                                                        <binding destination="hrg-GH-xWc" name="content" keyPath="arrangedObjects" id="KFm-DF-I0a"/>
-                                                        <binding destination="hrg-GH-xWc" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="KFm-DF-I0a" id="roQ-Cd-Mav"/>
+                                                        <binding destination="5H2-fi-BQv" name="content" keyPath="arrangedObjects" id="5GS-sc-dWI"/>
+                                                        <binding destination="5H2-fi-BQv" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="5GS-sc-dWI" id="fbm-Rp-WMW"/>
                                                     </connections>
                                                 </tableView>
                                             </subviews>
@@ -584,17 +603,16 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="arrayController" destination="hrg-GH-xWc" id="uej-vB-7vy"/>
+                        <outlet property="arrayController" destination="5H2-fi-BQv" id="cST-L5-3Fb"/>
                         <outlet property="tableView" destination="2ER-YL-MMy" id="lkm-O1-NY6"/>
                     </connections>
                 </viewController>
                 <customObject id="NvE-ah-uo0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="tmpNote.List" id="hrg-GH-xWc">
+                <arrayController mode="entity" entityName="Draft" usesLazyFetching="YES" automaticallyPreparesContent="YES" id="5H2-fi-BQv">
                     <connections>
-                        <binding destination="fp4-sN-ufy" name="contentArray" keyPath="self.dataArray" id="gxq-mT-m9o"/>
+                        <binding destination="fp4-sN-ufy" name="managedObjectContext" keyPath="self.moc" id="p51-wR-PDN"/>
                     </connections>
                 </arrayController>
-                <userDefaultsController id="uCJ-bG-oc3"/>
             </objects>
             <point key="canvasLocation" x="-994" y="755"/>
         </scene>

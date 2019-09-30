@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G59b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Draft" representedClassName="Draft" syncable="YES" codeGenerationType="class">
+        <attribute name="body" attributeType="String" defaultValueString="new list" syncable="YES"/>
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Sketch" representedClassName="Sketch" syncable="YES" codeGenerationType="class">
+        <attribute name="body" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Draft" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Sketch" positionX="-54" positionY="18" width="128" height="30"/>
+    </elements>
+</model>

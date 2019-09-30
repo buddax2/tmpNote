@@ -31,23 +31,38 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var drawingScene: DrawingScene?
     var skview: SKView?
     
+    @objc lazy var moc: NSManagedObjectContext = {
+        return (NSApplication.shared.delegate as? AppDelegate)!.persistentContainer.viewContext
+    }()
+    
+    @IBOutlet var arrayController: NSArrayController!
+
     var tmpLockMode = false
 
     var currentListID: Int? {
         didSet {
-            guard let listID = currentListID else { return }
-            listButton.selectItem(at: listID)
+//            if let title = listButton.titleOfSelectedItem {
+//                debugPrint(title)
+//                textView.string = load(listName: title) ?? ""
+//            }
 
-            guard oldValue != listID else {
-                return
+            if let idx = currentListID {
+                arrayController.setSelectionIndex(idx)
             }
             
-            if let oldValue = oldValue {
-                TmpNoteViewController.saveText(note: textView.string, listID: oldValue)
-            }
+//            guard let listID = currentListID else { return }
+//            listButton.selectItem(at: listID)
+
+//            guard oldValue != listID else {
+//                return
+//            }
+//
+//            if let oldValue = oldValue {
+//                TmpNoteViewController.saveText(note: textView.string, listID: oldValue)
+//            }
             
-            let text = TmpNoteViewController.loadText(listID: listID)
-            textView.string = text
+//            let text = TmpNoteViewController.loadText(listID: listID)
+//            textView.string = text
             
             textView.checkTextInDocument(nil)
         }
@@ -90,8 +105,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    var lists = [List]()
-    var lines = [SKShapeNode]()
+    var lists = [Draft]()
+    var lines = [SKShapeNode]() {
+        didSet {
+            contentDidChange()
+        }
+    }
     var currentMode: Mode = .text {
         didSet {
             let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw")
@@ -164,7 +183,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func toggleDrawingMode(_ sender: Any) {
-        save()
+//        save()
         
         switch currentMode {
             case .text:
@@ -178,6 +197,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
 //        save()
         currentListID = sender.indexOfSelectedItem
+        
 //        sender.selectedItem!.title
 //        textView.string = lists.filter{ $0.ID == currentListID }.first?.note ?? ""
 //        textView.string = TmpNoteViewController.loadText(listID: currentListID)
@@ -234,32 +254,92 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func loadPreviousText() {
         loadSubstitutions()
         
-        if let listsData = UserDefaults.standard.data(forKey: TmpNoteViewController.kListsKey) {
-            let listsArray = try? JSONDecoder().decode([List].self, from: listsData)
-            if let l = listsArray {
-                lists = l
-            }
-
-            listButton.removeAllItems()
-            lists.forEach { item in
-                listButton.addItem(withTitle: item.title)
-            }
+        
+        
+//        if let listsData = UserDefaults.standard.data(forKey: TmpNoteViewController.kListsKey) {
+//            let listsArray = try? JSONDecoder().decode([List].self, from: listsData)
+//            if let l = listsArray {
+//                lists = l
+//            }
+//
+//            listButton.removeAllItems()
+//            lists.forEach { item in
+//                listButton.addItem(withTitle: item.title)
+//            }
+//        }
+        
+//        let lastListID = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
+//        currentListID = lastListID
+        
+//        listButton.selectItem(at: lastListID)
+        
+        if let titles = arrayController.selectedObjects as? [Draft], let obj = titles.first?.body {
+//            textView.string = String(data: obj as Data, encoding: .utf8) ?? ""
+            textView.string = obj
+            
+//            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "List")
+//            fetchRequest.predicate = NSPredicate(format: "title = %@", title)
+//
+//            do {
+//                let results = try moc.fetch(fetchRequest) as? [List]
+//                if results?.count != 0 { // Atleast one was returned
+//
+//                    // In my case, I only updated the first item in results
+//                    if let data = textView.string.data(using: .utf8) as NSData? {
+//                        results?.first?.body = data
+//                    }
+//                }
+//            } catch {
+//                print("Fetch Failed: \(error)")
+//            }
         }
-        
-        let lastListID = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
-        currentListID = lastListID
-        
-        listButton.selectItem(at: lastListID)
+
+
         
         textView.checkTextInDocument(nil)
 
         loadSketch()
     }
     
-    func loadSketch() {
-        lines = TmpNoteViewController.loadSketch()
+    func load(listName: String) -> String? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Draft")
+        fetchRequest.predicate = NSPredicate(format: "title = %@", listName)
         
-        contentDidChange()
+        do {
+            let results = try moc.fetch(fetchRequest) as? [Draft]
+            return results?.first?.body ?? ""
+//            if let firstList = results?.first, let body = firstList.body as Data? {
+//                return String(data: body, encoding: .utf8)
+//            }
+        } catch {
+            print("Fetch Failed: \(error)")
+        }
+
+        return nil
+    }
+    
+    func loadSketch() {
+//        lines = TmpNoteViewController.loadSketch()
+//
+//        contentDidChange()
+        
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Sketch")
+        
+        do {
+            let results = try moc.fetch(fetchRequest) as? [Sketch]
+            if results?.count != 0 { // Atleast one was returned
+                lines = TmpNoteViewController.loadSketch(encodedData: results?.first?.body)
+//                if let encodedData = results?.first?.body {
+//                    if let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? [Data] {
+//                        lines = TmpNoteViewController.loadSketch()
+//                    }
+//                }
+            }
+        } catch {
+            print("Fetch Failed: \(error)")
+        }
+
     }
     
     static func loadText() -> String {
@@ -302,11 +382,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textView.isAutomaticLinkDetectionEnabled = UserDefaults.standard.object(forKey: "SmartLinks") != nil ? UserDefaults.standard.bool(forKey: "SmartLinks") : true
     }
 
-    static func loadSketch() -> [SKShapeNode] {
+    static func loadSketch(encodedData: Data?) -> [SKShapeNode] {
+        guard let encodedData = encodedData else { return [] }
         var lines = [SKShapeNode]()
         
-        if let encodedLines = UserDefaults.standard.value(forKey: DrawingScene.saveKey) as? [Data] {
-            for data in encodedLines {
+        if let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? [Data] {
+            for data in decodedArray {
                 if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
                     let path = bp.cgPath
                     let newLine = SKShapeNode(path: path)
@@ -326,15 +407,46 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
     }
     
+    func save(listName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Draft")
+        fetchRequest.predicate = NSPredicate(format: "title = %@", listName)
+        
+        do {
+            let results = try moc.fetch(fetchRequest) as? [Draft]
+            if results?.count != 0 { // Atleast one was returned
+
+//                // In my case, I only updated the first item in results
+//                if let data = textView.string.data(using: .utf8) as NSData? {
+//                    results?.first?.body = data
+//                }
+                
+                results?.first?.body = textView.string
+            }
+        } catch {
+            print("Fetch Failed: \(error)")
+        }
+
+        do {
+            try moc.save()
+        }
+        catch {
+            print("Saving Core Data Failed: \(error)")
+        }
+    }
+    
     func save() {
-        guard let currentListID = currentListID else { return }
+        if let title = listButton.titleOfSelectedItem {
+            save(listName: title)
+        }
+        
+//        guard let currentListID = currentListID else { return }
         UserDefaults.standard.set(currentListID, forKey: TmpNoteViewController.kPreviousSessionSelectedListKey)
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
-        TmpNoteViewController.saveText(note: textView.string, listID: currentListID)
+//        TmpNoteViewController.saveText(note: textView.string, listID: currentListID)
         
-        if let listsData = try? JSONEncoder().encode(lists) {
-            UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
-        }
+//        if let listsData = try? JSONEncoder().encode(lists) {
+//            UserDefaults.standard.set(listsData, forKey: TmpNoteViewController.kListsKey)
+//        }
         
         saveSubstitutions()
         
@@ -380,8 +492,34 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
                 encodedLines.append(arch)
             }
         }
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: encodedLines)
         
-        UserDefaults.standard.set(encodedLines, forKey: DrawingScene.saveKey)
+//        UserDefaults.standard.set(encodedLines, forKey: DrawingScene.saveKey)
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Sketch")
+        
+        do {
+            let results = try moc.fetch(fetchRequest) as? [Sketch]
+            if results?.count != 0 { // Atleast one was returned
+                results?.first?.body = encodedData
+            }
+            else {
+                let sketchEntity = NSEntityDescription.entity(forEntityName: "Sketch", in: moc)
+                
+                let newSketch = NSManagedObject(entity: sketchEntity! , insertInto: moc) as! Sketch
+                newSketch.body = encodedData
+            }
+        } catch {
+            print("Fetch Failed: \(error)")
+        }
+        
+        do {
+            try moc.save()
+        }
+        catch {
+            print("Saving Core Data Failed: \(error)")
+        }
+
     }
 
     
@@ -513,8 +651,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func textDidChange(_ notification: Notification) {
-        lists[currentListID ?? 0].note = textView.string
-        save()
+//        lists[currentListID ?? 0].note = textView.string
+//        save()
         contentDidChange()
     }
     
