@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let popover = NSPopover()
     var eventMonitor: EventMonitor?
     let preferences = PreferencesWindowController.freshController()
-    
+
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -106,6 +106,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
     
+    public func loadText() {
+        (popover.contentViewController as! TmpNoteViewController).loadPreviousText()
+    }
+    
     //MARK: Menu actions
     @objc func togglePopover(_ sender: Any?) {
         popover.isShown == true ? closePopover() : showPopover()
@@ -122,8 +126,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     //MARK: Popover Show/Hide
     func showPopover() {
+        
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            loadText()
             NSApplication.shared.activate(ignoringOtherApps: true)
             eventMonitor?.start()
         }

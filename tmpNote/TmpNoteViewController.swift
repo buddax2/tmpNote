@@ -8,6 +8,7 @@
 
 import Cocoa
 import SpriteKit
+import AppKit
 
 
 class TmpNoteViewController: NSViewController, NSTextViewDelegate {
@@ -25,6 +26,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
     static let kPreviousSessionTextKey = "PreviousSessionText"
     static let kPreviousSessionModeKey = "PreviousMode"
+    static let kPreviousPathKey = "PreviousFilePath"
+    static let kFilePathsKey = "FilePaths"
     
     var drawingScene: DrawingScene?
     var skview: SKView?
@@ -52,6 +55,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var textareaScrollView: NSScrollView!
     @IBOutlet weak var drawingView: NSView!
     @IBOutlet var appMenu: NSMenu!
+    @IBOutlet weak var notesListMenu: NSPopUpButton!
     @IBOutlet var textView: NSTextView! {
         didSet {
             textView.delegate = self
@@ -73,6 +77,17 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw")
             drawButton.state = currentMode == .sketch ? .on : .off
             drawButton.image = icon
+        }
+    }
+    var currentNote: Note? {
+        didSet {
+            if let oldPath = oldValue?.url {
+                TmpNoteViewController.save(text: textView.string, to: oldPath)
+            }
+            
+            if let newPath = currentNote?.url {
+                textView.string = TmpNoteViewController.loadText(from: newPath)
+            }
         }
     }
     
@@ -150,6 +165,21 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    @IBAction func noteDidChange(_ sender: NSPopUpButton) {
+
+//        if let cNote = currentNote {
+//            TmpNoteViewController.save(text: textView.string, to: cNote.url)
+//        }
+        
+        guard let title = sender.selectedItem?.title else { return }
+        let notes = TmpNoteViewController.loadNotesList()
+        if let note = notes.filter({ $0.name == title }).first {
+//            let text = TmpNoteViewController.loadText(from: note.url)
+//            textView.string = text
+            currentNote = note
+        }
+    }
+    
     func copyContent() {
         if drawingView.isHidden == false {
             
@@ -197,13 +227,30 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         let font = NSFont.systemFont(ofSize: size)
         textView.font = font
     }
-    
+        
     func loadPreviousText() {
         loadSubstitutions()
+                
+        notesListMenu.menu?.removeAllItems()
+        let paths = TmpNoteViewController.loadNotesList()
+        paths.forEach { [weak self] note in
+            self?.notesListMenu.menu?.addItem(withTitle: note.name, action: nil, keyEquivalent: "")
+        }
         
-        textView.string = TmpNoteViewController.loadText()
+        if paths.isEmpty {
+            self.notesListMenu.menu?.addItem(withTitle: "tmp", action: nil, keyEquivalent: "")
+        } else {
+            if let previousPath = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousPathKey) {
+                if let fileName = previousPath.fileName() {
+                    currentNote = Note(name: fileName, path: previousPath, url: URL(fileURLWithPath: previousPath))
+                    notesListMenu.selectItem(withTitle: currentNote!.name)
+                }
+            }
+        }
+        
+//        textView.string = TmpNoteViewController.loadText()
         textView.checkTextInDocument(nil)
-
+        
         loadSketch()
     }
     
@@ -213,13 +260,50 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         contentDidChange()
     }
     
+    static func loadNotesList() -> [Note] {
+        if let paths = UserDefaults.standard.array(forKey: TmpNoteViewController.kFilePathsKey) as? [String] {
+            return paths.compactMap { path in
+                if let fileName = path.fileName() {
+                    return Note(name: fileName, path: path, url: URL(fileURLWithPath: path))
+                }
+                return nil
+            }
+        }
+        
+        return [Note]()
+    }
+    
+    static func loadText(from path: URL) -> String {
+        debugPrint("Loading: " + path.absoluteString)
+
+        var text = ""
+        
+        do {
+            let savedText = try String(contentsOf: path, encoding: .utf8)
+            text = savedText
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+
+        return text
+
+    }
+    
     static func loadText() -> String {
         var text = ""
         
-        if let savedText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
-            text = savedText
+        // get URL to the the documents directory in the sandbox
+        if let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Notes") {
+            // add a filename
+            let fileUrl = URL(fileURLWithPath: "foo", relativeTo: documentsUrl).appendingPathExtension("txt")
+            do {
+                let savedText = try String(contentsOf: fileUrl, encoding: .utf8)
+                text = savedText
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
         }
-        
+
         return text
     }
     
@@ -235,14 +319,24 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     static func loadSketch() -> [SKShapeNode] {
         var lines = [SKShapeNode]()
         
-        if let encodedLines = UserDefaults.standard.value(forKey: DrawingScene.saveKey) as? [Data] {
-            for data in encodedLines {
-                if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
-                    let path = bp.cgPath
-                    let newLine = SKShapeNode(path: path)
-                    newLine.strokeColor = .textColor
-                    lines.append(newLine)
+        if let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Sketches") {
+
+            let fileUrl = URL(fileURLWithPath: "sketch", relativeTo: documentsUrl).appendingPathExtension("txt")
+
+            do {
+                let data = try Data(contentsOf: fileUrl)
+                if let encodedLines = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Data] {
+                    for data in encodedLines {
+                        if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
+                            let path = bp.cgPath
+                            let newLine = SKShapeNode(path: path)
+                            newLine.strokeColor = .textColor
+                            lines.append(newLine)
+                        }
+                    }
                 }
+            } catch {
+                debugPrint(error.localizedDescription)
             }
         }
         
@@ -256,8 +350,34 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
     }
     
+    static func save(text: String, to path: URL) {
+        debugPrint("Saving to: " + path.absoluteString)
+        
+        do {
+            try text.write(to: path, atomically: true, encoding: .utf8)
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+    }
+    
     func save() {
-        UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        if let cNote = currentNote {
+            TmpNoteViewController.save(text: textView.string, to: cNote.url)
+            
+            UserDefaults.standard.set(cNote.path, forKey: TmpNoteViewController.kPreviousPathKey)
+        }
+        
+//        // get URL to the the documents directory in the sandbox
+//        if let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Notes") {
+//            // add a filename
+//            let fileUrl = URL(fileURLWithPath: "foo", relativeTo: documentsUrl).appendingPathExtension("txt")
+//            // write to it
+//            do {
+//                try textView.string.write(to: fileUrl, atomically: true, encoding: .utf8)
+//            } catch {
+//                debugPrint(error.localizedDescription)
+//            }
+//        }
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
         
         saveSubstitutions()
@@ -301,7 +421,17 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             }
         }
         
-        UserDefaults.standard.set(encodedLines, forKey: DrawingScene.saveKey)
+        if let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Sketches") {
+            // add a filename
+            let fileUrl = URL(fileURLWithPath: "sketch", relativeTo: documentsUrl).appendingPathExtension("txt")
+            // write to it
+            do {
+                let data = NSKeyedArchiver.archivedData(withRootObject: encodedLines)
+                try data.write(to: fileUrl)
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
 
     
@@ -484,5 +614,18 @@ extension TmpNoteViewController: PreferencesDelegate {
         
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.toggleMenuIcon(fill: textView.string.isEmpty == false)
+    }
+}
+
+extension String {
+    
+    func fileName() -> String? {
+        let url = URL(fileURLWithPath: self)
+        
+        let fileNameWithExtension = url.lastPathComponent
+        let fileExtension = url.pathExtension
+        let fileName = fileNameWithExtension.replacingOccurrences(of: "." + fileExtension, with: "")
+        
+        return fileName
     }
 }
