@@ -164,6 +164,7 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
     @IBOutlet var arrayController: NSArrayController!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var pathControl: NSPathControl!
+    var bookmarks = [URL: Data]()
     
     @objc dynamic var fileNames = [Note]()
     
@@ -184,6 +185,7 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
         
         let notes = TmpNoteViewController.loadNotesList()
         fileNames.append(contentsOf: notes)
+        bookmarks = TmpNoteViewController.loadBookmarks()
     }
 
     override func viewDidDisappear() {
@@ -216,11 +218,65 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
                         let fileName = fileNameWithExtension.replacingOccurrences(of: "." + fileExtension, with: "")
                         let note = Note(name: fileName, path: fileURL.path, url: fileURL)
                         self?.fileNames.append(note)
+                        
+                        self?.storeBookmark(url: fileURL)
+                        self?.saveBookmarks()
+
                     }
                 }
             }
         }
     }
+    
+    func saveBookmarks()
+    {
+        let url = TmpNoteViewController.bookmarkURL()
+        do
+        {
+            if #available(OSX 10.13, *) {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: bookmarks, requiringSecureCoding: false)
+                try data.write(to: url)
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+        catch
+        {
+            print("Couldn't save bookmarks")
+        }
+    }
+
+    func storeBookmark(url: URL)
+    {
+        do
+        {
+            let data = try url.bookmarkData(options: NSURL.BookmarkCreationOptions.withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
+            bookmarks[url] = data
+        }
+        catch
+        {
+            Swift.print ("Error storing bookmarks")
+        }
+
+    }
+
+    func allowFolder(completion: @escaping (URL?) -> Void)
+    {
+        let openPanel = NSOpenPanel()
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseFiles = true
+        openPanel.begin
+            { [weak self] (result) -> Void in
+                if result == .OK
+                {
+                    let url = openPanel.url
+                    self?.storeBookmark(url: url!)
+                    self?.saveBookmarks()
+                    completion(url)
+                }
+        }
+    }
+
     
     func exportHistory() {
         
@@ -244,10 +300,15 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
                             //Just create empty file
                             do {
                                 try "".write(to: fileURL, atomically: true, encoding: .utf8)
+                                self?.storeBookmark(url: fileURL)
                             } catch {
                                 debugPrint(error.localizedDescription)
                             }
                         }
+                        else {
+                            self?.storeBookmark(url: fileURL)
+                        }
+                        self?.saveBookmarks()
                     }
                 }
             }
@@ -307,6 +368,7 @@ class ListsPreferencesViewController: NSViewController, NSTableViewDelegate {
         UserDefaults.standard.set(paths, forKey: TmpNoteViewController.kFilePathsKey)
         UserDefaults.standard.synchronize()
         (NSApplication.shared.delegate as? AppDelegate)?.loadText()
+        ((NSApplication.shared.delegate as? AppDelegate)?.popover.contentViewController as? TmpNoteViewController)?.loadPreviousText()
     }
 }
 

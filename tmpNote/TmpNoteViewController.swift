@@ -86,7 +86,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             }
             
             if let newPath = currentNote?.url {
-                textView.string = TmpNoteViewController.loadText(from: newPath)
+                textView.string = (try? TmpNoteViewController.loadText(from: newPath)) ?? ""
             }
         }
     }
@@ -230,6 +230,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         
     func loadPreviousText() {
         loadSubstitutions()
+        bookmarks = TmpNoteViewController.loadBookmarks()
                 
         notesListMenu.menu?.removeAllItems()
         let paths = TmpNoteViewController.loadNotesList()
@@ -273,20 +274,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         return [Note]()
     }
     
-    static func loadText(from path: URL) -> String {
+    static func loadText(from path: URL) throws -> String {
         debugPrint("Loading: " + path.absoluteString)
 
         var text = ""
         
-        do {
-            let savedText = try String(contentsOf: path, encoding: .utf8)
-            text = savedText
-        } catch {
-            debugPrint(error.localizedDescription)
-        }
-
-        return text
-
+        return try String(contentsOf: path, encoding: .utf8)
     }
     
     static func loadText() -> String {
@@ -571,6 +564,79 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         let isTextContent = textView.string.isEmpty == false
         let isSketchContent = lines.count > 0
         appDelegate.toggleMenuIcon(fill: (isTextContent || isSketchContent))
+    }
+
+    var bookmarks = [URL: Data]()
+
+    static func fileExists(_ url: URL) -> Bool
+    {
+        var isDir = ObjCBool(false)
+        let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir)
+
+        return exists
+    }
+
+    static func bookmarkURL() -> URL
+    {
+        let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        let appSupportURL = urls[urls.count - 1]
+        let url = appSupportURL.appendingPathComponent("Bookmarks.dict")
+        return url
+    }
+
+    static func loadBookmarks() -> [URL: Data]
+    {
+
+        let url = TmpNoteViewController.bookmarkURL()
+        if TmpNoteViewController.fileExists(url)
+        {
+            do
+            {
+                let fileData = try Data(contentsOf: url)
+                if let fileBookmarks = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(fileData) as! [URL: Data]?
+                {
+//                    bookmarks = fileBookmarks
+                    for bookmark in fileBookmarks
+                    {
+                        TmpNoteViewController.restoreBookmark(bookmark)
+                    }
+                    
+                    return fileBookmarks
+                }
+            }
+            catch
+            {
+                print ("Couldn't load bookmarks")
+            }
+
+        }
+        
+        return [URL: Data]()
+    }
+
+    static func restoreBookmark(_ bookmark: (key: URL, value: Data))
+    {
+        let restoredUrl: URL?
+        var isStale = false
+
+        Swift.print ("Restoring \(bookmark.key)")
+        do
+        {
+            restoredUrl = try URL.init(resolvingBookmarkData: bookmark.value, options: NSURL.BookmarkResolutionOptions.withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale)
+        }
+        catch
+        {
+            Swift.print ("Error restoring bookmarks")
+            restoredUrl = nil
+        }
+
+        if let url = restoredUrl
+        {
+            if !url.startAccessingSecurityScopedResource()
+            {
+                Swift.print ("Couldn't access: \(url.path)")
+            }
+        }
     }
 }
 
