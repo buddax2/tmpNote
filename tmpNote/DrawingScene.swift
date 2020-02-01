@@ -10,8 +10,6 @@ import SpriteKit
 
 class DrawingScene: SKScene {
     
-    static let saveKey = "PreviousSessionSketch"
-    
     var firstPoint: CGPoint?
     weak var mainController: TmpNoteViewController!
     var lineNode = SKShapeNode()

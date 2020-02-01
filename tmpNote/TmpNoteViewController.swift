@@ -23,7 +23,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         return kFontSizes[4]
     }
 
-    static let kPreviousSessionTextKey = "PreviousSessionText"
     static let kPreviousSessionModeKey = "PreviousMode"
     
     var drawingScene: DrawingScene?
@@ -55,8 +54,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet var textView: NSTextView! {
         didSet {
             textView.delegate = self
-            setupTextView()
-            loadPreviousText()
+            DispatchQueue.main.async { [weak self] in
+                self?.setupTextView()
+                self?.loadPreviousText()
+            }
         }
     }
     @IBOutlet weak var lockButton: NSButton! {
@@ -140,7 +141,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func toggleDrawingMode(_ sender: Any) {
-        save()
+        DispatchQueue.main.async { [weak self] in
+            self?.save()
+        }
         
         switch currentMode {
             case .text:
@@ -212,17 +215,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         
         contentDidChange()
     }
-    
-    static func loadText() -> String {
-        var text = ""
         
-        if let savedText = UserDefaults.standard.string(forKey: TmpNoteViewController.kPreviousSessionTextKey)  {
-            text = savedText
-        }
-        
-        return text
-    }
-    
     func loadSubstitutions() {
         textView.isAutomaticDashSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartDashes") != nil ? UserDefaults.standard.bool(forKey: "SmartDashes") : true
         textView.isAutomaticSpellingCorrectionEnabled = UserDefaults.standard.object(forKey: "SmartSpelling") != nil ? UserDefaults.standard.bool(forKey: "SmartSpelling") : true
@@ -230,23 +223,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textView.isAutomaticDataDetectionEnabled = UserDefaults.standard.object(forKey: "SmartDataDetection") != nil ? UserDefaults.standard.bool(forKey: "SmartDataDetection") : true
         textView.isAutomaticQuoteSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartQuotes") != nil ? UserDefaults.standard.bool(forKey: "SmartQuotes") : true
         textView.isAutomaticLinkDetectionEnabled = UserDefaults.standard.object(forKey: "SmartLinks") != nil ? UserDefaults.standard.bool(forKey: "SmartLinks") : true
-    }
-
-    static func loadSketch() -> [SKShapeNode] {
-        var lines = [SKShapeNode]()
-        
-        if let encodedLines = UserDefaults.standard.value(forKey: DrawingScene.saveKey) as? [Data] {
-            for data in encodedLines {
-                if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
-                    let path = bp.cgPath
-                    let newLine = SKShapeNode(path: path)
-                    newLine.strokeColor = .textColor
-                    lines.append(newLine)
-                }
-            }
-        }
-        
-        return lines
     }
 
     @IBAction func lockAction(_ sender: Any) {
@@ -257,7 +233,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func save() {
-        UserDefaults.standard.set(textView.string, forKey: TmpNoteViewController.kPreviousSessionTextKey)
+        TmpNoteViewController.saveText(note: textView.string)
+
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
         
         saveSubstitutions()
@@ -282,26 +259,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func saveSketch() {
-        let paths:[CGPath] = lines.compactMap { $0.path }
-        
-        var encodedLines = [Data]()
-        for path in paths {
-            let bp = NSBezierPath()
-            
-            let points:[CGPoint] = path.getPathElementsPoints()
-            if points.count > 0 {
-                
-                bp.move(to: points.first!)
-                for i in 1..<points.count {
-                    bp.line(to: points[i])
-                }
-                
-                let arch = NSKeyedArchiver.archivedData(withRootObject: bp)
-                encodedLines.append(arch)
-            }
-        }
-        
-        UserDefaults.standard.set(encodedLines, forKey: DrawingScene.saveKey)
+        TmpNoteViewController.saveSketch(lines: lines)
     }
 
     
@@ -484,5 +442,143 @@ extension TmpNoteViewController: PreferencesDelegate {
         
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.toggleMenuIcon(fill: textView.string.isEmpty == false)
+    }
+}
+
+//MARK: Storage
+extension TmpNoteViewController {
+    
+    static func localFileURL(name: String, extensionStr: String) -> URL? {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths.first?.appendingPathComponent(name).appendingPathExtension(extensionStr)
+    }
+
+    static func remoteFileURL(name: String, extensionStr: String) -> URL? {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        return appDelegate.containerUrl?.appendingPathComponent(name).appendingPathExtension(extensionStr)
+    }
+    
+    static var defaultTextFileURL: URL? {
+        let fileName = "defaultContainer"
+        let fileExtension = "txt"
+        
+        if let url = TmpNoteViewController.remoteFileURL(name: fileName, extensionStr: fileExtension) {
+            return url
+        }
+        
+        return TmpNoteViewController.localFileURL(name: fileName, extensionStr: fileExtension)
+    }
+
+    static var defaultSketchFileURL: URL? {
+        let fileName = "defaultSketch"
+        let fileExtension = "tmpSketch"
+        
+        if let url = TmpNoteViewController.remoteFileURL(name: fileName, extensionStr: fileExtension) {
+            return url
+        }
+        
+        return TmpNoteViewController.localFileURL(name: fileName, extensionStr: fileExtension)
+    }
+    
+    static func saveText(note: String) {
+        if let url = defaultTextFileURL {
+            try? note.write(to: url, atomically: true, encoding: .utf8)
+        }
+    }
+    
+    static func loadText() -> String {
+        var text = ""
+
+        if let url = defaultTextFileURL, let txt = try? String(contentsOf: url) {
+            text = txt
+        }
+        
+        return text
+    }
+    
+    static func saveSketch(lines: [SKShapeNode]) {
+        let paths:[CGPath] = lines.compactMap { $0.path }
+
+        var encodedLines = [Data]()
+        for path in paths {
+            let bp = NSBezierPath()
+            
+            let points:[CGPoint] = path.getPathElementsPoints()
+            if points.count > 0 {
+                
+                bp.move(to: points.first!)
+                for i in 1..<points.count {
+                    bp.line(to: points[i])
+                }
+                
+                let arch = NSKeyedArchiver.archivedData(withRootObject: bp)
+                encodedLines.append(arch)
+            }
+        }
+
+        if let url = TmpNoteViewController.defaultSketchFileURL {
+            NSKeyedArchiver.archiveRootObject(encodedLines, toFile: url.path)
+        }
+    }
+
+    static func loadSketch() -> [SKShapeNode] {
+        var lines = [SKShapeNode]()
+
+        if let url = TmpNoteViewController.defaultSketchFileURL {
+            if let encodedLines = NSKeyedUnarchiver.unarchiveObject(withFile: url.path) as? [Data] {
+                for data in encodedLines {
+                    if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
+                        let path = bp.cgPath
+                        let newLine = SKShapeNode(path: path)
+                        newLine.strokeColor = .textColor
+                        lines.append(newLine)
+                    }
+                }
+            }
+        }
+
+        return lines
+    }
+
+}
+
+//MARK: Storage Migration
+extension TmpNoteViewController {
+    
+    static private func migrateText() {
+        let textUserDefaultsKey = "PreviousSessionText"
+        
+        if let prevText = UserDefaults.standard.string(forKey: textUserDefaultsKey) {
+            TmpNoteViewController.saveText(note: prevText)
+
+            //Nulify old text storage
+            UserDefaults.standard.setValue(nil, forKey: textUserDefaultsKey)
+        }
+    }
+    
+    static private func migrateSketch() {
+        let sketchUserDefaultsKey = "PreviousSessionSketch"
+        
+        if let encodedLines = UserDefaults.standard.value(forKey: sketchUserDefaultsKey) as? [Data] {
+            var lines = [SKShapeNode]()
+            for data in encodedLines {
+                if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
+                    let path = bp.cgPath
+                    let newLine = SKShapeNode(path: path)
+                    newLine.strokeColor = .textColor
+                    lines.append(newLine)
+                }
+            }
+            
+            TmpNoteViewController.saveSketch(lines: lines)
+
+            //Nulify old sketch storage
+            UserDefaults.standard.setValue(nil, forKey: sketchUserDefaultsKey)
+        }
+    }
+    
+    static public func migrate() {
+        migrateText()
+        migrateSketch()
     }
 }
