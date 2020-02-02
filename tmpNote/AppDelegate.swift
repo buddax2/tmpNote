@@ -72,9 +72,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         DispatchQueue.main.async { [weak self] in
-            let savedText = TmpNoteViewController.loadText()
-            let savedSketch = TmpNoteViewController.loadSketch()
-            self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
+            TmpNoteViewController.loadText { (savedText) in
+                TmpNoteViewController.loadSketch { (savedSketch) in
+                    self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
+                }
+            }
         }
     }
     

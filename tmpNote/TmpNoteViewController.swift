@@ -204,18 +204,18 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func loadPreviousText() {
         loadSubstitutions()
         
-        textView.string = TmpNoteViewController.loadText()
-        textView.checkTextInDocument(nil)
+        TmpNoteViewController.loadText { [weak self] (savedText) in
+            self?.textView.string = savedText
+            self?.textView.checkTextInDocument(nil)
+        }
 
-        loadSketch()
+        TmpNoteViewController.loadSketch() { [weak self] savedLines in
+            self?.lines = savedLines
+            self?.contentDidChange()
+            self?.drawingScene?.load()
+        }
     }
     
-    func loadSketch() {
-        lines = TmpNoteViewController.loadSketch()
-        
-        contentDidChange()
-    }
-        
     func loadSubstitutions() {
         textView.isAutomaticDashSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartDashes") != nil ? UserDefaults.standard.bool(forKey: "SmartDashes") : true
         textView.isAutomaticSpellingCorrectionEnabled = UserDefaults.standard.object(forKey: "SmartSpelling") != nil ? UserDefaults.standard.bool(forKey: "SmartSpelling") : true
@@ -233,13 +233,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func save() {
-        TmpNoteViewController.saveText(note: textView.string)
+        TmpNoteViewController.saveTextIfChanged(note: textView.string, completion: nil)
+        TmpNoteViewController.saveSketchIfChanged(lines: lines, completion: nil)
 
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
         
         saveSubstitutions()
-        
-        saveSketch()
     }
     
     func saveSubstitutions() {
@@ -257,11 +256,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(quotes, forKey: "SmartQuotes")
         UserDefaults.standard.set(links, forKey: "SmartLinks")
     }
-    
-    func saveSketch() {
-        TmpNoteViewController.saveSketch(lines: lines)
-    }
-
     
     ///Close popover if Esc key is pressed
     override func cancelOperation(_ sender: Any?) {
@@ -480,9 +474,26 @@ extension TmpNoteViewController {
         return TmpNoteViewController.localFileURL(name: fileName, extensionStr: fileExtension)
     }
     
-    static func saveText(note: String) {
+    static func saveTextIfChanged(note: String, completion: ((Bool)->Void)?) {
+        var result = false
+        
+        defer {
+            completion?(result)
+        }
+
+        // Check if text has been changed
+        let savedText = loadText()
+        if note == savedText {
+            return
+        }
+        
         if let url = defaultTextFileURL {
-            try? note.write(to: url, atomically: true, encoding: .utf8)
+            do {
+                try note.write(to: url, atomically: true, encoding: .utf8)
+                result = true
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
         }
     }
     
@@ -496,9 +507,25 @@ extension TmpNoteViewController {
         return text
     }
     
-    static func saveSketch(lines: [SKShapeNode]) {
+    static func loadText(completion: (String)->Void) {
+        let savedText = loadText()
+        completion(savedText)
+    }
+    
+    static func saveSketchIfChanged(lines: [SKShapeNode], completion: ((Bool)->Void)?) {
+        var result = false
+        
+        defer {
+            completion?(result)
+        }
+        
         let paths:[CGPath] = lines.compactMap { $0.path }
 
+        let savedPaths = loadSketch().compactMap { $0.path }
+        if paths == savedPaths {
+            return
+        }
+        
         var encodedLines = [Data]()
         for path in paths {
             let bp = NSBezierPath()
@@ -517,11 +544,11 @@ extension TmpNoteViewController {
         }
 
         if let url = TmpNoteViewController.defaultSketchFileURL {
-            NSKeyedArchiver.archiveRootObject(encodedLines, toFile: url.path)
+            result = NSKeyedArchiver.archiveRootObject(encodedLines, toFile: url.path)
         }
     }
 
-    static func loadSketch() -> [SKShapeNode] {
+    static private  func loadSketch() -> [SKShapeNode] {
         var lines = [SKShapeNode]()
 
         if let url = TmpNoteViewController.defaultSketchFileURL {
@@ -539,7 +566,10 @@ extension TmpNoteViewController {
 
         return lines
     }
-
+    static func loadSketch(completion: ([SKShapeNode])->Void) {
+        let lines = loadSketch()
+        completion(lines)
+    }
 }
 
 //MARK: Storage Migration
@@ -549,10 +579,12 @@ extension TmpNoteViewController {
         let textUserDefaultsKey = "PreviousSessionText"
         
         if let prevText = UserDefaults.standard.string(forKey: textUserDefaultsKey) {
-            TmpNoteViewController.saveText(note: prevText)
-
-            //Nulify old text storage
-            UserDefaults.standard.setValue(nil, forKey: textUserDefaultsKey)
+            TmpNoteViewController.saveTextIfChanged(note: prevText) { (saved) in
+                if saved == true {
+                    //Nulify old text storage
+                    UserDefaults.standard.setValue(nil, forKey: textUserDefaultsKey)
+                }
+            }
         }
     }
     
@@ -570,10 +602,12 @@ extension TmpNoteViewController {
                 }
             }
             
-            TmpNoteViewController.saveSketch(lines: lines)
-
-            //Nulify old sketch storage
-            UserDefaults.standard.setValue(nil, forKey: sketchUserDefaultsKey)
+            TmpNoteViewController.saveSketchIfChanged(lines: lines) { (saved) in
+                if saved == true {
+                    //Nulify old sketch storage
+                    UserDefaults.standard.setValue(nil, forKey: sketchUserDefaultsKey)
+                }
+            }
         }
     }
     
