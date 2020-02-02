@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+
+        setDefaultSettings()
         
         TmpNoteViewController.migrate()
         
@@ -77,6 +79,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
                 }
             }
+        }
+    }
+    
+    func setDefaultSettings() {
+        let syncSettingsExists = UserDefaults.standard.value(forKey: "SynchronizeContent")
+        if syncSettingsExists == nil {
+            UserDefaults.standard.set(true, forKey: "SynchronizeContent")
         }
     }
     

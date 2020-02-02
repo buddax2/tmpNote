@@ -456,8 +456,10 @@ extension TmpNoteViewController {
         let fileName = "defaultContainer"
         let fileExtension = "txt"
         
-        if let url = TmpNoteViewController.remoteFileURL(name: fileName, extensionStr: fileExtension) {
-            return url
+        if UserDefaults.standard.bool(forKey: "SynchronizeContent") == true {
+            if let url = TmpNoteViewController.remoteFileURL(name: fileName, extensionStr: fileExtension) {
+                return url
+            }
         }
         
         return TmpNoteViewController.localFileURL(name: fileName, extensionStr: fileExtension)
@@ -467,8 +469,10 @@ extension TmpNoteViewController {
         let fileName = "defaultSketch"
         let fileExtension = "tmpSketch"
         
-        if let url = TmpNoteViewController.remoteFileURL(name: fileName, extensionStr: fileExtension) {
-            return url
+        if UserDefaults.standard.bool(forKey: "SynchronizeContent") == true {
+            if let url = TmpNoteViewController.remoteFileURL(name: fileName, extensionStr: fileExtension) {
+                return url
+            }
         }
         
         return TmpNoteViewController.localFileURL(name: fileName, extensionStr: fileExtension)
@@ -582,7 +586,7 @@ extension TmpNoteViewController {
             TmpNoteViewController.saveTextIfChanged(note: prevText) { (saved) in
                 if saved == true {
                     //Nulify old text storage
-                    UserDefaults.standard.setValue(nil, forKey: textUserDefaultsKey)
+                    UserDefaults.standard.removeObject(forKey: textUserDefaultsKey)
                 }
             }
         }
@@ -605,7 +609,7 @@ extension TmpNoteViewController {
             TmpNoteViewController.saveSketchIfChanged(lines: lines) { (saved) in
                 if saved == true {
                     //Nulify old sketch storage
-                    UserDefaults.standard.setValue(nil, forKey: sketchUserDefaultsKey)
+                    UserDefaults.standard.removeObject(forKey: sketchUserDefaultsKey)
                 }
             }
         }
