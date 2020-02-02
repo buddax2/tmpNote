@@ -1,2 +1,6 @@
 
 *.xcbkptlist
+*.xcuserstate
+Pods/Pods.xcodeproj/xcuserdata/bx2.xcuserdatad/xcschemes/xcschememanagement.plist
+tmpNote.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+tmpNote.xcodeproj/xcuserdata/bx2.xcuserdatad/xcschemes/xcschememanagement.plist
