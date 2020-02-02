@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -908,8 +908,7 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="clg-M0-VxI">
                     <items>
-                        <menuItem title="Preferences..." id="SD4-yG-jIO">
-                            <modifierMask key="keyEquivalentModifierMask"/>
+                        <menuItem title="Preferences..." keyEquivalent="," id="SD4-yG-jIO">
                             <connections>
                                 <action selector="openPreferences:" target="XfG-lQ-9wD" id="BxA-QH-77o"/>
                             </connections>
@@ -989,14 +988,14 @@
             <objects>
                 <viewController id="Gxo-NN-4O8" customClass="GeneralViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Bkm-LD-4MX">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="173"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-2e-99M">
-                                <rect key="frame" x="100" y="21" width="280" height="131"/>
+                                <rect key="frame" x="100" y="20" width="280" height="160"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
-                                        <rect key="frame" x="-2" y="115" width="232" height="18"/>
+                                        <rect key="frame" x="-2" y="144" width="232" height="18"/>
                                         <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wFd-BU-K3o">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1004,6 +1003,16 @@
                                         <connections>
                                             <action selector="toggleLaunchState:" target="Gxo-NN-4O8" id="YXA-yf-6fC"/>
                                             <binding destination="zNx-2O-HHw" name="value" keyPath="values.LaunchOnStartup" id="5ds-KR-epv"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="CNo-RY-6pR">
+                                        <rect key="frame" x="-2" y="115" width="168" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Synchronize with iCloud" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="krP-f5-J3P">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="zNx-2O-HHw" name="value" keyPath="values.SynchronizeContent" id="DaO-7n-9LM"/>
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-zh-AOf">
@@ -1047,7 +1056,7 @@
                                         <rect key="frame" x="30" y="45" width="154" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XYm-By-taG">
-                                                <rect key="frame" x="-2" y="4" width="66" height="17"/>
+                                                <rect key="frame" x="-2" y="5" width="66" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Tint color:" id="PCb-kt-zan">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1058,7 +1067,7 @@
                                                 <rect key="frame" x="75" y="-3" width="82" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Du2-WR-qTz" id="rlX-Lk-g38">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="menu"/>
+                                                    <font key="font" metaFont="system"/>
                                                     <menu key="menu" id="SvS-uw-Dm9">
                                                         <items>
                                                             <menuItem title="Default" state="on" id="Du2-WR-qTz"/>
@@ -1085,7 +1094,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="236" height="30"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zh2-rq-LlD">
-                                                <rect key="frame" x="-2" y="7" width="112" height="17"/>
+                                                <rect key="frame" x="-2" y="7" width="112" height="16"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Global show/hide:" id="Iyo-r6-3sm">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1118,8 +1127,10 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>

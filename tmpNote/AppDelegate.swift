@@ -19,9 +19,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let popover = NSPopover()
     var eventMonitor: EventMonitor?
     let preferences = PreferencesWindowController.freshController()
-    
+    var containerUrl: URL? {
+        return FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+
+        setDefaultSettings()
+        
+        TmpNoteViewController.migrate()
         
         setupLaunchOnStartup()
         killLauncher()
@@ -44,6 +50,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if majorVersion == 10 && minorVersion < 14 {
             popover.appearance = NSAppearance(named: .vibrantLight)
         }
+        
+        // check for container existence
+        if let url = self.containerUrl, !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -57,9 +73,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
         
-        let savedText = TmpNoteViewController.loadText()
-        let savedSketch = TmpNoteViewController.loadSketch()
-        toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
+        DispatchQueue.main.async { [weak self] in
+            TmpNoteViewController.loadText { (savedText) in
+                TmpNoteViewController.loadSketch { (savedSketch) in
+                    self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
+                }
+            }
+        }
+    }
+    
+    func setDefaultSettings() {
+        let syncSettingsExists = UserDefaults.standard.value(forKey: "SynchronizeContent")
+        if syncSettingsExists == nil {
+            UserDefaults.standard.set(true, forKey: "SynchronizeContent")
+        }
     }
     
     public func toggleMenuIcon(fill: Bool) {
@@ -131,7 +158,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func closePopover() {
         popover.performClose(self)
-        (popover.contentViewController as! TmpNoteViewController).save()
+        DispatchQueue.main.async { [weak self] in
+            (self?.popover.contentViewController as! TmpNoteViewController).save()
+        }
         eventMonitor?.stop()
         UserDefaults.standard.synchronize()
     }
