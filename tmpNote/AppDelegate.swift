@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         DispatchQueue.main.async { [weak self] in
-            TmpNoteViewController.loadText { (savedText) in
+            TmpNoteViewController.loadText(viewIndex: 1) { (savedText) in
                 TmpNoteViewController.loadSketch { (savedSketch) in
                     self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
                 }
@@ -153,6 +153,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             NSApplication.shared.activate(ignoringOtherApps: true)
             eventMonitor?.start()
+            DispatchQueue.main.async { [weak self] in
+                (self?.popover.contentViewController as! TmpNoteViewController).loadPreviousText()
+            }
         }
     }
     

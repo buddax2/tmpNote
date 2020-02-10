@@ -704,7 +704,7 @@
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <size key="minSize" width="345" height="204"/>
-                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                    <size key="maxSize" width="614" height="10000000"/>
                                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
                                             </subviews>
@@ -729,10 +729,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="175" y="0.0" width="171" height="30"/>
+                                                        <rect key="frame" x="231" y="0.0" width="115" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                 <subviews>
                                                                     <button toolTip="Draw" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
                                                                         <rect key="frame" x="-0.5" y="-1" width="26" height="31"/>
@@ -742,13 +742,15 @@
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="draw" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S1T-hQ-kdK">
                                                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">d</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                         </buttonCell>
                                                                         <connections>
                                                                             <action selector="toggleDrawingMode:" target="XfG-lQ-9wD" id="h8m-oD-LTK"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4r2-Vj-3vr">
-                                                                        <rect key="frame" x="28" y="3" width="55" height="24"/>
+                                                                    <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4r2-Vj-3vr">
+                                                                        <rect key="frame" x="-2" y="7" width="55" height="24"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="PB5-e5-2Y6">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -761,7 +763,7 @@
                                                                         </connections>
                                                                     </segmentedControl>
                                                                     <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="85.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="29.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
@@ -775,7 +777,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="115.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="59.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
@@ -789,7 +791,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="145.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="89.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
@@ -850,8 +852,93 @@
                                                             <action selector="clearAction:" target="XfG-lQ-9wD" id="r0L-9h-JEr"/>
                                                         </connections>
                                                     </button>
+                                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYT-mX-Kkg">
+                                                        <rect key="frame" x="37" y="0.0" width="182" height="30"/>
+                                                        <subviews>
+                                                            <button verticalHuggingPriority="750" tag="1" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huB-Q5-tUB" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="viewButton_big" imagePosition="only" state="on" inset="2" id="5Ad-nP-R0a">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent">1</string>
+                                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                </buttonCell>
+                                                                <color key="contentTintColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <action selector="changeView:" target="XfG-lQ-9wD" id="cPU-ox-tCt"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="KOM-re-Ici" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                <rect key="frame" x="38" y="0.0" width="30" height="30"/>
+                                                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="viewButton_big" imagePosition="only" inset="2" id="tyR-CC-laI">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent">2</string>
+                                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                </buttonCell>
+                                                                <color key="contentTintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <action selector="changeView:" target="XfG-lQ-9wD" id="pPA-sE-xn0"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-in-BRf" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                <rect key="frame" x="76" y="0.0" width="30" height="30"/>
+                                                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="viewButton_big" imagePosition="only" inset="2" id="WhR-9M-mX3">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent">3</string>
+                                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                </buttonCell>
+                                                                <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <action selector="changeView:" target="XfG-lQ-9wD" id="Lpu-kX-ltc"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="AgQ-ja-bnD" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                <rect key="frame" x="114" y="0.0" width="30" height="30"/>
+                                                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="viewButton_big" imagePosition="only" inset="2" id="FOL-WU-3hB">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent">4</string>
+                                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                </buttonCell>
+                                                                <color key="contentTintColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <action selector="changeView:" target="XfG-lQ-9wD" id="Y1H-n2-sg5"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Dd-9c-d3Z" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                <rect key="frame" x="152" y="0.0" width="30" height="30"/>
+                                                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="viewButton_big" imagePosition="only" inset="2" id="mXo-7P-xn0">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent">5</string>
+                                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                </buttonCell>
+                                                                <color key="contentTintColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <action selector="changeView:" target="XfG-lQ-9wD" id="4wS-VA-psJ"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <visibilityPriorities>
+                                                            <integer value="1000"/>
+                                                            <integer value="1000"/>
+                                                            <integer value="1000"/>
+                                                            <integer value="1000"/>
+                                                            <integer value="1000"/>
+                                                        </visibilityPriorities>
+                                                        <customSpacing>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                            <real value="3.4028234663852886e+38"/>
+                                                        </customSpacing>
+                                                    </stackView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="aYT-mX-Kkg" firstAttribute="centerY" secondItem="bhm-gD-XRi" secondAttribute="centerY" id="02W-EZ-VJg"/>
                                                     <constraint firstItem="bhm-gD-XRi" firstAttribute="leading" secondItem="wsD-cc-9eo" secondAttribute="leading" constant="4" id="6mx-Pd-LUb"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ja4-zF-4V6" secondAttribute="bottom" id="SgK-BV-5Vv"/>
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="top" secondItem="wsD-cc-9eo" secondAttribute="top" id="UHZ-dR-dvF"/>
@@ -859,6 +946,7 @@
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bhm-gD-XRi" secondAttribute="trailing" constant="5" id="os3-Ti-utA"/>
                                                     <constraint firstItem="bhm-gD-XRi" firstAttribute="centerY" secondItem="R0a-dX-I4o" secondAttribute="centerY" id="qF9-DJ-2sH"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ja4-zF-4V6" secondAttribute="trailing" constant="4" id="uUp-6M-tiO"/>
+                                                    <constraint firstItem="aYT-mX-Kkg" firstAttribute="leading" secondItem="bhm-gD-XRi" secondAttribute="trailing" constant="8" id="xGY-Ux-beh"/>
                                                 </constraints>
                                             </visualEffectView>
                                         </subviews>
@@ -903,6 +991,7 @@
                         <outlet property="shareButton" destination="HNl-Bn-WOw" id="Zdz-rN-pA0"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
                         <outlet property="textareaScrollView" destination="ljf-ax-0FW" id="J9Q-Bp-9ZF"/>
+                        <outlet property="viewButtons" destination="aYT-mX-Kkg" id="Ytv-RE-vv4"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1165,5 +1254,6 @@
         <image name="draw" width="374" height="252"/>
         <image name="settings" width="17" height="17"/>
         <image name="small_A" width="7" height="8"/>
+        <image name="viewButton_big" width="30" height="30"/>
     </resources>
 </document>
