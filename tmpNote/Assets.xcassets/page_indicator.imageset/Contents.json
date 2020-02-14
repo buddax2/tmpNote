@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "viewButton_big.pdf",
+      "filename" : "page_indicator.pdf",
       "scale" : "1x"
     },
     {
@@ -19,6 +19,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template"
+    "template-rendering-intent" : "original"
   }
 }

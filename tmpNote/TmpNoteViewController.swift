@@ -29,7 +29,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var skview: SKView?
     
     var tmpLockMode = false
-    var fileMonitor: DAFileMonitor?
     var currentViewIndex: Int = 1
     
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
@@ -326,6 +325,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         else {
             increaseFontSize()
         }
+    }
+    
+    @IBAction func increaseFontSize(_ sender: Any) {
+        increaseFontSize()
+    }
+    
+    @IBAction func decreaseFontSize(_ sender: Any) {
+        decreaseFontSize()
     }
     
     func decreaseFontSize() {
@@ -697,24 +704,9 @@ class DirectoryObserver {
 
 class CustomRadioButton: NSButton {
 
-    
-    var activeIndicator: NSImageView?
-    
-    required init?(coder: NSCoder) {
-        
-        super.init(coder: coder)
-
-        if let img = NSImage(named: "viewButton_small")?.tintedImage(tintColor: .white) {
-            activeIndicator = NSImageView(image: img)
-            activeIndicator?.frame = NSRect(x: (self.frame.width/2)-3, y: (self.frame.height/2)-3, width: 6, height: 6)
-            self.addSubview(activeIndicator!)
-            activeIndicator?.isHidden = true
-        }
-
-    }
-    
     func toggleState(newState: StateValue) {
         self.state = newState
-        activeIndicator?.isHidden = self.state != .on
+        let imageName = self.state == .on ? "page_indicator_active" : "page_indicator"
+        self.image = NSImage(named: imageName)
     }
 }
