@@ -704,7 +704,7 @@
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <size key="minSize" width="345" height="204"/>
-                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                    <size key="maxSize" width="614" height="10000000"/>
                                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
                                             </subviews>
@@ -729,12 +729,12 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="175" y="0.0" width="171" height="30"/>
+                                                        <rect key="frame" x="231" y="0.0" width="115" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                 <subviews>
-                                                                    <button toolTip="Draw" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
+                                                                    <button toolTip="Draw ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
                                                                         <rect key="frame" x="-0.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="uQ9-jz-Jh4"/>
@@ -742,13 +742,16 @@
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="draw" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S1T-hQ-kdK">
                                                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">d</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                         </buttonCell>
+                                                                        <accessibility description="Toggle drawing mode button"/>
                                                                         <connections>
                                                                             <action selector="toggleDrawingMode:" target="XfG-lQ-9wD" id="h8m-oD-LTK"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4r2-Vj-3vr">
-                                                                        <rect key="frame" x="28" y="3" width="55" height="24"/>
+                                                                    <segmentedControl hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4r2-Vj-3vr">
+                                                                        <rect key="frame" x="-2" y="7" width="55" height="24"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="PB5-e5-2Y6">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -760,44 +763,53 @@
                                                                             <action selector="changeFontSize:" target="XfG-lQ-9wD" id="u1D-wD-EeF"/>
                                                                         </connections>
                                                                     </segmentedControl>
-                                                                    <button toolTip="Do Not Hide on Deactivate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="85.5" y="-1" width="26" height="31"/>
+                                                                    <button toolTip="Lock on screen ⌘L" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
+                                                                        <rect key="frame" x="29.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSLockUnlockedTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oDG-nR-cXq">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">l</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                         </buttonCell>
                                                                         <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="Lock app on screen button"/>
                                                                         <connections>
                                                                             <action selector="lockAction:" target="XfG-lQ-9wD" id="7na-65-UKk"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button toolTip="Share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="115.5" y="-1" width="26" height="31"/>
+                                                                    <button toolTip="Share ⌘S" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
+                                                                        <rect key="frame" x="59.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">s</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                         </buttonCell>
                                                                         <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="Share button"/>
                                                                         <connections>
                                                                             <action selector="shareAction:" target="XfG-lQ-9wD" id="ZbB-fd-ovm"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button toolTip="Menu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="145.5" y="-1" width="26" height="31"/>
+                                                                    <button toolTip="Menu ⌘," verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
+                                                                        <rect key="frame" x="89.5" y="-1" width="26" height="31"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="settings" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1lt-4a-E1F">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">,</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                         </buttonCell>
                                                                         <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="Menu button"/>
                                                                         <connections>
                                                                             <action selector="showAppMenu:" target="XfG-lQ-9wD" id="Xio-Lv-R2C"/>
                                                                         </connections>
@@ -846,19 +858,145 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <accessibility description="Clear button"/>
                                                         <connections>
                                                             <action selector="clearAction:" target="XfG-lQ-9wD" id="r0L-9h-JEr"/>
                                                         </connections>
                                                     </button>
+                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q4R-Ce-QAE">
+                                                        <rect key="frame" x="37" y="0.0" width="186" height="30"/>
+                                                        <subviews>
+                                                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYT-mX-Kkg">
+                                                                <rect key="frame" x="23" y="3" width="140" height="24"/>
+                                                                <subviews>
+                                                                    <button toolTip="⌘1" verticalHuggingPriority="750" tag="1" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huB-Q5-tUB" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="24" id="IJd-1a-SiQ"/>
+                                                                            <constraint firstAttribute="height" constant="24" id="aom-Dd-lB5"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSStatusNone" imagePosition="only" state="on" inset="2" id="5Ad-nP-R0a">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">1</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="View 1"/>
+                                                                        <connections>
+                                                                            <action selector="changeView:" target="XfG-lQ-9wD" id="cPU-ox-tCt"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button toolTip="⌘2" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="KOM-re-Ici" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                        <rect key="frame" x="29" y="0.0" width="24" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="24" id="1Nx-kj-2M7"/>
+                                                                            <constraint firstAttribute="width" constant="24" id="7a2-oO-IS4"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSStatusNone" imagePosition="only" inset="2" id="tyR-CC-laI">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">2</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="View 2"/>
+                                                                        <connections>
+                                                                            <action selector="changeView:" target="XfG-lQ-9wD" id="pPA-sE-xn0"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button toolTip="⌘3" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-in-BRf" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                        <rect key="frame" x="58" y="0.0" width="24" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="24" id="Lwf-M8-eXr"/>
+                                                                            <constraint firstAttribute="width" constant="24" id="dTb-Zb-wbW"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSStatusNone" imagePosition="only" inset="2" id="WhR-9M-mX3">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">3</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="View 3"/>
+                                                                        <connections>
+                                                                            <action selector="changeView:" target="XfG-lQ-9wD" id="Lpu-kX-ltc"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button toolTip="⌘4" verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="AgQ-ja-bnD" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                        <rect key="frame" x="87" y="0.0" width="24" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="24" id="Tr4-TC-IYY"/>
+                                                                            <constraint firstAttribute="height" constant="24" id="cMZ-z3-5MM"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSStatusNone" imagePosition="only" inset="2" id="FOL-WU-3hB">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">4</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="View 4"/>
+                                                                        <connections>
+                                                                            <action selector="changeView:" target="XfG-lQ-9wD" id="Y1H-n2-sg5"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button toolTip="⌘5" verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Dd-9c-d3Z" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
+                                                                        <rect key="frame" x="116" y="0.0" width="24" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="24" id="KMs-RP-F4Q"/>
+                                                                            <constraint firstAttribute="width" constant="24" id="qw5-OD-DAy"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSStatusNone" imagePosition="only" inset="2" id="mXo-7P-xn0">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">5</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="View 5"/>
+                                                                        <connections>
+                                                                            <action selector="changeView:" target="XfG-lQ-9wD" id="4wS-VA-psJ"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <visibilityPriorities>
+                                                                    <integer value="1000"/>
+                                                                    <integer value="1000"/>
+                                                                    <integer value="1000"/>
+                                                                    <integer value="1000"/>
+                                                                    <integer value="1000"/>
+                                                                </visibilityPriorities>
+                                                                <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                </customSpacing>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="aYT-mX-Kkg" firstAttribute="centerY" secondItem="Q4R-Ce-QAE" secondAttribute="centerY" id="8RI-fG-2wE"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aYT-mX-Kkg" secondAttribute="trailing" id="arY-eO-lUe"/>
+                                                            <constraint firstItem="aYT-mX-Kkg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q4R-Ce-QAE" secondAttribute="leading" id="ilP-9d-Mgq"/>
+                                                            <constraint firstItem="aYT-mX-Kkg" firstAttribute="centerX" secondItem="Q4R-Ce-QAE" secondAttribute="centerX" id="u8Y-TL-bbq"/>
+                                                        </constraints>
+                                                    </customView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="aYT-mX-Kkg" firstAttribute="height" secondItem="wsD-cc-9eo" secondAttribute="height" multiplier="0.8" id="5dl-dm-6jM"/>
                                                     <constraint firstItem="bhm-gD-XRi" firstAttribute="leading" secondItem="wsD-cc-9eo" secondAttribute="leading" constant="4" id="6mx-Pd-LUb"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ja4-zF-4V6" secondAttribute="bottom" id="SgK-BV-5Vv"/>
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="top" secondItem="wsD-cc-9eo" secondAttribute="top" id="UHZ-dR-dvF"/>
+                                                    <constraint firstItem="Ja4-zF-4V6" firstAttribute="leading" secondItem="Q4R-Ce-QAE" secondAttribute="trailing" constant="8" id="UPP-8T-ldn"/>
                                                     <constraint firstAttribute="height" constant="30" id="VwY-KC-GPY"/>
+                                                    <constraint firstItem="Q4R-Ce-QAE" firstAttribute="top" secondItem="Ja4-zF-4V6" secondAttribute="top" id="k5B-ji-8GR"/>
                                                     <constraint firstItem="Ja4-zF-4V6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bhm-gD-XRi" secondAttribute="trailing" constant="5" id="os3-Ti-utA"/>
                                                     <constraint firstItem="bhm-gD-XRi" firstAttribute="centerY" secondItem="R0a-dX-I4o" secondAttribute="centerY" id="qF9-DJ-2sH"/>
+                                                    <constraint firstItem="Q4R-Ce-QAE" firstAttribute="leading" secondItem="bhm-gD-XRi" secondAttribute="trailing" constant="8" id="txM-dX-lSK"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ja4-zF-4V6" secondAttribute="trailing" constant="4" id="uUp-6M-tiO"/>
+                                                    <constraint firstItem="Q4R-Ce-QAE" firstAttribute="height" secondItem="wsD-cc-9eo" secondAttribute="height" id="w74-dj-8xV"/>
                                                 </constraints>
                                             </visualEffectView>
                                         </subviews>
@@ -903,17 +1041,30 @@
                         <outlet property="shareButton" destination="HNl-Bn-WOw" id="Zdz-rN-pA0"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
                         <outlet property="textareaScrollView" destination="ljf-ax-0FW" id="J9Q-Bp-9ZF"/>
+                        <outlet property="viewButtons" destination="aYT-mX-Kkg" id="Ytv-RE-vv4"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="clg-M0-VxI">
                     <items>
-                        <menuItem title="Preferences..." keyEquivalent="," id="SD4-yG-jIO">
+                        <menuItem title="Preferences..." id="SD4-yG-jIO">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="openPreferences:" target="XfG-lQ-9wD" id="BxA-QH-77o"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="52B-5O-Vpk"/>
+                        <menuItem title="Increase Font Size" keyEquivalent="+" id="1hx-ZS-Yc2">
+                            <connections>
+                                <action selector="increaseFontSize:" target="XfG-lQ-9wD" id="CCh-6b-EWz"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Decrease Font Size" keyEquivalent="-" id="pDh-7E-ECd">
+                            <connections>
+                                <action selector="decreaseFontSize:" target="XfG-lQ-9wD" id="phE-1V-dFw"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="wdT-FG-m2F"/>
                         <menuItem title="Quit tmpNote" keyEquivalent="q" id="YCc-f5-uaw">
                             <connections>
                                 <action selector="terminateApp:" target="XfG-lQ-9wD" id="dOl-NL-VSN"/>
@@ -1160,6 +1311,7 @@
         <image name="NSLockUnlockedTemplate" width="10" height="14"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSStatusNone" width="16" height="16"/>
         <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
         <image name="big_A" width="10" height="11"/>
         <image name="draw" width="374" height="252"/>

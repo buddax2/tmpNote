@@ -29,23 +29,32 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var skview: SKView?
     
     var tmpLockMode = false
+    var currentViewIndex: Int = 1
     
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
     @IBOutlet weak var headerView: HeaderView! {
         didSet {
             headerView.onMouseExitedClosure = { [weak self] in
                 DispatchQueue.main.async {
-                    self?.hidableHeaderView.isHidden = true
+                      NSAnimationContext.runAnimationGroup({ context in
+                          context.duration = 0.15
+                        self?.hidableHeaderView.alphaValue = 0
+                      }, completionHandler: nil)
                 }
             }
             headerView.onMouseEnteredClosure = { [weak self] in
                 DispatchQueue.main.async {
-                    self?.hidableHeaderView.isHidden = false
+                    NSAnimationContext.runAnimationGroup({ context in
+                        context.duration = 0.15
+                      self?.hidableHeaderView.alphaValue = 1
+                    }, completionHandler: nil)
                 }
             }
 
         }
     }
+
+    @IBOutlet weak var viewButtons: NSStackView!
     @IBOutlet weak var drawButton: NSButton!
     @IBOutlet weak var shareButton: NSButton!
     @IBOutlet weak var textareaScrollView: NSScrollView!
@@ -128,6 +137,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         drawingView.isHidden = false
         
         currentMode = .sketch
+        setupViewButtons()
     }
     
     func removeDrawScene() {
@@ -138,6 +148,42 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         drawingView.isHidden = true
         
         currentMode = .text
+        setupViewButtons()
+    }
+    
+    func setupViewButtons() {
+        let enabled = currentMode != .sketch
+        let selectedTag = currentViewIndex
+        
+        if let buttons = viewButtons.arrangedSubviews as? [CustomRadioButton] {
+            buttons.forEach {
+                $0.isEnabled = enabled
+                $0.toggleState(newState: $0.tag == selectedTag ? .on : .off)
+            }
+        }
+    }
+    
+    @IBAction func changeView(_ sender: NSButton) {
+        save()
+        currentViewIndex = sender.tag
+        loadPreviousText()
+        
+        setupViewButtons()
+    }
+
+    @IBAction func viewDidChange(_ sender: NSPopUpButton) {
+        guard let selectedItem = sender.selectedItem else { return }
+        
+        if selectedItem.tag == -1 {
+            DispatchQueue.main.async { [weak self] in
+                self?.save()
+            }
+            
+            createDrawScene()
+        }
+        else {
+            removeDrawScene()
+        }
     }
     
     @IBAction func toggleDrawingMode(_ sender: Any) {
@@ -201,10 +247,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textView.font = font
     }
     
+    var directoryObserver: DirectoryObserver?
+    
     func loadPreviousText() {
         loadSubstitutions()
         
-        TmpNoteViewController.loadText { [weak self] (savedText) in
+        TmpNoteViewController.loadText(viewIndex: currentViewIndex) { [weak self] (savedText) in
             self?.textView.string = savedText
             self?.textView.checkTextInDocument(nil)
         }
@@ -214,6 +262,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             self?.contentDidChange()
             self?.drawingScene?.load()
         }
+        
+        setupViewButtons()
     }
     
     func loadSubstitutions() {
@@ -233,7 +283,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func save() {
-        TmpNoteViewController.saveTextIfChanged(note: textView.string, completion: nil)
+        TmpNoteViewController.saveTextIfChanged(note: textView.string, viewIndex: currentViewIndex, completion: nil)
         TmpNoteViewController.saveSketchIfChanged(lines: lines, completion: nil)
 
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
@@ -275,6 +325,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         else {
             increaseFontSize()
         }
+    }
+    
+    @IBAction func increaseFontSize(_ sender: Any) {
+        increaseFontSize()
+    }
+    
+    @IBAction func decreaseFontSize(_ sender: Any) {
+        decreaseFontSize()
     }
     
     func decreaseFontSize() {
@@ -452,8 +510,8 @@ extension TmpNoteViewController {
         return appDelegate.containerUrl?.appendingPathComponent(name).appendingPathExtension(extensionStr)
     }
     
-    static var defaultTextFileURL: URL? {
-        let fileName = "defaultContainer"
+    static func defaultTextFileURL(viewIndex: Int) -> URL? {
+        let fileName = "defaultContainer_\(viewIndex)"
         let fileExtension = "txt"
         
         if UserDefaults.standard.bool(forKey: "SynchronizeContent") == true {
@@ -478,7 +536,7 @@ extension TmpNoteViewController {
         return TmpNoteViewController.localFileURL(name: fileName, extensionStr: fileExtension)
     }
     
-    static func saveTextIfChanged(note: String, completion: ((Bool)->Void)?) {
+    static func saveTextIfChanged(note: String, viewIndex: Int, completion: ((Bool)->Void)?) {
         var result = false
         
         defer {
@@ -486,12 +544,12 @@ extension TmpNoteViewController {
         }
 
         // Check if text has been changed
-        let savedText = loadText()
+        let savedText = loadText(viewIndex: viewIndex)
         if note == savedText {
             return
         }
         
-        if let url = defaultTextFileURL {
+        if let url = defaultTextFileURL(viewIndex: viewIndex) {
             do {
                 try note.write(to: url, atomically: true, encoding: .utf8)
                 result = true
@@ -501,18 +559,18 @@ extension TmpNoteViewController {
         }
     }
     
-    static func loadText() -> String {
+    static func loadText(viewIndex: Int) -> String {
         var text = ""
 
-        if let url = defaultTextFileURL, let txt = try? String(contentsOf: url) {
+        if let url = defaultTextFileURL(viewIndex: viewIndex), let txt = try? String(contentsOf: url) {
             text = txt
         }
         
         return text
     }
     
-    static func loadText(completion: (String)->Void) {
-        let savedText = loadText()
+    static func loadText(viewIndex: Int, completion: (String)->Void) {
+        let savedText = loadText(viewIndex: viewIndex)
         completion(savedText)
     }
     
@@ -583,7 +641,7 @@ extension TmpNoteViewController {
         let textUserDefaultsKey = "PreviousSessionText"
         
         if let prevText = UserDefaults.standard.string(forKey: textUserDefaultsKey) {
-            TmpNoteViewController.saveTextIfChanged(note: prevText) { (saved) in
+            TmpNoteViewController.saveTextIfChanged(note: prevText, viewIndex: 1) { (saved) in
                 if saved == true {
                     //Nulify old text storage
                     UserDefaults.standard.removeObject(forKey: textUserDefaultsKey)
@@ -618,5 +676,37 @@ extension TmpNoteViewController {
     static public func migrate() {
         migrateText()
         migrateSketch()
+    }
+}
+
+class DirectoryObserver {
+
+    private let fileDescriptor: CInt
+    private let source: DispatchSourceProtocol
+
+    deinit {
+
+      self.source.cancel()
+      close(fileDescriptor)
+    }
+
+    init(URL: URL, block: @escaping ()->Void) {
+
+      self.fileDescriptor = open(URL.path, O_EVTONLY)
+        self.source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: self.fileDescriptor, eventMask: .all, queue: DispatchQueue.global())
+      self.source.setEventHandler {
+          block()
+      }
+      self.source.resume()
+  }
+
+}
+
+class CustomRadioButton: NSButton {
+
+    func toggleState(newState: StateValue) {
+        self.state = newState
+        let imageName = self.state == .on ? "page_indicator_active" : "page_indicator"
+        self.image = NSImage(named: imageName)
     }
 }
