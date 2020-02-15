@@ -50,6 +50,7 @@ enum IconColor: Int {
 
 class GeneralViewController: NSViewController {
     
+    @IBOutlet weak var syncToggleButton: NSButton!
     @IBOutlet weak var colorPicker: NSPopUpButton!
     @IBOutlet weak var colorView: NSStackView!
     @IBOutlet weak var launchAtStartupCheckbox: NSButton!
@@ -69,6 +70,10 @@ class GeneralViewController: NSViewController {
             let appDelegate = NSApplication.shared.delegate as! AppDelegate
             appDelegate.togglePopover(self)
         })
+    }
+    
+    override func viewWillAppear() {
+        syncUI()
     }
     
     @IBAction func toggleDynamicIcon(_ sender: Any) {
@@ -94,6 +99,11 @@ class GeneralViewController: NSViewController {
         guard let vc = storyBoard.instantiateController(withIdentifier: identifier) as? PopoverAnimationVC else { return }
         popover.contentViewController = vc
         popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.maxX)
+    }
+    
+    func syncUI() {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        syncToggleButton.isEnabled = appDelegate.containerUrl != nil
     }
 }
 
