@@ -80,7 +80,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var lines = [SKShapeNode]()
     var currentMode: Mode = .text {
         didSet {
-            let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw")
+            let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw_empty")
             drawButton.state = currentMode == .sketch ? .on : .off
             drawButton.image = icon
         }

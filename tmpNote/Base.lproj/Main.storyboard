@@ -735,11 +735,11 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                 <subviews>
                                                                     <button toolTip="Draw ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
-                                                                        <rect key="frame" x="-0.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="uQ9-jz-Jh4"/>
                                                                         </constraints>
-                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="draw" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S1T-hQ-kdK">
+                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="draw_empty" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="S1T-hQ-kdK">
                                                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                             <string key="keyEquivalent">d</string>
@@ -764,11 +764,11 @@
                                                                         </connections>
                                                                     </segmentedControl>
                                                                     <button toolTip="Lock on screen ⌘L" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="29.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="30" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
-                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSLockUnlockedTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oDG-nR-cXq">
+                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSLockUnlockedTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="oDG-nR-cXq">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                             <string key="keyEquivalent">l</string>
@@ -781,11 +781,11 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Share ⌘S" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="59.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="60" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
-                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
+                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                             <string key="keyEquivalent">s</string>
@@ -798,11 +798,11 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu ⌘," verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="89.5" y="-1" width="26" height="31"/>
+                                                                        <rect key="frame" x="90" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
-                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="settings" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1lt-4a-E1F">
+                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="settings" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="1lt-4a-E1F">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
                                                                             <string key="keyEquivalent">,</string>
@@ -849,11 +849,11 @@
                                                         </constraints>
                                                     </customView>
                                                     <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
-                                                        <rect key="frame" x="3.5" y="3" width="26" height="23"/>
+                                                        <rect key="frame" x="4" y="-35" width="25" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="eBp-3F-idk"/>
                                                         </constraints>
-                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSTouchBarDeleteTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aHp-Qe-fZp">
+                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="clear" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aHp-Qe-fZp">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -1312,9 +1312,9 @@
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSStatusNone" width="16" height="16"/>
-        <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
         <image name="big_A" width="10" height="11"/>
-        <image name="draw" width="374" height="252"/>
+        <image name="clear" width="100" height="100"/>
+        <image name="draw_empty" width="100" height="100"/>
         <image name="settings" width="17" height="17"/>
         <image name="small_A" width="7" height="8"/>
     </resources>
