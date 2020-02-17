@@ -271,6 +271,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textView.isAutomaticDataDetectionEnabled = UserDefaults.standard.object(forKey: "SmartDataDetection") != nil ? UserDefaults.standard.bool(forKey: "SmartDataDetection") : true
         textView.isAutomaticQuoteSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartQuotes") != nil ? UserDefaults.standard.bool(forKey: "SmartQuotes") : true
         textView.isAutomaticLinkDetectionEnabled = UserDefaults.standard.object(forKey: "SmartLinks") != nil ? UserDefaults.standard.bool(forKey: "SmartLinks") : true
+        textView.isGrammarCheckingEnabled = UserDefaults.standard.object(forKey: "GrammarChecking") != nil ? UserDefaults.standard.bool(forKey: "GrammarChecking") : true
+        textView.isContinuousSpellCheckingEnabled = UserDefaults.standard.object(forKey: "SpellChecking") != nil ? UserDefaults.standard.bool(forKey: "SpellChecking") : true
     }
 
     @IBAction func lockAction(_ sender: Any) {
@@ -296,6 +298,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         let dataDetection = textView.isAutomaticDataDetectionEnabled
         let quotes = textView.isAutomaticQuoteSubstitutionEnabled
         let links = textView.isAutomaticLinkDetectionEnabled
+        let grammar = textView.isGrammarCheckingEnabled
+        let spellChecking = textView.isContinuousSpellCheckingEnabled
+
         
         UserDefaults.standard.set(dashes, forKey: "SmartDashes")
         UserDefaults.standard.set(spelling, forKey: "SmartSpelling")
@@ -303,6 +308,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(dataDetection, forKey: "SmartDataDetection")
         UserDefaults.standard.set(quotes, forKey: "SmartQuotes")
         UserDefaults.standard.set(links, forKey: "SmartLinks")
+        UserDefaults.standard.set(grammar, forKey: "GrammarChecking")
+        UserDefaults.standard.set(spellChecking, forKey: "SpellChecking")
     }
     
     ///Close popover if Esc key is pressed
