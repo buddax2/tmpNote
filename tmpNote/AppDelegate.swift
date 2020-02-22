@@ -154,7 +154,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             NSApplication.shared.activate(ignoringOtherApps: true)
             eventMonitor?.start()
             DispatchQueue.main.async { [weak self] in
-                (self?.popover.contentViewController as! TmpNoteViewController).loadPreviousText()
+                (self?.popover.contentViewController as! TmpNoteViewController).load()
             }
         }
     }

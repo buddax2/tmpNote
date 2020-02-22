@@ -8,7 +8,7 @@
 
 import Cocoa
 import SpriteKit
-
+import Carbon.HIToolbox
 
 class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
@@ -60,12 +60,13 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var textareaScrollView: NSScrollView!
     @IBOutlet weak var drawingView: NSView!
     @IBOutlet var appMenu: NSMenu!
-    @IBOutlet var textView: NSTextView! {
+    @IBOutlet var textView: NoteTextView! {
         didSet {
             textView.delegate = self
+            textView.storageDataSource = self
             DispatchQueue.main.async { [weak self] in
                 self?.setupTextView()
-                self?.loadPreviousText()
+                self?.load()
             }
         }
     }
@@ -73,7 +74,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         didSet {
             let isLocked = UserDefaults.standard.bool(forKey: "locked")
             lockButton.image = isLocked ? NSImage(named: "NSLockLockedTemplate") : NSImage(named: "NSLockUnlockedTemplate")
-            lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
+            lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate ⌘L" : "Hide on Deactivate ⌘L"
         }
     }
     
@@ -166,7 +167,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBAction func changeView(_ sender: NSButton) {
         save()
         currentViewIndex = sender.tag
-        loadPreviousText()
+        load()
         
         setupViewButtons()
     }
@@ -247,23 +248,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textView.font = font
     }
     
-    func loadPreviousText() {
-        loadSubstitutions()
-        
-        TmpNoteViewController.loadText(viewIndex: currentViewIndex) { [weak self] (savedText) in
-            self?.textView.string = savedText
-            self?.textView.checkTextInDocument(nil)
-        }
-
-        TmpNoteViewController.loadSketch() { [weak self] savedLines in
-            self?.lines = savedLines
-            self?.contentDidChange()
-            self?.drawingScene?.load()
-        }
-        
-        setupViewButtons()
-    }
-    
     func loadSubstitutions() {
         textView.isAutomaticDashSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartDashes") != nil ? UserDefaults.standard.bool(forKey: "SmartDashes") : true
         textView.isAutomaticSpellingCorrectionEnabled = UserDefaults.standard.object(forKey: "SmartSpelling") != nil ? UserDefaults.standard.bool(forKey: "SmartSpelling") : true
@@ -280,15 +264,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(!isLocked, forKey: "locked")
         lockButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
-    }
-    
-    func save() {
-        TmpNoteViewController.saveTextIfChanged(note: textView.string, viewIndex: currentViewIndex, completion: nil)
-        TmpNoteViewController.saveSketchIfChanged(lines: lines, completion: nil)
-
-        UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
-        
-        saveSubstitutions()
     }
     
     func saveSubstitutions() {
@@ -690,5 +665,53 @@ class CustomRadioButton: NSButton {
         self.state = newState
         let imageName = self.state == .on ? "page_indicator_active" : "page_indicator"
         self.image = NSImage(named: imageName)
+    }
+}
+
+class NoteTextView: NSTextView {
+    
+    var storageDataSource: StorageDataSource?
+
+    override func keyDown(with event: NSEvent) {
+
+        // ⌘S - Save content
+        if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
+            storageDataSource?.save()
+        }
+
+        super.keyDown(with: event)
+    }
+}
+
+protocol StorageDataSource {
+    func save()
+    func load()
+}
+
+extension TmpNoteViewController: StorageDataSource {
+    func load() {
+        loadSubstitutions()
+        
+        TmpNoteViewController.loadText(viewIndex: currentViewIndex) { [weak self] (savedText) in
+            self?.textView.string = savedText
+            self?.textView.checkTextInDocument(nil)
+        }
+
+        TmpNoteViewController.loadSketch() { [weak self] savedLines in
+            self?.lines = savedLines
+            self?.contentDidChange()
+            self?.drawingScene?.load()
+        }
+        
+        setupViewButtons()
+    }
+    
+    func save() {
+        TmpNoteViewController.saveTextIfChanged(note: textView.string, viewIndex: currentViewIndex, completion: nil)
+        TmpNoteViewController.saveSketchIfChanged(lines: lines, completion: nil)
+
+        UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
+        
+        saveSubstitutions()
     }
 }

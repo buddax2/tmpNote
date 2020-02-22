@@ -698,7 +698,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="234"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR">
+                                                <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR" customClass="NoteTextView" customModule="tmpNote" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -788,7 +788,7 @@
                                                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vVT-Uz-JXb">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="system"/>
-                                                                            <string key="keyEquivalent">s</string>
+                                                                            <string key="keyEquivalent">S</string>
                                                                             <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                         </buttonCell>
                                                                         <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>

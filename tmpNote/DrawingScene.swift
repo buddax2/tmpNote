@@ -7,13 +7,16 @@
 //
 
 import SpriteKit
+import Carbon.HIToolbox
 
 class DrawingScene: SKScene {
     
+    var storage: StorageDataSource?
     var firstPoint: CGPoint?
     weak var mainController: TmpNoteViewController!
     var lineNode = SKShapeNode()
     var pathToDraw: CGMutablePath?
+    var redoArray = [SKShapeNode]()
     
     var contentDidChangeCallback: (()->Void)?
     
@@ -63,5 +66,45 @@ class DrawingScene: SKScene {
             line.removeFromParent()
             addChild(line)
         }
+    }
+    
+    func undo() {
+        if let lastLine = mainController.lines.last {
+            redoArray.append(lastLine)
+            lastLine.removeFromParent()
+            mainController.lines.removeLast()
+        }
+    }
+    
+    func redo() {
+        if let lastLine = redoArray.last {
+            addChild(lastLine)
+            mainController.lines.append(lastLine)
+            redoArray.removeLast()
+        }
+    }
+}
+
+extension DrawingScene {
+    
+    override func keyDown(with event: NSEvent) {
+        
+        // ⌘S - Save content
+        if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
+            storage?.save()
+        }
+
+        if event.keyCode == kVK_ANSI_Z {
+            // ⌘⇧Z - Redo
+            if event.modifierFlags.contains(.command) && event.modifierFlags.contains(.shift) {
+                redo()
+            }
+            // ⌘Z - Undo
+            else if event.modifierFlags.contains(.command) {
+                undo()
+            }
+        }
+
+        super.keyDown(with: event)
     }
 }
