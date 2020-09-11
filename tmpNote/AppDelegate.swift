@@ -203,3 +203,7 @@ extension NSImage {
         return tinted
     }
 }
+
+extension Notification.Name {
+    static let AppleInterfaceThemeChangedNotification = Notification.Name("AppleInterfaceThemeChangedNotification")
+}

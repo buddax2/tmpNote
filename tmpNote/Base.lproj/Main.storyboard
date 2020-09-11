@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -686,24 +686,24 @@
             <objects>
                 <viewController storyboardIdentifier="TmpNoteViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="TmpNoteViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
+                        <rect key="frame" x="0.0" y="0.0" width="442" height="234"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
+                                <rect key="frame" x="0.0" y="0.0" width="442" height="234"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-ax-0FW">
-                                        <rect key="frame" x="5" y="0.0" width="345" height="234"/>
+                                        <rect key="frame" x="5" y="0.0" width="437" height="234"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Yc-ce-VzK">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="234"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="437" height="234"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR" customClass="NoteTextView" customModule="tmpNote" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="204"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="437" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="minSize" width="345" height="204"/>
+                                                    <size key="minSize" width="437" height="204"/>
                                                     <size key="maxSize" width="614" height="10000000"/>
                                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
@@ -715,26 +715,58 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V1X-0u-SVp">
-                                            <rect key="frame" x="329" y="30" width="16" height="204"/>
+                                            <rect key="frame" x="421" y="30" width="16" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
                                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LAu-TD-YOn">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="234"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="442" height="234"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="uDa-7L-bqj" customClass="HeaderView" customModule="tmpNote" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="350" height="30"/>
+                                        <rect key="frame" x="0.0" y="204" width="442" height="30"/>
                                         <subviews>
                                             <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="wsD-cc-9eo" userLabel="Header View">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="442" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="231" y="0.0" width="115" height="30"/>
+                                                        <rect key="frame" x="245" y="0.0" width="193" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="193" height="30"/>
                                                                 <subviews>
-                                                                    <button toolTip="Draw ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
+                                                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-IA-CAq">
+                                                                        <rect key="frame" x="-0.5" y="3" width="104" height="23"/>
+                                                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="capsule" trackingMode="selectOne" id="6d2-zU-5SW">
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <segments>
+                                                                                <segment image="NSTouchBarTextBoxTemplate" width="32"/>
+                                                                                <segment image="NSQuickLookTemplate" width="32" selected="YES" tag="1"/>
+                                                                                <segment image="draw_empty" width="32">
+                                                                                    <nil key="label"/>
+                                                                                </segment>
+                                                                            </segments>
+                                                                        </segmentedCell>
+                                                                        <connections>
+                                                                            <action selector="contentModeDidChange:" target="XfG-lQ-9wD" id="PtQ-xN-8zz"/>
+                                                                        </connections>
+                                                                    </segmentedControl>
+                                                                    <button hidden="YES" toolTip="Markdown ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wce-P4-Nnm">
+                                                                        <rect key="frame" x="0.0" y="18" width="25" height="12"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="25" id="YGc-m6-3Qp"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSQuickLookTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="33r-K0-nYg">
+                                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">d</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <accessibility description="Toggle drawing mode button"/>
+                                                                        <connections>
+                                                                            <action selector="toggleMarkdownMode:" target="XfG-lQ-9wD" id="tg1-vW-wSi"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button hidden="YES" toolTip="Draw ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tmv-FH-vBs">
                                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="uQ9-jz-Jh4"/>
@@ -764,7 +796,7 @@
                                                                         </connections>
                                                                     </segmentedControl>
                                                                     <button toolTip="Lock on screen ⌘L" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="30" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="108" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
@@ -781,7 +813,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Share ⌘S" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="60" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="138" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
@@ -798,7 +830,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu ⌘," verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="90" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="168" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
@@ -831,8 +863,12 @@
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
+                                                                    <integer value="1000"/>
+                                                                    <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
@@ -864,10 +900,10 @@
                                                         </connections>
                                                     </button>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q4R-Ce-QAE">
-                                                        <rect key="frame" x="37" y="0.0" width="186" height="30"/>
+                                                        <rect key="frame" x="37" y="0.0" width="200" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYT-mX-Kkg">
-                                                                <rect key="frame" x="23" y="3" width="140" height="24"/>
+                                                                <rect key="frame" x="30" y="3" width="140" height="24"/>
                                                                 <subviews>
                                                                     <button toolTip="⌘1" verticalHuggingPriority="750" tag="1" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huB-Q5-tUB" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -1033,11 +1069,14 @@
                     </view>
                     <connections>
                         <outlet property="appMenu" destination="clg-M0-VxI" id="oUi-gL-cdL"/>
+                        <outlet property="clearButton" destination="bhm-gD-XRi" id="sH4-60-Ohg"/>
+                        <outlet property="contentModeButton" destination="VF3-IA-CAq" id="cZ2-4C-4zz"/>
                         <outlet property="drawButton" destination="Tmv-FH-vBs" id="zNE-9n-yTr"/>
                         <outlet property="drawingView" destination="LAu-TD-YOn" id="Pds-vg-Xkl"/>
                         <outlet property="headerView" destination="uDa-7L-bqj" id="HFX-V0-Wqw"/>
                         <outlet property="hidableHeaderView" destination="wsD-cc-9eo" id="28Z-Wq-Jcx"/>
                         <outlet property="lockButton" destination="mVr-9C-HmB" id="lXr-gA-42a"/>
+                        <outlet property="markdownButton" destination="Wce-P4-Nnm" id="4PD-yX-lWO"/>
                         <outlet property="shareButton" destination="HNl-Bn-WOw" id="Zdz-rN-pA0"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
                         <outlet property="textareaScrollView" destination="ljf-ax-0FW" id="J9Q-Bp-9ZF"/>
@@ -1311,8 +1350,10 @@
     <resources>
         <image name="NSLockUnlockedTemplate" width="10" height="14"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="NSQuickLookTemplate" width="19" height="12"/>
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSStatusNone" width="16" height="16"/>
+        <image name="NSTouchBarTextBoxTemplate" width="20" height="30"/>
         <image name="big_A" width="10" height="11"/>
         <image name="clear" width="100" height="100"/>
         <image name="draw_empty" width="100" height="100"/>

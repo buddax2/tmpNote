@@ -9,11 +9,13 @@
 import Cocoa
 import SpriteKit
 import Carbon.HIToolbox
+import MarkdownKit
 
 class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
     enum Mode: Int {
         case text
+        case markdown
         case sketch
     }
     
@@ -55,11 +57,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
 
     @IBOutlet weak var viewButtons: NSStackView!
-    @IBOutlet weak var drawButton: NSButton!
     @IBOutlet weak var shareButton: NSButton!
     @IBOutlet weak var textareaScrollView: NSScrollView!
     @IBOutlet weak var drawingView: NSView!
+    @IBOutlet weak var contentModeButton: NSSegmentedControl!
     @IBOutlet var appMenu: NSMenu!
+    @IBOutlet weak var clearButton: NSButton!
     @IBOutlet var textView: NoteTextView! {
         didSet {
             textView.delegate = self
@@ -82,30 +85,71 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var currentMode: Mode = .text {
         didSet {
             let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw_empty")
-            drawButton.state = currentMode == .sketch ? .on : .off
-            drawButton.image = icon
+            contentModeButton.setImage(icon, forSegment: Mode.sketch.rawValue)
+            syncUI()
         }
+    }
+    
+    func syncUI() {
+        switch currentMode {
+        case .text:
+            removeDrawScene()
+            showPlainText()
+        case .markdown:
+            removeDrawScene()
+            showMarkdown()
+        case .sketch:
+            createDrawScene()
+        }
+        
+        clearButton.isEnabled = currentMode == .text || currentMode == .sketch
+    }
+    
+    var currentText: String = ""
+    
+    var markdownParser: MarkdownParser?
+    
+    func markdownParser(color: NSColor = .black) -> MarkdownParser {
+        let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        
+        let parser = MarkdownParser(font: NSFont.systemFont(ofSize: CGFloat(fontSize)), color: color)
+        parser.quote.color = .gray
+        parser.list.indicator = "•"
+
+        return parser
+    }
+    
+    func showMarkdown() {
+        textView.isEditable = false
+        
+        let markdown = currentText
+        guard let attributedString = markdownParser?.parse(markdown) else { return }
+        
+        textView.textStorage?.setAttributedString(attributedString)
+    }
+    
+    func showPlainText() {
+        textView.string = currentText
+        textView.isEditable = true
+        setupTextView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
 
+        listenToInterfaceChangesNotification()
+        
         shareButton.sendAction(on: .leftMouseDown)
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        
+        setupMarkdownTextView()
         let prevModeInt = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionModeKey)
+        contentModeButton.setSelected(true, forSegment: prevModeInt)
         if let mode = Mode(rawValue: prevModeInt) {
-            switch mode {
-            case .text:
-                textView?.window?.makeKeyAndOrderFront(self)
-                removeDrawScene()
-            case .sketch:
-                createDrawScene()
-            }
+            currentMode = mode
         }
     }
     
@@ -117,6 +161,40 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         drawingView.isHidden = true
 
         super.viewWillDisappear()
+    }
+    
+    var appearanceChangeObservation: NSKeyValueObservation?
+    
+    func listenToInterfaceChangesNotification() {
+        appearanceChangeObservation = self.view.observe(\.effectiveAppearance) { [weak self] _, _  in
+            self?.setupMarkdownTextView()
+        }
+    }
+    
+    var currentAppearanceIsLight: Bool {
+        let isLight: Bool
+        if #available(OSX 10.14, *) {
+            isLight = view.effectiveAppearance.name != .darkAqua && view.effectiveAppearance.name != .vibrantDark
+        } else {
+            // Fallback on earlier versions
+            isLight = NSAppearance.current.name != .vibrantDark
+        }
+
+        return isLight
+    }
+    
+    func setupMarkdownTextView() {
+        let color: NSColor = currentAppearanceIsLight ? .black : .white
+
+        markdownParser = markdownParser(color: color)
+    }
+
+    
+    @IBAction func contentModeDidChange(_ sender: NSSegmentedControl) {
+        guard let contentMode = Mode(rawValue: sender.selectedSegment) else { return }
+        if currentMode != contentMode {
+            currentMode = contentMode
+        }
     }
     
     func createDrawScene() {
@@ -137,7 +215,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textareaScrollView.isHidden = true
         drawingView.isHidden = false
         
-        currentMode = .sketch
         setupViewButtons()
     }
     
@@ -148,7 +225,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textareaScrollView.isHidden = false
         drawingView.isHidden = true
         
-        currentMode = .text
         setupViewButtons()
     }
     
@@ -184,19 +260,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
         else {
             removeDrawScene()
-        }
-    }
-    
-    @IBAction func toggleDrawingMode(_ sender: Any) {
-        DispatchQueue.main.async { [weak self] in
-            self?.save()
-        }
-        
-        switch currentMode {
-            case .text:
-                createDrawScene()
-            case .sketch:
-                removeDrawScene()
         }
     }
     
@@ -360,7 +423,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         
         var message: (String, String)
         switch currentMode {
-            case .text:
+            case .text, .markdown:
                 message = ("Delete the note?", "Are you sure you would like to delete the note?")
             case .sketch:
                 message = ("Delete the drawing?", "Are you sure you would like to delete the drawing?")
@@ -377,7 +440,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
                 
                 if let mode = self?.currentMode {
                     switch mode {
-                        case .text:
+                        case .text, .markdown:
                             if let textLength = strongSelf.textView.textStorage?.length {
                                 strongSelf.textView.insertText("", replacementRange: NSRange(location: 0, length: textLength))
                                 self?.save()
@@ -428,7 +491,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     
     func contentDidChange() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        let isTextContent = textView.string.isEmpty == false
+        if currentMode == .text {
+            currentText = textView.string
+        }
+        let isTextContent = currentText.isEmpty == false
         let isSketchContent = lines.count > 0
         appDelegate.toggleMenuIcon(fill: (isTextContent || isSketchContent))
     }
@@ -694,7 +760,9 @@ extension TmpNoteViewController: StorageDataSource {
         
         TmpNoteViewController.loadText(viewIndex: currentViewIndex) { [weak self] (savedText) in
             self?.textView.string = savedText
+            self?.currentText = savedText
             self?.textView.checkTextInDocument(nil)
+            self?.syncUI()
         }
 
         TmpNoteViewController.loadSketch() { [weak self] savedLines in
@@ -707,7 +775,7 @@ extension TmpNoteViewController: StorageDataSource {
     }
     
     func save() {
-        TmpNoteViewController.saveTextIfChanged(note: textView.string, viewIndex: currentViewIndex, completion: nil)
+        TmpNoteViewController.saveTextIfChanged(note: currentText, viewIndex: currentViewIndex, completion: nil)
         TmpNoteViewController.saveSketchIfChanged(lines: lines, completion: nil)
 
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
