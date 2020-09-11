@@ -105,7 +105,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         clearButton.isEnabled = currentMode == .text || currentMode == .sketch
     }
     
-    var currentText: String = ""
+    var rawText: String = ""
     
     var markdownParser: MarkdownParser?
     
@@ -122,14 +122,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func showMarkdown() {
         textView.isEditable = false
         
-        let markdown = currentText
+        let markdown = rawText
         guard let attributedString = markdownParser?.parse(markdown) else { return }
         
         textView.textStorage?.setAttributedString(attributedString)
     }
     
     func showPlainText() {
-        textView.string = currentText
+        textView.string = rawText
         textView.isEditable = true
         setupTextView()
     }
@@ -459,13 +459,15 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBAction func shareAction(_ sender: NSButton) {
         var sharedItems = [Any]()
         
-        if drawingView.isHidden == false {
-            if let image = imageFromScene() {
-                sharedItems = [image]
-            }
-        }
-        else {
-            sharedItems = [textView.string];
+        switch currentMode {
+            case .text:
+                sharedItems = [textView.string];
+            case .sketch:
+                if let image = imageFromScene() {
+                    sharedItems = [image]
+                }
+            case .markdown:
+                sharedItems = [textView.attributedString()];
         }
         
         let servicePicker = NSSharingServicePicker(items: sharedItems)
@@ -492,9 +494,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func contentDidChange() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         if currentMode == .text {
-            currentText = textView.string
+            rawText = textView.string
         }
-        let isTextContent = currentText.isEmpty == false
+        let isTextContent = rawText.isEmpty == false
         let isSketchContent = lines.count > 0
         appDelegate.toggleMenuIcon(fill: (isTextContent || isSketchContent))
     }
@@ -760,7 +762,7 @@ extension TmpNoteViewController: StorageDataSource {
         
         TmpNoteViewController.loadText(viewIndex: currentViewIndex) { [weak self] (savedText) in
             self?.textView.string = savedText
-            self?.currentText = savedText
+            self?.rawText = savedText
             self?.textView.checkTextInDocument(nil)
             self?.syncUI()
         }
@@ -775,7 +777,7 @@ extension TmpNoteViewController: StorageDataSource {
     }
     
     func save() {
-        TmpNoteViewController.saveTextIfChanged(note: currentText, viewIndex: currentViewIndex, completion: nil)
+        TmpNoteViewController.saveTextIfChanged(note: rawText, viewIndex: currentViewIndex, completion: nil)
         TmpNoteViewController.saveSketchIfChanged(lines: lines, completion: nil)
 
         UserDefaults.standard.set(currentMode.rawValue, forKey: TmpNoteViewController.kPreviousSessionModeKey)
