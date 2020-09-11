@@ -309,6 +309,11 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     fileprivate func setFontSize(size: CGFloat) {
         let font = NSFont.systemFont(ofSize: size)
         textView.font = font
+        
+        if currentMode == .markdown {
+            markdownParser = markdownParser(color: currentAppearanceIsLight ? .black : .white)
+            showMarkdown()
+        }
     }
     
     func loadSubstitutions() {
