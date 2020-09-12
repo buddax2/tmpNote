@@ -2,8 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="16002"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -701,6 +703,66 @@
                                                 <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR" customClass="NoteTextView" customModule="tmpNote" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="437" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <touchBar key="touchBar" id="a0W-BE-WZq">
+                                                        <touchBarItems>
+                                                            <touchBarItem id="ieP-CP-M66">
+                                                                <viewController key="viewController" id="BTe-xb-wo0">
+                                                                    <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XVT-Ip-as6">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="238" height="30"/>
+                                                                        <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="739-Gb-jAz">
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <segments>
+                                                                                <segment label="1" width="44"/>
+                                                                                <segment label="2" width="44" selected="YES" tag="1"/>
+                                                                                <segment label="3" width="44"/>
+                                                                                <segment label="4" width="44"/>
+                                                                                <segment label="5" width="44"/>
+                                                                            </segments>
+                                                                        </segmentedCell>
+                                                                        <connections>
+                                                                            <action selector="pageTouchBarDidChange:" target="XfG-lQ-9wD" id="8Xy-CE-qVl"/>
+                                                                        </connections>
+                                                                    </segmentedControl>
+                                                                </viewController>
+                                                            </touchBarItem>
+                                                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFixedSpaceLarge" id="ygW-6h-ato"/>
+                                                            <touchBarItem id="hjO-fk-4f6">
+                                                                <viewController key="viewController" id="kDU-SN-OYz">
+                                                                    <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CB1-8A-VJV">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="146" height="30"/>
+                                                                        <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="WWM-Ue-Maq">
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <segments>
+                                                                                <segment image="NSTouchBarTextBoxTemplate" width="44"/>
+                                                                                <segment image="NSQuickLookTemplate" width="44" selected="YES" tag="1"/>
+                                                                                <segment image="draw_empty" width="44">
+                                                                                    <nil key="label"/>
+                                                                                </segment>
+                                                                            </segments>
+                                                                        </segmentedCell>
+                                                                        <connections>
+                                                                            <action selector="contentModeDidChange:" target="XfG-lQ-9wD" id="O3Q-Z1-5bH"/>
+                                                                        </connections>
+                                                                    </segmentedControl>
+                                                                </viewController>
+                                                            </touchBarItem>
+                                                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFixedSpaceLarge" id="ixU-Tr-qWb"/>
+                                                            <touchBarItem id="0dL-lI-Kiw">
+                                                                <viewController key="viewController" id="yb0-iT-nFf">
+                                                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NJz-8v-xbL">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSLockLockedTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ajx-Et-TXs">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <action selector="lockAction:" target="XfG-lQ-9wD" id="9Aj-Yz-mfI"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </viewController>
+                                                            </touchBarItem>
+                                                        </touchBarItems>
+                                                    </touchBar>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <size key="minSize" width="437" height="204"/>
@@ -1018,10 +1080,13 @@
                         <outlet property="appMenu" destination="clg-M0-VxI" id="oUi-gL-cdL"/>
                         <outlet property="clearButton" destination="bhm-gD-XRi" id="sH4-60-Ohg"/>
                         <outlet property="contentModeButton" destination="VF3-IA-CAq" id="cZ2-4C-4zz"/>
+                        <outlet property="contentTouchBarButton" destination="CB1-8A-VJV" id="oiW-ud-tcg"/>
                         <outlet property="drawingView" destination="LAu-TD-YOn" id="Pds-vg-Xkl"/>
                         <outlet property="headerView" destination="uDa-7L-bqj" id="HFX-V0-Wqw"/>
                         <outlet property="hidableHeaderView" destination="wsD-cc-9eo" id="28Z-Wq-Jcx"/>
                         <outlet property="lockButton" destination="mVr-9C-HmB" id="lXr-gA-42a"/>
+                        <outlet property="lockTouchBarButton" destination="NJz-8v-xbL" id="VHN-wc-3WG"/>
+                        <outlet property="pageTouchBarButton" destination="XVT-Ip-as6" id="rt3-Fy-Jbs"/>
                         <outlet property="shareButton" destination="HNl-Bn-WOw" id="Zdz-rN-pA0"/>
                         <outlet property="textView" destination="xUV-fZ-zVR" id="hLx-PI-Wuz"/>
                         <outlet property="textareaScrollView" destination="ljf-ax-0FW" id="J9Q-Bp-9ZF"/>
@@ -1293,6 +1358,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSLockLockedTemplate" width="10" height="14"/>
         <image name="NSLockUnlockedTemplate" width="10" height="14"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSQuickLookTemplate" width="19" height="12"/>

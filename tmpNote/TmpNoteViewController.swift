@@ -56,6 +56,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
 
+    @IBOutlet weak var pageTouchBarButton: NSSegmentedControl!
+    @IBOutlet weak var contentTouchBarButton: NSSegmentedControl!
+    @IBOutlet weak var lockTouchBarButton: NSButton!
     @IBOutlet weak var viewButtons: NSStackView!
     @IBOutlet weak var shareButton: NSButton!
     @IBOutlet weak var textareaScrollView: NSScrollView!
@@ -91,6 +94,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func syncUI() {
+        contentTouchBarButton.selectedSegment = currentMode.rawValue
+        contentModeButton.selectedSegment = currentMode.rawValue
+        
         switch currentMode {
         case .text:
             removeDrawScene()
@@ -197,6 +203,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    @IBAction func pageTouchBarDidChange(_ sender: NSSegmentedControl) {
+        save()
+        currentViewIndex = sender.selectedSegment + 1
+        load()
+        
+        setupViewButtons()
+    }
+    
     func createDrawScene() {
         skview = SKView(frame: drawingView.bounds)
         drawingView.addSubview(skview!)
@@ -231,6 +245,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func setupViewButtons() {
         let enabled = currentMode != .sketch
         let selectedTag = currentViewIndex
+        
+        pageTouchBarButton.selectedSegment = selectedTag - 1
         
         if let buttons = viewButtons.arrangedSubviews as? [CustomRadioButton] {
             buttons.forEach {
@@ -332,6 +348,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         UserDefaults.standard.set(!isLocked, forKey: "locked")
         lockButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
+        lockTouchBarButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
     }
     
     func saveSubstitutions() {
