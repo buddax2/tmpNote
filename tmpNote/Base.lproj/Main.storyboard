@@ -804,9 +804,9 @@
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="capsule" trackingMode="selectOne" id="6d2-zU-5SW">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
-                                                                                <segment image="NSTouchBarTextBoxTemplate" width="32"/>
-                                                                                <segment image="NSQuickLookTemplate" width="32" selected="YES" tag="1"/>
-                                                                                <segment image="draw_empty" width="32">
+                                                                                <segment toolTip="Plain text mode" image="NSTouchBarTextBoxTemplate" width="32" selected="YES"/>
+                                                                                <segment toolTip="Markdown preview mode" image="NSQuickLookTemplate" width="32" tag="1"/>
+                                                                                <segment toolTip="Drawing mode" image="draw_empty" width="32" tag="2">
                                                                                     <nil key="label"/>
                                                                                 </segment>
                                                                             </segments>
@@ -896,7 +896,7 @@
                                                             <constraint firstItem="R0a-dX-I4o" firstAttribute="top" secondItem="Ja4-zF-4V6" secondAttribute="top" id="laZ-uW-YvJ"/>
                                                         </constraints>
                                                     </customView>
-                                                    <button toolTip="Clear" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
+                                                    <button toolTip="Clear current workspace" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhm-gD-XRi" userLabel="Clear">
                                                         <rect key="frame" x="4" y="-35" width="25" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="eBp-3F-idk"/>
