@@ -9,7 +9,7 @@
 import Cocoa
 import SpriteKit
 import Carbon.HIToolbox
-import MarkdownKit
+import SwiftyMarkdown
 
 class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
@@ -113,25 +113,45 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     
     var rawText: String = ""
     
-    var markdownParser: MarkdownParser?
-    
-    func markdownParser(color: NSColor = .black) -> MarkdownParser {
-        let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
-        
-        let parser = MarkdownParser(font: NSFont.systemFont(ofSize: CGFloat(fontSize)), color: color)
-        parser.quote.color = .gray
-        parser.list.indicator = "•"
-
-        return parser
-    }
-    
     func showMarkdown() {
         textView.isEditable = false
         
-        let markdown = rawText
-        guard let attributedString = markdownParser?.parse(markdown) else { return }
+        let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
+        let color: NSColor = currentAppearanceIsLight ? .black : .white
         
-        textView.textStorage?.setAttributedString(attributedString)
+        let md = markdown(text: rawText, baseFontSize: CGFloat(fontSize), color: color)
+        textView.textStorage?.setAttributedString(md.attributedString())
+    }
+    
+    func markdown(text: String, baseFontSize: CGFloat, color: NSColor) -> SwiftyMarkdown {
+        let md = SwiftyMarkdown(string: rawText)
+        md.setFontColorForAllStyles(with: color)
+        md.setFontSizeForAllStyles(with: baseFontSize)
+        
+        md.h1.fontSize = baseFontSize + 10
+        md.h1.fontStyle = .bold
+
+        md.h2.fontSize = baseFontSize + 8
+        md.h2.fontStyle = .bold
+
+        md.h3.fontSize = baseFontSize + 4
+        md.h3.fontStyle = .bold
+
+        md.h4.fontSize = baseFontSize
+        md.h4.fontStyle = .bold
+
+        md.h5.fontSize = baseFontSize - 2
+        md.h5.fontStyle = .bold
+
+        md.h6.fontSize = baseFontSize - 4
+        md.h6.fontStyle = .bold
+
+        md.blockquotes.fontSize = baseFontSize - 2
+        md.blockquotes.color = .gray
+
+        md.code.color = .red
+
+        return md
     }
     
     func showPlainText() {
@@ -151,7 +171,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        setupMarkdownTextView()
         let prevModeInt = UserDefaults.standard.integer(forKey: TmpNoteViewController.kPreviousSessionModeKey)
         contentModeButton.setSelected(true, forSegment: prevModeInt)
         if let mode = Mode(rawValue: prevModeInt) {
@@ -173,7 +192,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     
     func listenToInterfaceChangesNotification() {
         appearanceChangeObservation = self.view.observe(\.effectiveAppearance) { [weak self] _, _  in
-            self?.setupMarkdownTextView()
+            guard let strongSelf = self else { return }
+            if strongSelf.currentMode == .markdown {
+                strongSelf.showMarkdown()
+            }
         }
     }
     
@@ -188,14 +210,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
         return isLight
     }
-    
-    func setupMarkdownTextView() {
-        let color: NSColor = currentAppearanceIsLight ? .black : .white
 
-        markdownParser = markdownParser(color: color)
-    }
-
-    
     @IBAction func contentModeDidChange(_ sender: NSSegmentedControl) {
         guard let contentMode = Mode(rawValue: sender.selectedSegment) else { return }
         if currentMode != contentMode {
@@ -327,7 +342,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textView.font = font
         
         if currentMode == .markdown {
-            markdownParser = markdownParser(color: currentAppearanceIsLight ? .black : .white)
             showMarkdown()
         }
     }

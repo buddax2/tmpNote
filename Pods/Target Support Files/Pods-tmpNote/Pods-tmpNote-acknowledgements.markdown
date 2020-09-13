@@ -27,11 +27,11 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-## MarkdownKit
+## SwiftyMarkdown
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Ivan Bruel
+Copyright (c) 2016 Simon Fairbairn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

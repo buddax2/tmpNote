@@ -48,7 +48,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			<key>FooterText</key>
 			<string>The MIT License (MIT)
 
-Copyright (c) 2016 Ivan Bruel
+Copyright (c) 2016 Simon Fairbairn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,7 +71,7 @@ SOFTWARE.
 			<key>License</key>
 			<string>MIT</string>
 			<key>Title</key>
-			<string>MarkdownKit</string>
+			<string>SwiftyMarkdown</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

@@ -7,87 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		073A950E3A2DA40A5F646181A4AC8F31 /* cs.lproj in Resources */ = {isa = PBXBuildFile; fileRef = AFDF74A779EE1DF2741852F6DBC8E527 /* cs.lproj */; };
-		079FCEC9F018FBF4D78ADA34A8DADE9F /* MASShortcutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88456CC74F834C72E0C99BA5E65AC909 /* MASShortcutView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		073A950E3A2DA40A5F646181A4AC8F31 /* cs.lproj in Resources */ = {isa = PBXBuildFile; fileRef = C5A54E326F50C18FB1474500C06E0006 /* cs.lproj */; };
+		079FCEC9F018FBF4D78ADA34A8DADE9F /* MASShortcutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B66EF95B3ACC772499B4761A6CFFEAC /* MASShortcutView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13C1CE0E8AA9ECEC60B23849CF09A4E0 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9A917933F4C0AF5EB9A8D8A67875A7 /* Carbon.framework */; };
-		160C4CD01A1356AC372FEB207345D0CB /* MarkdownLinkElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65A4814B862EAC0799EA7264C260935 /* MarkdownLinkElement.swift */; };
-		1E3432A082724C95EC7F9D5E7A4876CF /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EBEED3BE5D0A463A401239F1A5255405 /* de.lproj */; };
-		202B91ED564337EB1069906BE930BBD3 /* MarkdownCommonElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B908EE4E7B5277EC82E84F45FA55F6C4 /* MarkdownCommonElement.swift */; };
-		20CB8E693C18040413F852F75571E4F7 /* MarkdownEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D755ECD3774696E70B280CD1299B8571 /* MarkdownEscaping.swift */; };
-		20CE6E21B9E9799C41AB080CBA792E12 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 066D85FEC383663E6FD01277D8F4B6DA /* es.lproj */; };
-		240977CD99A58CFB2DD46991D6966AB7 /* MASShortcutView+Bindings.m in Sources */ = {isa = PBXBuildFile; fileRef = EADE7E5BC213B7B1A4DD7538B6B41541 /* MASShortcutView+Bindings.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		270535476D5C759A67E492613E7D9B4F /* MarkdownLevelElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66079B192CB7B217E6EC918F7703A150 /* MarkdownLevelElement.swift */; };
-		2C4D633420F1C6D2823D63BEA63DE2DD /* zh-Hant.lproj in Resources */ = {isa = PBXBuildFile; fileRef = ECAF75A9225E0CEB9C03F88A70CFCDF7 /* zh-Hant.lproj */; };
-		32B5805B36510663B595B677CB60E43D /* MASShortcutView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB50F1DA1B8BD8E3378BB3FCCC3F90F0 /* MASShortcutView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		331DECC7E0F2280ADC483C1621C58D42 /* MASShortcutValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F06861BA8BBB446343147A4EF47EFF3 /* MASShortcutValidator.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		13F8A0C3C6939963ACEC69D4FEEF18A8 /* CharacterRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F8B62B14A6718569AF2F05276AB2E /* CharacterRule.swift */; };
+		1E3432A082724C95EC7F9D5E7A4876CF /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 881E75025871981EC87A23CE5A87A1A6 /* de.lproj */; };
+		20CE6E21B9E9799C41AB080CBA792E12 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1B6D2C8D7731E4A2EC688CD978C3F282 /* es.lproj */; };
+		23848D00B8C15C140C162CA5ED2DB972 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC42DF0B83C1D952803230D09BBBCB3 /* Token.swift */; };
+		240977CD99A58CFB2DD46991D6966AB7 /* MASShortcutView+Bindings.m in Sources */ = {isa = PBXBuildFile; fileRef = FBED7C57E265B2037DA2A0E527E6A7AD /* MASShortcutView+Bindings.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2C4D633420F1C6D2823D63BEA63DE2DD /* zh-Hant.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C8348880B329649B993905D97898CB7 /* zh-Hant.lproj */; };
+		32B5805B36510663B595B677CB60E43D /* MASShortcutView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9F52787EE66A692FD7DFD825EE9AEE /* MASShortcutView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		331DECC7E0F2280ADC483C1621C58D42 /* MASShortcutValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2147992B98E5401162BCF37F51CEBE12 /* MASShortcutValidator.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		374C03041AE988F0C5CE2DFB025C0CB1 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6973AD1A03179E1F5911AF624627E608 /* AppKit.framework */; };
-		37F88B8D98D6D77B0AF91344038CADA7 /* MASHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE21528A0129EAC8A3BECD4F542C12F /* MASHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3DC856F27B0A845C83480415D8AFAF6C /* pl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0858C330D2F6098425550198DEB55319 /* pl.lproj */; };
-		4598D587D87AD4A55BD1C785751735D7 /* Shortcut.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B5F239F71A03134B990374500178DB /* Shortcut.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		46077DCFF1DD84F154B8465CC32B950E /* MASKeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B500BAA281101086E63A368959EA5512 /* MASKeyCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A8B29520D4239463C771EDE33A94532 /* MASHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBFA7F30632048BDAD9D0B4A0663613 /* MASHotKey.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		4D1B40C4FF8156576EE1FC111339133D /* MarkdownHeader+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D720CCB270445C7589BCB726D98663 /* MarkdownHeader+AppKit.swift */; };
-		4EC19B49863CA191567DF87B28420C2E /* ko.lproj in Resources */ = {isa = PBXBuildFile; fileRef = D16196DEAA459BA7EB8CCBF5AC6D355E /* ko.lproj */; };
+		37F88B8D98D6D77B0AF91344038CADA7 /* MASHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A61E53742BD4E04272473CAEB5270F36 /* MASHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3DC856F27B0A845C83480415D8AFAF6C /* pl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = A1083A46DF7522AA6AD5E31AAEC57D93 /* pl.lproj */; };
+		44ACC6521094A92DBCC45677CE6995C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF44E1C5E5E5A2FBD665B0C6874EBB2 /* Cocoa.framework */; };
+		4598D587D87AD4A55BD1C785751735D7 /* Shortcut.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D4B1DBED2DF5779E8281C808B61A50 /* Shortcut.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46077DCFF1DD84F154B8465CC32B950E /* MASKeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = DC37670ED5412E0615948F7D448BFF96 /* MASKeyCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4998884F404326FE10DD88264198D555 /* Pods-tmpNote-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E63A8C1098BBAB07047036BC8DF918 /* Pods-tmpNote-dummy.m */; };
+		4A8B29520D4239463C771EDE33A94532 /* MASHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2914404F351676B65ED689C346D34334 /* MASHotKey.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4EC19B49863CA191567DF87B28420C2E /* ko.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 349DFB1F876221BBBB8B02A7F2D47C8D /* ko.lproj */; };
 		511F5B5244A4CB3ED46CEFE35E521627 /* MASShortcut.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 230F8208BE63C052A548A7D41A1158B2 /* MASShortcut.bundle */; };
-		5501EB99BECAD30C647587302C1F91E9 /* MASShortcutValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = C7AE6B7162FC8BEC4A700F442EECCF9A /* MASShortcutValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		60DC75A2CECC0670BACF732A24196624 /* MASShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = AB628549A73FC10D0FF79AC36D4A91C2 /* MASShortcut.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		68814C18786D713EA924588B8F155F11 /* MASShortcut.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC9199D72D1C22F921D40F903EE972 /* MASShortcut.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		68FC222621783EB49EDCC15386E04FE1 /* MarkdownCode+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EB5CA0E0814421B5037BADAD5598D /* MarkdownCode+AppKit.swift */; };
-		84537A8AFB34C13C81AE5862637E8887 /* MarkdownQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36D6C67F477940A55D367548C75E5A6 /* MarkdownQuote.swift */; };
-		857D4991D1B596546A1ABDE472D69600 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6973AD1A03179E1F5911AF624627E608 /* AppKit.framework */; };
-		88363CF350B06CFCEA32447F10FEE6FE /* MarkdownItalic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6140E14995884C7156E5F52AE8B8E /* MarkdownItalic.swift */; };
-		896EE381E8562C9D113DDDA91F6A9006 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 5248B8F2C1BC7B6B2D0C103D0F9B221E /* nl.lproj */; };
-		8A0F925BA3B50909CF4BF04456A98A0D /* MASShortcutBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7379A73EA0FCCBE82B13F58A6277C5 /* MASShortcutBinder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		8AA92D8795856ACEFE142C8CF0A4E7B9 /* MASShortcutMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1334E876521063DB61715E1FA5CD3768 /* MASShortcutMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8D9EAB0321629B8C19918CD53D878DF4 /* MarkdownUnescaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60069DEB8CE742DC75DE0766E599C48 /* MarkdownUnescaping.swift */; };
-		9203512B4FE159C6E9A56AF05344DFAD /* MarkdownLink+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D0E4B6689A1E14FC95559D96D48FC /* MarkdownLink+AppKit.swift */; };
-		956BEEEB6A4F24C7D3160B531E206B9C /* Pods-tmpNote-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E63A8C1098BBAB07047036BC8DF918 /* Pods-tmpNote-dummy.m */; };
-		96D88F742E87CCF2CD5D6485D0534F15 /* MarkdownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7436E2B6FF0C2B5455538F416D408D9E /* MarkdownStyle.swift */; };
-		99E275FDF68055FD51D1401BDDC6C37E /* MarkdownLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3009CF1D74CF17F61F6882DD28FB32 /* MarkdownLink.swift */; };
-		9B852FD22DAFBAEED16E9A2BDE18A11A /* MASShortcutBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 823D3145D98ADC0EB10805A446271EE4 /* MASShortcutBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5501EB99BECAD30C647587302C1F91E9 /* MASShortcutValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = DA98C13D522A6578224D3E89CD3E8D48 /* MASShortcutValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60DC75A2CECC0670BACF732A24196624 /* MASShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = E387D0AEE4A11933ACB1ECD0222AA0BC /* MASShortcut.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		68814C18786D713EA924588B8F155F11 /* MASShortcut.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BB6A4969946DBA54B890E70A7089AC3 /* MASShortcut.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		825AD9A948ECEA7DAB7EAF29A61B9215 /* SwiftyLineProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC805ADEDF9BF1F25C9AA483BBF7B0A /* SwiftyLineProcessor.swift */; };
+		896EE381E8562C9D113DDDA91F6A9006 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4E85B64AA25541F99E88EDC8387249B3 /* nl.lproj */; };
+		8A0F925BA3B50909CF4BF04456A98A0D /* MASShortcutBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D856371ED4EEF792AAC8EB40B56F25 /* MASShortcutBinder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8AA92D8795856ACEFE142C8CF0A4E7B9 /* MASShortcutMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = A623697F91C530130A1451A87E4AB79C /* MASShortcutMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B852FD22DAFBAEED16E9A2BDE18A11A /* MASShortcutBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F9DE7327242FDD2B8DCD0C3CE124E3 /* MASShortcutBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D7607BC54363A90B707BDEF8EF1AA54 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF44E1C5E5E5A2FBD665B0C6874EBB2 /* Cocoa.framework */; };
-		9DA80A7C76DDA9A5034253AB16A60F2D /* MarkdownFont+Traits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6688F8859C8ED01095BB41F33E872101 /* MarkdownFont+Traits.swift */; };
-		9DCA0F6A9CB2547CE5EC834C2F758565 /* MarkdownAutomaticLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731479A1CAB853F04E7326240E3E3A87 /* MarkdownAutomaticLink.swift */; };
-		A54B90D20AB5E2FC86F3E5FDBF0E92C1 /* MASShortcutMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA92E3253C8713964265ABBCBC0D65C /* MASShortcutMonitor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A87374920AA3441951A2AD4955C40B2E /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CC02875E3E061177563656781C696037 /* zh-Hans.lproj */; };
-		AA5730F9AB7737BE8D47DA0B26D66656 /* MarkdownHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0150131178BC1B25FB0590F19ED17867 /* MarkdownHeader.swift */; };
-		ACAE208869715341A8D0CE1B821582FF /* MASShortcut-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E92CB1C13F012D566CFDFCBCAABDC /* MASShortcut-dummy.m */; };
-		B03F7158DC04D51262BC5E7D848DB681 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF44E1C5E5E5A2FBD665B0C6874EBB2 /* Cocoa.framework */; };
-		B5C8C5E636E24ACF4108E2426458D6F4 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = B50DAABDE4D8DC45129678A14625F7EF /* it.lproj */; };
-		B6DCFE037533E61E637C39B686E428EC /* MASShortcut-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B47A26D837F665DA453CC3B45BA4D9A /* MASShortcut-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BA24555DDDBBF186F3CF4BF59DA2FE72 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15E491B6335575D3FB47143EFFF18DF2 /* en.lproj */; };
-		BB4AB144F9AA940063051C4AF8B28E43 /* MarkdownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA79FD6323E88491181467C0D846776 /* MarkdownList.swift */; };
-		C7FECA97DF2F18C454A7B9AF59612AB1 /* String+UTF16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04693579B98D4A0F4AA3B87B0DB10A /* String+UTF16.swift */; };
-		C82AA7D71A2E10979F45446698721CE2 /* MarkdownKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 585B1A99EB46C873534222AD627D8FE7 /* MarkdownKit-dummy.m */; };
-		CAD72103B26549AD6F09E1603CE565BC /* MASKeyMasks.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8334190F07D5B2785BE65ACD68181E /* MASKeyMasks.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CCF9D243E25482628A3942A7B397E8FA /* MASDictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 909247F1C67207FE32378E63C5A19085 /* MASDictionaryTransformer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CE245EF47BF327C6F2A45E28B66FA7F5 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = DE42BA4EB6DB87F3443073754A9FF73E /* fr.lproj */; };
-		CF41B0853163EA6195BECB9739F9927E /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE768766FC9FD67E6664EE37B56E7017 /* Typealias.swift */; };
-		D1B95E9FC7CAF79705E707040CDF19D4 /* MarkdownKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B00E631F928F33FD67A99440D4A66C /* MarkdownKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2EC4A4E34F1987674E9AAA5DE023F99 /* Pods-tmpNote-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CFF28375B785E87E7713AF13B2A2BD /* Pods-tmpNote-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D50DE46B805ECB8D8598B20F9C786360 /* MarkdownParser+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939849D7122CC729E9EA08875D186966 /* MarkdownParser+AppKit.swift */; };
-		D598D24B24EC5726A4BBCC796D427224 /* MASShortcutView+Bindings.h in Headers */ = {isa = PBXBuildFile; fileRef = 316F4F0CCC9BC9D8AD409529D48213C9 /* MASShortcutView+Bindings.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBB1E713EF34DBA1561B42347868D924 /* MarkdownStrikethrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC810905443392A650A5421A33BCD18 /* MarkdownStrikethrough.swift */; };
-		E1E22DB641D6AA002B3623C53066DA7F /* MASLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9C4BB1E31C170B005DEA996B45AA39 /* MASLocalization.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E1F2DF6E6D809089A04529265FBFA437 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF44E1C5E5E5A2FBD665B0C6874EBB2 /* Cocoa.framework */; };
-		E2F448B004F3A054550A1FDC1F5B4F72 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = A1A4DA61E933F222E606291601B3D232 /* ja.lproj */; };
-		E39ADE26E8B57B222F31B20206D36B5D /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599647D1B91F5037A3E2519E14D12B2B /* MarkdownCodeEscaping.swift */; };
-		E926B2761DAFDE38C8D78DD627446101 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 589C0864D759B8840086853B6FFBCA8D /* ru.lproj */; };
-		EA8590DCE6EA8758A8634492EEC0F848 /* MarkdownBold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A6453E9B921EB15BF165A3438C12E3 /* MarkdownBold.swift */; };
-		EF07CF4A5C9DD12C6A5E801F9D94101B /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAD9C6D998F01473AF24AE2C530951B /* MarkdownParser.swift */; };
-		F216419617F02556A27886E23CCE6861 /* MASLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 353273CD98E91ED2CCE03F815DC82BFA /* MASLocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F59425B9934AE583E34E4611AD9FE8A7 /* MarkdownCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B523B53A4B8B42702C0F7FD89ADF49D /* MarkdownCode.swift */; };
-		F60A6BDDC585847C68ACEEC2A9A37451 /* MarkdownElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF994FEB35819DCA720AF04D31E4C8A1 /* MarkdownElement.swift */; };
-		FF3F96B373B1055F1554329721BEE0E3 /* MASDictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 08912A60C0DDBB46D71C49E749CB187B /* MASDictionaryTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A12619D5319E2FCE7F60710DFDC66CE1 /* SwiftyMarkdown+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A068CF459547406F5A4E3494A3C7AF23 /* SwiftyMarkdown+iOS.swift */; };
+		A54B90D20AB5E2FC86F3E5FDBF0E92C1 /* MASShortcutMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 393B64905F02659CA65B785BFCE6CC94 /* MASShortcutMonitor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A87374920AA3441951A2AD4955C40B2E /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2B69AD933C03BFC84BB17C9451CB59BA /* zh-Hans.lproj */; };
+		ACAE208869715341A8D0CE1B821582FF /* MASShortcut-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F51A05A9CC1C0FFA5E7DC67BF35F99CC /* MASShortcut-dummy.m */; };
+		B5C8C5E636E24ACF4108E2426458D6F4 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 30F9364C803070B31B9DFE3BA7DFC650 /* it.lproj */; };
+		B6DCFE037533E61E637C39B686E428EC /* MASShortcut-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B1B3427101D4CFB21BEF8DCA4BBB14F1 /* MASShortcut-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B719F88D2DFCB7FD59A1394D753F7BE8 /* SwiftyMarkdown-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FCCBD4563332E2C5A8C243271B3510 /* SwiftyMarkdown-dummy.m */; };
+		BA24555DDDBBF186F3CF4BF59DA2FE72 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 3A471C6A24C6F1CB79F1588F67BDEC4C /* en.lproj */; };
+		C06E6334F5BD8589C97E5505E9169F9B /* String+SwiftyMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7322ED9E3BA4444871C0173FCBFA9 /* String+SwiftyMarkdown.swift */; };
+		CAB2592F9FECDBB0381127153BAAC63D /* SwiftyMarkdown+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CDDE73365C8E378E9EC7DAA9A79243 /* SwiftyMarkdown+macOS.swift */; };
+		CAD72103B26549AD6F09E1603CE565BC /* MASKeyMasks.h in Headers */ = {isa = PBXBuildFile; fileRef = D3B32B585F0CD38547A688622E5C00E5 /* MASKeyMasks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCF9D243E25482628A3942A7B397E8FA /* MASDictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E599C6F68A1006A04DCFF592E1866B67 /* MASDictionaryTransformer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CE245EF47BF327C6F2A45E28B66FA7F5 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F926843AF9A395778487BE9F0B12BB2B /* fr.lproj */; };
+		D598D24B24EC5726A4BBCC796D427224 /* MASShortcutView+Bindings.h in Headers */ = {isa = PBXBuildFile; fileRef = 08255952FD8F1CE8E2DFF4E6DF629B51 /* MASShortcutView+Bindings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE124898572ED3593F02313D40F378FF /* SwiftyScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B6869D9178DAA734D4FA5612CF1AE /* SwiftyScanner.swift */; };
+		E01F8197B3F004436765A6CE73E450BE /* PerfomanceLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEDCAC3B71B927FAA00B65B94A7AD0 /* PerfomanceLog.swift */; };
+		E1E22DB641D6AA002B3623C53066DA7F /* MASLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA6B2A1FAD5929B353CD2508F5470A0 /* MASLocalization.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E2F448B004F3A054550A1FDC1F5B4F72 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 336A55F735B60EE855D6889DF4607BD6 /* ja.lproj */; };
+		E926B2761DAFDE38C8D78DD627446101 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4D37A5721640493D111DD4AB29A58667 /* ru.lproj */; };
+		EB8CC81FC0CB70EBF6F74D9EBE2D25F2 /* SwiftyMarkdown-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDB8CF196CC5E1685106F3159A6E16 /* SwiftyMarkdown-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F216419617F02556A27886E23CCE6861 /* MASLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 59C3081C195BE255770C6CE2FD7FE44F /* MASLocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F40338C70B5907DC5D0E9076458E2665 /* Pods-tmpNote-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CFF28375B785E87E7713AF13B2A2BD /* Pods-tmpNote-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F445272421B5A3E7F1F4FF94774D78F8 /* SwiftyTokeniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0E868D0E34CA40EDA1F2FCA690555 /* SwiftyTokeniser.swift */; };
+		FC9B60009B3527936108FE4640F29C22 /* SwiftyMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC24464706790A7E6541A31B1771F26 /* SwiftyMarkdown.swift */; };
+		FF3F96B373B1055F1554329721BEE0E3 /* MASDictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B55FA3E7E91A677B307CF55C24E68DB7 /* MASDictionaryTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF6478C14E63AD6CDD9E2D36A90E8153 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF44E1C5E5E5A2FBD665B0C6874EBB2 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0BC0DE1B73D7B202211F22ADE0E8BFAF /* PBXContainerItemProxy */ = {
+		1C99968A6C456A32CA1FB783D86DFAF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2B2B481A164695722839BD581D442457;
 			remoteInfo = MASShortcut;
+		};
+		3FFB985D9B8369C99E512FACA24F7783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93523582DEC251A9E59F621510B882C3;
+			remoteInfo = SwiftyMarkdown;
 		};
 		A9C471B1560788DF79C58AEDB5C43A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -96,107 +87,85 @@
 			remoteGlobalIDString = 73C37A16ECCEAD845651DCDEE95675BE;
 			remoteInfo = "MASShortcut-MASShortcut";
 		};
-		B72F543B376359A6FA37FF96A1FCAA8C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9B8CED42548FBCD698879F50FDF51154;
-			remoteInfo = MarkdownKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0150131178BC1B25FB0590F19ED17867 /* MarkdownHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownHeader.swift; path = MarkdownKit/Sources/Common/Elements/Header/MarkdownHeader.swift; sourceTree = "<group>"; };
-		066D85FEC383663E6FD01277D8F4B6DA /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = es.lproj; sourceTree = "<group>"; };
-		0858C330D2F6098425550198DEB55319 /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = pl.lproj; sourceTree = "<group>"; };
-		08912A60C0DDBB46D71C49E749CB187B /* MASDictionaryTransformer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASDictionaryTransformer.h; path = Framework/MASDictionaryTransformer.h; sourceTree = "<group>"; };
-		0B7379A73EA0FCCBE82B13F58A6277C5 /* MASShortcutBinder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutBinder.m; path = Framework/MASShortcutBinder.m; sourceTree = "<group>"; };
+		0286F905E9C4D6D442E79DBEA7109E20 /* ResourceBundle-MASShortcut-MASShortcut-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-MASShortcut-MASShortcut-Info.plist"; sourceTree = "<group>"; };
+		041117DC8C4F52F2E2E7EF7775A55DCE /* SwiftyMarkdown-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyMarkdown-Info.plist"; sourceTree = "<group>"; };
+		08255952FD8F1CE8E2DFF4E6DF629B51 /* MASShortcutView+Bindings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASShortcutView+Bindings.h"; path = "Framework/MASShortcutView+Bindings.h"; sourceTree = "<group>"; };
 		0D140E38D33E357CB0B54A53F3840534 /* Pods-tmpNote.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-tmpNote.modulemap"; sourceTree = "<group>"; };
-		1334E876521063DB61715E1FA5CD3768 /* MASShortcutMonitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutMonitor.h; path = Framework/MASShortcutMonitor.h; sourceTree = "<group>"; };
-		15E491B6335575D3FB47143EFFF18DF2 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = en.lproj; sourceTree = "<group>"; };
-		1A3C77ED41B674666BF1E1E308D9BA90 /* MASShortcut.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MASShortcut.modulemap; sourceTree = "<group>"; };
-		1B3EC55F94EF22A5447A799B3FE79EED /* MarkdownKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MarkdownKit.release.xcconfig; sourceTree = "<group>"; };
+		18D4B1DBED2DF5779E8281C808B61A50 /* Shortcut.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Shortcut.h; path = Framework/Shortcut.h; sourceTree = "<group>"; };
+		1B6D2C8D7731E4A2EC688CD978C3F282 /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = es.lproj; sourceTree = "<group>"; };
+		1BB6A4969946DBA54B890E70A7089AC3 /* MASShortcut.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcut.h; path = Framework/MASShortcut.h; sourceTree = "<group>"; };
 		1DF44E1C5E5E5A2FBD665B0C6874EBB2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		2147992B98E5401162BCF37F51CEBE12 /* MASShortcutValidator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutValidator.m; path = Framework/MASShortcutValidator.m; sourceTree = "<group>"; };
 		230F8208BE63C052A548A7D41A1158B2 /* MASShortcut.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MASShortcut.bundle; path = "MASShortcut-MASShortcut.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		258E92CB1C13F012D566CFDFCBCAABDC /* MASShortcut-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MASShortcut-dummy.m"; sourceTree = "<group>"; };
 		26A8810424438A12E7ADBFB3E068C658 /* MASShortcut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MASShortcut.framework; path = MASShortcut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2831908B41E54BF406A6B94E1344B005 /* MarkdownKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MarkdownKit.modulemap; sourceTree = "<group>"; };
-		29A0093B9A5D2F097893410CFE7EAB28 /* MarkdownKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MarkdownKit.framework; path = MarkdownKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F06861BA8BBB446343147A4EF47EFF3 /* MASShortcutValidator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutValidator.m; path = Framework/MASShortcutValidator.m; sourceTree = "<group>"; };
-		316F4F0CCC9BC9D8AD409529D48213C9 /* MASShortcutView+Bindings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASShortcutView+Bindings.h"; path = "Framework/MASShortcutView+Bindings.h"; sourceTree = "<group>"; };
-		32BA5107F5AD8D1205DA3009BE4E9E23 /* MASShortcut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASShortcut.release.xcconfig; sourceTree = "<group>"; };
-		353273CD98E91ED2CCE03F815DC82BFA /* MASLocalization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLocalization.h; path = Framework/MASLocalization.h; sourceTree = "<group>"; };
-		362EAAD8B9CC71D129367EB65BF80EB5 /* MASShortcut-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MASShortcut-Info.plist"; sourceTree = "<group>"; };
+		2914404F351676B65ED689C346D34334 /* MASHotKey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASHotKey.m; path = Framework/MASHotKey.m; sourceTree = "<group>"; };
+		2B69AD933C03BFC84BB17C9451CB59BA /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = "zh-Hans.lproj"; sourceTree = "<group>"; };
+		2C8348880B329649B993905D97898CB7 /* zh-Hant.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = "zh-Hant.lproj"; sourceTree = "<group>"; };
+		30B85F019A463C2D797EA0FDABD6EBBD /* MASShortcut-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MASShortcut-prefix.pch"; sourceTree = "<group>"; };
+		30F9364C803070B31B9DFE3BA7DFC650 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = it.lproj; sourceTree = "<group>"; };
+		336A55F735B60EE855D6889DF4607BD6 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = ja.lproj; sourceTree = "<group>"; };
+		33877DEAC6FB814AF366F7FA995931F8 /* MASShortcut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASShortcut.release.xcconfig; sourceTree = "<group>"; };
+		349DFB1F876221BBBB8B02A7F2D47C8D /* ko.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = ko.lproj; sourceTree = "<group>"; };
 		3923CF58102B67FE99B72CDAA08BE1EE /* Pods_tmpNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_tmpNote.framework; path = "Pods-tmpNote.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B523B53A4B8B42702C0F7FD89ADF49D /* MarkdownCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownCode.swift; path = MarkdownKit/Sources/Common/Elements/Code/MarkdownCode.swift; sourceTree = "<group>"; };
+		393B64905F02659CA65B785BFCE6CC94 /* MASShortcutMonitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutMonitor.m; path = Framework/MASShortcutMonitor.m; sourceTree = "<group>"; };
+		3A471C6A24C6F1CB79F1588F67BDEC4C /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = en.lproj; sourceTree = "<group>"; };
+		3B66EF95B3ACC772499B4761A6CFFEAC /* MASShortcutView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutView.h; path = Framework/MASShortcutView.h; sourceTree = "<group>"; };
+		3BC42DF0B83C1D952803230D09BBBCB3 /* Token.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Token.swift; path = Sources/SwiftyMarkdown/Token.swift; sourceTree = "<group>"; };
+		42F9DE7327242FDD2B8DCD0C3CE124E3 /* MASShortcutBinder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutBinder.h; path = Framework/MASShortcutBinder.h; sourceTree = "<group>"; };
+		4D37A5721640493D111DD4AB29A58667 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = ru.lproj; sourceTree = "<group>"; };
 		4DD53B177140118DC62C905DF7535C1D /* Pods-tmpNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tmpNote.release.xcconfig"; sourceTree = "<group>"; };
-		5248B8F2C1BC7B6B2D0C103D0F9B221E /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = nl.lproj; sourceTree = "<group>"; };
-		57029C1D1493C098077D5541C246160F /* MarkdownKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarkdownKit-Info.plist"; sourceTree = "<group>"; };
-		574E6042D0FAD2E32B1506A93087EE32 /* MarkdownKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarkdownKit-prefix.pch"; sourceTree = "<group>"; };
-		585B1A99EB46C873534222AD627D8FE7 /* MarkdownKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarkdownKit-dummy.m"; sourceTree = "<group>"; };
-		589C0864D759B8840086853B6FFBCA8D /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = ru.lproj; sourceTree = "<group>"; };
-		599647D1B91F5037A3E2519E14D12B2B /* MarkdownCodeEscaping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownCodeEscaping.swift; path = MarkdownKit/Sources/Common/Elements/Escaping/MarkdownCodeEscaping.swift; sourceTree = "<group>"; };
+		4E85B64AA25541F99E88EDC8387249B3 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = nl.lproj; sourceTree = "<group>"; };
+		503382EB956B8E6211193E753E9043F8 /* MASShortcut.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MASShortcut.modulemap; sourceTree = "<group>"; };
+		57FCCBD4563332E2C5A8C243271B3510 /* SwiftyMarkdown-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyMarkdown-dummy.m"; sourceTree = "<group>"; };
+		59C3081C195BE255770C6CE2FD7FE44F /* MASLocalization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLocalization.h; path = Framework/MASLocalization.h; sourceTree = "<group>"; };
 		5F48B0296119344FD0014E667735F829 /* Pods-tmpNote-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-tmpNote-acknowledgements.markdown"; sourceTree = "<group>"; };
-		648C5603DFDF8E6F08C34092AB75A2CA /* MASShortcut-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MASShortcut-prefix.pch"; sourceTree = "<group>"; };
-		66079B192CB7B217E6EC918F7703A150 /* MarkdownLevelElement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownLevelElement.swift; path = MarkdownKit/Sources/Common/Protocols/MarkdownLevelElement.swift; sourceTree = "<group>"; };
-		6688F8859C8ED01095BB41F33E872101 /* MarkdownFont+Traits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MarkdownFont+Traits.swift"; path = "MarkdownKit/Sources/AppKit/Extensions/MarkdownFont+Traits.swift"; sourceTree = "<group>"; };
+		62F7322ED9E3BA4444871C0173FCBFA9 /* String+SwiftyMarkdown.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+SwiftyMarkdown.swift"; path = "Sources/SwiftyMarkdown/String+SwiftyMarkdown.swift"; sourceTree = "<group>"; };
 		6973AD1A03179E1F5911AF624627E608 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		6F493E5345BB14020883A4C4D4214E46 /* Pods-tmpNote-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-tmpNote-Info.plist"; sourceTree = "<group>"; };
-		731479A1CAB853F04E7326240E3E3A87 /* MarkdownAutomaticLink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownAutomaticLink.swift; path = MarkdownKit/Sources/Common/Elements/Link/MarkdownAutomaticLink.swift; sourceTree = "<group>"; };
-		7436E2B6FF0C2B5455538F416D408D9E /* MarkdownStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownStyle.swift; path = MarkdownKit/Sources/Common/Protocols/MarkdownStyle.swift; sourceTree = "<group>"; };
-		74A6453E9B921EB15BF165A3438C12E3 /* MarkdownBold.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownBold.swift; path = MarkdownKit/Sources/Common/Elements/Bold/MarkdownBold.swift; sourceTree = "<group>"; };
-		7AC810905443392A650A5421A33BCD18 /* MarkdownStrikethrough.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownStrikethrough.swift; path = MarkdownKit/Sources/Common/Elements/Strikethrough/MarkdownStrikethrough.swift; sourceTree = "<group>"; };
-		7B47A26D837F665DA453CC3B45BA4D9A /* MASShortcut-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MASShortcut-umbrella.h"; sourceTree = "<group>"; };
+		71AEBCEA1E85C560C5A96E1772677722 /* SwiftyMarkdown-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyMarkdown-prefix.pch"; sourceTree = "<group>"; };
+		727CF44C31720DFC99A8F7E352AB9356 /* MASShortcut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASShortcut.debug.xcconfig; sourceTree = "<group>"; };
 		7DD66EF85AD1B79060002C923F733D34 /* Pods-tmpNote-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-tmpNote-frameworks.sh"; sourceTree = "<group>"; };
-		823D3145D98ADC0EB10805A446271EE4 /* MASShortcutBinder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutBinder.h; path = Framework/MASShortcutBinder.h; sourceTree = "<group>"; };
-		88456CC74F834C72E0C99BA5E65AC909 /* MASShortcutView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutView.h; path = Framework/MASShortcutView.h; sourceTree = "<group>"; };
-		896D0E4B6689A1E14FC95559D96D48FC /* MarkdownLink+AppKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MarkdownLink+AppKit.swift"; path = "MarkdownKit/Sources/AppKit/Elements/Link/MarkdownLink+AppKit.swift"; sourceTree = "<group>"; };
-		8BE21528A0129EAC8A3BECD4F542C12F /* MASHotKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASHotKey.h; path = Framework/MASHotKey.h; sourceTree = "<group>"; };
-		8DCC9199D72D1C22F921D40F903EE972 /* MASShortcut.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcut.h; path = Framework/MASShortcut.h; sourceTree = "<group>"; };
+		82CDDE73365C8E378E9EC7DAA9A79243 /* SwiftyMarkdown+macOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SwiftyMarkdown+macOS.swift"; path = "Sources/SwiftyMarkdown/SwiftyMarkdown+macOS.swift"; sourceTree = "<group>"; };
+		881E75025871981EC87A23CE5A87A1A6 /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = de.lproj; sourceTree = "<group>"; };
 		8E9A917933F4C0AF5EB9A8D8A67875A7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
-		909247F1C67207FE32378E63C5A19085 /* MASDictionaryTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASDictionaryTransformer.m; path = Framework/MASDictionaryTransformer.m; sourceTree = "<group>"; };
-		931E79A0070C851B0145ADECC4FAAC09 /* ResourceBundle-MASShortcut-MASShortcut-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-MASShortcut-MASShortcut-Info.plist"; sourceTree = "<group>"; };
-		939849D7122CC729E9EA08875D186966 /* MarkdownParser+AppKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MarkdownParser+AppKit.swift"; path = "MarkdownKit/Sources/AppKit/MarkdownParser+AppKit.swift"; sourceTree = "<group>"; };
+		914B6869D9178DAA734D4FA5612CF1AE /* SwiftyScanner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyScanner.swift; path = Sources/SwiftyMarkdown/SwiftyScanner.swift; sourceTree = "<group>"; };
 		97E977BD7D6115561EC3CCCC4CB5CD68 /* Pods-tmpNote-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-tmpNote-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D04693579B98D4A0F4AA3B87B0DB10A /* String+UTF16.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+UTF16.swift"; path = "MarkdownKit/Sources/Common/Extensions/String+UTF16.swift"; sourceTree = "<group>"; };
-		9D8334190F07D5B2785BE65ACD68181E /* MASKeyMasks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASKeyMasks.h; path = Framework/MASKeyMasks.h; sourceTree = "<group>"; };
+		98332F769BFE50CDB76A9D111D3292A2 /* SwiftyMarkdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyMarkdown.release.xcconfig; sourceTree = "<group>"; };
+		9BA6B2A1FAD5929B353CD2508F5470A0 /* MASLocalization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLocalization.m; path = Framework/MASLocalization.m; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9EA92E3253C8713964265ABBCBC0D65C /* MASShortcutMonitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutMonitor.m; path = Framework/MASShortcutMonitor.m; sourceTree = "<group>"; };
-		A1A4DA61E933F222E606291601B3D232 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = ja.lproj; sourceTree = "<group>"; };
+		A068CF459547406F5A4E3494A3C7AF23 /* SwiftyMarkdown+iOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SwiftyMarkdown+iOS.swift"; path = "Sources/SwiftyMarkdown/SwiftyMarkdown+iOS.swift"; sourceTree = "<group>"; };
+		A1083A46DF7522AA6AD5E31AAEC57D93 /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = pl.lproj; sourceTree = "<group>"; };
 		A3CFF28375B785E87E7713AF13B2A2BD /* Pods-tmpNote-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-tmpNote-umbrella.h"; sourceTree = "<group>"; };
-		AB628549A73FC10D0FF79AC36D4A91C2 /* MASShortcut.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcut.m; path = Framework/MASShortcut.m; sourceTree = "<group>"; };
-		ABBFA7F30632048BDAD9D0B4A0663613 /* MASHotKey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASHotKey.m; path = Framework/MASHotKey.m; sourceTree = "<group>"; };
-		ACA79FD6323E88491181467C0D846776 /* MarkdownList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownList.swift; path = MarkdownKit/Sources/Common/Elements/List/MarkdownList.swift; sourceTree = "<group>"; };
-		AFDF74A779EE1DF2741852F6DBC8E527 /* cs.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = cs.lproj; sourceTree = "<group>"; };
-		B0D720CCB270445C7589BCB726D98663 /* MarkdownHeader+AppKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MarkdownHeader+AppKit.swift"; path = "MarkdownKit/Sources/AppKit/Elements/Header/MarkdownHeader+AppKit.swift"; sourceTree = "<group>"; };
-		B36D6C67F477940A55D367548C75E5A6 /* MarkdownQuote.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownQuote.swift; path = MarkdownKit/Sources/Common/Elements/Quote/MarkdownQuote.swift; sourceTree = "<group>"; };
-		B500BAA281101086E63A368959EA5512 /* MASKeyCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASKeyCodes.h; path = Framework/MASKeyCodes.h; sourceTree = "<group>"; };
-		B50DAABDE4D8DC45129678A14625F7EF /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = it.lproj; sourceTree = "<group>"; };
-		B60069DEB8CE742DC75DE0766E599C48 /* MarkdownUnescaping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownUnescaping.swift; path = MarkdownKit/Sources/Common/Elements/Escaping/MarkdownUnescaping.swift; sourceTree = "<group>"; };
-		B80EB5CA0E0814421B5037BADAD5598D /* MarkdownCode+AppKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MarkdownCode+AppKit.swift"; path = "MarkdownKit/Sources/AppKit/Elements/Code/MarkdownCode+AppKit.swift"; sourceTree = "<group>"; };
-		B908EE4E7B5277EC82E84F45FA55F6C4 /* MarkdownCommonElement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownCommonElement.swift; path = MarkdownKit/Sources/Common/Protocols/MarkdownCommonElement.swift; sourceTree = "<group>"; };
-		BB50F1DA1B8BD8E3378BB3FCCC3F90F0 /* MASShortcutView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutView.m; path = Framework/MASShortcutView.m; sourceTree = "<group>"; };
-		BF2F2E4C3F1E5000CA6357C5225A14FA /* MASShortcut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MASShortcut.debug.xcconfig; sourceTree = "<group>"; };
-		BF9C4BB1E31C170B005DEA996B45AA39 /* MASLocalization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLocalization.m; path = Framework/MASLocalization.m; sourceTree = "<group>"; };
-		C7AE6B7162FC8BEC4A700F442EECCF9A /* MASShortcutValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutValidator.h; path = Framework/MASShortcutValidator.h; sourceTree = "<group>"; };
-		C7B00E631F928F33FD67A99440D4A66C /* MarkdownKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarkdownKit-umbrella.h"; sourceTree = "<group>"; };
-		CC02875E3E061177563656781C696037 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = "zh-Hans.lproj"; sourceTree = "<group>"; };
-		CE768766FC9FD67E6664EE37B56E7017 /* Typealias.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealias.swift; path = MarkdownKit/Sources/AppKit/Typealias.swift; sourceTree = "<group>"; };
-		D16196DEAA459BA7EB8CCBF5AC6D355E /* ko.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = ko.lproj; sourceTree = "<group>"; };
-		D3A6140E14995884C7156E5F52AE8B8E /* MarkdownItalic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownItalic.swift; path = MarkdownKit/Sources/Common/Elements/Italic/MarkdownItalic.swift; sourceTree = "<group>"; };
-		D755ECD3774696E70B280CD1299B8571 /* MarkdownEscaping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownEscaping.swift; path = MarkdownKit/Sources/Common/Elements/Escaping/MarkdownEscaping.swift; sourceTree = "<group>"; };
-		DE42BA4EB6DB87F3443073754A9FF73E /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = fr.lproj; sourceTree = "<group>"; };
-		DF994FEB35819DCA720AF04D31E4C8A1 /* MarkdownElement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownElement.swift; path = MarkdownKit/Sources/Common/Protocols/MarkdownElement.swift; sourceTree = "<group>"; };
-		E4B5F239F71A03134B990374500178DB /* Shortcut.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Shortcut.h; path = Framework/Shortcut.h; sourceTree = "<group>"; };
-		E65A4814B862EAC0799EA7264C260935 /* MarkdownLinkElement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownLinkElement.swift; path = MarkdownKit/Sources/Common/Protocols/MarkdownLinkElement.swift; sourceTree = "<group>"; };
-		EADE7E5BC213B7B1A4DD7538B6B41541 /* MASShortcutView+Bindings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "MASShortcutView+Bindings.m"; path = "Framework/MASShortcutView+Bindings.m"; sourceTree = "<group>"; };
+		A61E53742BD4E04272473CAEB5270F36 /* MASHotKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASHotKey.h; path = Framework/MASHotKey.h; sourceTree = "<group>"; };
+		A623697F91C530130A1451A87E4AB79C /* MASShortcutMonitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutMonitor.h; path = Framework/MASShortcutMonitor.h; sourceTree = "<group>"; };
+		AC17564D0F58DCA6B3280EDA07C2876D /* SwiftyMarkdown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyMarkdown.framework; path = SwiftyMarkdown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE9FA8B43073554EA0E792CD48260D8D /* MASShortcut-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MASShortcut-Info.plist"; sourceTree = "<group>"; };
+		B1B3427101D4CFB21BEF8DCA4BBB14F1 /* MASShortcut-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MASShortcut-umbrella.h"; sourceTree = "<group>"; };
+		B55FA3E7E91A677B307CF55C24E68DB7 /* MASDictionaryTransformer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASDictionaryTransformer.h; path = Framework/MASDictionaryTransformer.h; sourceTree = "<group>"; };
+		BA9F52787EE66A692FD7DFD825EE9AEE /* MASShortcutView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutView.m; path = Framework/MASShortcutView.m; sourceTree = "<group>"; };
+		BAEDB8CF196CC5E1685106F3159A6E16 /* SwiftyMarkdown-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyMarkdown-umbrella.h"; sourceTree = "<group>"; };
+		C5A54E326F50C18FB1474500C06E0006 /* cs.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = cs.lproj; sourceTree = "<group>"; };
+		C9D856371ED4EEF792AAC8EB40B56F25 /* MASShortcutBinder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcutBinder.m; path = Framework/MASShortcutBinder.m; sourceTree = "<group>"; };
+		CCBEDCAC3B71B927FAA00B65B94A7AD0 /* PerfomanceLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PerfomanceLog.swift; path = Sources/SwiftyMarkdown/PerfomanceLog.swift; sourceTree = "<group>"; };
+		CFC805ADEDF9BF1F25C9AA483BBF7B0A /* SwiftyLineProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyLineProcessor.swift; path = Sources/SwiftyMarkdown/SwiftyLineProcessor.swift; sourceTree = "<group>"; };
+		D3B32B585F0CD38547A688622E5C00E5 /* MASKeyMasks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASKeyMasks.h; path = Framework/MASKeyMasks.h; sourceTree = "<group>"; };
+		DA0F8B62B14A6718569AF2F05276AB2E /* CharacterRule.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CharacterRule.swift; path = Sources/SwiftyMarkdown/CharacterRule.swift; sourceTree = "<group>"; };
+		DA98C13D522A6578224D3E89CD3E8D48 /* MASShortcutValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASShortcutValidator.h; path = Framework/MASShortcutValidator.h; sourceTree = "<group>"; };
+		DAC24464706790A7E6541A31B1771F26 /* SwiftyMarkdown.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyMarkdown.swift; path = Sources/SwiftyMarkdown/SwiftyMarkdown.swift; sourceTree = "<group>"; };
+		DC37670ED5412E0615948F7D448BFF96 /* MASKeyCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASKeyCodes.h; path = Framework/MASKeyCodes.h; sourceTree = "<group>"; };
+		E074186343182CC263D5DC0AB4512130 /* SwiftyMarkdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyMarkdown.debug.xcconfig; sourceTree = "<group>"; };
+		E387D0AEE4A11933ACB1ECD0222AA0BC /* MASShortcut.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASShortcut.m; path = Framework/MASShortcut.m; sourceTree = "<group>"; };
+		E4F7E639E1204410BA36C749367507C1 /* SwiftyMarkdown.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyMarkdown.modulemap; sourceTree = "<group>"; };
+		E599C6F68A1006A04DCFF592E1866B67 /* MASDictionaryTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASDictionaryTransformer.m; path = Framework/MASDictionaryTransformer.m; sourceTree = "<group>"; };
 		EBAFDFA52941E13B9CD14B1998B614F2 /* Pods-tmpNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tmpNote.debug.xcconfig"; sourceTree = "<group>"; };
-		EBEED3BE5D0A463A401239F1A5255405 /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = de.lproj; sourceTree = "<group>"; };
-		ECAF75A9225E0CEB9C03F88A70CFCDF7 /* zh-Hant.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = "zh-Hant.lproj"; sourceTree = "<group>"; };
+		EDF0E868D0E34CA40EDA1F2FCA690555 /* SwiftyTokeniser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyTokeniser.swift; path = Sources/SwiftyMarkdown/SwiftyTokeniser.swift; sourceTree = "<group>"; };
+		F51A05A9CC1C0FFA5E7DC67BF35F99CC /* MASShortcut-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MASShortcut-dummy.m"; sourceTree = "<group>"; };
 		F6E63A8C1098BBAB07047036BC8DF918 /* Pods-tmpNote-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-tmpNote-dummy.m"; sourceTree = "<group>"; };
-		FAE42268B10B36B98765187EE21604A1 /* MarkdownKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MarkdownKit.debug.xcconfig; sourceTree = "<group>"; };
-		FD3009CF1D74CF17F61F6882DD28FB32 /* MarkdownLink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownLink.swift; path = MarkdownKit/Sources/Common/Elements/Link/MarkdownLink.swift; sourceTree = "<group>"; };
-		FDAD9C6D998F01473AF24AE2C530951B /* MarkdownParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownParser.swift; path = MarkdownKit/Sources/Common/MarkdownParser.swift; sourceTree = "<group>"; };
+		F926843AF9A395778487BE9F0B12BB2B /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = fr.lproj; sourceTree = "<group>"; };
+		FBED7C57E265B2037DA2A0E527E6A7AD /* MASShortcutView+Bindings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "MASShortcutView+Bindings.m"; path = "Framework/MASShortcutView+Bindings.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,20 +179,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2FBD21F185D1BDC02F9464B4B8D85A3E /* Frameworks */ = {
+		4B8BBB6A55E53B965AB5A4DC3383A0CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				857D4991D1B596546A1ABDE472D69600 /* AppKit.framework in Frameworks */,
-				E1F2DF6E6D809089A04529265FBFA437 /* Cocoa.framework in Frameworks */,
+				44ACC6521094A92DBCC45677CE6995C4 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFEBBF35938953B3D71B2AB10E6716FF /* Frameworks */ = {
+		8F5A0B58199846D592D4095EBBD09574 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B03F7158DC04D51262BC5E7D848DB681 /* Cocoa.framework in Frameworks */,
+				FF6478C14E63AD6CDD9E2D36A90E8153 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,29 +205,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0836D42CB9B8267EF3868B7C668778EF /* Support Files */ = {
+		0CC51C86E3B84965D8AA541A0576F185 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1A3C77ED41B674666BF1E1E308D9BA90 /* MASShortcut.modulemap */,
-				258E92CB1C13F012D566CFDFCBCAABDC /* MASShortcut-dummy.m */,
-				362EAAD8B9CC71D129367EB65BF80EB5 /* MASShortcut-Info.plist */,
-				648C5603DFDF8E6F08C34092AB75A2CA /* MASShortcut-prefix.pch */,
-				7B47A26D837F665DA453CC3B45BA4D9A /* MASShortcut-umbrella.h */,
-				BF2F2E4C3F1E5000CA6357C5225A14FA /* MASShortcut.debug.xcconfig */,
-				32BA5107F5AD8D1205DA3009BE4E9E23 /* MASShortcut.release.xcconfig */,
-				931E79A0070C851B0145ADECC4FAAC09 /* ResourceBundle-MASShortcut-MASShortcut-Info.plist */,
+				503382EB956B8E6211193E753E9043F8 /* MASShortcut.modulemap */,
+				F51A05A9CC1C0FFA5E7DC67BF35F99CC /* MASShortcut-dummy.m */,
+				AE9FA8B43073554EA0E792CD48260D8D /* MASShortcut-Info.plist */,
+				30B85F019A463C2D797EA0FDABD6EBBD /* MASShortcut-prefix.pch */,
+				B1B3427101D4CFB21BEF8DCA4BBB14F1 /* MASShortcut-umbrella.h */,
+				727CF44C31720DFC99A8F7E352AB9356 /* MASShortcut.debug.xcconfig */,
+				33877DEAC6FB814AF366F7FA995931F8 /* MASShortcut.release.xcconfig */,
+				0286F905E9C4D6D442E79DBEA7109E20 /* ResourceBundle-MASShortcut-MASShortcut-Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/MASShortcut";
-			sourceTree = "<group>";
-		};
-		42B0EA11BE05AE5CC1A5CF9C102F4168 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				86AEE58F446DF61EEE8DCD43F721ED67 /* MarkdownKit */,
-				FAEF7DBACC99F0C65692473CFD74517E /* MASShortcut */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		5A426EFD36984249419FD45334D82866 /* OS X */ = {
@@ -289,56 +248,53 @@
 			path = "Target Support Files/Pods-tmpNote";
 			sourceTree = "<group>";
 		};
-		86AEE58F446DF61EEE8DCD43F721ED67 /* MarkdownKit */ = {
+		77C8049ED4259339086BD46AD6F62988 /* MASShortcut */ = {
 			isa = PBXGroup;
 			children = (
-				731479A1CAB853F04E7326240E3E3A87 /* MarkdownAutomaticLink.swift */,
-				74A6453E9B921EB15BF165A3438C12E3 /* MarkdownBold.swift */,
-				3B523B53A4B8B42702C0F7FD89ADF49D /* MarkdownCode.swift */,
-				B80EB5CA0E0814421B5037BADAD5598D /* MarkdownCode+AppKit.swift */,
-				599647D1B91F5037A3E2519E14D12B2B /* MarkdownCodeEscaping.swift */,
-				B908EE4E7B5277EC82E84F45FA55F6C4 /* MarkdownCommonElement.swift */,
-				DF994FEB35819DCA720AF04D31E4C8A1 /* MarkdownElement.swift */,
-				D755ECD3774696E70B280CD1299B8571 /* MarkdownEscaping.swift */,
-				6688F8859C8ED01095BB41F33E872101 /* MarkdownFont+Traits.swift */,
-				0150131178BC1B25FB0590F19ED17867 /* MarkdownHeader.swift */,
-				B0D720CCB270445C7589BCB726D98663 /* MarkdownHeader+AppKit.swift */,
-				D3A6140E14995884C7156E5F52AE8B8E /* MarkdownItalic.swift */,
-				66079B192CB7B217E6EC918F7703A150 /* MarkdownLevelElement.swift */,
-				FD3009CF1D74CF17F61F6882DD28FB32 /* MarkdownLink.swift */,
-				896D0E4B6689A1E14FC95559D96D48FC /* MarkdownLink+AppKit.swift */,
-				E65A4814B862EAC0799EA7264C260935 /* MarkdownLinkElement.swift */,
-				ACA79FD6323E88491181467C0D846776 /* MarkdownList.swift */,
-				FDAD9C6D998F01473AF24AE2C530951B /* MarkdownParser.swift */,
-				939849D7122CC729E9EA08875D186966 /* MarkdownParser+AppKit.swift */,
-				B36D6C67F477940A55D367548C75E5A6 /* MarkdownQuote.swift */,
-				7AC810905443392A650A5421A33BCD18 /* MarkdownStrikethrough.swift */,
-				7436E2B6FF0C2B5455538F416D408D9E /* MarkdownStyle.swift */,
-				B60069DEB8CE742DC75DE0766E599C48 /* MarkdownUnescaping.swift */,
-				9D04693579B98D4A0F4AA3B87B0DB10A /* String+UTF16.swift */,
-				CE768766FC9FD67E6664EE37B56E7017 /* Typealias.swift */,
-				AA45AF00221D0B2D48FAE16B32A1EDBF /* Support Files */,
+				B55FA3E7E91A677B307CF55C24E68DB7 /* MASDictionaryTransformer.h */,
+				E599C6F68A1006A04DCFF592E1866B67 /* MASDictionaryTransformer.m */,
+				A61E53742BD4E04272473CAEB5270F36 /* MASHotKey.h */,
+				2914404F351676B65ED689C346D34334 /* MASHotKey.m */,
+				DC37670ED5412E0615948F7D448BFF96 /* MASKeyCodes.h */,
+				D3B32B585F0CD38547A688622E5C00E5 /* MASKeyMasks.h */,
+				59C3081C195BE255770C6CE2FD7FE44F /* MASLocalization.h */,
+				9BA6B2A1FAD5929B353CD2508F5470A0 /* MASLocalization.m */,
+				1BB6A4969946DBA54B890E70A7089AC3 /* MASShortcut.h */,
+				E387D0AEE4A11933ACB1ECD0222AA0BC /* MASShortcut.m */,
+				42F9DE7327242FDD2B8DCD0C3CE124E3 /* MASShortcutBinder.h */,
+				C9D856371ED4EEF792AAC8EB40B56F25 /* MASShortcutBinder.m */,
+				A623697F91C530130A1451A87E4AB79C /* MASShortcutMonitor.h */,
+				393B64905F02659CA65B785BFCE6CC94 /* MASShortcutMonitor.m */,
+				DA98C13D522A6578224D3E89CD3E8D48 /* MASShortcutValidator.h */,
+				2147992B98E5401162BCF37F51CEBE12 /* MASShortcutValidator.m */,
+				3B66EF95B3ACC772499B4761A6CFFEAC /* MASShortcutView.h */,
+				BA9F52787EE66A692FD7DFD825EE9AEE /* MASShortcutView.m */,
+				08255952FD8F1CE8E2DFF4E6DF629B51 /* MASShortcutView+Bindings.h */,
+				FBED7C57E265B2037DA2A0E527E6A7AD /* MASShortcutView+Bindings.m */,
+				18D4B1DBED2DF5779E8281C808B61A50 /* Shortcut.h */,
+				9ED6EBE5198299A68A4E8BE304596349 /* Resources */,
+				0CC51C86E3B84965D8AA541A0576F185 /* Support Files */,
 			);
-			name = MarkdownKit;
-			path = MarkdownKit;
+			name = MASShortcut;
+			path = MASShortcut;
 			sourceTree = "<group>";
 		};
-		9558A2E81809CA40041843F5CDFCC3FA /* Resources */ = {
+		9ED6EBE5198299A68A4E8BE304596349 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AFDF74A779EE1DF2741852F6DBC8E527 /* cs.lproj */,
-				EBEED3BE5D0A463A401239F1A5255405 /* de.lproj */,
-				15E491B6335575D3FB47143EFFF18DF2 /* en.lproj */,
-				066D85FEC383663E6FD01277D8F4B6DA /* es.lproj */,
-				DE42BA4EB6DB87F3443073754A9FF73E /* fr.lproj */,
-				B50DAABDE4D8DC45129678A14625F7EF /* it.lproj */,
-				A1A4DA61E933F222E606291601B3D232 /* ja.lproj */,
-				D16196DEAA459BA7EB8CCBF5AC6D355E /* ko.lproj */,
-				5248B8F2C1BC7B6B2D0C103D0F9B221E /* nl.lproj */,
-				0858C330D2F6098425550198DEB55319 /* pl.lproj */,
-				589C0864D759B8840086853B6FFBCA8D /* ru.lproj */,
-				CC02875E3E061177563656781C696037 /* zh-Hans.lproj */,
-				ECAF75A9225E0CEB9C03F88A70CFCDF7 /* zh-Hant.lproj */,
+				C5A54E326F50C18FB1474500C06E0006 /* cs.lproj */,
+				881E75025871981EC87A23CE5A87A1A6 /* de.lproj */,
+				3A471C6A24C6F1CB79F1588F67BDEC4C /* en.lproj */,
+				1B6D2C8D7731E4A2EC688CD978C3F282 /* es.lproj */,
+				F926843AF9A395778487BE9F0B12BB2B /* fr.lproj */,
+				30F9364C803070B31B9DFE3BA7DFC650 /* it.lproj */,
+				336A55F735B60EE855D6889DF4607BD6 /* ja.lproj */,
+				349DFB1F876221BBBB8B02A7F2D47C8D /* ko.lproj */,
+				4E85B64AA25541F99E88EDC8387249B3 /* nl.lproj */,
+				A1083A46DF7522AA6AD5E31AAEC57D93 /* pl.lproj */,
+				4D37A5721640493D111DD4AB29A58667 /* ru.lproj */,
+				2B69AD933C03BFC84BB17C9451CB59BA /* zh-Hans.lproj */,
+				2C8348880B329649B993905D97898CB7 /* zh-Hant.lproj */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -351,30 +307,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AA45AF00221D0B2D48FAE16B32A1EDBF /* Support Files */ = {
+		C774BEA8F5051710B938A43E4A8D6B18 /* SwiftyMarkdown */ = {
 			isa = PBXGroup;
 			children = (
-				2831908B41E54BF406A6B94E1344B005 /* MarkdownKit.modulemap */,
-				585B1A99EB46C873534222AD627D8FE7 /* MarkdownKit-dummy.m */,
-				57029C1D1493C098077D5541C246160F /* MarkdownKit-Info.plist */,
-				574E6042D0FAD2E32B1506A93087EE32 /* MarkdownKit-prefix.pch */,
-				C7B00E631F928F33FD67A99440D4A66C /* MarkdownKit-umbrella.h */,
-				FAE42268B10B36B98765187EE21604A1 /* MarkdownKit.debug.xcconfig */,
-				1B3EC55F94EF22A5447A799B3FE79EED /* MarkdownKit.release.xcconfig */,
+				DA0F8B62B14A6718569AF2F05276AB2E /* CharacterRule.swift */,
+				CCBEDCAC3B71B927FAA00B65B94A7AD0 /* PerfomanceLog.swift */,
+				62F7322ED9E3BA4444871C0173FCBFA9 /* String+SwiftyMarkdown.swift */,
+				CFC805ADEDF9BF1F25C9AA483BBF7B0A /* SwiftyLineProcessor.swift */,
+				DAC24464706790A7E6541A31B1771F26 /* SwiftyMarkdown.swift */,
+				A068CF459547406F5A4E3494A3C7AF23 /* SwiftyMarkdown+iOS.swift */,
+				82CDDE73365C8E378E9EC7DAA9A79243 /* SwiftyMarkdown+macOS.swift */,
+				914B6869D9178DAA734D4FA5612CF1AE /* SwiftyScanner.swift */,
+				EDF0E868D0E34CA40EDA1F2FCA690555 /* SwiftyTokeniser.swift */,
+				3BC42DF0B83C1D952803230D09BBBCB3 /* Token.swift */,
+				E547E973F0972F58BB272D616770BC69 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/MarkdownKit";
-			sourceTree = "<group>";
-		};
-		C3B45780B23AD874BCA0695583E85937 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				29A0093B9A5D2F097893410CFE7EAB28 /* MarkdownKit.framework */,
-				230F8208BE63C052A548A7D41A1158B2 /* MASShortcut.bundle */,
-				26A8810424438A12E7ADBFB3E068C658 /* MASShortcut.framework */,
-				3923CF58102B67FE99B72CDAA08BE1EE /* Pods_tmpNote.framework */,
-			);
-			name = Products;
+			name = SwiftyMarkdown;
+			path = SwiftyMarkdown;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -382,10 +331,45 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				A3CDB250FFEFB42CA2C68F1FBD92997D /* Frameworks */,
-				42B0EA11BE05AE5CC1A5CF9C102F4168 /* Pods */,
-				C3B45780B23AD874BCA0695583E85937 /* Products */,
+				E4809EAAB87020CF87A8D32FBDA30B03 /* Pods */,
+				DE4F4AA087CF0225F3AA6B40F7BA131D /* Products */,
 				FA38D91ACE513D62D1389EF8F2258BB3 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		DE4F4AA087CF0225F3AA6B40F7BA131D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				230F8208BE63C052A548A7D41A1158B2 /* MASShortcut.bundle */,
+				26A8810424438A12E7ADBFB3E068C658 /* MASShortcut.framework */,
+				3923CF58102B67FE99B72CDAA08BE1EE /* Pods_tmpNote.framework */,
+				AC17564D0F58DCA6B3280EDA07C2876D /* SwiftyMarkdown.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4809EAAB87020CF87A8D32FBDA30B03 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				77C8049ED4259339086BD46AD6F62988 /* MASShortcut */,
+				C774BEA8F5051710B938A43E4A8D6B18 /* SwiftyMarkdown */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E547E973F0972F58BB272D616770BC69 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E4F7E639E1204410BA36C749367507C1 /* SwiftyMarkdown.modulemap */,
+				57FCCBD4563332E2C5A8C243271B3510 /* SwiftyMarkdown-dummy.m */,
+				041117DC8C4F52F2E2E7EF7775A55DCE /* SwiftyMarkdown-Info.plist */,
+				71AEBCEA1E85C560C5A96E1772677722 /* SwiftyMarkdown-prefix.pch */,
+				BAEDB8CF196CC5E1685106F3159A6E16 /* SwiftyMarkdown-umbrella.h */,
+				E074186343182CC263D5DC0AB4512130 /* SwiftyMarkdown.debug.xcconfig */,
+				98332F769BFE50CDB76A9D111D3292A2 /* SwiftyMarkdown.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyMarkdown";
 			sourceTree = "<group>";
 		};
 		FA38D91ACE513D62D1389EF8F2258BB3 /* Targets Support Files */ = {
@@ -396,53 +380,22 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		FAEF7DBACC99F0C65692473CFD74517E /* MASShortcut */ = {
-			isa = PBXGroup;
-			children = (
-				08912A60C0DDBB46D71C49E749CB187B /* MASDictionaryTransformer.h */,
-				909247F1C67207FE32378E63C5A19085 /* MASDictionaryTransformer.m */,
-				8BE21528A0129EAC8A3BECD4F542C12F /* MASHotKey.h */,
-				ABBFA7F30632048BDAD9D0B4A0663613 /* MASHotKey.m */,
-				B500BAA281101086E63A368959EA5512 /* MASKeyCodes.h */,
-				9D8334190F07D5B2785BE65ACD68181E /* MASKeyMasks.h */,
-				353273CD98E91ED2CCE03F815DC82BFA /* MASLocalization.h */,
-				BF9C4BB1E31C170B005DEA996B45AA39 /* MASLocalization.m */,
-				8DCC9199D72D1C22F921D40F903EE972 /* MASShortcut.h */,
-				AB628549A73FC10D0FF79AC36D4A91C2 /* MASShortcut.m */,
-				823D3145D98ADC0EB10805A446271EE4 /* MASShortcutBinder.h */,
-				0B7379A73EA0FCCBE82B13F58A6277C5 /* MASShortcutBinder.m */,
-				1334E876521063DB61715E1FA5CD3768 /* MASShortcutMonitor.h */,
-				9EA92E3253C8713964265ABBCBC0D65C /* MASShortcutMonitor.m */,
-				C7AE6B7162FC8BEC4A700F442EECCF9A /* MASShortcutValidator.h */,
-				2F06861BA8BBB446343147A4EF47EFF3 /* MASShortcutValidator.m */,
-				88456CC74F834C72E0C99BA5E65AC909 /* MASShortcutView.h */,
-				BB50F1DA1B8BD8E3378BB3FCCC3F90F0 /* MASShortcutView.m */,
-				316F4F0CCC9BC9D8AD409529D48213C9 /* MASShortcutView+Bindings.h */,
-				EADE7E5BC213B7B1A4DD7538B6B41541 /* MASShortcutView+Bindings.m */,
-				E4B5F239F71A03134B990374500178DB /* Shortcut.h */,
-				9558A2E81809CA40041843F5CDFCC3FA /* Resources */,
-				0836D42CB9B8267EF3868B7C668778EF /* Support Files */,
-			);
-			name = MASShortcut;
-			path = MASShortcut;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		206A5B7E57CB0C27BF2240A35B537A31 /* Headers */ = {
+		56070453F29D1C270D893266E507B93C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1B95E9FC7CAF79705E707040CDF19D4 /* MarkdownKit-umbrella.h in Headers */,
+				F40338C70B5907DC5D0E9076458E2665 /* Pods-tmpNote-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2B943003A99E188DEF143AAA0A5F3F15 /* Headers */ = {
+		A3CBB0AA1BBA2CECB5FFCF86933143FF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2EC4A4E34F1987674E9AAA5DE023F99 /* Pods-tmpNote-umbrella.h in Headers */,
+				EB8CC81FC0CB70EBF6F74D9EBE2D25F2 /* SwiftyMarkdown-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,40 +460,40 @@
 		};
 		8BBB88F0EF0C7EC8E55DD656027CD9EB /* Pods-tmpNote */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 24C8A3EC62672F88D94460DDE25B5ECA /* Build configuration list for PBXNativeTarget "Pods-tmpNote" */;
+			buildConfigurationList = 137DD6799B73973A94DC1F3363FDC1A7 /* Build configuration list for PBXNativeTarget "Pods-tmpNote" */;
 			buildPhases = (
-				2B943003A99E188DEF143AAA0A5F3F15 /* Headers */,
-				FAF6C5245C154B4FD610D2EE8F688500 /* Sources */,
-				AFEBBF35938953B3D71B2AB10E6716FF /* Frameworks */,
-				6B1D6FE64458FDEA4CF6A739FF733631 /* Resources */,
+				56070453F29D1C270D893266E507B93C /* Headers */,
+				F281189DD1E2EF933EE22A6CBD48314C /* Sources */,
+				8F5A0B58199846D592D4095EBBD09574 /* Frameworks */,
+				5870190BF451F685844F251F62F4A073 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8C6119C1E17BEDA2C537A108D0AA799E /* PBXTargetDependency */,
-				EA3975759835187852ABF6217CF5258E /* PBXTargetDependency */,
+				4C817826F394402FE524972AA8A2C81D /* PBXTargetDependency */,
+				7AA023B1C988F960D8D194090A6E7417 /* PBXTargetDependency */,
 			);
 			name = "Pods-tmpNote";
 			productName = "Pods-tmpNote";
 			productReference = 3923CF58102B67FE99B72CDAA08BE1EE /* Pods_tmpNote.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9B8CED42548FBCD698879F50FDF51154 /* MarkdownKit */ = {
+		93523582DEC251A9E59F621510B882C3 /* SwiftyMarkdown */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D82385E11E61C95A09EE3D3AE3A6FEA9 /* Build configuration list for PBXNativeTarget "MarkdownKit" */;
+			buildConfigurationList = 15C05C15D921CEA35FC63E927F5266F9 /* Build configuration list for PBXNativeTarget "SwiftyMarkdown" */;
 			buildPhases = (
-				206A5B7E57CB0C27BF2240A35B537A31 /* Headers */,
-				482119FC05E910B8C2472FEB5F22CB9E /* Sources */,
-				2FBD21F185D1BDC02F9464B4B8D85A3E /* Frameworks */,
-				121AEFB2ACBDDC9946D0C96EADB804A2 /* Resources */,
+				A3CBB0AA1BBA2CECB5FFCF86933143FF /* Headers */,
+				8D877CFAD7ADF0176A8B190817C2648F /* Sources */,
+				4B8BBB6A55E53B965AB5A4DC3383A0CF /* Frameworks */,
+				FB8DAF320AF1971208114289642E665B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MarkdownKit;
-			productName = MarkdownKit;
-			productReference = 29A0093B9A5D2F097893410CFE7EAB28 /* MarkdownKit.framework */;
+			name = SwiftyMarkdown;
+			productName = SwiftyMarkdown;
+			productReference = AC17564D0F58DCA6B3280EDA07C2876D /* SwiftyMarkdown.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -561,20 +514,20 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = C3B45780B23AD874BCA0695583E85937 /* Products */;
+			productRefGroup = DE4F4AA087CF0225F3AA6B40F7BA131D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9B8CED42548FBCD698879F50FDF51154 /* MarkdownKit */,
 				2B2B481A164695722839BD581D442457 /* MASShortcut */,
 				73C37A16ECCEAD845651DCDEE95675BE /* MASShortcut-MASShortcut */,
 				8BBB88F0EF0C7EC8E55DD656027CD9EB /* Pods-tmpNote */,
+				93523582DEC251A9E59F621510B882C3 /* SwiftyMarkdown */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		121AEFB2ACBDDC9946D0C96EADB804A2 /* Resources */ = {
+		5870190BF451F685844F251F62F4A073 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -609,7 +562,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6B1D6FE64458FDEA4CF6A739FF733631 /* Resources */ = {
+		FB8DAF320AF1971208114289642E665B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -619,39 +572,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		482119FC05E910B8C2472FEB5F22CB9E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DCA0F6A9CB2547CE5EC834C2F758565 /* MarkdownAutomaticLink.swift in Sources */,
-				EA8590DCE6EA8758A8634492EEC0F848 /* MarkdownBold.swift in Sources */,
-				68FC222621783EB49EDCC15386E04FE1 /* MarkdownCode+AppKit.swift in Sources */,
-				F59425B9934AE583E34E4611AD9FE8A7 /* MarkdownCode.swift in Sources */,
-				E39ADE26E8B57B222F31B20206D36B5D /* MarkdownCodeEscaping.swift in Sources */,
-				202B91ED564337EB1069906BE930BBD3 /* MarkdownCommonElement.swift in Sources */,
-				F60A6BDDC585847C68ACEEC2A9A37451 /* MarkdownElement.swift in Sources */,
-				20CB8E693C18040413F852F75571E4F7 /* MarkdownEscaping.swift in Sources */,
-				9DA80A7C76DDA9A5034253AB16A60F2D /* MarkdownFont+Traits.swift in Sources */,
-				4D1B40C4FF8156576EE1FC111339133D /* MarkdownHeader+AppKit.swift in Sources */,
-				AA5730F9AB7737BE8D47DA0B26D66656 /* MarkdownHeader.swift in Sources */,
-				88363CF350B06CFCEA32447F10FEE6FE /* MarkdownItalic.swift in Sources */,
-				C82AA7D71A2E10979F45446698721CE2 /* MarkdownKit-dummy.m in Sources */,
-				270535476D5C759A67E492613E7D9B4F /* MarkdownLevelElement.swift in Sources */,
-				9203512B4FE159C6E9A56AF05344DFAD /* MarkdownLink+AppKit.swift in Sources */,
-				99E275FDF68055FD51D1401BDDC6C37E /* MarkdownLink.swift in Sources */,
-				160C4CD01A1356AC372FEB207345D0CB /* MarkdownLinkElement.swift in Sources */,
-				BB4AB144F9AA940063051C4AF8B28E43 /* MarkdownList.swift in Sources */,
-				D50DE46B805ECB8D8598B20F9C786360 /* MarkdownParser+AppKit.swift in Sources */,
-				EF07CF4A5C9DD12C6A5E801F9D94101B /* MarkdownParser.swift in Sources */,
-				84537A8AFB34C13C81AE5862637E8887 /* MarkdownQuote.swift in Sources */,
-				DBB1E713EF34DBA1561B42347868D924 /* MarkdownStrikethrough.swift in Sources */,
-				96D88F742E87CCF2CD5D6485D0534F15 /* MarkdownStyle.swift in Sources */,
-				8D9EAB0321629B8C19918CD53D878DF4 /* MarkdownUnescaping.swift in Sources */,
-				C7FECA97DF2F18C454A7B9AF59612AB1 /* String+UTF16.swift in Sources */,
-				CF41B0853163EA6195BECB9739F9927E /* Typealias.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		52860AF2B250CED8219DBAE5624918DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -676,38 +596,92 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FAF6C5245C154B4FD610D2EE8F688500 /* Sources */ = {
+		8D877CFAD7ADF0176A8B190817C2648F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				956BEEEB6A4F24C7D3160B531E206B9C /* Pods-tmpNote-dummy.m in Sources */,
+				13F8A0C3C6939963ACEC69D4FEEF18A8 /* CharacterRule.swift in Sources */,
+				E01F8197B3F004436765A6CE73E450BE /* PerfomanceLog.swift in Sources */,
+				C06E6334F5BD8589C97E5505E9169F9B /* String+SwiftyMarkdown.swift in Sources */,
+				825AD9A948ECEA7DAB7EAF29A61B9215 /* SwiftyLineProcessor.swift in Sources */,
+				A12619D5319E2FCE7F60710DFDC66CE1 /* SwiftyMarkdown+iOS.swift in Sources */,
+				CAB2592F9FECDBB0381127153BAAC63D /* SwiftyMarkdown+macOS.swift in Sources */,
+				B719F88D2DFCB7FD59A1394D753F7BE8 /* SwiftyMarkdown-dummy.m in Sources */,
+				FC9B60009B3527936108FE4640F29C22 /* SwiftyMarkdown.swift in Sources */,
+				DE124898572ED3593F02313D40F378FF /* SwiftyScanner.swift in Sources */,
+				F445272421B5A3E7F1F4FF94774D78F8 /* SwiftyTokeniser.swift in Sources */,
+				23848D00B8C15C140C162CA5ED2DB972 /* Token.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F281189DD1E2EF933EE22A6CBD48314C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4998884F404326FE10DD88264198D555 /* Pods-tmpNote-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4C817826F394402FE524972AA8A2C81D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MASShortcut;
+			target = 2B2B481A164695722839BD581D442457 /* MASShortcut */;
+			targetProxy = 1C99968A6C456A32CA1FB783D86DFAF0 /* PBXContainerItemProxy */;
+		};
 		785DF10A7F6D077AAC7E454D1492F078 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MASShortcut-MASShortcut";
 			target = 73C37A16ECCEAD845651DCDEE95675BE /* MASShortcut-MASShortcut */;
 			targetProxy = A9C471B1560788DF79C58AEDB5C43A59 /* PBXContainerItemProxy */;
 		};
-		8C6119C1E17BEDA2C537A108D0AA799E /* PBXTargetDependency */ = {
+		7AA023B1C988F960D8D194090A6E7417 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = MASShortcut;
-			target = 2B2B481A164695722839BD581D442457 /* MASShortcut */;
-			targetProxy = 0BC0DE1B73D7B202211F22ADE0E8BFAF /* PBXContainerItemProxy */;
-		};
-		EA3975759835187852ABF6217CF5258E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MarkdownKit;
-			target = 9B8CED42548FBCD698879F50FDF51154 /* MarkdownKit */;
-			targetProxy = B72F543B376359A6FA37FF96A1FCAA8C /* PBXContainerItemProxy */;
+			name = SwiftyMarkdown;
+			target = 93523582DEC251A9E59F621510B882C3 /* SwiftyMarkdown */;
+			targetProxy = 3FFB985D9B8369C99E512FACA24F7783 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		29D5D541F0D0AF0393ACBBDAD22AE218 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBAFDFA52941E13B9CD14B1998B614F2 /* Pods-tmpNote.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		2AE0D8B39827576460938522CAB2F560 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -768,43 +742,9 @@
 			};
 			name = Release;
 		};
-		34DA05302AEBBE6CB4A7502BBE3FC3DB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FAE42268B10B36B98765187EE21604A1 /* MarkdownKit.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/MarkdownKit/MarkdownKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MarkdownKit/MarkdownKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/MarkdownKit/MarkdownKit.modulemap";
-				PRODUCT_MODULE_NAME = MarkdownKit;
-				PRODUCT_NAME = MarkdownKit;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		3554FFB2366FD172C04A9712FFECCE58 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF2F2E4C3F1E5000CA6357C5225A14FA /* MASShortcut.debug.xcconfig */;
+			baseConfigurationReference = 727CF44C31720DFC99A8F7E352AB9356 /* MASShortcut.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -820,11 +760,10 @@
 			};
 			name = Debug;
 		};
-		581E606024B47D5401FE0F559645E218 /* Debug */ = {
+		6D12E7FC5E54D678B66092CA97AAAA84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBAFDFA52941E13B9CD14B1998B614F2 /* Pods-tmpNote.debug.xcconfig */;
+			baseConfigurationReference = E074186343182CC263D5DC0AB4512130 /* SwiftyMarkdown.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -838,59 +777,22 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyMarkdown/SwiftyMarkdown-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyMarkdown/SwiftyMarkdown-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/SwiftyMarkdown/SwiftyMarkdown.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyMarkdown;
+				PRODUCT_NAME = SwiftyMarkdown;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		7279F28E62B09F96AB7F475E13A78F0E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DD53B177140118DC62C905DF7535C1D /* Pods-tmpNote.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		816C679D58750316935F7386A438309D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -958,7 +860,7 @@
 		};
 		9308A8EC81CDF4EC8F85EB14A4D34882 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32BA5107F5AD8D1205DA3009BE4E9E23 /* MASShortcut.release.xcconfig */;
+			baseConfigurationReference = 33877DEAC6FB814AF366F7FA995931F8 /* MASShortcut.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -990,9 +892,43 @@
 			};
 			name = Release;
 		};
+		9A3B61FE9CF0D1046D2E2DF0B3E50F61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98332F769BFE50CDB76A9D111D3292A2 /* SwiftyMarkdown.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyMarkdown/SwiftyMarkdown-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyMarkdown/SwiftyMarkdown-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/SwiftyMarkdown/SwiftyMarkdown.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyMarkdown;
+				PRODUCT_NAME = SwiftyMarkdown;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		A9319EF8D22E0711246A5B25FECD54FC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32BA5107F5AD8D1205DA3009BE4E9E23 /* MASShortcut.release.xcconfig */;
+			baseConfigurationReference = 33877DEAC6FB814AF366F7FA995931F8 /* MASShortcut.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1008,10 +944,11 @@
 			};
 			name = Release;
 		};
-		CDAA4E42EAA27B17E848355FFF23410F /* Release */ = {
+		E19B8DD097076C7411806F5F1917F654 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B3EC55F94EF22A5447A799B3FE79EED /* MarkdownKit.release.xcconfig */;
+			baseConfigurationReference = 4DD53B177140118DC62C905DF7535C1D /* Pods-tmpNote.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1025,18 +962,19 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/MarkdownKit/MarkdownKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MarkdownKit/MarkdownKit-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/MarkdownKit/MarkdownKit.modulemap";
-				PRODUCT_MODULE_NAME = MarkdownKit;
-				PRODUCT_NAME = MarkdownKit;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-tmpNote/Pods-tmpNote.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1044,7 +982,7 @@
 		};
 		FA369E91E34A5EB96D1BBDABFDD64418 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF2F2E4C3F1E5000CA6357C5225A14FA /* MASShortcut.debug.xcconfig */;
+			baseConfigurationReference = 727CF44C31720DFC99A8F7E352AB9356 /* MASShortcut.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1079,6 +1017,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		137DD6799B73973A94DC1F3363FDC1A7 /* Build configuration list for PBXNativeTarget "Pods-tmpNote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29D5D541F0D0AF0393ACBBDAD22AE218 /* Debug */,
+				E19B8DD097076C7411806F5F1917F654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		14EDD71B3D9BB25C4467E6BAFABDB673 /* Build configuration list for PBXNativeTarget "MASShortcut-MASShortcut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1088,11 +1035,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		24C8A3EC62672F88D94460DDE25B5ECA /* Build configuration list for PBXNativeTarget "Pods-tmpNote" */ = {
+		15C05C15D921CEA35FC63E927F5266F9 /* Build configuration list for PBXNativeTarget "SwiftyMarkdown" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				581E606024B47D5401FE0F559645E218 /* Debug */,
-				7279F28E62B09F96AB7F475E13A78F0E /* Release */,
+				6D12E7FC5E54D678B66092CA97AAAA84 /* Debug */,
+				9A3B61FE9CF0D1046D2E2DF0B3E50F61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1111,15 +1058,6 @@
 			buildConfigurations = (
 				FA369E91E34A5EB96D1BBDABFDD64418 /* Debug */,
 				9308A8EC81CDF4EC8F85EB14A4D34882 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D82385E11E61C95A09EE3D3AE3A6FEA9 /* Build configuration list for PBXNativeTarget "MarkdownKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				34DA05302AEBBE6CB4A7502BBE3FC3DB /* Debug */,
-				CDAA4E42EAA27B17E848355FFF23410F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

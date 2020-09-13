@@ -307,12 +307,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-tmpNote/Pods-tmpNote-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MASShortcut/MASShortcut.framework",
-				"${BUILT_PRODUCTS_DIR}/MarkdownKit/MarkdownKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyMarkdown/SwiftyMarkdown.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASShortcut.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarkdownKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyMarkdown.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
