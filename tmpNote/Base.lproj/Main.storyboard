@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="16002"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="17008"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
@@ -619,6 +619,22 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
+                                        <menuItem title="Plain Text" keyEquivalent="T" id="QcL-Z8-Tnc">
+                                            <connections>
+                                                <action selector="switchToPlainText:" target="Voe-Tx-rLC" id="Avz-WO-sQb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Markdown Preview" keyEquivalent="M" id="AyN-sz-IXf">
+                                            <connections>
+                                                <action selector="switchToMarkdown:" target="Voe-Tx-rLC" id="51V-Ot-1SE"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Drawing" keyEquivalent="D" id="oyl-cZ-SOB">
+                                            <connections>
+                                                <action selector="switchToDrawing:" target="Voe-Tx-rLC" id="uar-NE-lMn"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="bo9-DY-kaf"/>
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -708,8 +724,7 @@
                                                             <touchBarItem id="ieP-CP-M66">
                                                                 <viewController key="viewController" id="BTe-xb-wo0">
                                                                     <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XVT-Ip-as6">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="238" height="30"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="278" height="30"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="739-Gb-jAz">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -730,8 +745,7 @@
                                                             <touchBarItem id="hjO-fk-4f6">
                                                                 <viewController key="viewController" id="kDU-SN-OYz">
                                                                     <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CB1-8A-VJV">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="146" height="30"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="166" height="30"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="WWM-Ue-Maq">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -753,7 +767,6 @@
                                                                 <viewController key="viewController" id="yb0-iT-nFf">
                                                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NJz-8v-xbL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSLockLockedTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ajx-Et-TXs">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -794,13 +807,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="400" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="203" y="0.0" width="193" height="30"/>
+                                                        <rect key="frame" x="196" y="0.0" width="200" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="193" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
                                                                 <subviews>
                                                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-IA-CAq">
-                                                                        <rect key="frame" x="-0.5" y="3" width="104" height="23"/>
+                                                                        <rect key="frame" x="-1" y="3" width="112" height="23"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="capsule" trackingMode="selectOne" id="6d2-zU-5SW">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -816,7 +829,7 @@
                                                                         </connections>
                                                                     </segmentedControl>
                                                                     <button toolTip="Lock on screen ⌘L" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-9C-HmB">
-                                                                        <rect key="frame" x="108" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="115" y="-2.5" width="25.5" height="36"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="4FR-ju-a4K"/>
                                                                         </constraints>
@@ -833,7 +846,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Share ⌘S" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="138" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="145" y="-3" width="25.5" height="38"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
@@ -850,7 +863,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu ⌘," verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="168" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="175" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
@@ -912,10 +925,10 @@
                                                         </connections>
                                                     </button>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q4R-Ce-QAE">
-                                                        <rect key="frame" x="37" y="0.0" width="158" height="30"/>
+                                                        <rect key="frame" x="37" y="0.0" width="151" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYT-mX-Kkg">
-                                                                <rect key="frame" x="9" y="3" width="140" height="24"/>
+                                                                <rect key="frame" x="6" y="3" width="140" height="24"/>
                                                                 <subviews>
                                                                     <button toolTip="⌘1" verticalHuggingPriority="750" tag="1" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huB-Q5-tUB" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -1166,7 +1179,10 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
                         <toolbar key="toolbar" implicitIdentifier="5D91E1F9-40C9-43DE-B340-36F2E568DF14" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="1cT-xj-hNn">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="B91A2435-DE33-4E89-8547-C37BA64407E7" label="General" paletteLabel="General" tag="-1" image="NSPreferencesGeneral" id="tQs-aW-iqY"/>
+                                <toolbarItem implicitItemIdentifier="B91A2435-DE33-4E89-8547-C37BA64407E7" label="General" paletteLabel="General" tag="-1" image="NSPreferencesGeneral" id="tQs-aW-iqY">
+                                    <size key="minSize" width="22" height="22"/>
+                                    <size key="maxSize" width="22" height="22"/>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="GxD-1t-oru"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="3Uo-Kd-d8P"/>
                             </allowedToolbarItems>
@@ -1195,10 +1211,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-2e-99M">
-                                <rect key="frame" x="100" y="20" width="280" height="160"/>
+                                <rect key="frame" x="98" y="19" width="284" height="162"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SP1-l5-MaS">
-                                        <rect key="frame" x="-2" y="144" width="232" height="18"/>
+                                        <rect key="frame" x="-2" y="145" width="236" height="18"/>
                                         <buttonCell key="cell" type="check" title="Launch tmpNote at system startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wFd-BU-K3o">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1209,7 +1225,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="CNo-RY-6pR">
-                                        <rect key="frame" x="-2" y="115" width="191" height="18"/>
+                                        <rect key="frame" x="-2" y="114" width="195" height="18"/>
                                         <buttonCell key="cell" type="check" title="Synchronization with iCloud" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="krP-f5-J3P">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1219,10 +1235,10 @@
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-zh-AOf">
-                                        <rect key="frame" x="0.0" y="81" width="280" height="21"/>
+                                        <rect key="frame" x="0.0" y="80" width="284" height="20"/>
                                         <subviews>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="vRQ-ac-kCA">
-                                                <rect key="frame" x="-2" y="-2" width="248" height="25"/>
+                                                <rect key="frame" x="-2" y="-1" width="251" height="22"/>
                                                 <buttonCell key="cell" type="check" title="Menu Icon depends on note contents" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gjD-k7-4Ne">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1233,7 +1249,7 @@
                                                 </connections>
                                             </button>
                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="74e-Qj-hCg">
-                                                <rect key="frame" x="257" y="-4" width="25" height="25"/>
+                                                <rect key="frame" x="261" y="-4" width="25" height="25"/>
                                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i4L-r9-ZdB">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1256,10 +1272,10 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sno-8E-NQV">
-                                        <rect key="frame" x="30" y="45" width="154" height="21"/>
+                                        <rect key="frame" x="30" y="45" width="153" height="20"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XYm-By-taG">
-                                                <rect key="frame" x="-2" y="5" width="66" height="16"/>
+                                                <rect key="frame" x="-2" y="4" width="66" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Tint color:" id="PCb-kt-zan">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1267,10 +1283,10 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IFG-C1-jEf">
-                                                <rect key="frame" x="75" y="-3" width="82" height="25"/>
+                                                <rect key="frame" x="74" y="-4" width="83" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Du2-WR-qTz" id="rlX-Lk-g38">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="SvS-uw-Dm9">
                                                         <items>
                                                             <menuItem title="Default" state="on" id="Du2-WR-qTz"/>
@@ -1361,13 +1377,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSLockLockedTemplate" width="10" height="14"/>
-        <image name="NSLockUnlockedTemplate" width="10" height="14"/>
+        <image name="NSLockLockedTemplate" width="14" height="15"/>
+        <image name="NSLockUnlockedTemplate" width="17" height="15"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
-        <image name="NSQuickLookTemplate" width="19" height="12"/>
-        <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSQuickLookTemplate" width="21" height="13"/>
+        <image name="NSShareTemplate" width="15" height="17"/>
         <image name="NSStatusNone" width="16" height="16"/>
-        <image name="NSTouchBarTextBoxTemplate" width="20" height="30"/>
+        <image name="NSTouchBarTextBoxTemplate" width="19" height="14"/>
         <image name="clear" width="100" height="100"/>
         <image name="draw_empty" width="100" height="100"/>
         <image name="settings" width="17" height="17"/>

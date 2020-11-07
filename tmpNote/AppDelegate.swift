@@ -119,6 +119,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     //MARK: Menu actions
+    
+    @IBAction func switchToPlainText(_ sender: NSMenuItem) {
+        (self.popover.contentViewController as! TmpNoteViewController).currentMode = .text
+    }
+    
+    @IBAction func switchToMarkdown(_ sender: NSMenuItem) {
+        (self.popover.contentViewController as! TmpNoteViewController).currentMode = .markdown
+    }
+    
+    @IBAction func switchToDrawing(_ sender: NSMenuItem) {
+        (self.popover.contentViewController as! TmpNoteViewController).currentMode = .sketch
+    }
+    
     @objc func togglePopover(_ sender: Any?) {
         popover.isShown == true ? closePopover() : showPopover()
     }
