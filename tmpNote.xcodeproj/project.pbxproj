@@ -21,9 +21,9 @@
 		275847351F782C7F0072F709 /* TmpNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275847341F782C7F0072F709 /* TmpNoteViewController.swift */; };
 		277656601F75BBEC001B0294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776565F1F75BBEC001B0294 /* AppDelegate.swift */; };
 		277656641F75BBEC001B0294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277656631F75BBEC001B0294 /* Assets.xcassets */; };
-		277656671F75BBEC001B0294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277656651F75BBEC001B0294 /* Main.storyboard */; };
 		2787D48A21E20934005E817F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787D48921E20934005E817F /* Extensions.swift */; };
 		27B72AB221E384BD0082E490 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = 27B72AB121E384BD0082E490 /* example.gif */; };
+		B55A0BC7255739CF00A04621 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277656651F75BBEC001B0294 /* Main.storyboard */; };
 		EFD8EF95C286CE804BC4EA9F /* Pods_tmpNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A6AF7F337DA7E0EF356794 /* Pods_tmpNote.framework */; };
 /* End PBXBuildFile section */
 
@@ -270,11 +270,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55A0BC7255739CF00A04621 /* Main.storyboard in Resources */,
 				274464B71F79939F008A0252 /* Podfile in Resources */,
 				271CEFF021DD555A004CD3A8 /* DrawingScene.sks in Resources */,
 				277656641F75BBEC001B0294 /* Assets.xcassets in Resources */,
 				27B72AB221E384BD0082E490 /* example.gif in Resources */,
-				277656671F75BBEC001B0294 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

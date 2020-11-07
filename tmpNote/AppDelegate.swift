@@ -97,27 +97,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
 
         let colorIndex = UserDefaults.standard.integer(forKey: "iconFillColor")
-        let iconColor: NSColor = IconColor(rawValue: colorIndex)?.color() ?? .textColor
-        let resultColor = iconShouldBeFilled ? iconColor : .textColor
-
-        if #available(OSX 10.14, *) {
-            let image = iconShouldBeFilled ? NSImage(named: "Compose_bg_template") : NSImage(named: "Compose")
-            statusItem.button?.image = image
-            statusItem.button?.contentTintColor = resultColor
-        }
-        else {
-            let image = iconShouldBeFilled ? NSImage(named: "Compose_bg3") : NSImage(named: "Compose")
-            
-            image?.isTemplate = false
-            if IconColor(rawValue: colorIndex) == .default {
-                image?.isTemplate = true
-            }
-            
-            statusItem.button?.image = image
-            
-            let img = image?.tintedImage(tintColor: resultColor)
-            statusItem.button?.image = img
-        }
+        let iconColor: NSColor = IconColor(rawValue: colorIndex)?.color() ?? .controlColor
+        let resultColor = iconShouldBeFilled ? iconColor : .controlColor
+        
+        let image = iconShouldBeFilled ? NSImage(named: "Compose_bg_template") : NSImage(named: "Compose")
+        let img = image?.image(with: resultColor)
+        statusItem.button?.image = img
     }
     
     fileprivate func killLauncher() {
@@ -190,17 +175,19 @@ extension NSImage {
         unlockFocus()
     }
     
-    func tintedImage(tintColor: NSColor?) -> NSImage {
-        guard let tinted = self.copy() as? NSImage else { return self }
-        guard let tint = tintColor else { return self }
+    func image(with tintColor: NSColor) -> NSImage {
+        guard self.isTemplate else { return self }
         
-        tinted.lockFocus()
-        tint.set()
-        let imageRect = NSRect(origin: NSZeroPoint, size: tinted.size)
-        __NSRectFillUsingOperation(imageRect, .sourceAtop)
-        tinted.unlockFocus()
+        let image = self.copy() as! NSImage
+            image.lockFocus()
+            tintColor.set()
         
-        return tinted
+        let imageRect = NSRect(origin: .zero, size: image.size)
+            imageRect.fill(using: .sourceIn)
+            image.unlockFocus()
+            image.isTemplate = false
+        
+        return image
     }
 }
 
