@@ -97,8 +97,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
 
         let colorIndex = UserDefaults.standard.integer(forKey: "iconFillColor")
-        let iconColor: NSColor = IconColor(rawValue: colorIndex)?.color() ?? .controlColor
-        let resultColor = iconShouldBeFilled ? iconColor : .controlColor
+        let iconColor: NSColor = IconColor(rawValue: colorIndex)?.color() ?? IconColor.defaultColor()
+        let resultColor = iconShouldBeFilled ? iconColor : IconColor.defaultColor()
         
         let image = iconShouldBeFilled ? NSImage(named: "Compose_bg_template") : NSImage(named: "Compose")
         let img = image?.image(with: resultColor)

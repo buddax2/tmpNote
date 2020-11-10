@@ -41,10 +41,18 @@ enum IconColor: Int {
     func color() -> NSColor {
         switch self {
             case .default:
-                return .controlColor
+                return IconColor.defaultColor()
             case .red:
                 return .red
         }
+    }
+    
+    static func defaultColor() -> NSColor {
+        if #available(macOS 11, *) {
+            return .controlColor
+        }
+        
+        return .textColor
     }
 }
 
