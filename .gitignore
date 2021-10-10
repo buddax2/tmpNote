@@ -5,3 +5,4 @@ Pods/Pods.xcodeproj/xcuserdata/bx2.xcuserdatad/xcschemes/xcschememanagement.plis
 tmpNote.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 tmpNote.xcodeproj/xcuserdata/bx2.xcuserdatad/xcschemes/xcschememanagement.plist
 .DS_Store
+*.xcbkptlist

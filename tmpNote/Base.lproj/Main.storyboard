@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="17008"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="19016"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
@@ -704,20 +704,20 @@
             <objects>
                 <viewController storyboardIdentifier="TmpNoteViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="TmpNoteViewController" customModule="tmpNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="234"/>
+                        <rect key="frame" x="0.0" y="0.0" width="419" height="234"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="234"/>
+                                <rect key="frame" x="0.0" y="0.0" width="419" height="234"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-ax-0FW">
-                                        <rect key="frame" x="5" y="0.0" width="395" height="234"/>
+                                        <rect key="frame" x="5" y="0.0" width="414" height="234"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Yc-ce-VzK">
-                                            <rect key="frame" x="0.0" y="0.0" width="395" height="234"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" continuousSpellChecking="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" grammarChecking="YES" smartInsertDelete="YES" id="xUV-fZ-zVR" customClass="NoteTextView" customModule="tmpNote" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="395" height="204"/>
+                                                <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" allowsUndo="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" smartInsertDelete="YES" id="xUV-fZ-zVR" customClass="NoteTextView" customModule="tmpNote" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <touchBar key="touchBar" id="a0W-BE-WZq">
                                                         <touchBarItems>
@@ -725,6 +725,7 @@
                                                                 <viewController key="viewController" id="BTe-xb-wo0">
                                                                     <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XVT-Ip-as6">
                                                                         <rect key="frame" x="0.0" y="0.0" width="278" height="30"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="739-Gb-jAz">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -746,6 +747,7 @@
                                                                 <viewController key="viewController" id="kDU-SN-OYz">
                                                                     <segmentedControl key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CB1-8A-VJV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="166" height="30"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="WWM-Ue-Maq">
                                                                             <font key="font" metaFont="system"/>
                                                                             <segments>
@@ -767,6 +769,7 @@
                                                                 <viewController key="viewController" id="yb0-iT-nFf">
                                                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NJz-8v-xbL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSLockLockedTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ajx-Et-TXs">
                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -781,7 +784,7 @@
                                                     </touchBar>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="minSize" width="395" height="204"/>
+                                                    <size key="minSize" width="414" height="204"/>
                                                     <size key="maxSize" width="614" height="10000000"/>
                                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
@@ -793,24 +796,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V1X-0u-SVp">
-                                            <rect key="frame" x="379" y="30" width="16" height="204"/>
+                                            <rect key="frame" x="398" y="30" width="16" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
                                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LAu-TD-YOn">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="234"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="419" height="234"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="uDa-7L-bqj" customClass="HeaderView" customModule="tmpNote" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="400" height="30"/>
+                                        <rect key="frame" x="0.0" y="204" width="419" height="30"/>
                                         <subviews>
                                             <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="wsD-cc-9eo" userLabel="Header View">
-                                                <rect key="frame" x="0.0" y="0.0" width="400" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="419" height="30"/>
                                                 <subviews>
                                                     <customView horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="Ja4-zF-4V6">
-                                                        <rect key="frame" x="196" y="0.0" width="200" height="30"/>
+                                                        <rect key="frame" x="185" y="0.0" width="230" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-dX-I4o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="230" height="30"/>
                                                                 <subviews>
                                                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-IA-CAq">
                                                                         <rect key="frame" x="-1" y="3" width="112" height="23"/>
@@ -845,8 +848,25 @@
                                                                             <action selector="lockAction:" target="XfG-lQ-9wD" id="7na-65-UKk"/>
                                                                         </connections>
                                                                     </button>
+                                                                    <button toolTip="Separate window ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-qw-4YC">
+                                                                        <rect key="frame" x="145" y="-3" width="25" height="37"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="25" id="Wlg-wW-o6e"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="macwindow.on.rectangle.rtl" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="4Ws-zf-mj4">
+                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <string key="keyEquivalent">d</string>
+                                                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                                        </buttonCell>
+                                                                        <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <accessibility description="Open in a separate window"/>
+                                                                        <connections>
+                                                                            <action selector="toggleWindowState:" target="XfG-lQ-9wD" id="B0X-j5-JFK"/>
+                                                                        </connections>
+                                                                    </button>
                                                                     <button toolTip="Share ⌘S" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HNl-Bn-WOw" userLabel="Share">
-                                                                        <rect key="frame" x="145" y="-3" width="25.5" height="38"/>
+                                                                        <rect key="frame" x="175" y="-3" width="25.5" height="38"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="kDC-Hu-pIg"/>
                                                                         </constraints>
@@ -863,7 +883,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Menu ⌘," verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JuG-yx-yCu">
-                                                                        <rect key="frame" x="175" y="0.0" width="25" height="30"/>
+                                                                        <rect key="frame" x="205" y="0.0" width="25" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wpk-Wd-Xot"/>
                                                                         </constraints>
@@ -883,6 +903,8 @@
                                                                 <constraints>
                                                                     <constraint firstItem="JuG-yx-yCu" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="0ef-ne-Lh5"/>
                                                                     <constraint firstAttribute="bottom" secondItem="JuG-yx-yCu" secondAttribute="bottom" id="CX0-1t-fIk"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="5oU-qw-4YC" secondAttribute="bottom" id="DvL-4g-x85"/>
+                                                                    <constraint firstItem="5oU-qw-4YC" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="JDc-Zw-TeI"/>
                                                                     <constraint firstAttribute="bottom" secondItem="mVr-9C-HmB" secondAttribute="bottom" id="JIP-ga-mFB"/>
                                                                     <constraint firstItem="mVr-9C-HmB" firstAttribute="top" secondItem="R0a-dX-I4o" secondAttribute="top" id="YId-Au-51O"/>
                                                                     <constraint firstAttribute="bottom" secondItem="HNl-Bn-WOw" secondAttribute="bottom" id="aeQ-JD-WfM"/>
@@ -893,8 +915,10 @@
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
+                                                                    <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
@@ -925,10 +949,10 @@
                                                         </connections>
                                                     </button>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q4R-Ce-QAE">
-                                                        <rect key="frame" x="37" y="0.0" width="151" height="30"/>
+                                                        <rect key="frame" x="37" y="0.0" width="140" height="30"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYT-mX-Kkg">
-                                                                <rect key="frame" x="6" y="3" width="140" height="24"/>
+                                                                <rect key="frame" x="0.0" y="3" width="140" height="24"/>
                                                                 <subviews>
                                                                     <button toolTip="⌘1" verticalHuggingPriority="750" tag="1" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huB-Q5-tUB" customClass="CustomRadioButton" customModule="tmpNote" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -1386,6 +1410,7 @@
         <image name="NSTouchBarTextBoxTemplate" width="19" height="14"/>
         <image name="clear" width="100" height="100"/>
         <image name="draw_empty" width="100" height="100"/>
+        <image name="macwindow.on.rectangle.rtl" catalog="system" width="20" height="16"/>
         <image name="settings" width="17" height="17"/>
     </resources>
 </document>
