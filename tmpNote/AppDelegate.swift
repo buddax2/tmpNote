@@ -180,7 +180,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             if let controller = self?.panel?.contentViewController as? TmpNoteViewController {
                 controller.save()
             }
-//            (self?.panel?.contentViewController as! TmpNoteViewController).save()
         }
         panel?.close()
     }
