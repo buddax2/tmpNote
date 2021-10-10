@@ -17,7 +17,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
+    var panel: NSPanel?
+    var isPresented = false
+    
     var eventMonitor: EventMonitor?
+    var isInPopover = true
     let preferences = PreferencesWindowController.freshController()
     var containerUrl: URL? {
         return FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
@@ -35,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             let isLocked = UserDefaults.standard.bool(forKey: "locked")
             if let strongSelf = self, strongSelf.popover.isShown, isLocked == false {
-                strongSelf.closePopover()
+                strongSelf.close()
             }
         }
         
@@ -133,7 +137,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     @objc func togglePopover(_ sender: Any?) {
-        popover.isShown == true ? closePopover() : showPopover()
+        if isInPopover {
+            isPresented == true ? close() : show()
+        }
+        else {
+            panel?.isKeyWindow == true ? close() : show()
+        }
     }
     
     @objc func openPreferences() {
@@ -166,6 +175,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         UserDefaults.standard.synchronize()
     }
     
+    func closePanel() {
+        DispatchQueue.main.async { [weak self] in
+            if let controller = self?.panel?.contentViewController as? TmpNoteViewController {
+                controller.save()
+            }
+        }
+        panel?.close()
+    }
+    
     func setupLaunchOnStartup() {
         
         var shouldLaunch = false
@@ -177,6 +195,66 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         SMLoginItemSetEnabled(launcherIdentifier as CFString, shouldLaunch)
+    }
+    
+    func toggleWindowState() {
+        isInPopover.toggle()
+        show()
+    }
+    
+    func show() {
+        isPresented = true
+
+        if isInPopover {
+            closePanel()
+            showPopover()
+            return
+        }
+        
+        closePopover()
+        
+        if panel != nil {
+            DispatchQueue.main.async {
+                self.panel?.orderFrontRegardless()
+                NSApplication.shared.activate(ignoringOtherApps: true)
+            }
+            return
+        }
+        
+        let noteController = TmpNoteViewController.freshController()
+
+        let isLocked = UserDefaults.standard.bool(forKey: "locked") == true
+        let panelStyleMask: NSWindow.StyleMask = isLocked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
+        panel = NSPanel(contentRect: popover.positioningRect, styleMask: panelStyleMask, backing: .buffered, defer: true)
+        panel?.level = .mainMenu
+        panel?.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+        panel?.contentViewController = noteController
+        if let bounds = statusItem.button?.window?.frame {
+            panel?.setFrameTopLeftPoint(CGPoint(x: bounds.midX - noteController.view.bounds.width/2, y: bounds.minY))
+        }
+        panel?.isFloatingPanel = isLocked
+        panel?.orderFrontRegardless()
+        noteController.load()
+        NSApplication.shared.activate(ignoringOtherApps: true)
+    }
+    
+    func close() {
+        isPresented = false
+        
+        if isInPopover {
+            closePopover()
+            return
+        }
+        
+        closePanel()
+    }
+    
+    func changeLockMode(locked: Bool) {
+        guard isInPopover == false else { return }
+        
+        let panelStyleMask: NSWindow.StyleMask = locked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
+        panel?.styleMask = panelStyleMask
+        panel?.isFloatingPanel = locked
     }
 }
 

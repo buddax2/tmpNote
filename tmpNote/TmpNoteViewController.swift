@@ -363,6 +363,15 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         lockButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
         lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
         lockTouchBarButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
+        
+        
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.changeLockMode(locked: !isLocked)
+    }
+    
+    @IBAction func toggleWindowState(_ sender: Any) {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.toggleWindowState()
     }
     
     func saveSubstitutions() {
@@ -389,7 +398,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     ///Close popover if Esc key is pressed
     override func cancelOperation(_ sender: Any?) {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        appDelegate.closePopover()
+        appDelegate.close()
     }
     
     @IBAction func showAppMenu(_ sender: NSButton) {
