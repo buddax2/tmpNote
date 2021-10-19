@@ -110,8 +110,7 @@ class GeneralViewController: NSViewController {
     }
     
     func syncUI() {
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        syncToggleButton.isEnabled = appDelegate.containerUrl != nil
+        syncToggleButton.isEnabled = Datasource.containerUrl != nil
     }
 }
 

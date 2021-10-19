@@ -23,15 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var eventMonitor: EventMonitor?
     var isInPopover = true
     let preferences = PreferencesWindowController.freshController()
-    var containerUrl: URL? {
-        return FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
-    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
         setDefaultSettings()
         
-        TmpNoteViewController.migrate()
+//        TmpNoteViewController.migrate()
         
         setupLaunchOnStartup()
         killLauncher()
@@ -56,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         // check for container existence
-        if let url = self.containerUrl, !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
+        if let url = Datasource.containerUrl, !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
             do {
                 try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             }
@@ -77,13 +74,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
         
-        DispatchQueue.main.async { [weak self] in
-            TmpNoteViewController.loadText(viewIndex: 1) { (savedText) in
-                TmpNoteViewController.loadSketch { (savedSketch) in
-                    self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
-                }
-            }
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            TmpNoteViewController.loadText(viewIndex: 1) { (savedText) in
+//                TmpNoteViewController.loadSketch { (savedSketch) in
+//                    self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
+//                }
+//            }
+//        }
     }
     
     func setDefaultSettings() {
@@ -160,27 +157,31 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             NSApplication.shared.activate(ignoringOtherApps: true)
             eventMonitor?.start()
-            DispatchQueue.main.async { [weak self] in
-                (self?.popover.contentViewController as! TmpNoteViewController).load()
-            }
+            DatasourceController.shared.load()
+//            DispatchQueue.main.async { [weak self] in
+//                (self?.popover.contentViewController as! TmpNoteViewController).load()
+//            }
         }
     }
     
     func closePopover() {
         popover.performClose(self)
-        DispatchQueue.main.async { [weak self] in
-            (self?.popover.contentViewController as! TmpNoteViewController).save()
-        }
+        DatasourceController.shared.save()
+//        DispatchQueue.main.async { [weak self] in
+//            (self?.popover.contentViewController as! TmpNoteViewController).save()
+//        }
         eventMonitor?.stop()
         UserDefaults.standard.synchronize()
     }
     
     func closePanel() {
-        DispatchQueue.main.async { [weak self] in
-            if let controller = self?.panel?.contentViewController as? TmpNoteViewController {
-                controller.save()
-            }
-        }
+        DatasourceController.shared.save()
+
+//        DispatchQueue.main.async { [weak self] in
+//            if let controller = self?.panel?.contentViewController as? TmpNoteViewController {
+//                controller.save()
+//            }
+//        }
         panel?.close()
     }
     
@@ -234,7 +235,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         panel?.isFloatingPanel = isLocked
         panel?.orderFrontRegardless()
-        noteController.load()
+        DatasourceController.shared.load()
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
     

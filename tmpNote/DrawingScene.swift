@@ -91,7 +91,7 @@ extension DrawingScene {
         
         // ⌘S - Save content
         if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
-            storage?.save()
+            DatasourceController.shared.saveSketch(newSketch: mainController.lines)
         }
 
         if event.keyCode == kVK_ANSI_Z {
