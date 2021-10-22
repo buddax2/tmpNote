@@ -74,8 +74,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    var lines = [SKShapeNode]()
-    
     func syncUI() {
         contentTouchBarButton.selectedSegment = DatasourceController.shared.currentMode.rawValue
         contentModeButton.selectedSegment = DatasourceController.shared.currentMode.rawValue
@@ -246,8 +244,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         skview = SKView(frame: drawingView.bounds)
         drawingView.addSubview(skview!)
         drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
-        drawingScene?.mainController = self
-        drawingScene?.contentDidChangeCallback = contentDidChange
         skview?.presentScene(drawingScene)
         
         drawingScene?.load()
@@ -551,9 +547,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func contentDidChange() {
         if DatasourceController.shared.currentMode == .text {
             DatasourceController.shared.content = textView.string
-        }
-        else {
-            DatasourceController.shared.lines = lines
         }
     }
 }

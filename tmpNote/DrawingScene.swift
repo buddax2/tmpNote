@@ -13,12 +13,9 @@ class DrawingScene: SKScene {
     
     var storage: StorageDataSource?
     var firstPoint: CGPoint?
-    weak var mainController: TmpNoteViewController!
     var lineNode = SKShapeNode()
     var pathToDraw: CGMutablePath?
     var redoArray = [SKShapeNode]()
-    
-    var contentDidChangeCallback: (()->Void)?
     
     override func mouseDown(with event: NSEvent) {
         firstPoint = event.location(in: self)
@@ -45,41 +42,39 @@ class DrawingScene: SKScene {
             let newLine = SKShapeNode(path: path)
             newLine.strokeColor = .textColor
             addChild(newLine)
-            mainController.lines.append(newLine)
+            DatasourceController.shared.lines.append(newLine)
         }
-        
-        contentDidChangeCallback?()
     }
     
     func clear() {
-        mainController.lines.forEach { line in
+        DatasourceController.shared.lines.forEach { line in
             line.removeFromParent()
         }
-        mainController.lines.removeAll()
+        DatasourceController.shared.lines.removeAll()
         pathToDraw = nil
     }
     
     func load() {
         pathToDraw = CGMutablePath()
 
-        for line in mainController.lines {
+        for line in DatasourceController.shared.lines {
             line.removeFromParent()
             addChild(line)
         }
     }
     
     func undo() {
-        if let lastLine = mainController.lines.last {
+        if let lastLine = DatasourceController.shared.lines.last {
             redoArray.append(lastLine)
             lastLine.removeFromParent()
-            mainController.lines.removeLast()
+            DatasourceController.shared.lines.removeLast()
         }
     }
     
     func redo() {
         if let lastLine = redoArray.last {
             addChild(lastLine)
-            mainController.lines.append(lastLine)
+            DatasourceController.shared.lines.append(lastLine)
             redoArray.removeLast()
         }
     }
@@ -91,7 +86,7 @@ extension DrawingScene {
         
         // ⌘S - Save content
         if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
-            DatasourceController.shared.saveSketch(newSketch: mainController.lines)
+            DatasourceController.shared.saveSketch()
         }
 
         if event.keyCode == kVK_ANSI_Z {

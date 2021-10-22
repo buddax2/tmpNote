@@ -31,6 +31,9 @@ class DatasourceController: ObservableObject {
     private lazy var loadNoteSubject = PassthroughSubject<String, Never>()
     lazy var doLoadNoteSubject = loadNoteSubject.eraseToAnyPublisher()
 
+    private lazy var loadSketchSubject = PassthroughSubject<[SKShapeNode], Never>()
+    lazy var doLoadSketchSubject = loadNoteSubject.eraseToAnyPublisher()
+
     
     func load() {
         let prevModeRaw = UserDefaults.standard.integer(forKey: DatasourceKey.previousSessionModeKey.rawValue)
@@ -63,6 +66,7 @@ class DatasourceController: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] savedLines in
                 self?.lines = savedLines
+                self?.loadSketchSubject.send(savedLines)
             })
     }
     
