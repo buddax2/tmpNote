@@ -24,7 +24,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var skview: SKView?
     
     var tmpLockMode = false
-    var currentViewIndex: Int = 1
     
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
     @IBOutlet weak var headerView: HeaderView! {
@@ -62,12 +61,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet var textView: NoteTextView! {
         didSet {
             textView.delegate = self
-//            textView.storageDataSource = self
             DispatchQueue.main.async { [weak self] in
                 self?.setupTextView()
-                
-                DatasourceController.shared.load()
-//                self?.load()
             }
         }
     }
@@ -80,19 +75,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     var lines = [SKShapeNode]()
-    var currentMode: Mode = .text {
-        didSet {
-            let icon = currentMode == .sketch ? NSImage(named: "draw_filled") : NSImage(named: "draw_empty")
-            contentModeButton.setImage(icon, forSegment: Mode.sketch.rawValue)
-            syncUI()
-        }
-    }
     
     func syncUI() {
-        contentTouchBarButton.selectedSegment = currentMode.rawValue
-        contentModeButton.selectedSegment = currentMode.rawValue
+        contentTouchBarButton.selectedSegment = DatasourceController.shared.currentMode.rawValue
+        contentModeButton.selectedSegment = DatasourceController.shared.currentMode.rawValue
         
-        switch currentMode {
+        switch DatasourceController.shared.currentMode {
         case .text:
             removeDrawScene()
             showPlainText()
@@ -103,7 +91,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             createDrawScene()
         }
         
-        clearButton.isEnabled = currentMode == .text || currentMode == .sketch
+        clearButton.isEnabled = DatasourceController.shared.currentMode == .text || DatasourceController.shared.currentMode == .sketch
     }
     
     var rawText: String = ""
@@ -116,12 +104,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
         let color: NSColor = currentAppearanceIsLight ? .black : .white
         
-        let md = markdown(text: rawText, baseFontSize: CGFloat(fontSize), color: color)
+        let md = markdown(text: DatasourceController.shared.content, baseFontSize: CGFloat(fontSize), color: color)
         textView.textStorage?.setAttributedString(md.attributedString())
     }
     
     func markdown(text: String, baseFontSize: CGFloat, color: NSColor) -> SwiftyMarkdown {
-        let md = SwiftyMarkdown(string: rawText)
+        let md = SwiftyMarkdown(string: text)
         md.setFontColorForAllStyles(with: color)
         md.setFontSizeForAllStyles(with: baseFontSize)
         
@@ -152,7 +140,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func showPlainText() {
-        textView.string = rawText
+        textView.string = DatasourceController.shared.content
         textView.isEditable = true
         setupTextView()
     }
@@ -166,32 +154,53 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         shareButton.sendAction(on: .leftMouseDown)
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        self.loadSubstitutions()
+        
+        DatasourceController.shared.load()
+        
+        DatasourceController.shared.doLoadNoteSubject
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            
+            }, receiveValue: { [weak self] newContent in
+                self?.showPlainText()
+            })
+            .store(in: &self.subscribers)
+
+        DatasourceController.shared.$currentViewIndex
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newIndex in
+                self?.setupViewButtons()
+            }
+            .store(in: &self.subscribers)
+
+        DatasourceController.shared.$currentMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newMode in
+                self?.contentModeButton.setSelected(true, forSegment: newMode.rawValue)
+                self?.syncUI()
+            }
+            .store(in: &self.subscribers)
+    }
+
     override func viewDidAppear() {
         super.viewDidAppear()
-        
-        DatasourceController.shared.$content.receive(on: DispatchQueue.main)
-            .sink { _ in
-            
-            } receiveValue: { [weak self] newContent in
-                self?.rawText = newContent
-                self?.showPlainText()
-            }
-            .store(in: &subscribers)
-
-        let prevModeInt = UserDefaults.standard.integer(forKey: DatasourceKey.previousSessionModeKey.rawValue)
-        contentModeButton.setSelected(true, forSegment: prevModeInt)
-        if let mode = Mode(rawValue: prevModeInt) {
-            currentMode = mode
-        }
     }
     
     override func viewWillDisappear() {
+        saveSubstitutions()
+
         drawingScene?.removeFromParent()
         skview?.removeFromSuperview()
         
         textareaScrollView.isHidden = false
         drawingView.isHidden = true
 
+        DatasourceController.shared.save()
+        
         super.viewWillDisappear()
     }
 
@@ -200,7 +209,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     func listenToInterfaceChangesNotification() {
         appearanceChangeObservation = self.view.observe(\.effectiveAppearance) { [weak self] _, _  in
             guard let strongSelf = self else { return }
-            if strongSelf.currentMode == .markdown {
+            if DatasourceController.shared.currentMode == .markdown {
                 strongSelf.showMarkdown()
             }
         }
@@ -220,16 +229,15 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
     @IBAction func contentModeDidChange(_ sender: NSSegmentedControl) {
         guard let contentMode = Mode(rawValue: sender.selectedSegment) else { return }
-        if currentMode != contentMode {
-            currentMode = contentMode
+        if DatasourceController.shared.currentMode != contentMode {
+            DatasourceController.shared.currentMode = contentMode
         }
     }
     
     @IBAction func pageTouchBarDidChange(_ sender: NSSegmentedControl) {
         DatasourceController.shared.save()
-        currentViewIndex = sender.selectedSegment + 1
+        DatasourceController.shared.currentViewIndex = sender.selectedSegment + 1
         DatasourceController.shared.load()
-
         
         setupViewButtons()
     }
@@ -266,8 +274,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func setupViewButtons() {
-        let enabled = currentMode != .sketch
-        let selectedTag = currentViewIndex
+        let enabled = DatasourceController.shared.currentMode != .sketch
+        let selectedTag = DatasourceController.shared.currentViewIndex
         
         pageTouchBarButton.selectedSegment = selectedTag - 1
         
@@ -280,9 +288,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func changeView(_ sender: NSButton) {
-        DatasourceController.shared.save()
-        currentViewIndex = sender.tag
-        DatasourceController.shared.load()
+        DatasourceController.shared.saveText()
+        DatasourceController.shared.currentViewIndex = sender.tag
+        DatasourceController.shared.loadNote()
 
         setupViewButtons()
     }
@@ -347,7 +355,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         let font = NSFont.systemFont(ofSize: size)
         textView.font = font
         
-        if currentMode == .markdown {
+        if DatasourceController.shared.currentMode == .markdown {
             showMarkdown()
         }
     }
@@ -473,7 +481,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBAction func clearAction(_ sender: Any) {
         
         var message: (String, String)
-        switch currentMode {
+        switch DatasourceController.shared.currentMode {
             case .text, .markdown:
                 message = ("Delete the note?", "Are you sure you would like to delete the note?")
             case .sketch:
@@ -489,20 +497,18 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             
             if modalResponse == .alertFirstButtonReturn {
                 
-                if let mode = self?.currentMode {
-                    switch mode {
-                        case .text, .markdown:
-                            if let textLength = strongSelf.textView.textStorage?.length {
-                                strongSelf.textView.insertText("", replacementRange: NSRange(location: 0, length: textLength))
-                                DatasourceController.shared.save()
-                            }
+                switch DatasourceController.shared.currentMode {
+                    case .text, .markdown:
+                        if let textLength = strongSelf.textView.textStorage?.length {
+                            strongSelf.textView.insertText("", replacementRange: NSRange(location: 0, length: textLength))
+                            DatasourceController.shared.save()
+                        }
 
-                        case .sketch:
-                            self?.drawingScene?.clear()
-                    }
-                    
-                    self?.contentDidChange()
+                    case .sketch:
+                        self?.drawingScene?.clear()
                 }
+                
+                self?.contentDidChange()
             }
         })
     }
@@ -510,7 +516,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBAction func shareAction(_ sender: NSButton) {
         var sharedItems = [Any]()
         
-        switch currentMode {
+        switch DatasourceController.shared.currentMode {
             case .text:
                 sharedItems = [textView.string];
             case .sketch:
@@ -543,18 +549,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func contentDidChange() {
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        if currentMode == .text {
-            rawText = textView.string
+        if DatasourceController.shared.currentMode == .text {
+            DatasourceController.shared.content = textView.string
         }
-        let isTextContent = rawText.isEmpty == false
-        let isSketchContent = lines.count > 0
-        
-        DatasourceController.shared.content = rawText
-        DatasourceController.shared.currentViewIndex = currentViewIndex
-        DatasourceController.shared.lines = lines
-
-        appDelegate.toggleMenuIcon(fill: (isTextContent || isSketchContent))
+        else {
+            DatasourceController.shared.lines = lines
+        }
     }
 }
 
@@ -601,51 +601,6 @@ extension TmpNoteViewController: PreferencesDelegate {
     }
 }
 
-//MARK: Storage Migration
-//extension TmpNoteViewController {
-//
-//    static private func migrateText() {
-//        let textUserDefaultsKey = "PreviousSessionText"
-//
-//        if let prevText = UserDefaults.standard.string(forKey: textUserDefaultsKey) {
-//            TmpNoteViewController.saveTextIfChanged(note: prevText, viewIndex: 1) { (saved) in
-//                if saved == true {
-//                    //Nulify old text storage
-//                    UserDefaults.standard.removeObject(forKey: textUserDefaultsKey)
-//                }
-//            }
-//        }
-//    }
-//
-//    static private func migrateSketch() {
-//        let sketchUserDefaultsKey = "PreviousSessionSketch"
-//
-//        if let encodedLines = UserDefaults.standard.value(forKey: sketchUserDefaultsKey) as? [Data] {
-//            var lines = [SKShapeNode]()
-//            for data in encodedLines {
-//                if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
-//                    let path = bp.cgPath
-//                    let newLine = SKShapeNode(path: path)
-//                    newLine.strokeColor = .textColor
-//                    lines.append(newLine)
-//                }
-//            }
-//
-//            TmpNoteViewController.saveSketchIfChanged(lines: lines) { (saved) in
-//                if saved == true {
-//                    //Nulify old sketch storage
-//                    UserDefaults.standard.removeObject(forKey: sketchUserDefaultsKey)
-//                }
-//            }
-//        }
-//    }
-//
-//    static public func migrate() {
-//        migrateText()
-//        migrateSketch()
-//    }
-//}
-
 class CustomRadioButton: NSButton {
 
     func toggleState(newState: StateValue) {
@@ -664,7 +619,6 @@ class NoteTextView: NSTextView {
         // ⌘S - Save content
         if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
             DatasourceController.shared.saveText(newContent: self.string)
-//            storageDataSource?.save()
         }
 
         super.keyDown(with: event)

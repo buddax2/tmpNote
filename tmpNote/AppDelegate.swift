@@ -8,6 +8,7 @@
 
 import Cocoa
 import ServiceManagement
+import Combine
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -16,42 +17,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
        return  Bundle.main.bundleIdentifier!+".LauncherApplication"
     }
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
-    let popover = NSPopover()
+    var popover: NSPopover?
     var panel: NSPanel?
     var isPresented = false
     
     var eventMonitor: EventMonitor?
     var isInPopover = true
     let preferences = PreferencesWindowController.freshController()
+    var contentSubscriber: AnyCancellable?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
         setDefaultSettings()
-        
-//        TmpNoteViewController.migrate()
         
         setupLaunchOnStartup()
         killLauncher()
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             let isLocked = UserDefaults.standard.bool(forKey: "locked")
-            if let strongSelf = self, strongSelf.popover.isShown, isLocked == false {
+            if let strongSelf = self, let popover = strongSelf.popover, popover.isShown, isLocked == false {
                 strongSelf.close()
             }
         }
         
+        DatasourceController.shared.load()
+        
         createStatusBarIcon()
-        popover.animates = false
-        popover.contentViewController = TmpNoteViewController.freshController()
 
-        // Force light appearance for OSX < 10.14
-        let majorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.majorVersion
-        let minorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.minorVersion
-        
-        if majorVersion == 10 && minorVersion < 14 {
-            popover.appearance = NSAppearance(named: .vibrantLight)
-        }
-        
         // check for container existence
         if let url = Datasource.containerUrl, !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
             do {
@@ -64,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        DatasourceController.shared.save()
     }
 
     private func createStatusBarIcon() {
@@ -74,13 +66,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             button.action = #selector(AppDelegate.togglePopover(_:))
         }
         
-//        DispatchQueue.main.async { [weak self] in
-//            TmpNoteViewController.loadText(viewIndex: 1) { (savedText) in
-//                TmpNoteViewController.loadSketch { (savedSketch) in
-//                    self?.toggleMenuIcon(fill: (savedText.isEmpty == false || savedSketch.count > 0))
-//                }
-//            }
-//        }
+        contentSubscriber = DatasourceController.shared.$content
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            
+            }, receiveValue: { [weak self] newContent in
+                self?.toggleMenuIcon(fill: newContent.isEmpty == false)
+            })
     }
     
     func setDefaultSettings() {
@@ -122,24 +114,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     //MARK: Menu actions
     
     @IBAction func switchToPlainText(_ sender: NSMenuItem) {
-        (self.popover.contentViewController as! TmpNoteViewController).currentMode = .text
+        DatasourceController.shared.currentMode = .text
     }
     
     @IBAction func switchToMarkdown(_ sender: NSMenuItem) {
-        (self.popover.contentViewController as! TmpNoteViewController).currentMode = .markdown
+        DatasourceController.shared.currentMode = .markdown
     }
     
     @IBAction func switchToDrawing(_ sender: NSMenuItem) {
-        (self.popover.contentViewController as! TmpNoteViewController).currentMode = .sketch
+        DatasourceController.shared.currentMode = .sketch
     }
     
     @objc func togglePopover(_ sender: Any?) {
-        if isInPopover {
-            isPresented == true ? close() : show()
-        }
-        else {
-            panel?.isKeyWindow == true ? close() : show()
-        }
+//        DispatchQueue.main.async {
+            if self.isInPopover {
+                self.isPresented == true ? self.close() : self.show()
+            }
+            else {
+                self.panel?.isKeyWindow == true ? self.close() : self.show()
+            }
+//        }
     }
     
     @objc func openPreferences() {
@@ -154,34 +148,45 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     //MARK: Popover Show/Hide
     func showPopover() {
         if let button = statusItem.button {
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
-            NSApplication.shared.activate(ignoringOtherApps: true)
-            eventMonitor?.start()
-            DatasourceController.shared.load()
-//            DispatchQueue.main.async { [weak self] in
-//                (self?.popover.contentViewController as! TmpNoteViewController).load()
-//            }
+            if popover != nil {
+                DispatchQueue.main.async {
+                    self.popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+                    NSApplication.shared.activate(ignoringOtherApps: true)
+                    self.eventMonitor?.start()
+                }
+                return
+            }
+            
+            popover = NSPopover()
+
+            popover?.animates = false
+            popover?.contentViewController = TmpNoteViewController.freshController()
+
+            // Force light appearance for OSX < 10.14
+            let majorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.majorVersion
+            let minorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.minorVersion
+            
+            if majorVersion == 10 && minorVersion < 14 {
+                popover?.appearance = NSAppearance(named: .vibrantLight)
+            }
+
+//            popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            
+            DispatchQueue.main.async {
+                self.popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+                NSApplication.shared.activate(ignoringOtherApps: true)
+                self.eventMonitor?.start()
+            }
         }
     }
     
     func closePopover() {
-        popover.performClose(self)
-        DatasourceController.shared.save()
-//        DispatchQueue.main.async { [weak self] in
-//            (self?.popover.contentViewController as! TmpNoteViewController).save()
-//        }
+        popover?.performClose(self)
         eventMonitor?.stop()
         UserDefaults.standard.synchronize()
     }
     
     func closePanel() {
-        DatasourceController.shared.save()
-
-//        DispatchQueue.main.async { [weak self] in
-//            if let controller = self?.panel?.contentViewController as? TmpNoteViewController {
-//                controller.save()
-//            }
-//        }
         panel?.close()
     }
     
@@ -226,7 +231,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         let isLocked = UserDefaults.standard.bool(forKey: "locked") == true
         let panelStyleMask: NSWindow.StyleMask = isLocked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
-        panel = NSPanel(contentRect: popover.positioningRect, styleMask: panelStyleMask, backing: .buffered, defer: true)
+        panel = NSPanel(contentRect: popover?.positioningRect ?? NSRect.zero, styleMask: panelStyleMask, backing: .buffered, defer: true)
         panel?.level = .mainMenu
         panel?.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         panel?.contentViewController = noteController
@@ -235,7 +240,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         panel?.isFloatingPanel = isLocked
         panel?.orderFrontRegardless()
-        DatasourceController.shared.load()
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
     

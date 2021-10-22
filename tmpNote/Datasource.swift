@@ -20,28 +20,50 @@ class DatasourceController: ObservableObject {
     
     let datasource = Datasource()
     
-    var currentViewIndex: Int = 0
-    var currentMode: Mode = .text
-    var lines = [SKShapeNode]()
+    @Published var currentViewIndex: Int = 0
+    @Published var currentMode: Mode = .text
     @Published var content: String = ""
+    @Published var lines = [SKShapeNode]()
 
+    private var loadNoteSubscriber: AnyCancellable?
+    private var loadSketchSubscriber: AnyCancellable?
+    
+    private lazy var loadNoteSubject = PassthroughSubject<String, Never>()
+    lazy var doLoadNoteSubject = loadNoteSubject.eraseToAnyPublisher()
+
+    
     func load() {
-        _ = datasource.loadText(viewIndex: currentViewIndex)
+        let prevModeRaw = UserDefaults.standard.integer(forKey: DatasourceKey.previousSessionModeKey.rawValue)
+        currentMode = Mode(rawValue: prevModeRaw) ?? .text
+        currentViewIndex = UserDefaults.standard.integer(forKey: DatasourceKey.previousViewIndex.rawValue)
+        
+        loadNote()
+        loadSketch()
+    }
+    
+    func save() {
+        UserDefaults.standard.set(currentMode.rawValue, forKey: DatasourceKey.previousSessionModeKey.rawValue)
+        UserDefaults.standard.set(currentViewIndex, forKey: DatasourceKey.previousViewIndex.rawValue)
+        
+        saveText()
+        saveSketch()
+    }
+    
+    func loadNote() {
+        loadNoteSubscriber = datasource.loadText(viewIndex: currentViewIndex)
             .receive(on: DispatchQueue.main)
             .sink { _ in } receiveValue: { [weak self] savedText in
                 self?.content = savedText
+                self?.loadNoteSubject.send(savedText)
             }
-
-        _ = datasource.loadSketch()
+    }
+    
+    func loadSketch() {
+        loadSketchSubscriber = datasource.loadSketch()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] savedLines in
                 self?.lines = savedLines
             })
-    }
-    
-    func save() {
-        saveText()
-        saveSketch()
     }
     
     func saveText(newContent: String? = nil) {
@@ -116,109 +138,12 @@ class Datasource {
         
         return Self.localFileURL(name: fileName, extensionStr: fileExtension)
     }
-    
-//    static func saveTextIfChanged(note: String, viewIndex: Int, completion: ((Bool)->Void)?) {
-//        var result = false
-//
-//        defer {
-//            completion?(result)
-//        }
-//
-//        // Check if text has been changed
-//        let savedText = loadText(viewIndex: viewIndex)
-//        if note == savedText {
-//            return
-//        }
-//
-//        if let url = defaultTextFileURL(viewIndex: viewIndex) {
-//            do {
-//                try note.write(to: url, atomically: true, encoding: .utf8)
-//                result = true
-//            } catch {
-//                debugPrint(error.localizedDescription)
-//            }
-//        }
-//    }
-        
-//    static func saveSketchIfChanged(lines: [SKShapeNode], completion: ((Bool)->Void)?) {
-//        var result = false
-//
-//        defer {
-//            completion?(result)
-//        }
-//
-//        let paths:[CGPath] = lines.compactMap { $0.path }
-//
-//        let savedPaths = loadSketch().compactMap { $0.path }
-//        if paths == savedPaths {
-//            return
-//        }
-//
-//        var encodedLines = [Data]()
-//        for path in paths {
-//            let bp = NSBezierPath()
-//
-//            let points:[CGPoint] = path.getPathElementsPoints()
-//            if points.count > 0 {
-//
-//                bp.move(to: points.first!)
-//                for i in 1..<points.count {
-//                    bp.line(to: points[i])
-//                }
-//
-//                let arch = NSKeyedArchiver.archivedData(withRootObject: bp)
-//                encodedLines.append(arch)
-//            }
-//        }
-//
-//        if let url = Self.defaultSketchFileURL {
-//            result = NSKeyedArchiver.archiveRootObject(encodedLines, toFile: url.path)
-//        }
-//    }
-
-//    static private  func loadSketch() -> [SKShapeNode] {
-//        var lines = [SKShapeNode]()
-//
-//        if let url = Self.defaultSketchFileURL {
-//            if let encodedLines = NSKeyedUnarchiver.unarchiveObject(withFile: url.path) as? [Data] {
-//                for data in encodedLines {
-//                    if let bp = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSBezierPath {
-//                        let path = bp.cgPath
-//                        let newLine = SKShapeNode(path: path)
-//                        newLine.strokeColor = .textColor
-//                        lines.append(newLine)
-//                    }
-//                }
-//            }
-//        }
-//
-//        return lines
-//    }
-//    static func loadSketch(completion: ([SKShapeNode])->Void) {
-//        let lines = loadSketch()
-//        completion(lines)
-//    }
-    
-//    static func loadText(viewIndex: Int) -> String {
-//        var text = ""
-//
-//        if let url = defaultTextFileURL(viewIndex: viewIndex), let txt = try? String(contentsOf: url) {
-//            text = txt
-//        }
-//
-//        return text
-//    }
-//
-//    static func loadText(viewIndex: Int, completion: (String)->Void) {
-//        let savedText = loadText(viewIndex: viewIndex)
-//        completion(savedText)
-//    }
 }
 protocol StorageDataSource {
     func saveText(content: String, viewIndex: Int) -> Future<Bool, Error>
     func saveSketch(lines: [SKShapeNode]) -> Future<Bool, Error>
-    func loadText(viewIndex: Int) -> Future<String, Error>
-    func loadSketch() -> Future<[SKShapeNode], Error>
+    func loadText(viewIndex: Int) -> AnyPublisher<String, Error>
+    func loadSketch() -> AnyPublisher<[SKShapeNode], Error>
 }
 
 enum StorageError: Error {
@@ -228,7 +153,7 @@ enum StorageError: Error {
 }
 
 extension Datasource: StorageDataSource {
-    func loadText(viewIndex: Int) -> Future<String, Error> {
+    func loadText(viewIndex: Int) -> AnyPublisher<String, Error> {
         Future<String, Error> { promise in
             
             if let url = Self.defaultTextFileURL(viewIndex: viewIndex), let txt = try? String(contentsOf: url) {
@@ -237,10 +162,10 @@ extension Datasource: StorageDataSource {
             else {
                 promise(.failure(StorageError.failedToReadFile))
             }
-        }
+        }.eraseToAnyPublisher()
     }
     
-    func loadSketch() -> Future<[SKShapeNode], Error> {
+    func loadSketch() -> AnyPublisher<[SKShapeNode], Error> {
         Future<[SKShapeNode], Error> { promise in
             if let url = Self.defaultSketchFileURL, let data = try? Data(contentsOf: url) {
                 
@@ -268,7 +193,7 @@ extension Datasource: StorageDataSource {
             else {
                 promise(.failure(StorageError.failedToReadFile))
             }
-        }
+        }.eraseToAnyPublisher()
     }
     
     func saveText(content: String, viewIndex: Int) -> Future<Bool, Error> {
@@ -378,6 +303,7 @@ extension Datasource: StorageDataSource {
 
 enum DatasourceKey: String {
     case previousSessionModeKey = "PreviousMode"
+    case previousViewIndex = "SelectedViewIndex"
 }
 
 enum Mode: Int {
