@@ -20,6 +20,7 @@ class DatasourceController: ObservableObject {
     
     let datasource = Datasource()
     
+    var isLocked: Bool = UserDefaults.standard.bool(forKey: DatasourceKey.isLockedKey.rawValue)
     @Published var currentViewIndex: Int = 0
     @Published var currentMode: Mode = .text
     @Published var content: String = ""
@@ -39,6 +40,7 @@ class DatasourceController: ObservableObject {
         let prevModeRaw = UserDefaults.standard.integer(forKey: DatasourceKey.previousSessionModeKey.rawValue)
         currentMode = Mode(rawValue: prevModeRaw) ?? .text
         currentViewIndex = UserDefaults.standard.integer(forKey: DatasourceKey.previousViewIndex.rawValue)
+        isLocked = UserDefaults.standard.bool(forKey: DatasourceKey.isLockedKey.rawValue)
         
         loadNote()
         loadSketch()
@@ -47,6 +49,7 @@ class DatasourceController: ObservableObject {
     func save() {
         UserDefaults.standard.set(currentMode.rawValue, forKey: DatasourceKey.previousSessionModeKey.rawValue)
         UserDefaults.standard.set(currentViewIndex, forKey: DatasourceKey.previousViewIndex.rawValue)
+        UserDefaults.standard.set(isLocked, forKey: DatasourceKey.isLockedKey.rawValue)
         
         saveText()
         saveSketch()
@@ -308,6 +311,7 @@ extension Datasource: StorageDataSource {
 enum DatasourceKey: String {
     case previousSessionModeKey = "PreviousMode"
     case previousViewIndex = "SelectedViewIndex"
+    case isLockedKey = "locked"
 }
 
 enum Mode: Int {

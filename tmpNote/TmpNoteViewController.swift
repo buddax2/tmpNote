@@ -68,7 +68,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     @IBOutlet weak var lockButton: NSButton! {
         didSet {
-            let isLocked = UserDefaults.standard.bool(forKey: "locked")
+            let isLocked = DatasourceController.shared.isLocked
             lockButton.image = isLocked ? NSImage(named: "NSLockLockedTemplate") : NSImage(named: "NSLockUnlockedTemplate")
             lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate ⌘L" : "Hide on Deactivate ⌘L"
         }
@@ -159,6 +159,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         
         DatasourceController.shared.load()
         
+        refreshLockState()
+        
         DatasourceController.shared.doLoadNoteSubject
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
@@ -197,6 +199,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         textareaScrollView.isHidden = false
         drawingView.isHidden = true
 
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.isPresented = false
+        
         DatasourceController.shared.save()
         
         super.viewWillDisappear()
@@ -368,20 +373,25 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
 
     @IBAction func lockAction(_ sender: Any) {
-        let isLocked = UserDefaults.standard.bool(forKey: "locked")
-        UserDefaults.standard.set(!isLocked, forKey: "locked")
-        lockButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
-        lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
-        lockTouchBarButton.image = isLocked ? NSImage(named: "NSLockUnlockedTemplate") : NSImage(named: "NSLockLockedTemplate")
+        DatasourceController.shared.isLocked.toggle()
         
-        
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        appDelegate.changeLockMode(locked: !isLocked)
+        refreshLockState()
     }
     
     @IBAction func toggleWindowState(_ sender: Any) {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.toggleWindowState()
+    }
+    
+    func refreshLockState() {
+        let isLocked = DatasourceController.shared.isLocked
+        lockButton.image = isLocked ? NSImage(named: "NSLockLockedTemplate") : NSImage(named: "NSLockUnlockedTemplate")
+        lockButton.toolTip = isLocked ? "Do Not Hide on Deactivate" : "Hide on Deactivate"
+        lockTouchBarButton.image = isLocked ? NSImage(named: "NSLockLockedTemplate") : NSImage(named: "NSLockUnlockedTemplate")
+        
+        
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.changeLockMode()
     }
     
     func saveSubstitutions() {

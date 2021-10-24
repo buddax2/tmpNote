@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         killLauncher()
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
-            let isLocked = UserDefaults.standard.bool(forKey: "locked")
+            let isLocked = DatasourceController.shared.isLocked
             if let strongSelf = self, let popover = strongSelf.popover, popover.isShown, isLocked == false {
                 strongSelf.close()
             }
@@ -126,14 +126,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     @objc func togglePopover(_ sender: Any?) {
-//        DispatchQueue.main.async {
-            if self.isInPopover {
-                self.isPresented == true ? self.close() : self.show()
-            }
-            else {
-                self.panel?.isKeyWindow == true ? self.close() : self.show()
-            }
-//        }
+        if isPresented {
+            close()
+        }
+        else {
+            show()
+        }
     }
     
     @objc func openPreferences() {
@@ -169,8 +167,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             if majorVersion == 10 && minorVersion < 14 {
                 popover?.appearance = NSAppearance(named: .vibrantLight)
             }
-
-//            popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             
             DispatchQueue.main.async {
                 self.popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
@@ -229,9 +225,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         let noteController = TmpNoteViewController.freshController()
 
-        let isLocked = UserDefaults.standard.bool(forKey: "locked") == true
+        let isLocked = DatasourceController.shared.isLocked == true
         let panelStyleMask: NSWindow.StyleMask = isLocked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
         panel = NSPanel(contentRect: popover?.positioningRect ?? NSRect.zero, styleMask: panelStyleMask, backing: .buffered, defer: true)
+        panel?.title = "tmpNote"
         panel?.level = .mainMenu
         panel?.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         panel?.contentViewController = noteController
@@ -254,12 +251,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         closePanel()
     }
     
-    func changeLockMode(locked: Bool) {
+    func changeLockMode() {
         guard isInPopover == false else { return }
         
-        let panelStyleMask: NSWindow.StyleMask = locked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
+        let panelStyleMask: NSWindow.StyleMask = DatasourceController.shared.isLocked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
         panel?.styleMask = panelStyleMask
-        panel?.isFloatingPanel = locked
+        panel?.isFloatingPanel = DatasourceController.shared.isLocked
     }
 }
 
