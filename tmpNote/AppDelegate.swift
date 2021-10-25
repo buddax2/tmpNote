@@ -95,6 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         let image = iconShouldBeFilled ? NSImage(named: "Compose_bg_template") : NSImage(named: "Compose")
         let img = image?.image(with: resultColor)
+        img?.isTemplate = true
         statusItem.button?.image = img
     }
     
