@@ -74,11 +74,13 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    func syncUI() {
-        contentTouchBarButton.selectedSegment = DatasourceController.shared.currentMode.rawValue
-        contentModeButton.selectedSegment = DatasourceController.shared.currentMode.rawValue
+    func syncUI(newMode: Mode? = nil) {
+        let mode: Mode = newMode ?? DatasourceController.shared.currentMode
         
-        switch DatasourceController.shared.currentMode {
+        contentTouchBarButton.selectedSegment = mode.rawValue
+        contentModeButton.selectedSegment = mode.rawValue
+        
+        switch mode {
         case .text:
             removeDrawScene()
             showPlainText()
@@ -89,7 +91,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             createDrawScene()
         }
         
-        clearButton.isEnabled = DatasourceController.shared.currentMode == .text || DatasourceController.shared.currentMode == .sketch
+        clearButton.isEnabled = mode == .text || mode == .sketch
     }
     
     var rawText: String = ""
@@ -181,7 +183,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newMode in
                 self?.contentModeButton.setSelected(true, forSegment: newMode.rawValue)
-                self?.syncUI()
+                self?.syncUI(newMode: newMode)
             }
             .store(in: &self.subscribers)
     }
@@ -238,11 +240,7 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func pageTouchBarDidChange(_ sender: NSSegmentedControl) {
-        DatasourceController.shared.save()
-        DatasourceController.shared.currentViewIndex = sender.selectedSegment + 1
-        DatasourceController.shared.load()
-        
-        setupViewButtons()
+        changeView(viewIndex: sender.selectedSegment + 1)
     }
     
     func createDrawScene() {
@@ -288,12 +286,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    @IBAction func changeView(_ sender: NSButton) {
+    func changeView(viewIndex: Int) {
         DatasourceController.shared.saveText()
-        DatasourceController.shared.currentViewIndex = sender.tag
+        DatasourceController.shared.currentViewIndex = viewIndex
         DatasourceController.shared.loadNote()
-
-        setupViewButtons()
+    }
+    
+    @IBAction func changeView(_ sender: NSButton) {
+        changeView(viewIndex: sender.tag)
     }
 
     @IBAction func viewDidChange(_ sender: NSPopUpButton) {
