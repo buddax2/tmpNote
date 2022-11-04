@@ -172,12 +172,12 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
             })
             .store(in: &self.subscribers)
 
-        DatasourceController.shared.$currentViewIndex
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newIndex in
-                self?.setupViewButtons()
-            }
-            .store(in: &self.subscribers)
+//        DatasourceController.shared.$currentViewIndex
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] newIndex in
+//                self?.setupViewButtons()
+//            }
+//            .store(in: &self.subscribers)
 
         DatasourceController.shared.$currentMode
             .receive(on: DispatchQueue.main)
@@ -236,6 +236,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         guard let contentMode = Mode(rawValue: sender.selectedSegment) else { return }
         if DatasourceController.shared.currentMode != contentMode {
             DatasourceController.shared.currentMode = contentMode
+            DatasourceController.shared.save()
+            DatasourceController.shared.load()
         }
     }
     
@@ -244,6 +246,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func createDrawScene() {
+        drawingScene?.removeAllChildren()
+        skview?.removeFromSuperview()
+        
         skview = SKView(frame: drawingView.bounds)
         drawingView.addSubview(skview!)
         drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
@@ -273,7 +278,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func setupViewButtons() {
-        let enabled = DatasourceController.shared.currentMode != .sketch
+//        let enabled = DatasourceController.shared.currentMode != .sketch
+        let enabled = true
         let selectedTag = DatasourceController.shared.currentViewIndex
         
         pageTouchBarButton.selectedSegment = selectedTag - 1
@@ -287,9 +293,17 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     }
     
     func changeView(viewIndex: Int) {
-        DatasourceController.shared.saveText()
-        DatasourceController.shared.currentViewIndex = viewIndex
-        DatasourceController.shared.loadNote()
+//        DatasourceController.shared.saveText()
+//        DatasourceController.shared.save()
+//        DatasourceController.shared.currentViewIndex = viewIndex
+//        DatasourceController.shared.load()
+//        DatasourceController.shared.loadNote()
+//        DatasourceController.shared.load(index: viewIndex)
+        DatasourceController.shared.save()
+
+        DatasourceController.shared.load(index: viewIndex)
+        
+        syncUI()
     }
     
     @IBAction func changeView(_ sender: NSButton) {
@@ -615,13 +629,11 @@ class CustomRadioButton: NSButton {
 
 class NoteTextView: NSTextView {
     
-    var storageDataSource: StorageDataSource?
-
     override func keyDown(with event: NSEvent) {
 
         // ⌘S - Save content
         if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
-            DatasourceController.shared.saveText(newContent: self.string)
+            DatasourceController.shared.save()
         }
 
         super.keyDown(with: event)

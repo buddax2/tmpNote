@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="19016"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="21008"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
@@ -707,7 +707,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="419" height="234"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
+                            <visualEffectView blendingMode="withinWindow" material="underPageBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Swo-en-XTe">
                                 <rect key="frame" x="0.0" y="0.0" width="419" height="234"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-ax-0FW">
@@ -849,7 +849,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button toolTip="Separate window ⌘D" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-qw-4YC">
-                                                                        <rect key="frame" x="145" y="-3" width="25" height="37"/>
+                                                                        <rect key="frame" x="145" y="-3" width="25" height="36"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="25" id="Wlg-wW-o6e"/>
                                                                         </constraints>
@@ -1255,6 +1255,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
+                                            <action selector="toggleSync:" target="Gxo-NN-4O8" id="gRG-5L-hhS"/>
                                             <binding destination="zNx-2O-HHw" name="value" keyPath="values.SynchronizeContent" id="DaO-7n-9LM"/>
                                         </connections>
                                     </button>
@@ -1401,16 +1402,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSLockLockedTemplate" width="14" height="15"/>
-        <image name="NSLockUnlockedTemplate" width="17" height="15"/>
+        <image name="NSLockLockedTemplate" width="19" height="19"/>
+        <image name="NSLockUnlockedTemplate" width="21" height="19"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
-        <image name="NSQuickLookTemplate" width="21" height="13"/>
-        <image name="NSShareTemplate" width="15" height="17"/>
+        <image name="NSQuickLookTemplate" width="26" height="17"/>
+        <image name="NSShareTemplate" width="19" height="22"/>
         <image name="NSStatusNone" width="16" height="16"/>
-        <image name="NSTouchBarTextBoxTemplate" width="19" height="14"/>
+        <image name="NSTouchBarTextBoxTemplate" width="25" height="18"/>
         <image name="clear" width="100" height="100"/>
         <image name="draw_empty" width="100" height="100"/>
-        <image name="macwindow.on.rectangle.rtl" catalog="system" width="20" height="16"/>
+        <image name="macwindow.on.rectangle.rtl" catalog="system" width="19" height="15"/>
         <image name="settings" width="17" height="17"/>
     </resources>
 </document>
