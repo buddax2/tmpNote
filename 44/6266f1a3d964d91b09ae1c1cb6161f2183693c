@@ -1,0 +1,19 @@
+tmpNote/TmpNoteViewController.swift
+  s_2ddcdf6d5fb6be::t_c28c8180da1e79 455-457,459-479
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "446266f1a3d964d91b09ae1c1cb6161f2183693c",
+  "prompts": {},
+  "sessions": {
+    "s_2ddcdf6d5fb6be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "86606924-7868-45a4-bddd-e4bc8a0c8657",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Alex Yakubchyk <alex.yakubchyk@coro.net>"
+    }
+  }
+}
