@@ -1,0 +1,56 @@
+tmpNote/TmpNoteViewController.swift
+  s_2ddcdf6d5fb6be::t_82fd2b85120917 102,104-109,115,189
+  s_2ddcdf6d5fb6be::t_e277a31eebe4af 27-29
+  s_2ddcdf6d5fb6be::t_ebe0f1ecfd7d5e 606-607,609
+  s_2ddcdf6d5fb6be::t_ab153536c1290b 626
+  s_2ddcdf6d5fb6be::t_7779c5b132b71e 67-69
+  s_2ddcdf6d5fb6be::t_7ceacf6f03d7d3 188,649-656
+  s_2ddcdf6d5fb6be::t_467eed33c1061f 444-448,450-451
+  s_2ddcdf6d5fb6be::t_68ec8a72af38ea 116,118,135-140,145,147-156,158-164,166-167,169-175,184-187
+  s_2ddcdf6d5fb6be::t_ad4209bde88ead 119-132
+  s_2ddcdf6d5fb6be::t_c15477654bc1f1 165
+  s_2ddcdf6d5fb6be::t_fe57d5e21e2eca 110,112-113,190
+  s_2ddcdf6d5fb6be::t_c9bd1229e36320 133-134
+  s_2ddcdf6d5fb6be::t_1dad029bd3cf9a 141-144,146
+  s_2ddcdf6d5fb6be::t_6150d01ebf6064 157,168,176-183
+  s_2ddcdf6d5fb6be::t_e284cf6d0f16f9 222,229,232-235,237-238
+  s_2ddcdf6d5fb6be::t_900593e39d5618 625
+  s_2ddcdf6d5fb6be::t_bbf2c5e2daf397 224-225,228,236,239-241,248-249,253,255
+  s_2ddcdf6d5fb6be::t_0c3eec65133f37 66
+  s_2ddcdf6d5fb6be::t_e07e82a0175f3a 275-284
+tmpNote/NoteTextView.swift
+  s_2ddcdf6d5fb6be::t_4df725c32ac0b7 1-97,109-110,117-123,125-212
+  s_2ddcdf6d5fb6be::t_00add2fcad5586 98-108
+  s_2ddcdf6d5fb6be::t_d87ec11501e031 111-116
+  s_2ddcdf6d5fb6be::t_a8a796f7d77d5a 124
+tmpNote/MarkdownHighlighter.swift
+  s_2ddcdf6d5fb6be::t_3ac5d48a519659 70
+  s_2ddcdf6d5fb6be::t_2fcc6cfba1fb9c 180
+  s_2ddcdf6d5fb6be::t_ec71dd1ca7c4f5 14-15
+  s_2ddcdf6d5fb6be::t_79d13bd87eb317 103-109
+  s_2ddcdf6d5fb6be::t_80a3ff9c5ffe79 33-35
+  s_2ddcdf6d5fb6be::t_02aaf32cf35169 100-102,110-115
+  s_2ddcdf6d5fb6be::t_b51b0229509a08 11-13,16-17
+  s_2ddcdf6d5fb6be::t_be1b7c9bf73511 1-10,18-32,36-69,71-99,116-179,181-187
+tmpNote.xcodeproj/project.pbxproj
+  s_2ddcdf6d5fb6be::t_2bee9522196191 139
+  s_2ddcdf6d5fb6be::t_b7f9cac2f846cd 357
+  s_2ddcdf6d5fb6be::t_744a5d35509973 28-29,73-74,138
+  s_2ddcdf6d5fb6be::t_1a7d3b2f9af065 358
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9bae34f332bf54bed788c14b145ec49ecec188be",
+  "prompts": {},
+  "sessions": {
+    "s_2ddcdf6d5fb6be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "86606924-7868-45a4-bddd-e4bc8a0c8657",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Alex Yakubchyk <alex.yakubchyk@coro.net>"
+    }
+  }
+}
