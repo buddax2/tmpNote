@@ -10,7 +10,7 @@ import AppKit
 import MASShortcut
 
 
-protocol PreferencesDelegate: class {
+protocol PreferencesDelegate: AnyObject {
     func settingsDidChange()
 }
 
@@ -109,8 +109,13 @@ class GeneralViewController: NSViewController {
         popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.maxX)
     }
     
+    @IBAction func toggleSync(_ sender: NSButton) {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+//        appDelegate.reloadStore()
+    }
+    
     func syncUI() {
-        syncToggleButton.isEnabled = Datasource.containerUrl != nil
+//        syncToggleButton.isEnabled = Datasource.containerUrl != nil
     }
 }
 

@@ -11,7 +11,6 @@ import Carbon.HIToolbox
 
 class DrawingScene: SKScene {
     
-    var storage: StorageDataSource?
     var firstPoint: CGPoint?
     var lineNode = SKShapeNode()
     var pathToDraw: CGMutablePath?
@@ -56,8 +55,10 @@ class DrawingScene: SKScene {
     
     func load() {
         pathToDraw = CGMutablePath()
-
-        for line in DatasourceController.shared.lines {
+        let lines = DatasourceController.shared.lines
+        self.removeAllChildren()
+        
+        for line in lines {
             line.removeFromParent()
             addChild(line)
         }
@@ -86,7 +87,7 @@ extension DrawingScene {
         
         // ⌘S - Save content
         if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
-            DatasourceController.shared.saveSketch()
+            DatasourceController.shared.save()
         }
 
         if event.keyCode == kVK_ANSI_Z {
