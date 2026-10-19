@@ -24,7 +24,9 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     var skview: SKView?
     
     var tmpLockMode = false
-    
+
+    let markdownHighlighter = MarkdownHighlighter()
+
     @IBOutlet weak var hidableHeaderView: NSVisualEffectView!
     @IBOutlet weak var headerView: HeaderView! {
         didSet {
@@ -61,6 +63,10 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet var textView: NoteTextView! {
         didSet {
             textView.delegate = self
+            textView.textStorage?.delegate = markdownHighlighter
+            textView.onPreviewTodoToggle = { [weak self] location in
+                self?.togglePreviewTodo(at: location)
+            }
             DispatchQueue.main.async { [weak self] in
                 self?.setupTextView()
             }
@@ -93,21 +99,95 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         
         clearButton.isEnabled = mode == .text || mode == .sketch
     }
-    
-    var rawText: String = ""
+
     var subscribers = Set<AnyCancellable>()
-    
-    
-    func showMarkdown() {
-        textView.isEditable = false
-        
+
+    var currentFontSize: CGFloat {
         let fontSize = UserDefaults.standard.value(forKey: TmpNoteViewController.kFontSizeKey) as? Int ?? TmpNoteViewController.defaultFontSize
-        let color: NSColor = currentAppearanceIsLight ? .black : .white
-        
-        let md = markdown(text: DatasourceController.shared.content, baseFontSize: CGFloat(fontSize), color: color)
-        textView.textStorage?.setAttributedString(md.attributedString())
+        return CGFloat(fontSize)
     }
-    
+
+    /// Read-only preview: fully rendered markdown with the markers removed.
+    func showMarkdown() {
+        // The rendered text must not be restyled as raw markdown
+        markdownHighlighter.isEnabled = false
+        textView.isEditable = false
+
+        textView.textStorage?.setAttributedString(renderedMarkdown(DatasourceController.shared.content))
+    }
+
+    /// Checks/unchecks a to-do from the read-only preview by flipping its `[ ]` in the saved note.
+    func togglePreviewTodo(at location: Int) {
+        let content = DatasourceController.shared.content as NSString
+        guard location < content.length else { return }
+
+        let stateRange = NSRange(location: location, length: 1)
+        let state = content.substring(with: stateRange)
+        guard [" ", "x", "X"].contains(state) else { return }
+
+        DatasourceController.shared.content = content.replacingCharacters(in: stateRange, with: state == " " ? "x" : " ")
+        DatasourceController.shared.save()
+        showMarkdown()
+    }
+
+    private static let uncheckedPlaceholder = "\u{2610}\u{2003}" // ☐ + em space
+    private static let checkedPlaceholder = "\u{2611}\u{2003}"   // ☑ + em space
+
+    /// Renders the note with SwiftyMarkdown. To-do markers become placeholders that
+    /// NoteTextView draws as checkboxes, and completed items are crossed out.
+    func renderedMarkdown(_ text: String) -> NSAttributedString {
+        let taskRegex = MarkdownHighlighter.taskRegex
+        let mutableText = NSMutableString(string: text)
+        let taskMatches = taskRegex.matches(in: text, range: NSRange(location: 0, length: mutableText.length))
+        // Where each task's `[ ]` state character lives in the note, in document order
+        let stateLocations = taskMatches.map { $0.range(at: 2).location }
+
+        // Reverse order keeps the earlier match ranges valid
+        for m in taskMatches.reversed() {
+            let isChecked = mutableText.substring(with: m.range(at: 2)) != " "
+            let item = m.range(at: 3).location != NSNotFound ? mutableText.substring(with: m.range(at: 3)) : ""
+            let markerStart = m.range(at: 1).location
+            let replaceRange = NSRange(location: markerStart, length: NSMaxRange(m.range) - markerStart)
+            mutableText.replaceCharacters(in: replaceRange, with: (isChecked ? Self.checkedPlaceholder : Self.uncheckedPlaceholder) + item)
+        }
+
+        let md = markdown(text: mutableText as String, baseFontSize: currentFontSize, color: .textColor)
+        let rendered = NSMutableAttributedString(attributedString: md.attributedString())
+        let renderedText = rendered.string as NSString
+        var markers = [NSRange]()
+
+        renderedText.enumerateSubstrings(in: NSRange(location: 0, length: renderedText.length), options: .byLines) { line, lineRange, _, _ in
+            guard let line = line else { return }
+            let trimmed = line.drop { $0 == " " || $0 == "\t" }
+            let isChecked = trimmed.hasPrefix(Self.checkedPlaceholder)
+            guard isChecked || trimmed.hasPrefix(Self.uncheckedPlaceholder) else { return }
+
+            let markerStart = lineRange.location + (line as NSString).length - (String(trimmed) as NSString).length
+            let marker = NSRange(location: markerStart, length: (Self.checkedPlaceholder as NSString).length)
+            rendered.addAttributes([.todoCheckbox: isChecked, .foregroundColor: NSColor.clear], range: marker)
+            markers.append(marker)
+
+            let item = NSRange(location: NSMaxRange(marker), length: NSMaxRange(lineRange) - NSMaxRange(marker))
+            if isChecked && item.length > 0 {
+                rendered.addAttributes([
+                    .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                    .foregroundColor: NSColor.secondaryLabelColor,
+                ], range: item)
+            }
+        }
+
+        // Link each checkbox back to its task in the note so it can be toggled from the preview.
+        // If the counts differ the mapping would be ambiguous, so leave them non-clickable.
+        if markers.count == stateLocations.count {
+            for (marker, location) in zip(markers, stateLocations) {
+                rendered.addAttribute(.todoSourceLocation, value: location, range: marker)
+            }
+        }
+
+        return rendered
+    }
+
+    /// Fully rendered markdown (markers removed), used by the preview and when sharing it.
     func markdown(text: String, baseFontSize: CGFloat, color: NSColor) -> SwiftyMarkdown {
         let md = SwiftyMarkdown(string: text)
         md.setFontColorForAllStyles(with: color)
@@ -139,36 +219,40 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         return md
     }
     
+    /// Edit mode: the raw text stays editable and MarkdownHighlighter styles it in place as you type.
     func showPlainText() {
+        markdownHighlighter.isEnabled = false
+
         textView.string = DatasourceController.shared.content
         textView.isEditable = true
+
+        // Applies the font size and the markdown highlighting
         setupTextView()
     }
-    
+
+    func highlightMarkdown() {
+        guard let storage = textView.textStorage else { return }
+
+        markdownHighlighter.baseFontSize = currentFontSize
+        markdownHighlighter.isEnabled = true
+        markdownHighlighter.highlight(storage)
+        textView.typingAttributes = markdownHighlighter.baseAttributes
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
 
-        listenToInterfaceChangesNotification()
-        
         shareButton.sendAction(on: .leftMouseDown)
-    }
-    
-    override func viewWillAppear() {
-        super.viewWillAppear()
 
-        self.loadSubstitutions()
-        
-        DatasourceController.shared.load()
-        
-        refreshLockState()
-        
+        // Subscribe once here: the popover reuses this controller, so subscribing
+        // in viewWillAppear would stack a duplicate subscription on every show.
         DatasourceController.shared.doLoadNoteSubject
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
-            
+
             }, receiveValue: { [weak self] newContent in
-                self?.showPlainText()
+                self?.syncUI()
             })
             .store(in: &self.subscribers)
 
@@ -186,6 +270,16 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
                 self?.syncUI(newMode: newMode)
             }
             .store(in: &self.subscribers)
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        self.loadSubstitutions()
+
+        DatasourceController.shared.load()
+
+        refreshLockState()
     }
 
     override func viewDidAppear() {
@@ -207,29 +301,6 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         DatasourceController.shared.save()
         
         super.viewWillDisappear()
-    }
-
-    var appearanceChangeObservation: NSKeyValueObservation?
-    
-    func listenToInterfaceChangesNotification() {
-        appearanceChangeObservation = self.view.observe(\.effectiveAppearance) { [weak self] _, _  in
-            guard let strongSelf = self else { return }
-            if DatasourceController.shared.currentMode == .markdown {
-                strongSelf.showMarkdown()
-            }
-        }
-    }
-    
-    var currentAppearanceIsLight: Bool {
-        let isLight: Bool
-        if #available(OSX 10.14, *) {
-            isLight = view.effectiveAppearance.name != .darkAqua && view.effectiveAppearance.name != .vibrantDark
-        } else {
-            // Fallback on earlier versions
-            isLight = NSAppearance.current.name != .vibrantDark
-        }
-
-        return isLight
     }
 
     @IBAction func contentModeDidChange(_ sender: NSSegmentedControl) {
@@ -370,8 +441,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         let font = NSFont.systemFont(ofSize: size)
         textView.font = font
         
-        if DatasourceController.shared.currentMode == .markdown {
+        // textView.font flattens every font in the note, so re-apply the styling
+        switch DatasourceController.shared.currentMode {
+        case .text:
+            highlightMarkdown()
+        case .markdown:
             showMarkdown()
+        case .sketch:
+            break
         }
     }
     
@@ -521,14 +598,15 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
                     case .text, .markdown:
                         if let textLength = strongSelf.textView.textStorage?.length {
                             strongSelf.textView.insertText("", replacementRange: NSRange(location: 0, length: textLength))
-                            DatasourceController.shared.save()
                         }
 
                     case .sketch:
                         self?.drawingScene?.clear()
                 }
-                
+
+                // Update the content before saving, otherwise the old text gets persisted
                 self?.contentDidChange()
+                DatasourceController.shared.save()
             }
         })
     }
@@ -544,7 +622,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
                     sharedItems = [image]
                 }
             case .markdown:
-                sharedItems = [textView.attributedString()];
+                let md = markdown(text: DatasourceController.shared.content, baseFontSize: currentFontSize, color: .textColor)
+                sharedItems = [md.attributedString()];
         }
         
         let servicePicker = NSSharingServicePicker(items: sharedItems)
@@ -566,6 +645,14 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
     
     func textDidChange(_ notification: Notification) {
         contentDidChange()
+    }
+
+    func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        guard commandSelector == #selector(NSResponder.insertNewline(_:)),
+              DatasourceController.shared.currentMode == .text,
+              let noteTextView = textView as? NoteTextView else { return false }
+
+        return noteTextView.continueList()
     }
     
     func contentDidChange() {
@@ -624,18 +711,5 @@ class CustomRadioButton: NSButton {
         self.state = newState
         let imageName = self.state == .on ? "page_indicator_active" : "page_indicator"
         self.image = NSImage(named: imageName)
-    }
-}
-
-class NoteTextView: NSTextView {
-    
-    override func keyDown(with event: NSEvent) {
-
-        // ⌘S - Save content
-        if event.modifierFlags.contains(.command) && event.keyCode == kVK_ANSI_S {
-            DatasourceController.shared.save()
-        }
-
-        super.keyDown(with: event)
     }
 }
