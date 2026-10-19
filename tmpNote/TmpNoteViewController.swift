@@ -245,6 +245,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
         shareButton.sendAction(on: .leftMouseDown)
 
+        setupResizeHandles()
+
         // Subscribe once here: the popover reuses this controller, so subscribing
         // in viewWillAppear would stack a duplicate subscription on every show.
         DatasourceController.shared.doLoadNoteSubject
@@ -286,8 +288,99 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         super.viewDidAppear()
 
         matchPopoverArrowBackground()
+
+        // The detached panel resizes from its window edges instead
+        let isPanel = view.window?.styleMask.contains(.titled) ?? false
+        for handle in resizeHandles {
+            handle.isHidden = isPanel
+            // Keep the handles above everything else in the note
+            view.addSubview(handle, positioned: .above, relativeTo: nil)
+        }
     }
 
+    // MARK: Resizing
+
+    static let kContentSizeKey = "ContentSize"
+    private static let minContentHeight: CGFloat = 150
+
+    /// The storyboard size. Its width is also the minimum: the header controls need all of it.
+    private var defaultContentSize = NSSize.zero
+    private let resizeHandles = [ResizeGripView(edge: .bottomLeft), ResizeGripView(edge: .bottom), ResizeGripView(edge: .bottomRight)]
+    private static let resizeCornerSize: CGFloat = 20
+    private static let resizeEdgeHeight: CGFloat = 5
+    private var resizeStartSize = NSSize.zero
+
+    /// The size the user last resized the popover or panel to, shared by both.
+    static var savedContentSize: NSSize? {
+        get { UserDefaults.standard.string(forKey: kContentSizeKey).map(NSSizeFromString) }
+        set { UserDefaults.standard.set(newValue.map(NSStringFromSize), forKey: kContentSizeKey) }
+    }
+
+    var minimumContentSize: NSSize {
+        _ = view // loads the view, which records defaultContentSize
+        return NSSize(width: defaultContentSize.width, height: Self.minContentHeight)
+    }
+
+    /// The saved size, kept within the limits of the current screen.
+    func restoredContentSize() -> NSSize? {
+        guard let size = Self.savedContentSize else { return nil }
+        return clampedContentSize(size)
+    }
+
+    func clampedContentSize(_ size: NSSize) -> NSSize {
+        let minSize = minimumContentSize
+        let screenSize = (view.window?.screen ?? NSScreen.main)?.visibleFrame.size ?? size
+        let maxSize = NSSize(width: max(minSize.width, screenSize.width * 2 / 3), height: max(minSize.height, screenSize.height * 2 / 3))
+
+        return NSSize(width: min(max(size.width, minSize.width), maxSize.width).rounded(),
+                      height: min(max(size.height, minSize.height), maxSize.height).rounded())
+    }
+
+    /// Invisible handles along the bottom that resize the popover like a window's edges.
+    private func setupResizeHandles() {
+        defaultContentSize = view.frame.size
+        let corner = Self.resizeCornerSize
+        
+        for handle in resizeHandles {
+            switch handle.edge {
+            case .bottomLeft:
+                handle.frame = NSRect(x: 0, y: 0, width: corner, height: corner)
+                handle.autoresizingMask = [.maxXMargin, .maxYMargin]
+            case .bottom:
+                handle.frame = NSRect(x: corner, y: 0, width: view.bounds.width - corner * 2, height: Self.resizeEdgeHeight)
+                handle.autoresizingMask = [.width, .maxYMargin]
+            case .bottomRight:
+                handle.frame = NSRect(x: view.bounds.maxX - corner, y: 0, width: corner, height: corner)
+                handle.autoresizingMask = [.minXMargin, .maxYMargin]
+            }
+            handle.toolTip = "Drag to resize"
+            handle.onDragBegan = { [weak self] in
+                guard let self = self else { return }
+                self.resizeStartSize = self.view.frame.size
+            }
+            handle.onDrag = { [weak self, weak handle] delta in
+                guard let edge = handle?.edge else { return }
+                self?.resizePopover(by: delta, from: edge)
+            }
+            handle.onDragEnded = { [weak self] in
+                guard let self = self else { return }
+                Self.savedContentSize = self.view.frame.size
+            }
+            view.addSubview(handle)
+        }
+    }
+    
+    private func resizePopover(by delta: NSSize, from edge: ResizeGripView.Edge) {
+        let appDelegate = NSApplication.shared.delegate as? AppDelegate
+        guard let popover = appDelegate?.popover, popover.contentViewController === self else { return }
+        
+        // The popover stays centred under the menu bar icon and grows on both sides,
+        // so the width changes twice as much to keep the dragged corner under the cursor
+        let size = NSSize(width: resizeStartSize.width + delta.width * 2 * edge.widthDirection,
+                          height: resizeStartSize.height + delta.height)
+        popover.contentSize = clampedContentSize(size)
+    }
+    
     /// Glass tint for the popover; underPageBackground matches the note's previous background tone.
     private static let popoverGlassTint = NSColor.underPageBackgroundColor.withAlphaComponent(0.8)
     
@@ -349,6 +442,8 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         skview?.removeFromSuperview()
         
         skview = SKView(frame: drawingView.bounds)
+        // Follow the popover/panel size; the scene uses .resizeFill so the canvas resizes with it
+        skview?.autoresizingMask = [.width, .height]
         drawingView.addSubview(skview!)
         drawingScene = SKScene(fileNamed: "DrawingScene") as? DrawingScene
         skview?.presentScene(drawingScene)
