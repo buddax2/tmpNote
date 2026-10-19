@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     var popover: NSPopover?
     var panel: NSPanel?
+    var panelResizeObserver: NSObjectProtocol?
     var isPresented = false
     
     var eventMonitor: EventMonitor?
@@ -151,6 +152,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func showPopover() {
         if let button = statusItem.button {
             if popover != nil {
+                // Pick up a size set in the detached panel
+                if let noteController = popover?.contentViewController as? TmpNoteViewController,
+                   let size = noteController.restoredContentSize() {
+                    popover?.contentSize = size
+                }
                 DispatchQueue.main.async {
                     self.popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
                     NSApplication.shared.activate(ignoringOtherApps: true)
@@ -162,7 +168,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             popover = NSPopover()
 
             popover?.animates = false
-            popover?.contentViewController = TmpNoteViewController.freshController()
+            let noteController = TmpNoteViewController.freshController()
+            popover?.contentViewController = noteController
+            if let size = noteController.restoredContentSize() {
+                popover?.contentSize = size
+            }
 
             // Force light appearance for OSX < 10.14
             let majorVersion: Int = ProcessInfo.processInfo.operatingSystemVersion.majorVersion
@@ -220,6 +230,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         closePopover()
         
         if panel != nil {
+            // Pick up a size set in the popover, keeping the panel's top-left corner in place
+            if let panel = panel, let noteController = panel.contentViewController as? TmpNoteViewController,
+               let size = noteController.restoredContentSize() {
+                let topLeft = NSPoint(x: panel.frame.minX, y: panel.frame.maxY)
+                panel.setContentSize(size)
+                panel.setFrameTopLeftPoint(topLeft)
+            }
             DispatchQueue.main.async {
                 self.panel?.orderFrontRegardless()
                 NSApplication.shared.activate(ignoringOtherApps: true)
@@ -230,12 +247,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let noteController = TmpNoteViewController.freshController()
 
         let isLocked = DatasourceController.shared.isLocked == true
-        let panelStyleMask: NSWindow.StyleMask = isLocked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
-        panel = NSPanel(contentRect: popover?.positioningRect ?? NSRect.zero, styleMask: panelStyleMask, backing: .buffered, defer: true)
+        panel = NSPanel(contentRect: popover?.positioningRect ?? NSRect.zero, styleMask: panelStyleMask(isLocked: isLocked), backing: .buffered, defer: true)
         panel?.title = "tmpNote"
         panel?.level = .mainMenu
         panel?.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         panel?.contentViewController = noteController
+        panel?.contentMinSize = noteController.minimumContentSize
+        if let size = noteController.restoredContentSize() {
+            panel?.setContentSize(size)
+        }
+        // Remember the size the panel is resized to, shared with the popover
+        panelResizeObserver = NotificationCenter.default.addObserver(forName: NSWindow.didEndLiveResizeNotification, object: panel, queue: .main) { [weak noteController] _ in
+            if let size = noteController?.view.frame.size {
+                TmpNoteViewController.savedContentSize = size
+            }
+        }
         if let bounds = statusItem.button?.window?.frame {
             panel?.setFrameTopLeftPoint(CGPoint(x: bounds.midX - noteController.view.bounds.width/2, y: bounds.minY))
         }
@@ -258,9 +284,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func changeLockMode() {
         guard isInPopover == false else { return }
         
-        let panelStyleMask: NSWindow.StyleMask = DatasourceController.shared.isLocked ? [.titled, .closable, .nonactivatingPanel] : [.titled, .closable]
-        panel?.styleMask = panelStyleMask
+        panel?.styleMask = panelStyleMask(isLocked: DatasourceController.shared.isLocked)
         panel?.isFloatingPanel = DatasourceController.shared.isLocked
+    }
+
+    private func panelStyleMask(isLocked: Bool) -> NSWindow.StyleMask {
+        return isLocked ? [.titled, .closable, .resizable, .nonactivatingPanel] : [.titled, .closable, .resizable]
     }
     
     // MARK: - Core Data stack
