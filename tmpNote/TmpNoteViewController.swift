@@ -452,15 +452,31 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
+    static let substitutionKeys = ["SmartDashes", "SmartSpelling", "SmartTextReplacing", "SmartDataDetection", "SmartQuotes", "SmartLinks", "GrammarChecking", "SpellChecking"]
+    static let substitutionsOffByDefaultKey = "SubstitutionsOffByDefault"
+
     func loadSubstitutions() {
-        textView.isAutomaticDashSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartDashes") != nil ? UserDefaults.standard.bool(forKey: "SmartDashes") : true
-        textView.isAutomaticSpellingCorrectionEnabled = UserDefaults.standard.object(forKey: "SmartSpelling") != nil ? UserDefaults.standard.bool(forKey: "SmartSpelling") : true
-        textView.isAutomaticTextReplacementEnabled = UserDefaults.standard.object(forKey: "SmartTextReplacing") != nil ? UserDefaults.standard.bool(forKey: "SmartTextReplacing") : true
-        textView.isAutomaticDataDetectionEnabled = UserDefaults.standard.object(forKey: "SmartDataDetection") != nil ? UserDefaults.standard.bool(forKey: "SmartDataDetection") : true
-        textView.isAutomaticQuoteSubstitutionEnabled = UserDefaults.standard.object(forKey: "SmartQuotes") != nil ? UserDefaults.standard.bool(forKey: "SmartQuotes") : true
-        textView.isAutomaticLinkDetectionEnabled = UserDefaults.standard.object(forKey: "SmartLinks") != nil ? UserDefaults.standard.bool(forKey: "SmartLinks") : true
-        textView.isGrammarCheckingEnabled = UserDefaults.standard.object(forKey: "GrammarChecking") != nil ? UserDefaults.standard.bool(forKey: "GrammarChecking") : true
-        textView.isContinuousSpellCheckingEnabled = UserDefaults.standard.object(forKey: "SpellChecking") != nil ? UserDefaults.standard.bool(forKey: "SpellChecking") : true
+        let defaults = UserDefaults.standard
+
+        // Spelling, grammar and smart substitutions are now off by default. The old
+        // defaults (all on) were saved on every close, so clear them once to apply it.
+        if !defaults.bool(forKey: TmpNoteViewController.substitutionsOffByDefaultKey) {
+            TmpNoteViewController.substitutionKeys.forEach { defaults.removeObject(forKey: $0) }
+            defaults.set(true, forKey: TmpNoteViewController.substitutionsOffByDefaultKey)
+        }
+
+        func isEnabled(_ key: String) -> Bool {
+            return defaults.object(forKey: key) as? Bool ?? false
+        }
+
+        textView.isAutomaticDashSubstitutionEnabled = isEnabled("SmartDashes")
+        textView.isAutomaticSpellingCorrectionEnabled = isEnabled("SmartSpelling")
+        textView.isAutomaticTextReplacementEnabled = isEnabled("SmartTextReplacing")
+        textView.isAutomaticDataDetectionEnabled = isEnabled("SmartDataDetection")
+        textView.isAutomaticQuoteSubstitutionEnabled = isEnabled("SmartQuotes")
+        textView.isAutomaticLinkDetectionEnabled = isEnabled("SmartLinks")
+        textView.isGrammarCheckingEnabled = isEnabled("GrammarChecking")
+        textView.isContinuousSpellCheckingEnabled = isEnabled("SpellChecking")
     }
 
     @IBAction func lockAction(_ sender: Any) {
