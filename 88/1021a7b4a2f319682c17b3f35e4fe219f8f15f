@@ -1,0 +1,37 @@
+tmpNote/AppDelegate.swift
+  s_2ddcdf6d5fb6be::t_5043d86daf6f17 22
+  s_2ddcdf6d5fb6be::t_bf44bebf88760d 233-239
+  s_2ddcdf6d5fb6be::t_1becd37d5581ff 287,290-292
+  s_2ddcdf6d5fb6be::t_c573e0cb5d9702 250,255-264
+  s_2ddcdf6d5fb6be::t_d33206f1f4ac17 171-175
+  s_2ddcdf6d5fb6be::t_48869108531ca6 155-159
+  s_2ddcdf6d5fb6be::t_5d5d856b36b11c 293
+tmpNote/TmpNoteViewController.swift
+  s_2ddcdf6d5fb6be::t_536a29dc47883a 291-293,298-306,308-316,318-334,354,364
+  s_2ddcdf6d5fb6be::t_fe47daa3d9fd8a 248-249
+  s_2ddcdf6d5fb6be::t_90625529ece8ca 307
+  s_2ddcdf6d5fb6be::t_128e4bf538c7bf 317
+  s_2ddcdf6d5fb6be::t_136f4eb9186078 294-297,345,348,352
+  s_2ddcdf6d5fb6be::t_4bce5bd6036b63 335-336,339-344,346-347,349-351,353,355-363,365-383,445-446
+tmpNote/ResizeGripView.swift
+  s_2ddcdf6d5fb6be::t_7b7610a4f45da5 1-4,8-13,30-36,46-50,55,61,63-82
+  s_2ddcdf6d5fb6be::t_ebb183c0b05c50 5-7,14-29,37-45,51-54,56-60,62
+tmpNote.xcodeproj/project.pbxproj
+  s_2ddcdf6d5fb6be::t_d377a8ea4b7fc5 28,74,140,360
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "881021a7b4a2f319682c17b3f35e4fe219f8f15f",
+  "prompts": {},
+  "sessions": {
+    "s_2ddcdf6d5fb6be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "86606924-7868-45a4-bddd-e4bc8a0c8657",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Alex Yakubchyk <alex.yakubchyk@coro.net>"
+    }
+  }
+}
