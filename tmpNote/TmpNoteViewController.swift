@@ -284,6 +284,34 @@ class TmpNoteViewController: NSViewController, NSTextViewDelegate {
 
     override func viewDidAppear() {
         super.viewDidAppear()
+
+        matchPopoverArrowBackground()
+    }
+
+    /// Glass tint for the popover; underPageBackground matches the note's previous background tone.
+    private static let popoverGlassTint = NSColor.underPageBackgroundColor.withAlphaComponent(0.8)
+    
+    /// Since macOS 26 the popover background is Liquid Glass, which also draws the arrow. The note's
+    /// own visual effect view only covers the body, so the arrow looked more transparent than the rest.
+    /// Give the popover a single background instead: tint its glass and hide the note's extra material.
+    private func matchPopoverArrowBackground() {
+        guard #available(macOS 26, *) else { return }
+        
+        // Popovers use a borderless window; the detached panel is titled and keeps its own background
+        guard let window = view.window, !window.styleMask.contains(.titled),
+              let glass = window.contentView?.superview?.subviews.first(where: { $0 is NSGlassEffectView }) as? NSGlassEffectView,
+              let contentBackground = view.subviews.first(where: { $0 is NSVisualEffectView }) as? NSVisualEffectView else { return }
+        
+        glass.tintColor = Self.popoverGlassTint
+        
+        // A fully clear mask hides only the material; the note's subviews stay visible
+        let clearMask = NSImage(size: NSSize(width: 1, height: 1), flipped: false) { rect in
+            NSColor.clear.set()
+            rect.fill()
+            return true
+        }
+        clearMask.resizingMode = .stretch
+        contentBackground.maskImage = clearMask
     }
     
     override func viewWillDisappear() {
